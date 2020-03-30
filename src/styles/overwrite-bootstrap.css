@@ -1,0 +1,101 @@
+
+@import 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css';
+
+:root {
+    --orange: #E0711F;
+    --d-orange: #D55F07;
+    --l-orange: #F87B1F;
+    --green: #2ECA71;
+    --d-green: #3BAB6B;
+    --l-green: #4BEF91;
+    --yellow: #F6D62A;
+    --d-yellow: #D3BA36;
+    --l-yellow: #FFF34A;
+}
+.btn:focus {
+    box-shadow: none !important;
+}
+.btn {
+    border-radius: 0.5rem;
+}
+.btn.disabled {
+    pointer-events: none;
+}
+.btn-warning {
+    background-color: var(--orange);
+    border-color: var(--orange);
+}
+.btn-warning:hover {
+    background-color: var(--l-orange);
+}
+.btn-success {
+    background-color: var(--green);
+    border-color: var(--green);
+}
+.btn-success:hover {
+    border-color: var(--green);
+    background-color: var(--l-green);
+}
+.custom-control-input:checked~.custom-control-label::before {
+    border-color: var(--green);
+    background-color: var(--green);
+}
+.fLabel.form-group {
+    position: relative;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+.fLabel.form-group label {
+    position: absolute;
+    font-size: 0.7rem;
+    background: #fff;
+    padding: 0rem 0.5rem;
+    margin: 0 0.5rem;
+    transform: translateY(-50%);
+}
+.fLabel.form-group .input-group-prepend {
+    color: #42A8E7;
+    font-size: 0.8rem;
+    position: absolute;
+    margin: 0.6rem 0.3rem;
+    width: 1.2rem;
+    align-items: center;
+    justify-content: center;
+}
+.fLabel.form-group .input-group-prepend ~ input {
+    padding: .375rem 0.5rem 0.375rem 1.6rem;
+}
+.fLabel.form-group input {
+    padding: .375rem 1.25rem;
+}
+.alert {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: 2rem;
+    line-height: 1.5;
+}
+.alert .badge {
+    font-size: 95%;
+    margin-right: 5px;
+}
+.alert-warning {
+    background-color: #FFF6E4;
+    color: #595959;
+}
+.scale-8 {
+    transform: scale(0.8);
+}
+.to-00 {
+    transform-origin: 0 0;
+}
+.badge-pill.material-icons {
+    width: 1.3em;
+    display: inline-flex;
+    font-size: 13px;
+    padding: 0;
+    height: 1.3em;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    line-height: 1;
+}
