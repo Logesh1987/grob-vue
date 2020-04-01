@@ -1,5 +1,6 @@
 <template>
   <div class="grOnboarding">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <div class="setupPage">
       <header>
         <div class="grad">
@@ -42,13 +43,21 @@
           </b-card-header>
           <b-collapse id="setup" visible accordion="my-accordion" role="tabpanel">
             <b-card-body>
-              <swiper ref="setupSwiper" :options="swiperOptions" @slideChangeTransitionEnd="swiperScte">
-                <swiper-slide>Slide 1</swiper-slide>
-                <swiper-slide>Slide 2</swiper-slide>
-                <swiper-slide>Slide 3</swiper-slide>
-                <swiper-slide>Slide 4</swiper-slide>
-                <swiper-slide>Slide 5</swiper-slide>
-              </swiper>
+              <div v-if="data">
+                <swiper
+                  ref="setupSwiper"
+                  :options="swiperOptions"
+                  @slideChangeTransitionEnd="swiperScte"
+                >
+                  <swiper-slide>
+                    <PointsProgram :data="data.points_program" />
+                  </swiper-slide>
+                  <swiper-slide>Slide 2</swiper-slide>
+                  <swiper-slide>Slide 3</swiper-slide>
+                  <swiper-slide>Slide 4</swiper-slide>
+                  <swiper-slide>Slide 5</swiper-slide>
+                </swiper>
+              </div>
               <div class="setupSwiper-navigator">
                 <div>
                   <button
@@ -142,10 +151,14 @@
 import Vue from "vue";
 import { Swiper, SwiperSlide, directive } from "vue-awesome-swiper";
 import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
+import axios from "axios";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 import "swiper/css/swiper.css";
+import "@/styles/overwrite-bootstrap.css";
 import "./style.less";
+import RadioGroup from "@/components/RadioGroup.vue";
+import PointsProgram from "@/components/setup/PointsProgram";
 
 // Install BootstrapVue
 Vue.use(BootstrapVue);
@@ -174,12 +187,13 @@ export default {
   },
   components: {
     Swiper,
-    SwiperSlide
+    SwiperSlide,
+    PointsProgram
   },
   methods: {
     swiperScte() {
-      this.swipe.isBeginning = this.$refs.setupSwiper.$swiper.isBeginning
-      this.swipe.isEnd = this.$refs.setupSwiper.$swiper.isEnd
+      this.swipe.isBeginning = this.$refs.setupSwiper.$swiper.isBeginning;
+      this.swipe.isEnd = this.$refs.setupSwiper.$swiper.isEnd;
     },
     swiperNext() {
       this.$refs.setupSwiper.$swiper.slideNext();
@@ -187,6 +201,20 @@ export default {
     swiperPrev() {
       this.$refs.setupSwiper.$swiper.slidePrev();
     }
+  },
+  mounted: function() {
+    axios.get("http://localhost:3000/data").then(res => {
+      this.data = res.data;
+    });
   }
 };
 </script>
+
+<style lang="less" scoped>
+@font-face {
+  font-family: "Material Icons";
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://example.com/MaterialIcons-Regular.woff) format("woff");
+}
+</style>

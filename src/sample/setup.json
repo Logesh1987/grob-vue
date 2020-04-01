@@ -1,0 +1,39 @@
+{
+    "data" : {
+        "points_program": {
+            "enabled": true,
+            "lPoints": "fixed",
+            "priceValue": 10,
+            "percentageValue": 10,
+            "rewardPoint": 10
+        },
+        "signup_bonus": {
+            "enabled": true,
+            "welcome_points": 100
+        },
+        "payby_points": {
+            "enabled": true,
+            "rewardPoint": 100
+        },
+        "referral_program": {
+            "enabled": true,
+            "rpType": "fixed",
+            "rpCouponType": "fixed"
+        },
+        "facebook_share": {
+            "enabled": true
+        },
+        "twitter_share": {
+            "enabled": true
+        },
+        "birthday_rewards": {
+            "enabled": true
+        },
+        "woo_rewards": {
+            "enabled": true
+        },
+        "news_letter": {
+            "enabled": true
+        }
+    }
+}
