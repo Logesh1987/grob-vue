@@ -49,10 +49,13 @@
                   :options="swiperOptions"
                   @slideChangeTransitionEnd="swiperScte"
                 >
-                  <swiper-slide>
-                    <PointsProgram :data="data.points_program" />
+                  <swiper-slide data-ref="PointsProgram">
+                    <PointsProgram ref="PointsProgram" :data="data.points_program" />
+                    {{ data.points_program }}
                   </swiper-slide>
-                  <swiper-slide>Slide 2</swiper-slide>
+                  <swiper-slide data-ref="SignupBonus">
+                    <SignupBonus ref="SignupBonus" :data="data.signup_bonus" />
+                  </swiper-slide>
                   <swiper-slide>Slide 3</swiper-slide>
                   <swiper-slide>Slide 4</swiper-slide>
                   <swiper-slide>Slide 5</swiper-slide>
@@ -159,6 +162,7 @@ import "@/styles/overwrite-bootstrap.css";
 import "./style.less";
 import RadioGroup from "@/components/RadioGroup.vue";
 import PointsProgram from "@/components/setup/PointsProgram";
+import SignupBonus from "@/components/setup/SignupBonus";
 
 // Install BootstrapVue
 Vue.use(BootstrapVue);
@@ -188,7 +192,8 @@ export default {
   components: {
     Swiper,
     SwiperSlide,
-    PointsProgram
+    PointsProgram,
+    SignupBonus
   },
   methods: {
     swiperScte() {
@@ -196,10 +201,18 @@ export default {
       this.swipe.isEnd = this.$refs.setupSwiper.$swiper.isEnd;
     },
     swiperNext() {
-      this.$refs.setupSwiper.$swiper.slideNext();
+      const re = document.querySelector('.swiper-slide-active').getAttribute('data-ref');
+      const result = this.$refs[re].submit();
+      if(result) {
+        this.$refs.setupSwiper.$swiper.slideNext();
+      }
     },
     swiperPrev() {
-      this.$refs.setupSwiper.$swiper.slidePrev();
+      const re = document.querySelector('.swiper-slide-active').getAttribute('data-ref');
+      const result = this.$refs[re].submit();
+      if(result) {
+        this.$refs.setupSwiper.$swiper.slidePrev();
+      }
     }
   },
   mounted: function() {

@@ -1,10 +1,10 @@
 <template>
-  <div class="setupSteps" v-bind:class="{disabled: !data.enabled}">
+  <div class="setupSteps" v-bind:class="{disabled: !enabled}">
     <div class="stepHead">
       <h3>Points Program</h3>
       <p>Start rewarding your customers for purchases</p>
       <label class="switch" for="pointsProgram">
-        <input type="checkbox" name="mainSwitch" v-model="data.enabled" id="pointsProgram" />
+        <input type="checkbox" name="mainSwitch" v-model="enabled" id="pointsProgram" />
         <i></i>
       </label>
     </div>
@@ -27,13 +27,13 @@
               fixed: 'Fixed',
               percentage: 'Percentage'
             }"
-            v-model="data.lPoints"
+            v-model="lPoints"
           ></RadioGroup>
           <br />
           <br />
           <div
             id="input_fixed"
-            v-if="data.lPoints === 'fixed'"
+            v-if="lPoints === 'fixed'"
             class="loyaltyPtForm form-row align-items-start"
           >
             <div class="form-group fLabel col-md-5">
@@ -44,8 +44,10 @@
                 class="form-control"
                 id="purchaseFor"
                 name="purchaseFor"
-                v-model="data.priceValue"
+                v-model.trim="priceValue"
               />
+              <em class="error" v-if="!$v.priceValue.required">Field is required</em>
+              <em class="error" v-if="!$v.priceValue.minValue">Need a minimum value of {{$v.priceValue.$params.minValue.min}}</em>
             </div>
             <div class="col-md-2 text-center mt-4 pt-1">to get</div>
             <div class="form-group fLabel col-md-5">
@@ -55,16 +57,16 @@
                 class="form-control"
                 id="rewardPoint"
                 name="rewardPoint"
-                v-model="data.rewardPoint"
+                v-model="rewardPoint"
               />
+              <em class="error" v-if="!$v.rewardPoint.required">Field is required</em>
+              <em class="error" v-if="!$v.rewardPoint.minValue">Need a minimum value of {{$v.rewardPoint.$params.minValue.min}}</em>
             </div>
-            <div class="col-6" id="purchaseFor-errorWrap"></div>
-            <div class="col-6" id="rewardPoint-errorWrap"></div>
           </div>
           <div
             id="input_percentage"
             class="loyaltyPtForm form-row"
-            v-if="data.lPoints === 'percentage'"
+            v-if="lPoints === 'percentage'"
           >
             <div class="form-group fLabel col-md-5">
               <label for="purchasePercent">% of purchase amount.</label>
@@ -73,8 +75,10 @@
                 class="form-control"
                 id="purchasePercent"
                 name="purchasePercent"
-                v-model="data.percentageValue"
+                v-model="percentageValue"
               />
+              <em class="error" v-if="!$v.percentageValue.required">Field is required</em>
+              <em class="error" v-if="!$v.percentageValue.minValue">Need a minimum value of {{$v.percentageValue.$params.minValue.min}}</em>
             </div>
           </div>
         </form>
@@ -95,10 +99,36 @@
 
 <script>
 import RadioGroup from "@/components/RadioGroup";
+import { validationMixin } from 'vuelidate';
+import { required, minValue, requiredIf } from 'vuelidate/lib/validators';
 
 export default {
   name: "PointsProgram",
   props: ["data"],
-  components: { RadioGroup }
+  mixins: [validationMixin],
+  components: { RadioGroup },
+  data: function() {
+    return this.data
+  },
+  methods: {
+    submit() {
+      this.$v.$touch()
+      return !this.$v.$invalid
+    }
+  },
+  validations: {
+    priceValue: {
+      required: requiredIf(function() {return this.enabled && this.lPoints === "fixed"}),
+      minValue: minValue(10)
+    },
+    rewardPoint: {
+      required: requiredIf(function() {return this.enabled && this.lPoints === "fixed"}),
+      minValue: minValue(10)
+    },
+    percentageValue: {
+      required: requiredIf(function() {return this.enabled && this.lPoints === "percentage"}),
+      minValue: minValue(10)
+    }
+  }
 };
 </script>
