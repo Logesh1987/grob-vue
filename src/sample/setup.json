@@ -18,22 +18,37 @@
         "referral_program": {
             "enabled": true,
             "rpType": "fixed",
-            "rpCouponType": "fixed"
+            "rewardPoint": 100,
+            "rewardPercentage": 10,
+            "rpCouponType": "fixed",
+            "maxCouponVal": 20,
+            "minSpendVal": 1
         },
         "facebook_share": {
-            "enabled": true
+            "enabled": true,
+            "rewardPoint": 100,
+            "share_text": "Hey check out my new product.",
+            "url": "http://www.google.com/product.com"
         },
         "twitter_share": {
-            "enabled": true
+            "enabled": true,
+            "rewardPoint": 100,
+            "share_text": "Hey check out my new product.",
+            "url": "http://www.google.com/product.com"
         },
         "birthday_rewards": {
-            "enabled": true
+            "enabled": true,
+            "rewardPoint": 100,
+            "birthdayPoint": 100
         },
         "woo_rewards": {
-            "enabled": true
+            "enabled": true,
+            "rewardPoint": 100,
+            "approvedReviews": true
         },
         "news_letter": {
-            "enabled": true
+            "enabled": true,
+            "rewardPoint": 100
         }
     }
 }

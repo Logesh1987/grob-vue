@@ -51,14 +51,31 @@
                 >
                   <swiper-slide data-ref="PointsProgram">
                     <PointsProgram ref="PointsProgram" :data="data.points_program" />
-                    {{ data.points_program }}
                   </swiper-slide>
                   <swiper-slide data-ref="SignupBonus">
                     <SignupBonus ref="SignupBonus" :data="data.signup_bonus" />
                   </swiper-slide>
-                  <swiper-slide>Slide 3</swiper-slide>
-                  <swiper-slide>Slide 4</swiper-slide>
-                  <swiper-slide>Slide 5</swiper-slide>
+                  <swiper-slide data-ref="PaybyPoints">
+                    <PaybyPoints ref="PaybyPoints" :data="data.payby_points" />
+                  </swiper-slide>
+                  <swiper-slide data-ref="ReferralProgram">
+                    <ReferralProgram ref="ReferralProgram" :data="data.referral_program" />
+                  </swiper-slide>
+                  <swiper-slide data-ref="FacebookShare">
+                    <FacebookShare ref="FacebookShare" :data="data.facebook_share" />
+                  </swiper-slide>
+                  <swiper-slide data-ref="TwitterShare">
+                    <TwitterShare ref="TwitterShare" :data="data.twitter_share" />
+                  </swiper-slide>
+                  <swiper-slide data-ref="BirthdayRewards">
+                    <BirthdayRewards ref="BirthdayRewards" :data="data.birthday_rewards" />
+                  </swiper-slide>
+                  <swiper-slide data-ref="WooRewards">
+                    <WooRewards ref="WooRewards" :data="data.woo_rewards" />
+                  </swiper-slide>
+                  <swiper-slide data-ref="Newsletter">
+                    <Newsletter ref="Newsletter" :data="data.news_letter" />
+                  </swiper-slide>
                 </swiper>
               </div>
               <div class="setupSwiper-navigator">
@@ -163,6 +180,13 @@ import "./style.less";
 import RadioGroup from "@/components/RadioGroup.vue";
 import PointsProgram from "@/components/setup/PointsProgram";
 import SignupBonus from "@/components/setup/SignupBonus";
+import PaybyPoints from "@/components/setup/PaybyPoints";
+import ReferralProgram from "@/components/setup/ReferralProgram";
+import FacebookShare from "@/components/setup/FacebookShare";
+import TwitterShare from "@/components/setup/TwitterShare";
+import BirthdayRewards from "@/components/setup/BirthdayRewards";
+import WooRewards from "@/components/setup/WooRewards";
+import Newsletter from "@/components/setup/Newsletter";
 
 // Install BootstrapVue
 Vue.use(BootstrapVue);
@@ -193,7 +217,14 @@ export default {
     Swiper,
     SwiperSlide,
     PointsProgram,
-    SignupBonus
+    SignupBonus,
+    ReferralProgram,
+    PaybyPoints,
+    Newsletter,
+    WooRewards,
+    BirthdayRewards,
+    TwitterShare,
+    FacebookShare
   },
   methods: {
     swiperScte() {
