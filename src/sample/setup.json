@@ -1,54 +1,54 @@
 {
-    "data" : {
-        "points_program": {
-            "enabled": true,
-            "lPoints": "fixed",
-            "priceValue": 10,
-            "percentageValue": 10,
-            "rewardPoint": 10
-        },
-        "signup_bonus": {
-            "enabled": true,
-            "welcome_points": 100
-        },
-        "payby_points": {
-            "enabled": true,
-            "rewardPoint": 100
-        },
-        "referral_program": {
-            "enabled": true,
-            "rpType": "fixed",
-            "rewardPoint": 100,
-            "rewardPercentage": 10,
-            "rpCouponType": "fixed",
-            "maxCouponVal": 20,
-            "minSpendVal": 1
-        },
-        "facebook_share": {
-            "enabled": true,
-            "rewardPoint": 100,
-            "share_text": "Hey check out my new product.",
-            "url": "http://www.google.com/product.com"
-        },
-        "twitter_share": {
-            "enabled": true,
-            "rewardPoint": 100,
-            "share_text": "Hey check out my new product.",
-            "url": "http://www.google.com/product.com"
-        },
-        "birthday_rewards": {
-            "enabled": true,
-            "rewardPoint": 100,
-            "birthdayPoint": 100
-        },
-        "woo_rewards": {
-            "enabled": true,
-            "rewardPoint": 100,
-            "approvedReviews": true
-        },
-        "news_letter": {
-            "enabled": true,
-            "rewardPoint": 100
-        }
+  "data": {
+    "points_program": {
+      "enabled": false,
+      "lPoints": "fixed",
+      "priceValue": 10,
+      "percentageValue": 10,
+      "rewardPoint": 10
+    },
+    "signup_bonus": {
+      "enabled": false,
+      "welcome_points": 100
+    },
+    "payby_points": {
+      "enabled": false,
+      "rewardPoint": 100
+    },
+    "referral_program": {
+      "enabled": false,
+      "rpType": "fixed",
+      "rewardPoint": 100,
+      "rewardPercentage": 10,
+      "rpCouponType": "fixed",
+      "maxCouponVal": 20,
+      "minSpendVal": 1
+    },
+    "facebook_share": {
+      "enabled": true,
+      "rewardPoint": 100,
+      "share_text": "Hey check out my new product.",
+      "url": "http://www.google.com/product.com"
+    },
+    "twitter_share": {
+      "enabled": true,
+      "rewardPoint": 100,
+      "share_text": "Hey check out my new product.",
+      "url": "http://www.google.com/product.com"
+    },
+    "birthday_rewards": {
+      "enabled": true,
+      "rewardPoint": 100,
+      "birthdayPoint": 100
+    },
+    "woo_rewards": {
+      "enabled": true,
+      "rewardPoint": 100,
+      "approvedReviews": true
+    },
+    "news_letter": {
+      "enabled": true,
+      "rewardPoint": 100
     }
+  }
 }

@@ -93,6 +93,16 @@
                   >Next</button>
                 </div>
               </div>
+              <footer class="saveBar" v-if="swipe.isEnd">
+                <div class="container">
+                  <div class="row justify-content-end">
+                    <button class="btn btn-light" @click.prevent="saveSetup">
+                      Save and Next
+                      <i class="material-icons">keyboard_arrow_right</i>
+                    </button>
+                  </div>
+                </div>
+              </footer>
             </b-card-body>
           </b-collapse>
         </b-card>
@@ -107,6 +117,8 @@
             header-tag="header"
             v-b-toggle.rewards
             role="tab"
+            ref="rewardHead"
+            class="disabled"
             @click="activeStep = 'rewardsBlock'"
           >
             <h2>2. Rewards</h2>
@@ -128,6 +140,7 @@
             header-tag="header"
             v-b-toggle.themes
             role="tab"
+            class="disabled"
             @click="activeStep = 'themesBlock'"
           >
             <h2>3. Themes</h2>
@@ -169,6 +182,7 @@
 
 <script>
 import Vue from "vue";
+import { mapState, mapActions } from "vuex";
 import { Swiper, SwiperSlide, directive } from "vue-awesome-swiper";
 import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
 import axios from "axios";
@@ -226,30 +240,44 @@ export default {
     TwitterShare,
     FacebookShare
   },
+  computed: {
+    ...mapState(["setupData"])
+  },
   methods: {
+    ...mapActions(["getSetupData", "saveSetupData"]),
     swiperScte() {
       this.swipe.isBeginning = this.$refs.setupSwiper.$swiper.isBeginning;
       this.swipe.isEnd = this.$refs.setupSwiper.$swiper.isEnd;
     },
     swiperNext() {
-      const re = document.querySelector('.swiper-slide-active').getAttribute('data-ref');
+      const re = document
+        .querySelector(".swiper-slide-active")
+        .getAttribute("data-ref");
       const result = this.$refs[re].submit();
-      if(result) {
+      if (result) {
         this.$refs.setupSwiper.$swiper.slideNext();
       }
     },
     swiperPrev() {
-      const re = document.querySelector('.swiper-slide-active').getAttribute('data-ref');
+      const re = document
+        .querySelector(".swiper-slide-active")
+        .getAttribute("data-ref");
       const result = this.$refs[re].submit();
-      if(result) {
+      if (result) {
         this.$refs.setupSwiper.$swiper.slidePrev();
       }
+    },
+    saveSetup() {
+      this.saveSetupData(this.data).then(res => {
+        alert('Saved')
+        this.$refs.rewardHead.classList.remove('disabled')
+        this.$root.$emit('bv::toggle::collapse', 'setup')
+        this.$root.$emit('bv::toggle::collapse', 'rewards')
+      })
     }
   },
   mounted: function() {
-    axios.get("http://localhost:3000/data").then(res => {
-      this.data = res.data;
-    });
+    this.getSetupData().then(res => (this.data = res));
   }
 };
 </script>
