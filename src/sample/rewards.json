@@ -12,7 +12,7 @@
             "in_stock": true,
             "realtime_coupon": true,
             "order": 1,
-            "realtime_coupon_on": 1,
+            "realtime_coupon_on": true,
             "nb_rewards": 0,
             "coupon" : {
                 "type": "Percentage",
@@ -35,7 +35,7 @@
             "in_stock": true,
             "realtime_coupon": true,
             "order": 2,
-            "realtime_coupon_on": 1,
+            "realtime_coupon_on": true,
             "nb_rewards": 0,
             "coupon" : {
                 "type": "Fixed amount",
@@ -58,7 +58,7 @@
             "in_stock": true,
             "realtime_coupon": true,
             "order": 2,
-            "realtime_coupon_on": 1,
+            "realtime_coupon_on": true,
             "nb_rewards": 0,
             "coupon" : {
                 "type": "Free shipping",
