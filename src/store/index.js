@@ -6,11 +6,15 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    setupData: ""
+    setupData: null,
+    rewardsData: null
   },
   mutations: {
     updateSetupData: (state, payload) => {
       state.setupData = payload
+    },
+    fetchRewardsData: (state, payload) => {
+      state.rewardsData = payload
     }
   },
   actions: {
@@ -20,12 +24,18 @@ export default new Vuex.Store({
         return state.setupData;
       });
     },
-    saveSetupData: ({commit}, payload) => {
+    saveSetupData: ({ commit }, payload) => {
       return Axios.post("http://localhost:3000/data", payload).then(res => {
         commit('updateSetupData', payload);
         return res;
       })
-    }
+    },
+    getRewardsData: ({ commit, state }) => {
+      return Axios.get("http://localhost:3001/data").then(res => {
+        commit('fetchRewardsData', res.data);
+        return state.rewardsData;
+      });
+    },
   },
   getters: {},
   modules: {}

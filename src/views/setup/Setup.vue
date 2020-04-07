@@ -43,38 +43,38 @@
           </b-card-header>
           <b-collapse id="setup" visible accordion="my-accordion" role="tabpanel">
             <b-card-body>
-              <div v-if="data">
+              <div v-if="data.setup">
                 <swiper
                   ref="setupSwiper"
                   :options="swiperOptions"
                   @slideChangeTransitionEnd="swiperScte"
                 >
                   <swiper-slide data-ref="PointsProgram">
-                    <PointsProgram ref="PointsProgram" :data="data.points_program" />
+                    <PointsProgram ref="PointsProgram" :data="data.setup.points_program" />
                   </swiper-slide>
                   <swiper-slide data-ref="SignupBonus">
-                    <SignupBonus ref="SignupBonus" :data="data.signup_bonus" />
+                    <SignupBonus ref="SignupBonus" :data="data.setup.signup_bonus" />
                   </swiper-slide>
                   <swiper-slide data-ref="PaybyPoints">
-                    <PaybyPoints ref="PaybyPoints" :data="data.payby_points" />
+                    <PaybyPoints ref="PaybyPoints" :data="data.setup.payby_points" />
                   </swiper-slide>
                   <swiper-slide data-ref="ReferralProgram">
-                    <ReferralProgram ref="ReferralProgram" :data="data.referral_program" />
+                    <ReferralProgram ref="ReferralProgram" :data="data.setup.referral_program" />
                   </swiper-slide>
                   <swiper-slide data-ref="FacebookShare">
-                    <FacebookShare ref="FacebookShare" :data="data.facebook_share" />
+                    <FacebookShare ref="FacebookShare" :data="data.setup.facebook_share" />
                   </swiper-slide>
                   <swiper-slide data-ref="TwitterShare">
-                    <TwitterShare ref="TwitterShare" :data="data.twitter_share" />
+                    <TwitterShare ref="TwitterShare" :data="data.setup.twitter_share" />
                   </swiper-slide>
                   <swiper-slide data-ref="BirthdayRewards">
-                    <BirthdayRewards ref="BirthdayRewards" :data="data.birthday_rewards" />
+                    <BirthdayRewards ref="BirthdayRewards" :data="data.setup.birthday_rewards" />
                   </swiper-slide>
                   <swiper-slide data-ref="WooRewards">
-                    <WooRewards ref="WooRewards" :data="data.woo_rewards" />
+                    <WooRewards ref="WooRewards" :data="data.setup.woo_rewards" />
                   </swiper-slide>
                   <swiper-slide data-ref="Newsletter">
-                    <Newsletter ref="Newsletter" :data="data.news_letter" />
+                    <Newsletter ref="Newsletter" :data="data.setup.news_letter" />
                   </swiper-slide>
                 </swiper>
               </div>
@@ -122,10 +122,19 @@
             @click="activeStep = 'rewardsBlock'"
           >
             <h2>2. Rewards</h2>
+            <button
+              v-if="activeStep === 'rewardsBlock'"
+              @click.stop="$bvModal.show('modal-reward')"
+              class="btn btn-success"
+            >Add Reward</button>
           </b-card-header>
           <b-collapse id="rewards" accordion="my-accordion" role="tabpanel">
             <b-card-body>
-              <b-card-text>asdas das das dasd</b-card-text>
+              <b-card-text>
+                <div v-if="rewardsData">
+                  <RewardsList :data="rewardsData" />
+                </div>
+              </b-card-text>
             </b-card-body>
           </b-collapse>
         </b-card>
@@ -154,11 +163,12 @@
       </div>
     </div>
 
+    <!-- SKIP MODAL -->
     <b-modal
       id="modal-skip"
       ref="modalSkip"
       hide-footer
-      hide-header
+      title="asdasd"
       centered
       modal-class="setupModal modal-skip"
       body-class="d-flex flex-column align-items-center"
@@ -175,6 +185,24 @@
             <small>Reset all and LIVE</small>
           </u>
         </a>
+      </template>
+    </b-modal>
+
+    <!-- REWARD MODAL -->
+    <b-modal
+      id="modal-reward"
+      ref="modalSkip"
+      hide-footer
+      hide-header-close
+      title="Add Reward setup"
+      centered
+      modal-class="setupModal  modal-1 modal-reward"
+      dialog-class="addRewardsModal"
+      body-class="d-flex flex-column"
+    >
+      <template v-slot:default="{ hide }">
+        <a href @click.prevent="hide()" aria-label="Close">&times;</a>
+        <RewardSettings :id="editRewardId" :closeModal="rewardModalClose" />
       </template>
     </b-modal>
   </div>
@@ -201,6 +229,8 @@ import TwitterShare from "@/components/setup/TwitterShare";
 import BirthdayRewards from "@/components/setup/BirthdayRewards";
 import WooRewards from "@/components/setup/WooRewards";
 import Newsletter from "@/components/setup/Newsletter";
+import RewardsList from "@/components/rewards/RewardsList";
+import RewardSettings from "@/components/rewards/RewardSettings";
 
 // Install BootstrapVue
 Vue.use(BootstrapVue);
@@ -218,13 +248,17 @@ export default {
         observeParents: true,
         autoHeight: true,
         allowTouchMove: false,
-        // initialSlide: 5,
+        initialSlide: 7,
         pagination: {
           el: ".swiper-pagination"
         }
         // Some Swiper option/callback...
       },
-      data: ""
+      editRewardId: '2297',
+      data: {
+        setup: null,
+        rewards: null
+      }
     };
   },
   components: {
@@ -238,13 +272,15 @@ export default {
     WooRewards,
     BirthdayRewards,
     TwitterShare,
-    FacebookShare
+    FacebookShare,
+    RewardsList,
+    RewardSettings
   },
   computed: {
-    ...mapState(["setupData"])
+    ...mapState(["setupData", "rewardsData"])
   },
   methods: {
-    ...mapActions(["getSetupData", "saveSetupData"]),
+    ...mapActions(["getSetupData", "saveSetupData", "getRewardsData"]),
     swiperScte() {
       this.swipe.isBeginning = this.$refs.setupSwiper.$swiper.isBeginning;
       this.swipe.isEnd = this.$refs.setupSwiper.$swiper.isEnd;
@@ -268,16 +304,21 @@ export default {
       }
     },
     saveSetup() {
-      this.saveSetupData(this.data).then(res => {
-        alert('Saved')
-        this.$refs.rewardHead.classList.remove('disabled')
-        this.$root.$emit('bv::toggle::collapse', 'setup')
-        this.$root.$emit('bv::toggle::collapse', 'rewards')
-      })
+      this.saveSetupData(this.data.setup).then(res => {
+        this.getRewardsData().then(re => {
+          this.activeStep = "rewardsBlock";
+          this.$refs.rewardHead.classList.remove("disabled");
+          this.$root.$emit("bv::toggle::collapse", "setup");
+          this.$root.$emit("bv::toggle::collapse", "rewards");
+        });
+      });
+    },
+    rewardModalClose() {
+      this.$bvModal.hide('modal-reward')
     }
   },
   mounted: function() {
-    this.getSetupData().then(res => (this.data = res));
+    this.getSetupData().then(res => (this.data.setup = res));
   }
 };
 </script>
