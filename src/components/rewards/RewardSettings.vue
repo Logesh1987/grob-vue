@@ -53,11 +53,171 @@
         </div>
       </div>
     </div>
+    <div>
+      <hr class="border-dark mb-0" />
+      <div class="rewardAccordion pl-5 pr-5 pb-4" id="rewardAccordion">
+        <b-card id="pointsSetupBlock" no-body class="pointsSetupBlock">
+          <b-card-header header-tag="header" v-b-toggle.pointsSetup role="tab">
+            <h2 class="color-green m-0">pointsSetup</h2>
+            <i class="material-icons text-success">done</i>
+          </b-card-header>
+          <b-collapse id="pointsSetup" accordion="rewards-accordion" role="tabpanel">
+            <b-card-body class="pr-0 pl-0 text-left">
+              <div class="form-group fLabel col-md-5 p-0">
+                <label for="rewardPoint">
+                  Required Points
+                  <a
+                    href="#"
+                    data-toggle="popover"
+                    data-trigger="focus"
+                    data-content="And here's some amazing content. It's very engaging. Right?"
+                  >
+                    <sup class="badge badge-pill badge-info">?</sup>
+                  </a>
+                </label>
+                <input
+                  type="text"
+                  class="form-control valid"
+                  id="rewardPoint"
+                  name="rewardPoint"
+                  v-model="data.required_points"
+                  aria-invalid="false"
+                />
+              </div>
+              <h6>Limit Referral Rewards Per Users?</h6>
+              <div class="col-md-12 mt-2 mb-2 p-0">
+                <div class="btn-group btnGrpToggle btnGrpCheck">
+                  <input
+                    type="checkbox"
+                    v-model="data.quantity"
+                    true-value="unlimited"
+                    false-value="0"
+                    name="limitReferral"
+                    id="limitReferral"
+                  />
+                  <label for="limitReferral" class="m-0">
+                    <span class="btn btn-outline-dark">Unlimited</span>
+                    <span class="btn btn-outline-dark">Limited</span>
+                  </label>
+                </div>
+              </div>
+              <div v-if="data.quantity !== 'unlimited'" class="form-group fLabel col-md-3 p-0 mb-0">
+                <label for="rewardPoint">Enter Quantity</label>
+                <input
+                  type="text"
+                  class="form-control valid"
+                  id="rewardPoint"
+                  name="rewardPoint"
+                  v-model="data.quantity"
+                  aria-invalid="false"
+                />
+              </div>
+            </b-card-body>
+          </b-collapse>
+        </b-card>
+
+        <b-card id="rewardsSetupBlock" no-body class="rewardsSetupBlock">
+          <b-card-header header-tag="header" v-b-toggle.rewardsSetup role="tab">
+            <h2 class="color-green m-0">rewardsSetup</h2>
+            <i class="material-icons text-success">done</i>
+          </b-card-header>
+          <b-collapse id="rewardsSetup" accordion="rewards-accordion" role="tabpanel">
+            <b-card-body class="pr-0 pl-0 text-left">
+              <h6>
+                Reward as a coupon?
+                <div
+                  class="alert alert-warning d-inline-flex align-items-center mb-0 ml-2"
+                  role="alert"
+                >
+                  <span class="badge badge-pill badge-primary">i</span>
+                  We will create coupon automatically on your webstore
+                </div>
+              </h6>
+              <div class="col-md-12 mt-2 mb-4 p-0">
+                <div class="btn-group btnGrpToggle btnGrpCheck">
+                  <input
+                    type="checkbox"
+                    v-model="data.realtime_coupon_on"
+                    true-value="1"
+                    false-value="0"
+                    name="rCoupon"
+                    id="rCoupon"
+                  />
+                  <label for="rCoupon" class="m-0">
+                    <span class="btn btn-outline-dark">Yes</span>
+                    <span class="btn btn-outline-dark">No</span>
+                  </label>
+                </div>
+              </div>
+              <div class="themesBlock">
+                <b-tabs nav-class="widget-tabs-nav" content-class="widget-tabs-panes">
+                  <b-tab title="Automatic" active>
+                    <h6>Coupon Type</h6>
+                    <div class="row">
+                      <div class="col-md-12 mt-2 mb-3">
+                        <div class="alert alert-warning d-flex align-items-center" role="alert">
+                          <span class="badge badge-pill badge-primary">i</span>
+                          We will create coupon automatically on your webstore
+                        </div>
+                        <RadioGroup
+                          v-model="data.realtime_coupon.type"
+                          name="cTyp"
+                          :options="{'Fixed amount': 'Fixed off', 'Percentage': 'Percentage off', 'Free shipping': 'Free shipping'}"
+                        />
+                      </div>
+                      <div
+                        class="row col-md-12 maxCouponValue"
+                        v-if="data.realtime_coupon.type !== 'Free shipping'"
+                      >
+                        <div class="form-group fLabel col-md-4">
+                          <div class="input-group-prepend">€</div>
+                          <label for>Max. Coupon Value</label>
+                          <input
+                            type="number"
+                            class="form-control"
+                            id="rpMcv"
+                            name="rpMcv"
+                            v-model="data.realtime_coupon.amount"
+                          />
+                        </div>
+                      </div>
+                      <div class="row col-md-12">
+                        <div class="mb-0 form-group fLabel col-md-4">
+                          <div class="input-group-prepend">€</div>
+                          <label for>Minimum Spend Value</label>
+                          <input
+                            type="number"
+                            class="form-control"
+                            id="rpMsv"
+                            name="rpMsv"
+                            v-model="data.realtime_coupon.minimum_order"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </b-tab>
+                  <b-tab title="Manual">
+                    <p>I'm the second tab</p>
+                  </b-tab>
+                </b-tabs>
+              </div>
+            </b-card-body>
+          </b-collapse>
+        </b-card>
+      </div>
+
+      <!-- CALL TO ACTIONS -->
+      <div class="pl-5 pr-5 pb-5 text-left">
+        <button type="submit" class="btn btn-success pl-5 pr-5 mr-2">Save</button>
+        <button type="submit" @click.prevent="closeModal()" class="btn btn-dark pl-5 pr-5">Cancel</button>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState } from "vuex";
+import RadioGroup from "@/components/RadioGroup";
 const newSettings = {
   name: "Default title",
   description: "Default Description",
@@ -79,22 +239,25 @@ const newSettings = {
 export default {
   name: "RewardSettings",
   props: ["id", "closeModal"],
+  components: { RadioGroup },
   data: function() {
     return {
       data: {}
     };
   },
   computed: {
-      ...mapState(["rewardsData"])
+    ...mapState(["rewardsData"])
   },
   methods: {
     getDataById: function(id) {
-        return this.rewardsData.find(data => data.id === id)
+      console.log(this.rewardsData);
+      console.log(id);
+      return this.rewardsData.find(data => data.id === id);
     }
   },
   mounted: function() {
     this.id
-      ? (this.data = this.getDataById(parseInt(this.id)))
+      ? (this.data = this.getDataById(this.id))
       : (this.data = newSettings);
   }
 };

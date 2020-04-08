@@ -254,7 +254,7 @@ export default {
         }
         // Some Swiper option/callback...
       },
-      editRewardId: '2297',
+      editRewardId: null,
       data: {
         setup: null,
         rewards: null
