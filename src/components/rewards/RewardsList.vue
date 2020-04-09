@@ -1,5 +1,5 @@
 <template>
-  <div class="rewardList">
+  <div class="rewardList" v-if="data">
     <div class="rewardItem" v-for="item in data" :key="item.id">
       <div class="rewardDragger">
         <i class="material-icons">reorder</i>
@@ -17,14 +17,14 @@
           <span>Qty</span>
           <strong>{{ item.quantity }}</strong>
           <span>Required Points</span>
-          <strong>{{ item.required_points }} Pts</strong>
+          <strong>{{ item.required_minimum_points }} Pts</strong>
         </div>
       </div>
       <div class="rewardControls">
         <a href="#" class="text-success">
           <i class="material-icons">check</i>
         </a>
-        <a href="#">
+        <a href="#" @click.prevent="handleEditRewards(item.id)">
           <i class="icon-undefined"></i>
         </a>
         <label class="switch" for="r1">
@@ -42,9 +42,16 @@
 <script>
 export default {
   name: "RewardsList",
-  props: ["data"],
+  props: ["data", "setEditReward", "showModal"],
   data: function() {
     return this.data;
   },
+
+  methods: {
+    handleEditRewards: function(id) {
+      this.setEditReward(id);
+      this.showModal()
+    }
+  }
 };
 </script>

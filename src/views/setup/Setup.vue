@@ -124,7 +124,7 @@
             <h2>2. Rewards</h2>
             <button
               v-if="activeStep === 'rewardsBlock'"
-              @click.stop="$bvModal.show('modal-reward')"
+              @click.stop="rewardModalOpen"
               class="btn btn-success"
             >Add Reward</button>
           </b-card-header>
@@ -132,9 +132,23 @@
             <b-card-body>
               <b-card-text>
                 <div v-if="rewardsData">
-                  <RewardsList :data="rewardsData" />
+                  <RewardsList
+                    :data="rewardsData"
+                    :setEditReward="setEditReward"
+                    :showModal="rewardModalOpen"
+                  />
                 </div>
               </b-card-text>
+              <footer class="saveBar" v-if="activeStep === 'rewardsBlock'">
+                <div class="container">
+                  <div class="row justify-content-end">
+                    <button class="btn btn-light" @click.prevent="saveRewards">
+                      Save and Next
+                      <i class="material-icons">keyboard_arrow_right</i>
+                    </button>
+                  </div>
+                </div>
+              </footer>
             </b-card-body>
           </b-collapse>
         </b-card>
@@ -149,6 +163,7 @@
             header-tag="header"
             v-b-toggle.themes
             role="tab"
+            ref="themesHead"
             class="disabled"
             @click="activeStep = 'themesBlock'"
           >
@@ -156,7 +171,9 @@
           </b-card-header>
           <b-collapse id="themes" accordion="my-accordion" role="tabpanel">
             <b-card-body>
-              <b-card-text>asdas das das dasd</b-card-text>
+              <b-card-text>
+                <!-- <Themes /> -->
+              </b-card-text>
             </b-card-body>
           </b-collapse>
         </b-card>
@@ -231,6 +248,7 @@ import WooRewards from "@/components/setup/WooRewards";
 import Newsletter from "@/components/setup/Newsletter";
 import RewardsList from "@/components/rewards/RewardsList";
 import RewardSettings from "@/components/rewards/RewardSettings";
+import Themes from "@/components/themes/Themes";
 
 // Install BootstrapVue
 Vue.use(BootstrapVue);
@@ -274,7 +292,8 @@ export default {
     TwitterShare,
     FacebookShare,
     RewardsList,
-    RewardSettings
+    RewardSettings,
+    Themes
   },
   computed: {
     ...mapState(["setupData", "rewardsData"])
@@ -313,8 +332,20 @@ export default {
         });
       });
     },
+    saveRewards() {
+      this.activeStep = "themesBlock";
+      this.$refs.themesHead.classList.remove("disabled");
+      this.$root.$emit("bv::toggle::collapse", "rewards");
+      this.$root.$emit("bv::toggle::collapse", "themes");
+    },
+    setEditReward(id) {
+      this.editRewardId = id ? id : null;
+    },
     rewardModalClose() {
       this.$bvModal.hide('modal-reward')
+    },
+    rewardModalOpen() {
+      this.$bvModal.show('modal-reward')
     }
   },
   mounted: function() {

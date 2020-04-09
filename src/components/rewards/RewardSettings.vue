@@ -6,13 +6,12 @@
       <h6 class="col-12 color-green mb-4">Reward Settings</h6>
       <div class="col-6">
         <label>Choose / Upload product cover image</label>
-        <div class="d-flex coverImgList justify-content-between">
-          <img src="https://picsum.photos/id/237/200/200" alt />
-          <img src="https://picsum.photos/id/200/200" alt />
-          <img src="https://picsum.photos/id/721/200/200" alt />
-          <img src="https://picsum.photos/id/1/200/200" alt />
+        <div class="d-flex flex-wrap coverImgList justify-content-between">
+          <span v-for="img in imgGroup" :key="img.id" :class="{active: data.image === img.id}">
+            <img src="img.src" alt />
+          </span>
         </div>
-        <label for="coverImg" class="btn-file d-block text-center mt-3">
+        <!-- <label for="coverImg" class="btn-file d-block text-center mt-3">
           <input type="file" id="coverImg" />
           <button class="btn btn-dark pl-5 pr-5">Upload</button>
         </label>
@@ -20,7 +19,7 @@
           Recommended width is 300 x 300 pixels. (Images must be GIF, JPEG, JPG, PNG
           and
           maximum of 2MB Limit).
-        </small>
+        </small>-->
       </div>
       <div class="col-6">
         <div class="form-group">
@@ -80,7 +79,7 @@
                   class="form-control valid"
                   id="rewardPoint"
                   name="rewardPoint"
-                  v-model="data.required_points"
+                  v-model="data.required_minimum_points"
                   aria-invalid="false"
                 />
               </div>
@@ -89,8 +88,8 @@
                 <div class="btn-group btnGrpToggle btnGrpCheck">
                   <input
                     type="checkbox"
-                    v-model="data.quantity"
-                    true-value="unlimited"
+                    v-model="data.is_unlimited"
+                    true-value="1"
                     false-value="0"
                     name="limitReferral"
                     id="limitReferral"
@@ -101,7 +100,7 @@
                   </label>
                 </div>
               </div>
-              <div v-if="data.quantity !== 'unlimited'" class="form-group fLabel col-md-3 p-0 mb-0">
+              <div v-if="data.is_unlimited === '0'" class="form-group fLabel col-md-3 p-0 mb-0">
                 <label for="rewardPoint">Enter Quantity</label>
                 <input
                   type="text"
@@ -149,7 +148,7 @@
                   </label>
                 </div>
               </div>
-              <div class="themesBlock">
+              <div v-if="data.realtime_coupon_on == 1" class="themesBlock">
                 <b-tabs nav-class="widget-tabs-nav" content-class="widget-tabs-panes">
                   <b-tab title="Automatic" active>
                     <h6>Coupon Type</h6>
@@ -162,12 +161,12 @@
                         <RadioGroup
                           v-model="data.realtime_coupon.type"
                           name="cTyp"
-                          :options="{'Fixed amount': 'Fixed off', 'Percentage': 'Percentage off', 'Free shipping': 'Free shipping'}"
+                          :options="{'1': 'Fixed off', '2': 'Percentage off', '3': 'Free shipping'}"
                         />
                       </div>
                       <div
                         class="row col-md-12 maxCouponValue"
-                        v-if="data.realtime_coupon.type !== 'Free shipping'"
+                        v-if="data.realtime_coupon.type !== '3'"
                       >
                         <div class="form-group fLabel col-md-4">
                           <div class="input-group-prepend">€</div>
@@ -196,7 +195,7 @@
                       </div>
                     </div>
                   </b-tab>
-                  <b-tab title="Manual">
+                  <b-tab title="Manual" disabled>
                     <p>I'm the second tab</p>
                   </b-tab>
                 </b-tabs>
@@ -218,20 +217,29 @@
 <script>
 import { mapState } from "vuex";
 import RadioGroup from "@/components/RadioGroup";
+
+const imgGroup = [
+  { src: "https://picsum.photos/id/237/200/200", id: "1" },
+  { src: "https://picsum.photos/id/200/200", id: "2" },
+  { src: "https://picsum.photos/id/721/200/200", id: "3" },
+  { src: "https://picsum.photos/id/1/200/200", id: "4" },
+  { src: "https://picsum.photos/id/726/200/200", id: "5" },
+  { src: "https://picsum.photos/id/5/200/200", id: "6" }
+];
 const newSettings = {
   name: "Default title",
   description: "Default Description",
-  required_points: 100,
-  quantity: "unlimited",
-  image: "assets/img/reward.jpg",
+  required_minimum_points: 100,
+  is_unlimited: 1,
+  quantity: 2,
+  image: "2",
   type: "Coupon",
   is_coupon: true,
-  realtime_coupon: true,
   order: 1,
   realtime_coupon_on: 1,
   nb_rewards: 0,
-  coupon: {
-    type: "Percentage",
+  realtime_coupon: {
+    type: "1",
     amount: 50,
     minimum_order: 100
   }
@@ -250,8 +258,6 @@ export default {
   },
   methods: {
     getDataById: function(id) {
-      console.log(this.rewardsData);
-      console.log(id);
       return this.rewardsData.find(data => data.id === id);
     }
   },
