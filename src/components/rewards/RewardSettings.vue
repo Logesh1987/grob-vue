@@ -7,8 +7,13 @@
       <div class="col-6">
         <label>Choose / Upload product cover image</label>
         <div class="d-flex flex-wrap coverImgList justify-content-between">
-          <span v-for="img in imgGroup" :key="img.id" :class="{active: data.image === img.id}">
-            <img src="img.src" alt />
+          <span
+            v-for="img in imgGroup"
+            :key="img"
+            :class="{active: data.image_url === img}"
+            @click="data.image_url = img"
+          >
+            <img :src="img" alt />
           </span>
         </div>
         <!-- <label for="coverImg" class="btn-file d-block text-center mt-3">
@@ -207,7 +212,11 @@
 
       <!-- CALL TO ACTIONS -->
       <div class="pl-5 pr-5 pb-5 text-left">
-        <button type="submit" class="btn btn-success pl-5 pr-5 mr-2">Save</button>
+        <button
+          type="submit"
+          @click.prevent="handleSubmit"
+          class="btn btn-success pl-5 pr-5 mr-2"
+        >Save</button>
         <button type="submit" @click.prevent="closeModal()" class="btn btn-dark pl-5 pr-5">Cancel</button>
       </div>
     </div>
@@ -218,39 +227,39 @@
 import { mapState } from "vuex";
 import RadioGroup from "@/components/RadioGroup";
 
-const imgGroup = [
-  { src: "https://picsum.photos/id/237/200/200", id: "1" },
-  { src: "https://picsum.photos/id/200/200", id: "2" },
-  { src: "https://picsum.photos/id/721/200/200", id: "3" },
-  { src: "https://picsum.photos/id/1/200/200", id: "4" },
-  { src: "https://picsum.photos/id/726/200/200", id: "5" },
-  { src: "https://picsum.photos/id/5/200/200", id: "6" }
-];
-const newSettings = {
-  name: "Default title",
-  description: "Default Description",
-  required_minimum_points: 100,
-  is_unlimited: 1,
-  quantity: 2,
-  image: "2",
-  type: "Coupon",
-  is_coupon: true,
-  order: 1,
-  realtime_coupon_on: 1,
-  nb_rewards: 0,
-  realtime_coupon: {
-    type: "1",
-    amount: 50,
-    minimum_order: 100
-  }
-};
 export default {
   name: "RewardSettings",
   props: ["id", "closeModal"],
   components: { RadioGroup },
   data: function() {
     return {
-      data: {}
+      data: {},
+      imgGroup: [
+        "https://i.picsum.photos/id/134/300/200.jpg",
+        "https://i.picsum.photos/id/256/300/200.jpg",
+        "https://i.picsum.photos/id/210/300/200.jpg",
+        "https://i.picsum.photos/id/348/300/200.jpg",
+        "https://i.picsum.photos/id/342/300/200.jpg",
+        "https://i.picsum.photos/id/321/300/200.jpg"
+      ],
+      newSettings: {
+        name: "Default title",
+        description: "Default Description",
+        required_minimum_points: 100,
+        is_unlimited: 1,
+        quantity: 2,
+        image_url: "",
+        type: "Coupon",
+        is_coupon: true,
+        order: 1,
+        realtime_coupon_on: 1,
+        nb_rewards: 0,
+        realtime_coupon: {
+          type: "1",
+          amount: 50,
+          minimum_order: 100
+        }
+      }
     };
   },
   computed: {
@@ -259,12 +268,22 @@ export default {
   methods: {
     getDataById: function(id) {
       return this.rewardsData.find(data => data.id === id);
+    },
+    handleSubmit: function() {
+      if(this.id) {
+        // EDIT REWARD - post functionality 
+        
+      } else {
+        // ADD REWARD - post functionality 
+      }
+      // On response call this
+      this.closeModal()
     }
   },
   mounted: function() {
     this.id
       ? (this.data = this.getDataById(this.id))
-      : (this.data = newSettings);
+      : (this.data = this.newSettings);
   }
 };
 </script>

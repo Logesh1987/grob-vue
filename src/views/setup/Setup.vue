@@ -172,7 +172,7 @@
           <b-collapse id="themes" accordion="my-accordion" role="tabpanel">
             <b-card-body>
               <b-card-text>
-                <!-- <Themes /> -->
+                <Themes />
               </b-card-text>
             </b-card-body>
           </b-collapse>
@@ -217,8 +217,8 @@
       dialog-class="addRewardsModal"
       body-class="d-flex flex-column"
     >
-      <template v-slot:default="{ hide }">
-        <a href @click.prevent="hide()" aria-label="Close">&times;</a>
+      <template v-slot:default>
+        <a href @click.prevent="rewardModalClose" aria-label="Close">&times;</a>
         <RewardSettings :id="editRewardId" :closeModal="rewardModalClose" />
       </template>
     </b-modal>
@@ -342,7 +342,8 @@ export default {
       this.editRewardId = id ? id : null;
     },
     rewardModalClose() {
-      this.$bvModal.hide('modal-reward')
+      this.$bvModal.hide('modal-reward');
+      this.setEditReward(null);
     },
     rewardModalOpen() {
       this.$bvModal.show('modal-reward')

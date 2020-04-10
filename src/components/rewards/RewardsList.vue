@@ -5,7 +5,9 @@
         <i class="material-icons">reorder</i>
       </div>
       <div class="rewardThumb">
-        <figure style="background-image: url(https://picsum.photos/300/200)"></figure>
+        <figure
+          :style="{ 'background-image': `url('${item.image_url}')` }"
+        ></figure>
       </div>
       <div class="rewardInfo">
         <h5>
@@ -50,7 +52,7 @@ export default {
   methods: {
     handleEditRewards: function(id) {
       this.setEditReward(id);
-      this.showModal()
+      this.showModal();
     }
   }
 };
