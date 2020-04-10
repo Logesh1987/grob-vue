@@ -1,0 +1,55 @@
+{
+  "data": {
+    "id_widget": "0",
+    "id_site": "3683",
+    "id_competition": "3000",
+    "name": "Loyalty Rewards Program",
+    "type": "referral",
+    "position": "top-bar",
+    "main_configuration": {
+      "contest_actions_to_show": "0",
+      "contest_all_action_count": "4"
+    },
+    "status": "1",
+    "date_added": "1586417627",
+    "date_update": "1586495984",
+    "has_published": "1",
+    "bg_color": "#ea0c46",
+    "style_data": {
+      "font_family": "'Arial', Helvetica",
+      "widget_size": "14",
+      "border_roundness": "0",
+      "norm_txt_color": "#ffffff",
+      "norm_bg_color": "#000000",
+      "norm_border_color": "#000000",
+      "norm_shadow_flag": "0",
+      "norm_shadow_color": "#000000",
+      "hover_txt_color": "#ffffff",
+      "hover_bg_color": "#000000",
+      "has_border_hover_flag": "0",
+      "has_border_flag": "0",
+      "hover_shadow_flag": "0",
+      "hover_border_color": "#000000",
+      "hover_shadow_color": "#000000",
+      "widget_text_main": "REWARDS",
+      "widget_sub_text": "",
+      "widget_click_navigate": "lightbox",
+      "contest_actions_to_show": "0",
+      "widget_logo_img": "",
+      "widget_bg_img": "",
+      "widget_bg_check": "0",
+      "w_desktop_view": "compact",
+      "w_mobile_view": "compact",
+      "mobile_position": "right"
+    },
+    "widget_position": {
+      "side-drawer": "Mid Right",
+      "left-side-drawer": "Mid Left",
+      "top-bar": "Top Bar",
+      "bottom-bar": "Bottom Bar",
+      "left-bottom-bar": "Bottom Left",
+      "lower-right-corner": "Bottom Right",
+      "mid-bottom-bar": "Bottom Center"
+    }
+  }
+}

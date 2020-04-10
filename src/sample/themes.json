@@ -1,0 +1,55 @@
+{
+  "data": {
+    "bg_color": "#ea0c46",
+    "is_bg": "0",
+    "is_new_fo": "1",
+    "styles_data": {
+      "font_family_main": "'Tahoma', Geneva",
+      "font_color_main": "#29f138",
+      "font_color_hover": "#000",
+      "bg_color_button": "#000000",
+      "font_family_button": "BARIOLREGULAR_0",
+      "font_color_button": "#ffffff",
+      "font_color_hover_button": "#000000",
+      "signup_button_text": "Create Account"
+    },
+    "fonts": [
+      {
+        "name": "Arial",
+        "font_group": "'Arial', Helvetica"
+      },
+      {
+        "name": "BARIOLREGULAR_0",
+        "font_group": "BARIOLREGULAR_0"
+      },
+      {
+        "name": "Comic Sans MS",
+        "font_group": "'Comic Sans MS', 'Chalkboard'"
+      },
+      {
+        "name": "Courier New",
+        "font_group": "'Courier New', Courier, monospace"
+      },
+      {
+        "name": "Georgia",
+        "font_group": "'Georgia'"
+      },
+      {
+        "name": "Inherit my website's font",
+        "font_group": "inherit"
+      },
+      {
+        "name": "Tahoma",
+        "font_group": "'Tahoma', Geneva"
+      },
+      {
+        "name": "Trebuchet MS",
+        "font_group": "'Trebuchet MS', Helvetica"
+      },
+      {
+        "name": "Verdana",
+        "font_group": "'Verdana', Geneva"
+      }
+    ]
+  }
+}
