@@ -172,7 +172,7 @@
           <b-collapse id="themes" accordion="my-accordion" role="tabpanel">
             <b-card-body>
               <b-card-text>
-                <Themes />
+                <Themes v-if="popupData" />
               </b-card-text>
             </b-card-body>
           </b-collapse>
@@ -275,7 +275,8 @@ export default {
       editRewardId: null,
       data: {
         setup: null,
-        rewards: null
+        rewards: null,
+        popup: null
       }
     };
   },
@@ -296,10 +297,10 @@ export default {
     Themes
   },
   computed: {
-    ...mapState(["setupData", "rewardsData"])
+    ...mapState(["setupData", "rewardsData", "popupData"])
   },
   methods: {
-    ...mapActions(["getSetupData", "saveSetupData", "getRewardsData"]),
+    ...mapActions(["getSetupData", "saveSetupData", "getRewardsData", "getPopupData"]),
     swiperScte() {
       this.swipe.isBeginning = this.$refs.setupSwiper.$swiper.isBeginning;
       this.swipe.isEnd = this.$refs.setupSwiper.$swiper.isEnd;
@@ -333,10 +334,12 @@ export default {
       });
     },
     saveRewards() {
-      this.activeStep = "themesBlock";
-      this.$refs.themesHead.classList.remove("disabled");
-      this.$root.$emit("bv::toggle::collapse", "rewards");
-      this.$root.$emit("bv::toggle::collapse", "themes");
+      this.getPopupData().then(res => {
+        this.activeStep = "themesBlock";        
+        this.$refs.themesHead.classList.remove("disabled");
+        this.$root.$emit("bv::toggle::collapse", "rewards");
+        this.$root.$emit("bv::toggle::collapse", "themes");
+      })
     },
     setEditReward(id) {
       this.editRewardId = id ? id : null;

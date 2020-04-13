@@ -37,9 +37,9 @@
             <h4 v-html="setup.desc"></h4>
             <nav class="stepsNav">
               <i></i>
-              <a href="#" @click.prevent="step=1" >Setup</a>
-              <a href="#" @click.prevent="step=2" >Rewards</a>
-              <a href="#" @click.prevent="step=3" >Themes</a>
+              <a href="#" @click.prevent="step=1">Setup</a>
+              <a href="#" @click.prevent="step=2">Rewards</a>
+              <a href="#" @click.prevent="step=3">Themes</a>
             </nav>
             <div class="setupStepsWrapper">
               <div class="setupSteps step-1">
@@ -166,7 +166,8 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
+import Axios from 'axios';
 export default {
   name: "guide",
   data: function() {
@@ -214,7 +215,7 @@ export default {
   methods: {
     fullpageLoad() {
       this.activeView = 1;
-      this.$refs.welcome.classList.add('play')
+      this.$refs.welcome.classList.add("play");
     },
     fullPageleave(origin, destination, direction) {
       if (origin.index == 1) {
@@ -266,9 +267,9 @@ export default {
   },
   mounted: function() {
     this.$refs.fullpage.init();
-    let a = require('@/sample/guide.json')
-    //AXIOS FETCH
-    this.likes = a['totallikes'];
+    Axios.get("http://localhost:3000/guide").then(({data}) => {
+      this.likes = data["totallikes"];
+    });
   }
 };
 </script>
