@@ -9,12 +9,12 @@ Vue.use(VueFullPage);
 
 const routes = [
   {
-    path: "/",
+    path: "/home",
     name: "Home",
     component: Home
   },
   {
-    path: "/guide",
+    path: "/",
     name: "Guide",
     component: Guide
   },

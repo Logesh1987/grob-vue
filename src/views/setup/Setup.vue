@@ -12,9 +12,15 @@
           <div>
             <h1>Welcome, Start with a quick setup.</h1>
             <ul class="paginate" id="setupPaginate">
-              <li data-paginate="setup">1</li>
-              <li data-paginate="rewards">2</li>
-              <li data-paginate="themes">3</li>
+              <li
+                :class="{'current' : activeStep === 'setupBlock', 'completed' : saved.setupBlock}"
+              >1</li>
+              <li
+                :class="{'current' : activeStep === 'rewardsBlock', 'completed' : saved.rewardsBlock}"
+              >2</li>
+              <li
+                :class="{'current' : activeStep === 'themesBlock', 'completed' : saved.themesBlock}"
+              >3</li>
             </ul>
           </div>
         </div>
@@ -27,21 +33,17 @@
         </div>
       </header>
       <div role="tablist" class="setupContainer" id="setupAccordion">
-        <b-card
-          id="setupBlock"
-          no-body
-          class="setupBlock"
-          :class="activeStep === 'setupBlock' ? 'active' : null"
-        >
+        <b-card no-body class="setupBlock" :class="activeStep === 'setupBlock' ? 'active' : null">
           <b-card-header
             header-tag="header"
-            v-b-toggle.setup
+            v-b-toggle.setupBlock
             role="tab"
-            @click="activeStep = 'setupBlock'"
+            @click="toggleCollapse('setupBlock')"
           >
             <h2>1. Setup</h2>
+            <span class="completeSteps">Complete all steps before proceed</span>
           </b-card-header>
-          <b-collapse id="setup" visible accordion="my-accordion" role="tabpanel">
+          <b-collapse id="setupBlock" accordion="my-accordion" role="tabpanel">
             <b-card-body>
               <div v-if="data.setup">
                 <swiper
@@ -50,31 +52,67 @@
                   @slideChangeTransitionEnd="swiperScte"
                 >
                   <swiper-slide data-ref="PointsProgram">
-                    <PointsProgram ref="PointsProgram" :data="data.setup.points_program" />
+                    <PointsProgram
+                      ref="PointsProgram"
+                      :reset="resetSetupBlock"
+                      :data="data.setup.points_program"
+                    />
                   </swiper-slide>
                   <swiper-slide data-ref="SignupBonus">
-                    <SignupBonus ref="SignupBonus" :data="data.setup.signup_bonus" />
+                    <SignupBonus
+                      ref="SignupBonus"
+                      :reset="resetSetupBlock"
+                      :data="data.setup.signup_bonus"
+                    />
                   </swiper-slide>
                   <swiper-slide data-ref="PaybyPoints">
-                    <PaybyPoints ref="PaybyPoints" :data="data.setup.payby_points" />
+                    <PaybyPoints
+                      ref="PaybyPoints"
+                      :reset="resetSetupBlock"
+                      :data="data.setup.payby_points"
+                    />
                   </swiper-slide>
                   <swiper-slide data-ref="ReferralProgram">
-                    <ReferralProgram ref="ReferralProgram" :data="data.setup.referral_program" />
+                    <ReferralProgram
+                      ref="ReferralProgram"
+                      :reset="resetSetupBlock"
+                      :data="data.setup.referral_program"
+                    />
                   </swiper-slide>
                   <swiper-slide data-ref="FacebookShare">
-                    <FacebookShare ref="FacebookShare" :data="data.setup.facebook_share" />
+                    <FacebookShare
+                      ref="FacebookShare"
+                      :reset="resetSetupBlock"
+                      :data="data.setup.facebook_share"
+                    />
                   </swiper-slide>
                   <swiper-slide data-ref="TwitterShare">
-                    <TwitterShare ref="TwitterShare" :data="data.setup.twitter_share" />
+                    <TwitterShare
+                      ref="TwitterShare"
+                      :reset="resetSetupBlock"
+                      :data="data.setup.twitter_share"
+                    />
                   </swiper-slide>
                   <swiper-slide data-ref="BirthdayRewards">
-                    <BirthdayRewards ref="BirthdayRewards" :data="data.setup.birthday_rewards" />
+                    <BirthdayRewards
+                      ref="BirthdayRewards"
+                      :reset="resetSetupBlock"
+                      :data="data.setup.birthday_rewards"
+                    />
                   </swiper-slide>
                   <swiper-slide data-ref="WooRewards">
-                    <WooRewards ref="WooRewards" :data="data.setup.woo_rewards" />
+                    <WooRewards
+                      ref="WooRewards"
+                      :reset="resetSetupBlock"
+                      :data="data.setup.woo_rewards"
+                    />
                   </swiper-slide>
                   <swiper-slide data-ref="Newsletter">
-                    <Newsletter ref="Newsletter" :data="data.setup.news_letter" />
+                    <Newsletter
+                      ref="Newsletter"
+                      :reset="resetSetupBlock"
+                      :data="data.setup.news_letter"
+                    />
                   </swiper-slide>
                 </swiper>
               </div>
@@ -95,9 +133,16 @@
               </div>
               <footer class="saveBar" v-if="swipe.isEnd">
                 <div class="container">
-                  <div class="row justify-content-end">
+                  <div class="row justify-content-between">
+                    <ul class="footProgress">
+                      <li class="completed">
+                        <i class="material-icons">check</i>
+                      </li>
+                      <li>2</li>
+                      <li>3</li>
+                    </ul>
                     <button class="btn btn-light" @click.prevent="saveSetup">
-                      Save and Next
+                      Proceed to Rewards
                       <i class="material-icons">keyboard_arrow_right</i>
                     </button>
                   </div>
@@ -108,18 +153,17 @@
         </b-card>
 
         <b-card
-          id="rewardsBlock"
           no-body
           class="rewardsBlock"
           :class="activeStep === 'rewardsBlock' ? 'active' : null"
         >
           <b-card-header
             header-tag="header"
-            v-b-toggle.rewards
+            v-b-toggle.rewardsBlock
             role="tab"
             ref="rewardHead"
             class="disabled"
-            @click="activeStep = 'rewardsBlock'"
+            @click="toggleCollapse('rewardsBlock')"
           >
             <h2>2. Rewards</h2>
             <button
@@ -128,7 +172,7 @@
               class="btn btn-success"
             >Add Reward</button>
           </b-card-header>
-          <b-collapse id="rewards" accordion="my-accordion" role="tabpanel">
+          <b-collapse id="rewardsBlock" accordion="my-accordion" role="tabpanel">
             <b-card-body>
               <b-card-text>
                 <div v-if="rewardsData">
@@ -141,7 +185,16 @@
               </b-card-text>
               <footer class="saveBar" v-if="activeStep === 'rewardsBlock'">
                 <div class="container">
-                  <div class="row justify-content-end">
+                  <div class="row justify-content-between">
+                    <ul class="footProgress">
+                      <li class="completed">
+                        <i class="material-icons">check</i>
+                      </li>
+                      <li class="completed">
+                        <i class="material-icons">check</i>
+                      </li>
+                      <li>3</li>
+                    </ul>
                     <button class="btn btn-light" @click.prevent="saveRewards">
                       Save and Next
                       <i class="material-icons">keyboard_arrow_right</i>
@@ -153,23 +206,18 @@
           </b-collapse>
         </b-card>
 
-        <b-card
-          id="themesBlock"
-          no-body
-          class="themesBlock"
-          :class="activeStep === 'themesBlock' ? 'active' : null"
-        >
+        <b-card no-body class="themesBlock" :class="activeStep === 'themesBlock' ? 'active' : null">
           <b-card-header
             header-tag="header"
-            v-b-toggle.themes
+            v-b-toggle.themesBlock
             role="tab"
             ref="themesHead"
             class="disabled"
-            @click="activeStep = 'themesBlock'"
+            @click="toggleCollapse('themesBlock')"
           >
             <h2>3. Themes</h2>
           </b-card-header>
-          <b-collapse id="themes" accordion="my-accordion" role="tabpanel">
+          <b-collapse id="themesBlock" accordion="my-accordion" role="tabpanel">
             <b-card-body>
               <b-card-text>
                 <Themes v-if="popupData" />
@@ -256,7 +304,12 @@ export default {
   name: "setup",
   data: function() {
     return {
-      activeStep: "setupBlock",
+      activeStep: null,
+      saved: {
+        setupBlock: false,
+        rewardsBlock: false,
+        themesBlock: false
+      },
       swipe: {
         isBeginning: true,
         isEnd: false
@@ -266,11 +319,10 @@ export default {
         observeParents: true,
         autoHeight: true,
         allowTouchMove: false,
-        initialSlide: 7,
+        // initialSlide: 7,
         pagination: {
           el: ".swiper-pagination"
         }
-        // Some Swiper option/callback...
       },
       editRewardId: null,
       data: {
@@ -300,7 +352,12 @@ export default {
     ...mapState(["setupData", "rewardsData", "popupData"])
   },
   methods: {
-    ...mapActions(["getSetupData", "saveSetupData", "getRewardsData", "getPopupData"]),
+    ...mapActions([
+      "getSetupData",
+      "saveSetupData",
+      "getRewardsData",
+      "getPopupData"
+    ]),
     swiperScte() {
       this.swipe.isBeginning = this.$refs.setupSwiper.$swiper.isBeginning;
       this.swipe.isEnd = this.$refs.setupSwiper.$swiper.isEnd;
@@ -323,37 +380,54 @@ export default {
         this.$refs.setupSwiper.$swiper.slidePrev();
       }
     },
+    toggleCollapse(id) {
+      if (document.querySelector(".completeSteps"))
+        document.querySelector(".completeSteps").remove();
+
+      id === this.activeStep
+        ? (this.activeStep = null)
+        : (this.activeStep = id);
+    },
+    resetSetupBlock(key) {
+      console.log(JSON.stringify(this.data.setup[key]));
+      console.log(JSON.stringify(this.setupData[key]));
+      this.data.setup[key] = {...this.setupData[key]}
+    },
     saveSetup() {
       this.saveSetupData(this.data.setup).then(res => {
         this.getRewardsData().then(re => {
+          this.saved.setupBlock = true;
           this.activeStep = "rewardsBlock";
           this.$refs.rewardHead.classList.remove("disabled");
-          this.$root.$emit("bv::toggle::collapse", "setup");
-          this.$root.$emit("bv::toggle::collapse", "rewards");
+          this.$root.$emit("bv::toggle::collapse", "setupBlock");
+          this.$root.$emit("bv::toggle::collapse", "rewardsBlock");
         });
       });
     },
     saveRewards() {
       this.getPopupData().then(res => {
-        this.activeStep = "themesBlock";        
+        this.saved.rewardsBlock = true;
+        this.activeStep = "themesBlock";
         this.$refs.themesHead.classList.remove("disabled");
-        this.$root.$emit("bv::toggle::collapse", "rewards");
-        this.$root.$emit("bv::toggle::collapse", "themes");
-      })
+        this.$root.$emit("bv::toggle::collapse", "rewardsBlock");
+        this.$root.$emit("bv::toggle::collapse", "themesBlock");
+      });
     },
     setEditReward(id) {
       this.editRewardId = id ? id : null;
     },
     rewardModalClose() {
-      this.$bvModal.hide('modal-reward');
+      this.$bvModal.hide("modal-reward");
       this.setEditReward(null);
     },
     rewardModalOpen() {
-      this.$bvModal.show('modal-reward')
+      this.$bvModal.show("modal-reward");
     }
   },
   mounted: function() {
-    this.getSetupData().then(res => (this.data.setup = res));
+    this.getSetupData().then(
+      res => (this.data.setup = JSON.parse(JSON.stringify(res)))
+    );
   }
 };
 </script>

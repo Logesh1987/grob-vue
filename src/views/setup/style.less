@@ -76,15 +76,15 @@
 					border: 1px solid #979797;
 					font-size: 1em;
 					outline: 5px solid #fff;
-					&.current {
-						background-color: #333333;
-						border-color: #333333;
-						color: #fff;
-					}
 					&.completed {
 						background-color: #e4fff0;
 						border-color: #17a66d;
 						color: #17a66d;
+					}
+					&.current {
+						background-color: #333333;
+						border-color: #333333;
+						color: #fff;
 					}
 					&:not(:first-child) {
 						margin-left: 50px;
@@ -101,11 +101,57 @@
 		left: 0;
 		bottom: 0;
 		z-index: 10;
+		.footProgress {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+			display: flex;
+			align-items: center;
+			li {
+				color: rgba(255, 255, 255, 0.8);
+				border: 1px solid rgba(255, 255, 255, 0.6);
+				border-radius: 50%;
+				width: 25px;
+				height: 25px;
+				font-size: 14px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				position: relative;
+				i {
+					font-size: inherit;
+				}
+				&:not(:last-child) {
+					margin-right: 60px;
+					&:after {
+						content: '';
+						width: 50px;
+						height: 1px;
+						background-color: rgba(255, 255, 255, 0.6);
+						position: absolute;
+						top: 50%;
+						right: -5px;
+						transform: translateX(100%);
+					}
+				}
+				&.completed {
+					background-color: #2ed176;
+					border-color: #2ed176;
+					color: #fff;
+					&:after {
+						background-color: #2ed176;
+					}
+				}
+			}
+		}
 		button {
-			border-radius: 10px;
+			border-radius: 5px;
 			display: flex;
 			align-items: center;
 			padding: 0.75rem;
+			font-weight: bold;
+			font-family: heebo;
+			color: #093042;
 			i {
 				background-color: #009688;
 				border-radius: 50%;
@@ -216,6 +262,7 @@
 		align-items: center;
 		justify-content: space-between;
 		transition: border-color 0.5s;
+		z-index: 2;
 		h2 {
 			color: rgba(0, 0, 0, 1);
 			font-size: 20px;
@@ -245,6 +292,17 @@
 		.card-header {
 			border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 		}
+	}
+	.completeSteps {
+		background: #000;
+		color: #fff;
+		padding: 5px 15px;
+		font-size: 12px;
+		border-radius: 20px;
+		position: absolute;
+		left: 50%;
+		bottom: 0;
+		transform: translate(-50%, 50%);
 	}
 	.setupSteps {
 		text-align: left;
@@ -760,7 +818,6 @@
 					top: 0;
 					border: 5px solid rgb(46, 202, 113);
 				}
-
 			}
 		}
 		img {

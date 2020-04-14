@@ -29,7 +29,7 @@ export default new Vuex.Store({
     getSetupData: ({ commit, state }) => {
       return Axios.get("http://localhost:3000/setup").then(res => {
         commit('updateSetupData', res.data);
-        return state.setupData;
+        return res.data;
       });
     },
     saveSetupData: ({ commit }, payload) => {
