@@ -1,0 +1,245 @@
+{
+  "guide": {
+    "totallikes": 11650
+  },
+  "setup": {
+    "points_program": {
+      "enabled": false,
+      "lPoints": "fixed",
+      "priceValue": 10,
+      "percentageValue": 10,
+      "rewardPoint": 10
+    },
+    "signup_bonus": {
+      "enabled": false,
+      "welcome_points": 100
+    },
+    "payby_points": {
+      "enabled": false,
+      "rewardPoint": 100
+    },
+    "referral_program": {
+      "enabled": false,
+      "rpType": "fixed",
+      "rewardPoint": 100,
+      "rewardPercentage": 10,
+      "rpCouponType": "fixed",
+      "maxCouponVal": 20,
+      "minSpendVal": 1
+    },
+    "facebook_share": {
+      "enabled": true,
+      "rewardPoint": 100,
+      "share_text": "Hey check out my new product.",
+      "url": "http://www.google.com/product.com"
+    },
+    "twitter_share": {
+      "enabled": true,
+      "rewardPoint": 100,
+      "share_text": "Hey check out my new product.",
+      "url": "http://www.google.com/product.com"
+    },
+    "birthday_rewards": {
+      "enabled": true,
+      "rewardPoint": 100,
+      "birthdayPoint": 100
+    },
+    "woo_rewards": {
+      "enabled": true,
+      "rewardPoint": 100,
+      "approvedReviews": true
+    },
+    "news_letter": {
+      "enabled": true,
+      "rewardPoint": 100
+    }
+  },
+  "rewards": [
+    {
+      "id": "2297",
+      "name": "$10 off coupon",
+      "description": "Redeem $10 off coupon for 1000 points",
+      "required_minimum_points": "1000",
+      "is_unlimited": 1,
+      "quantity": "2",
+      "image_url": "https://i.picsum.photos/id/348/300/200.jpg",
+      "type": "Coupon",
+      "is_coupon": "1",
+      "in_stock": "1",
+      "status": "1",
+      "sort_order": "2",
+      "realtime_coupon_on": "1",
+      "realtime_coupon": {
+        "type": "1",
+        "amount": "10",
+        "minimum_order": "2"
+      }
+    },
+    {
+      "id": "2298",
+      "name": "$15 off coupon",
+      "description": "Redeem $15 off coupon for 1500 points",
+      "required_minimum_points": "1500",
+      "is_unlimited": 0,
+      "quantity": "20",
+      "image_url": "https://i.picsum.photos/id/210/300/200.jpg",
+      "type": "Coupon",
+      "is_coupon": "1",
+      "in_stock": "1",
+      "status": "1",
+      "sort_order": "4",
+      "realtime_coupon_on": "1",
+      "realtime_coupon": {
+        "type": "1",
+        "amount": 15,
+        "minimum_order": 2
+      }
+    },
+    {
+      "id": "2299",
+      "name": "$20 off coupon",
+      "description": "Redeem $20 off coupon for 2000 points",
+      "required_minimum_points": "2000",
+      "is_unlimited": 1,
+      "quantity": "0",
+      "image_url": "https://i.picsum.photos/id/256/300/200.jpg",
+      "type": "Coupon",
+      "is_coupon": "1",
+      "in_stock": "1",
+      "status": "1",
+      "sort_order": "3",
+      "realtime_coupon_on": "1",
+      "realtime_coupon": {
+        "type": "2",
+        "amount": "20",
+        "minimum_order": "3"
+      }
+    },
+    {
+      "id": "2296",
+      "name": "$5 off coupon",
+      "description": "Redeem $5 off coupon for 500 points",
+      "required_minimum_points": "500",
+      "is_unlimited": 1,
+      "quantity": "0",
+      "image_url": "https://i.picsum.photos/id/134/300/200.jpg",
+      "type": "Coupon",
+      "is_coupon": "1",
+      "in_stock": "0",
+      "status": "1",
+      "sort_order": "1",
+      "realtime_coupon_on": "0",
+      "realtime_coupon": {
+        "type": "3",
+        "amount": "50",
+        "minimum_order": "1"
+      }
+    }
+  ],
+  "themes": {
+    "bg_color": "#ea0c46",
+    "is_bg": "0",
+    "is_new_fo": "1",
+    "styles_data": {
+      "font_family_main": "'Courier New', Courier, monospace",
+      "font_color_main": "#29f138",
+      "font_color_hover": "#000",
+      "bg_color_button": "#000000",
+      "font_family_button": "BARIOLREGULAR_0",
+      "font_color_button": "#ffffff",
+      "font_color_hover_button": "#000000",
+      "signup_button_text": "Create Account"
+    },
+    "fonts": [
+      {
+        "name": "Arial",
+        "font_group": "'Arial', Helvetica"
+      },
+      {
+        "name": "BARIOLREGULAR_0",
+        "font_group": "BARIOLREGULAR_0"
+      },
+      {
+        "name": "Comic Sans MS",
+        "font_group": "'Comic Sans MS', 'Chalkboard'"
+      },
+      {
+        "name": "Courier New",
+        "font_group": "'Courier New', Courier, monospace"
+      },
+      {
+        "name": "Georgia",
+        "font_group": "'Georgia'"
+      },
+      {
+        "name": "Inherit my website's font",
+        "font_group": "inherit"
+      },
+      {
+        "name": "Tahoma",
+        "font_group": "'Tahoma', Geneva"
+      },
+      {
+        "name": "Trebuchet MS",
+        "font_group": "'Trebuchet MS', Helvetica"
+      },
+      {
+        "name": "Verdana",
+        "font_group": "'Verdana', Geneva"
+      }
+    ]
+  },
+  "widgets": {
+    "id_widget": "0",
+    "id_site": "3683",
+    "id_competition": "3000",
+    "name": "Loyalty Rewards Program",
+    "type": "referral",
+    "position": "top-bar",
+    "main_configuration": {
+      "contest_actions_to_show": "0",
+      "contest_all_action_count": "4"
+    },
+    "status": "1",
+    "date_added": "1586417627",
+    "date_update": "1586495984",
+    "has_published": "1",
+    "bg_color": "#ea0c46",
+    "style_data": {
+      "font_family": "'Arial', Helvetica",
+      "widget_size": "14",
+      "border_roundness": "0",
+      "norm_txt_color": "#ffffff",
+      "norm_bg_color": "#000000",
+      "norm_border_color": "#000000",
+      "norm_shadow_flag": "0",
+      "norm_shadow_color": "#000000",
+      "hover_txt_color": "#ffffff",
+      "hover_bg_color": "#000000",
+      "has_border_hover_flag": "0",
+      "has_border_flag": "0",
+      "hover_shadow_flag": "0",
+      "hover_border_color": "#000000",
+      "hover_shadow_color": "#000000",
+      "widget_text_main": "REWARDS",
+      "widget_sub_text": "",
+      "widget_click_navigate": "lightbox",
+      "contest_actions_to_show": "0",
+      "widget_logo_img": "",
+      "widget_bg_img": "",
+      "widget_bg_check": "0",
+      "w_desktop_view": "compact",
+      "w_mobile_view": "compact",
+      "mobile_position": "Mid Right"
+    },
+    "widget_position": {
+      "side-drawer": "Mid Right",
+      "left-side-drawer": "Mid Left",
+      "top-bar": "Top Bar",
+      "bottom-bar": "Bottom Bar",
+      "left-bottom-bar": "Bottom Left",
+      "lower-right-corner": "Bottom Right",
+      "mid-bottom-bar": "Bottom Center"
+    }
+  }
+}

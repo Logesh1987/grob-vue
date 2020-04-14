@@ -9,12 +9,12 @@ Vue.use(VueFullPage);
 
 const routes = [
   {
-    path: "/",
+    path: "/home",
     name: "Home",
     component: Home
   },
   {
-    path: "/guide",
+    path: "/",
     name: "Guide",
     component: Guide
   },
@@ -22,10 +22,17 @@ const routes = [
     path: "/setup",
     name: "Setup",
     // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
+    // this generates a separate chunk (setup.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/setup/Setup.vue")
+    component: () => import("../views/setup/Setup.vue")
+  },
+  {
+    path: "/congrats",
+    name: "Congrats",
+    // route level code-splitting
+    // this generates a separate chunk (setup.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import("../views/congrats/Congrats.vue")
   }
 ];
 

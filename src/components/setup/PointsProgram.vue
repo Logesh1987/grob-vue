@@ -88,7 +88,7 @@
       <a
         href="#"
         class="resetSetting"
-        onclick="document.getElementById('form-points-program').reset();"
+        @click.prevent="reset('points_program')"
       >
         <i class="material-icons">refresh</i>
         <u>Reset to recommended settings</u>
@@ -104,7 +104,7 @@ import { required, minValue, requiredIf } from 'vuelidate/lib/validators';
 
 export default {
   name: "PointsProgram",
-  props: ["data"],
+  props: ["data", "reset"],
   mixins: [validationMixin],
   components: { RadioGroup },
   data: function() {

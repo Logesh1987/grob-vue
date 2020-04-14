@@ -1,73 +1,84 @@
 {
-    "loyalty_rewards": [
-        {
-            "id": 2299,
-            "name": "£5 off coupon",
-            "description": "Redeem £5 off coupon for 500 points",
-            "required_points": 2000,
-            "quantity": 3,
-            "image": "assets/img/reward.jpg",
-            "type": "Coupon",
-            "is_coupon": true,
-            "in_stock": true,
-            "realtime_coupon": true,
-            "order": 1,
-            "realtime_coupon_on": true,
-            "nb_rewards": 0,
-            "coupon" : {
-                "type": "Percentage",
-                "amount": 50,
-                "minimum_order": 100
-            },
-            "status": 1,
-            "created_at": "2020-04-06T10:20:16-04:00",
-            "updated_at": "2020-04-06T10:20:16-04:00"
-        },
-        {
-            "id": 2297,
-            "name": "£10 off coupon",
-            "description": "Redeem £10 off coupon for 1000 points",
-            "required_points": 1000,
-            "quantity": 2,
-            "image": "assets/img/reward.jpg",
-            "type": "Coupon",
-            "is_coupon": true,
-            "in_stock": true,
-            "realtime_coupon": true,
-            "order": 2,
-            "realtime_coupon_on": true,
-            "nb_rewards": 0,
-            "coupon" : {
-                "type": "Fixed amount",
-                "amount": 100,
-                "minimum_order": 200
-            },
-            "status": 1,
-            "created_at": "2020-04-06T10:20:16-04:00",
-            "updated_at": "2020-04-06T10:20:16-04:00"
-        },
-        {
-            "id": 2299,
-            "name": "£20 off coupon",
-            "description": "Redeem £20 off coupon for 2000 points",
-            "required_points": 2000,
-            "quantity": 2,
-            "image": "assets/img/reward.jpg",
-            "type": "Coupon",
-            "is_coupon": true,
-            "in_stock": true,
-            "realtime_coupon": true,
-            "order": 2,
-            "realtime_coupon_on": true,
-            "nb_rewards": 0,
-            "coupon" : {
-                "type": "Free shipping",
-                "amount": 0,
-                "minimum_order": 200
-            },
-            "status": 1,
-            "created_at": "2020-04-06T10:20:16-04:00",
-            "updated_at": "2020-04-06T10:20:16-04:00"
-        }
-    ]
-}
+	"data": [
+	  {
+		"id": "2297",
+		"name": "$10 off coupon",
+		"description": "Redeem $10 off coupon for 1000 points",
+		"required_minimum_points": "1000",
+		"is_unlimited": 1,
+		"quantity": "2",
+		"image_url": "https://i.picsum.photos/id/348/300/200.jpg",
+		"type": "Coupon",
+		"is_coupon": "1",
+		"in_stock": "1",
+		"status": "1",
+		"sort_order": "2",
+		"realtime_coupon_on": "1",
+		"realtime_coupon": {
+		  "type": "1",
+		  "amount": "10",
+		  "minimum_order": "2"
+		}
+	  },
+	  {
+		"id": "2298",
+		"name": "$15 off coupon",
+		"description": "Redeem $15 off coupon for 1500 points",
+		"required_minimum_points": "1500",
+		"is_unlimited": 0,
+		"quantity": "20",
+		"image_url": "https://i.picsum.photos/id/210/300/200.jpg",
+		"type": "Coupon",
+		"is_coupon": "1",
+		"in_stock": "1",
+		"status": "1",
+		"sort_order": "4",
+		"realtime_coupon_on": "1",
+		"realtime_coupon": {
+		  "type": "1",
+		  "amount": 15,
+		  "minimum_order": 2
+		}
+	  },
+	  {
+		"id": "2299",
+		"name": "$20 off coupon",
+		"description": "Redeem $20 off coupon for 2000 points",
+		"required_minimum_points": "2000",
+		"is_unlimited": 1,
+		"quantity": "0",
+		"image_url": "https://i.picsum.photos/id/256/300/200.jpg",
+		"type": "Coupon",
+		"is_coupon": "1",
+		"in_stock": "1",
+		"status": "1",
+		"sort_order": "3",
+		"realtime_coupon_on": "1",
+		"realtime_coupon": {
+		  "type": "2",
+		  "amount": "20",
+		  "minimum_order": "3"
+		}
+	  },
+	  {
+		"id": "2296",
+		"name": "$5 off coupon",
+		"description": "Redeem $5 off coupon for 500 points",
+		"required_minimum_points": "500",
+		"is_unlimited": 1,
+		"quantity": "0",
+		"image_url": "https://i.picsum.photos/id/134/300/200.jpg",
+		"type": "Coupon",
+		"is_coupon": "1",
+		"in_stock": "0",
+		"status": "1",
+		"sort_order": "1",
+		"realtime_coupon_on": "0",
+		"realtime_coupon": {
+		  "type": "3",
+		  "amount": "50",
+		  "minimum_order": "1"
+		}
+	  }
+	]
+  }
