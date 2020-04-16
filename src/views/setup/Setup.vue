@@ -123,7 +123,72 @@
                     :class="this.swipe.isBeginning ? 'disabled' : null"
                     @click.prevent="swiperPrev"
                   >Back</button>
-                  <div slot="pagination" class="setupSwiper-pagination swiper-pagination"></div>
+
+                  <div class="setupSwiper-pagination swiper-pagination">
+                    <span
+                      class="swiper-pagination-bullet"
+                      :class="{'swiper-pagination-bullet-active' : this.swipe.activeSwipe === 0 }"
+                      data-id="0"
+                      @click="gotoSlide"
+                      title="Points Program"
+                    ></span>
+                    <span
+                      class="swiper-pagination-bullet"
+                      :class="{'swiper-pagination-bullet-active' : this.swipe.activeSwipe === 1 }"
+                      data-id="1"
+                      @click="gotoSlide"
+                      title="Signup Bonus"
+                    ></span>
+                    <span
+                      class="swiper-pagination-bullet"
+                      :class="{'swiper-pagination-bullet-active' : this.swipe.activeSwipe === 2 }"
+                      data-id="2"
+                      @click="gotoSlide"
+                      title="Pay by points"
+                    ></span>
+                    <span
+                      class="swiper-pagination-bullet"
+                      :class="{'swiper-pagination-bullet-active' : this.swipe.activeSwipe === 3 }"
+                      data-id="3"
+                      @click="gotoSlide"
+                      title="Referral Program"
+                    ></span>
+                    <span
+                      class="swiper-pagination-bullet"
+                      :class="{'swiper-pagination-bullet-active' : this.swipe.activeSwipe === 4 }"
+                      data-id="4"
+                      @click="gotoSlide"
+                      title="Facebook Share Setup"
+                    ></span>
+                    <span
+                      class="swiper-pagination-bullet"
+                      :class="{'swiper-pagination-bullet-active' : this.swipe.activeSwipe === 5 }"
+                      data-id="5"
+                      @click="gotoSlide"
+                      title="Twitter Share Setup"
+                    ></span>
+                    <span
+                      class="swiper-pagination-bullet"
+                      :class="{'swiper-pagination-bullet-active' : this.swipe.activeSwipe === 6 }"
+                      data-id="6"
+                      @click="gotoSlide"
+                      title="Birthday Rewards"
+                    ></span>
+                    <span
+                      class="swiper-pagination-bullet"
+                      :class="{'swiper-pagination-bullet-active' : this.swipe.activeSwipe === 7 }"
+                      data-id="7"
+                      @click="gotoSlide"
+                      title="WOOReview Rewards"
+                    ></span>
+                    <span
+                      class="swiper-pagination-bullet"
+                      :class="{'swiper-pagination-bullet-active' : this.swipe.activeSwipe === 8 }"
+                      data-id="8"
+                      @click="gotoSlide"
+                      title="Subscribe to Newsletter Setup"
+                    ></span>
+                  </div>
                   <button
                     class="setupSwiper-button-next btn btn-warning text-light pr-5 pl-5"
                     :class="this.swipe.isEnd ? 'disabled' : null"
@@ -131,7 +196,7 @@
                   >Next</button>
                 </div>
               </div>
-              <footer class="saveBar"  v-if="swipe.isEnd" >
+              <footer class="saveBar" v-if="swipe.isEnd">
                 <div class="container">
                   <div class="row justify-content-between">
                     <ul class="footProgress">
@@ -312,17 +377,15 @@ export default {
       },
       swipe: {
         isBeginning: true,
-        isEnd: false
+        isEnd: false,
+        activeSwipe: 0
       },
       swiperOptions: {
         observer: true,
         observeParents: true,
         autoHeight: true,
-        allowTouchMove: false,
+        allowTouchMove: false
         // initialSlide: 7,
-        pagination: {
-          el: ".swiper-pagination"
-        }
       },
       editRewardId: null,
       data: {
@@ -361,6 +424,10 @@ export default {
     swiperScte() {
       this.swipe.isBeginning = this.$refs.setupSwiper.$swiper.isBeginning;
       this.swipe.isEnd = this.$refs.setupSwiper.$swiper.isEnd;
+      this.swipe.activeSwipe = this.$refs.setupSwiper.$swiper.realIndex;
+    },
+    gotoSlide(e) {
+      this.$refs.setupSwiper.$swiper.slideTo(e.target.getAttribute("data-id"));
     },
     swiperNext() {
       const re = document
@@ -368,6 +435,11 @@ export default {
         .getAttribute("data-ref");
       const result = this.$refs[re].submit();
       if (result) {
+        document
+          .querySelector(
+            `.swiper-pagination-bullet[data-id='${this.$refs.setupSwiper.$swiper.realIndex}']`
+          )
+          .setAttribute('data-completed', "completed");
         this.$refs.setupSwiper.$swiper.slideNext();
       }
     },
@@ -391,7 +463,7 @@ export default {
     resetSetupBlock(key) {
       console.log(JSON.stringify(this.data.setup[key]));
       console.log(JSON.stringify(this.setupData[key]));
-      this.data.setup[key] = {...this.setupData[key]}
+      this.data.setup[key] = { ...this.setupData[key] };
     },
     saveSetup() {
       console.log(this.data.setup);
