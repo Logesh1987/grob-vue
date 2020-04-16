@@ -42,8 +42,6 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
-
 export default {
   name: "RewardsList",
   props: ["data", "setEditReward", "setDeleteReward", "showModal"],
@@ -52,23 +50,13 @@ export default {
   },
 
   methods: {
-    ...mapActions([
-      "deleteReward",
-      "getRewardsData"
-    ]),
     handleEditRewards: function(id) {
-      this.updateReward(this.data).then(res => {
-          this.getRewardsData().then(re => {
-          this.saved.setupBlock = true;
-        }); 
-      });
+      this.setEditReward(id);
+      this.showModal();
     },
     handleDeleteRewards: function(id) {
-      this.deleteReward(id).then(res => {
-          this.getRewardsData().then(re => {
-
-        }); 
-      });
+      this.setDeleteReward(id);
+      this.showModal();
     }
   }
 };
