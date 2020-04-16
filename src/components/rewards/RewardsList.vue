@@ -5,9 +5,7 @@
         <i class="material-icons">reorder</i>
       </div>
       <div class="rewardThumb">
-        <figure
-          :style="{ 'background-image': `url('${item.image_url}')` }"
-        ></figure>
+        <figure :style="{ 'background-image': `url('${item.image_url}')` }"></figure>
       </div>
       <div class="rewardInfo">
         <h5>
@@ -29,8 +27,8 @@
         <a href="#" @click.prevent="handleEditRewards(item.id)">
           <i class="icon-undefined"></i>
         </a>
-        <label class="switch" for="r1">
-          <input type="checkbox" checked id="r1" />
+        <label class="switch" :for="item.id">
+          <input type="checkbox" checked :id="item.id" @change="handleSwitch" />
           <i></i>
         </label>
         <a href="#" @click.prevent="handleDeleteRewards(item.id)">
@@ -57,6 +55,9 @@ export default {
     handleDeleteRewards: function(id) {
       this.setDeleteReward(id);
       this.showModal();
+    },
+    handleSwitch: function(e) {
+      console.log(e.target.checked);
     }
   }
 };
