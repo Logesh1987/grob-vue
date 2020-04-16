@@ -456,6 +456,10 @@ export default {
       if (document.querySelector(".completeSteps"))
         document.querySelector(".completeSteps").remove();
 
+      if(this.activeStep == null) {
+        window.localStorage.setItem('inProgress', id)
+      }
+
       id === this.activeStep
         ? (this.activeStep = null)
         : (this.activeStep = id);
@@ -466,24 +470,15 @@ export default {
       this.data.setup[key] = { ...this.setupData[key] };
     },
     saveSetup() {
-      console.log(this.data.setup);
       this.saveSetupData(this.data.setup).then(res => {
         this.getRewardsData().then(re => {
-          this.saved.setupBlock = true;
-          this.activeStep = "rewardsBlock";
-          this.$refs.rewardHead.classList.remove("disabled");
-          this.$root.$emit("bv::toggle::collapse", "setupBlock");
-          this.$root.$emit("bv::toggle::collapse", "rewardsBlock");
+          this.setProgress("rewardsBlock")
         });
       });
     },
     saveRewards() {
       this.getPopupData().then(res => {
-        this.saved.rewardsBlock = true;
-        this.activeStep = "themesBlock";
-        this.$refs.themesHead.classList.remove("disabled");
-        this.$root.$emit("bv::toggle::collapse", "rewardsBlock");
-        this.$root.$emit("bv::toggle::collapse", "themesBlock");
+          this.setProgress("themesBlock")
       });
     },
     setEditReward(id) {
@@ -495,11 +490,35 @@ export default {
     },
     rewardModalOpen() {
       this.$bvModal.show("modal-reward");
+    },
+    setProgress(block) {      
+      this.activeStep = block;
+      this.$root.$emit("bv::toggle::collapse", block);
+      window.localStorage.setItem('inProgress', block)
+      const savedKeys = Object.keys(this.saved)
+      const index = savedKeys.indexOf(block)
+      for(var i=0; i<=index; i++) {
+        document.querySelector(`.${savedKeys[i]} .card-header`).classList.remove('disabled')
+        this.saved[savedKeys[i]] = true;
+      }
     }
   },
   mounted: function() {
+    const inProgress = window.localStorage.getItem('inProgress')
     this.getSetupData().then(
-      res => (this.data.setup = JSON.parse(JSON.stringify(res)))
+      res => {
+        this.data.setup = JSON.parse(JSON.stringify(res))
+        if(inProgress) {
+          document.querySelector(".completeSteps").remove();
+          this.setProgress(inProgress)
+          if(inProgress === 'rewardsBlock') {
+            this.getRewardsData()
+          }
+          if(inProgress === 'themesBlock') {
+            this.getPopupData().then(re => this.getRewardsData())
+          }
+        }
+      }
     );
   }
 };
