@@ -120,7 +120,7 @@ body {
 		}
 	}
 	&.buttonBordered {
-		border: 1px solid #DBDBDB;
+		border: 1px solid #dbdbdb;
 		border-radius: 5px;
 		padding: 0.8em 1em;
 		font-weight: normal;
@@ -152,7 +152,6 @@ body {
 		position: static;
 	}
 	&.feedbackModal {
-		
 		a[aria-label="Close"] {
 			position: absolute;
 			right: -1em;
@@ -171,8 +170,24 @@ body {
 		.btn-success {
 			background-color: #2eca71;
 			border-color: #2eca71;
-			padding: 5px 40px
+			padding: 5px 40px;
 		}
 	}
 }
 
+.verte button.verte__guide {
+	width: 100%;
+	position: relative;
+	.palette {
+		position: absolute;
+		right: 0;
+		top: 0;
+		margin: 8px;
+		width: 26px;
+		height: 21px;
+		border-radius: 5px;
+	}
+	input {
+		pointer-events: none;
+	}
+}
