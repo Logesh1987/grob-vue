@@ -107,6 +107,9 @@ export default new Vuex.Store({
         console.log(err);
       });
     },
+    updateRewardStatus: ({ commit }, id) => {
+      alert("DEL FUNCTION");     
+    },
     getPopupData: ({ commit, state }) => {
       return Axios.get("http://localhost:3000/themes").then(res => {
         commit('updatePopupData', res.data);

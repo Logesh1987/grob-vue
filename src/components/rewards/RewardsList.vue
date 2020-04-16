@@ -28,7 +28,7 @@
           <i class="icon-undefined"></i>
         </a>
         <label class="switch" :for="item.id">
-          <input type="checkbox" checked :id="item.id" @change="handleSwitch" />
+          <input type="checkbox" checked :id="item.id" @change="handleSwitch(item.id)" />
           <i></i>
         </label>
         <a href="#" @click.prevent="handleDeleteRewards(item.id)">
@@ -40,6 +40,7 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
 export default {
   name: "RewardsList",
   props: ["data", "setEditReward", "setDeleteReward", "showModal"],
@@ -48,6 +49,10 @@ export default {
   },
 
   methods: {
+    ...mapActions([
+      "getRewardsData",
+      "updateRewardStatus"
+    ]),
     handleEditRewards: function(id) {
       this.setEditReward(id);
       this.showModal();
@@ -56,8 +61,9 @@ export default {
       this.setDeleteReward(id);
       this.showModal();
     },
-    handleSwitch: function(e) {
-      console.log(e.target.checked);
+    handleSwitch: function(id) {
+      alert(id);
+      this.updateRewardStatus(id);
     }
   }
 };
