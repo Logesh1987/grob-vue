@@ -131,7 +131,7 @@
                   >Next</button>
                 </div>
               </div>
-              <footer class="saveBar" >
+              <footer class="saveBar"  v-if="swipe.isEnd" >
                 <div class="container">
                   <div class="row justify-content-between">
                     <ul class="footProgress">
@@ -394,6 +394,7 @@ export default {
       this.data.setup[key] = {...this.setupData[key]}
     },
     saveSetup() {
+      console.log(this.data.setup);
       this.saveSetupData(this.data.setup).then(res => {
         this.getRewardsData().then(re => {
           this.saved.setupBlock = true;

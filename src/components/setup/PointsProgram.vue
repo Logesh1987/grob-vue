@@ -1,10 +1,10 @@
 <template>
-  <div class="setupSteps" v-bind:class="{disabled: !purchase_status}">
+  <div class="setupSteps" v-bind:class="{disabled: !vData.purchase_status}">
     <div class="stepHead">
       <h3>Points Program</h3>
       <p>Start rewarding your customers for purchases</p>
       <label class="switch" for="pointsProgram">
-        <input type="checkbox" name="mainSwitch" v-model="purchase_status" id="pointsProgram" />
+        <input type="checkbox" name="mainSwitch" v-model="vData.purchase_status" id="pointsProgram" />
         <i></i>
       </label>
     </div>
@@ -27,13 +27,13 @@
               0: 'Fixed',
               1: 'Percentage'
             }"
-            v-model="is_points_percentage"
+            v-model="vData.is_points_percentage"
           ></RadioGroup>
           <br />
           <br />
           <div
             id="input_fixed"
-            v-if="is_points_percentage == 0"
+            v-if="vData.is_points_percentage == 0"
             class="loyaltyPtForm form-row align-items-start"
           >
             <div class="form-group fLabel col-md-5">
@@ -44,10 +44,10 @@
                 class="form-control"
                 id="purchaseFor"
                 name="purchaseFor"
-                v-model.trim="price"
+                v-model.trim="vData.price"
               />
-              <em class="error" v-if="!$v.price.required">Field is required</em>
-              <em class="error" v-if="!$v.price.minValue">Need a minimum value of {{$v.price.$params.minValue.min}}</em>
+              <em class="error" v-if="!$v.vData.price.required">Field is required</em>
+              <em class="error" v-if="!$v.vData.price.minValue">Need a minimum value of {{$v.vData.price.$params.minValue.min}}</em>
             </div>
             <div class="col-md-2 text-center mt-4 pt-1">to get</div>
             <div class="form-group fLabel col-md-5">
@@ -57,16 +57,16 @@
                 class="form-control"
                 id="rewardPoint"
                 name="rewardPoint"
-                v-model="points"
+                v-model="vData.points"
               />
-              <em class="error" v-if="!$v.points.required">Field is required</em>
-              <em class="error" v-if="!$v.points.minValue">Need a minimum value of {{$v.points.$params.minValue.min}}</em>
+              <em class="error" v-if="!$v.vData.points.required">Field is required</em>
+              <em class="error" v-if="!$v.vData.points.minValue">Need a minimum value of {{$v.vData.points.$params.minValue.min}}</em>
             </div>
           </div>
           <div
             id="input_percentage"
             class="loyaltyPtForm form-row"
-            v-if="is_points_percentage == 1"
+            v-if="vData.is_points_percentage == 1"
           >
             <div class="form-group fLabel col-md-5">
               <label for="purchasePercent">% of purchase amount.</label>
@@ -75,10 +75,10 @@
                 class="form-control"
                 id="purchasePercent"
                 name="purchasePercent"
-                v-model="points_percentage"
+                v-model="vData.points_percentage"
               />
-              <em class="error" v-if="!$v.points_percentage.required">Field is required</em>
-              <em class="error" v-if="!$v.points_percentage.minValue">Need a minimum value of {{$v.points_percentage.$params.minValue.min}}</em>
+              <em class="error" v-if="!$v.vData.points_percentage.required">Field is required</em>
+              <em class="error" v-if="!$v.vData.points_percentage.minValue">Need a minimum value of {{$v.vData.points_percentage.$params.minValue.min}}</em>
             </div>
           </div>
         </form>
@@ -88,7 +88,7 @@
       <a
         href="#"
         class="resetSetting"
-        @click.prevent="reset('points_program')"
+        @click.prevent="reset('points_setup')"
       >
         <i class="material-icons">refresh</i>
         <u>Reset to recommended settings</u>
@@ -108,7 +108,9 @@ export default {
   mixins: [validationMixin],
   components: { RadioGroup },
   data: function() {
-    return this.data
+    return {
+      vData: this.data
+    }
   },
   methods: {
     submit() {
@@ -116,18 +118,25 @@ export default {
       return !this.$v.$invalid
     }
   },
+  watch: {
+    data() {
+      this.vData = this.data
+    }
+  },
   validations: {
-    price: {
-      required: requiredIf(function() {return this.purchase_status && this.is_points_percentage == 0}),
-      minValue: minValue(10)
-    },
-    points: {
-      required: requiredIf(function() {return this.purchase_status && this.is_points_percentage == 0}),
-      minValue: minValue(10)
-    },
-    points_percentage: {
-      required: requiredIf(function() {return this.purchase_status && this.is_points_percentage == 1}),
-      minValue: minValue(10)
+    vData : {
+      price: {
+        required: requiredIf(function() {return this.purchase_status && this.is_points_percentage == 0}),
+        minValue: minValue(10)
+      },
+      points: {
+        required: requiredIf(function() {return this.purchase_status && this.is_points_percentage == 0}),
+        minValue: minValue(10)
+      },
+      points_percentage: {
+        required: requiredIf(function() {return this.purchase_status && this.is_points_percentage == 1}),
+        minValue: minValue(10)
+      }
     }
   }
 };
