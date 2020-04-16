@@ -13,6 +13,9 @@ export default new Vuex.Store({
   },
   mutations: {
     updateSetupData: (state, payload) => {
+      //console.log("#####################################################");
+      //console.log(JSON.stringify(payload));
+      //console.log("#####################################################");
       state.setupData = payload
     },
     updateRewardsData: (state, payload) => {
@@ -27,21 +30,81 @@ export default new Vuex.Store({
   },
   actions: {
     getSetupData: ({ commit, state }) => {
-      return Axios.get("http://localhost:3000/setup").then(res => {
-        commit('updateSetupData', res.data);
-        return res.data;
+      //return Axios.get("http://localhost:3000/setup").then(res => {
+        //alert("TEST");
+      return Axios.get("https://jai.devam.pro/gr/admin/onboarding?id_shop=1226&admin_email=jayakumar@appsmav.com").then(res => {
+        commit('updateSetupData', res.data.data);
+        //console.log("*****************************************************");
+        //console.log(JSON.stringify(res.data.data));
+        //console.log("*****************************************************");
+        return res.data.data;
       });
     },
     saveSetupData: ({ commit }, payload) => {
-      return Axios.post("http://localhost:3000/setup", payload).then(res => {
-        commit('updateSetupData', payload);
-        return res;
-      })
+        let headersData = {
+          headers: {
+              //'Access-Control-Allow-Origin': '*',
+              //'Access-Control-Allow-Methods': 'POST, GET, PUT, OPTIONS, DELETE',
+              //'Access-Control-Allow-Headers': 'Access-Control-Allow-Methods, Access-Control-Allow-Origin, Origin, Accept, Content-Type',
+              'Content-Type': 'text/plain',
+              'Accept': '*/*'
+          }
+        }
+
+        //return Axios.post("https://jai.devam.pro/gr/", postData, headersData).then(res => {
+          return Axios.post("https://jai.devam.pro/gr/admin/onboarding?id_shop=1226&admin_email=jayakumar@appsmav.com", payload, headersData).then(res => {
+            commit('updateSetupData', payload);
+            console.log("###############   SUCCESS   ###################");
+            console.log(res);
+            return res;
+          }).catch(err => {
+            console.log("###############   ERROR   ###################");
+            console.log(err);
+          });
     },
     getRewardsData: ({ commit, state }) => {
-      return Axios.get("http://localhost:3000/rewards").then(res => {
-        commit('updateRewardsData', res.data);
+        return Axios.get("https://jai.devam.pro/gr/admin/rewards?id_shop=1226&admin_email=jayakumar@appsmav.com").then(res => {
+        commit('updateRewardsData', res.data.data);
         return state.rewardsData;
+      });
+    },
+    addReward: ({ commit }, payload) => {
+      let headersData = {
+        headers: {
+            'Content-Type': 'text/plain',
+            'Accept': '*/*'
+        }
+      }
+      Axios.post('https://jai.devam.pro/gr/admin/rewards?id_shop=1226&admin_email=jayakumar@appsmav.com', payload, headersData).then((res) => {
+        console.log("RESPONSE RECEIVED: ", res);
+      }).catch(err => {
+        console.log(err);
+      });
+    },
+    updateReward: ({ commit }, payload) => {
+      let headersData = {
+        headers: {
+            'Content-Type': 'text/plain',
+            'Accept': '*/*'
+        }
+      }
+      Axios.put('https://jai.devam.pro/gr/admin/rewards?id_shop=1226&admin_email=jayakumar@appsmav.com', payload, headersData).then((res) => {
+        console.log("RESPONSE RECEIVED: ", res);
+      }).catch(err => {
+        console.log(err);
+      });
+    },
+    deleteReward: ({ commit }, id) => {
+      let headersData = {
+        headers: {
+            'Content-Type': 'text/plain',
+            'Accept': '*/*'
+        }
+      }
+      Axios.delete('https://jai.devam.pro/gr/admin/rewards?id_shop=1226&admin_email=jayakumar@appsmav.com&id='+id).then((res) => {
+        console.log("RESPONSE RECEIVED: ", res);
+      }).catch(err => {
+        console.log(err);
       });
     },
     getPopupData: ({ commit, state }) => {

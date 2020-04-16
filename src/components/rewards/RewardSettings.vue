@@ -141,7 +141,7 @@
                 <div class="btn-group btnGrpToggle btnGrpCheck">
                   <input
                     type="checkbox"
-                    v-model="data.realtime_coupon_on"
+                    v-model="data.is_coupon"
                     true-value="1"
                     false-value="0"
                     name="rCoupon"
@@ -153,7 +153,7 @@
                   </label>
                 </div>
               </div>
-              <div v-if="data.realtime_coupon_on == 1" class="themesBlock">
+              <div v-if="data.is_coupon == 1" class="themesBlock">
                 <b-tabs nav-class="widget-tabs-nav" content-class="widget-tabs-panes">
                   <b-tab title="Automatic" active>
                     <h6>Coupon Type</h6>
@@ -224,8 +224,9 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 import RadioGroup from "@/components/RadioGroup";
+import Axios from "axios";
 
 export default {
   name: "RewardSettings",
@@ -247,10 +248,10 @@ export default {
         description: "Default Description",
         required_minimum_points: 100,
         is_unlimited: 1,
-        quantity: 2,
+        quantity: 0,
         image_url: "",
         type: "Coupon",
-        is_coupon: true,
+        is_coupon: 1,
         order: 1,
         realtime_coupon_on: 1,
         nb_rewards: 0,
@@ -266,15 +267,47 @@ export default {
     ...mapState(["rewardsData"])
   },
   methods: {
+    ...mapActions([
+      "addReward",
+      "getRewardsData",
+      "updateReward"
+    ]),
     getDataById: function(id) {
       return this.rewardsData.find(data => data.id === id);
     },
     handleSubmit: function() {
       if(this.id) {
         // EDIT REWARD - post functionality 
+        this.updateReward(this.data).then(res => {
+            this.getRewardsData().then(re => {
+            this.saved.setupBlock = true;
+            this.activeStep = "rewardsBlock";
+            this.$refs.rewardHead.classList.remove("disabled");
+            this.$root.$emit("bv::toggle::collapse", "setupBlock");
+            this.$root.$emit("bv::toggle::collapse", "rewardsBlock");
+          }); 
+        });
         
       } else {
         // ADD REWARD - post functionality 
+        this.addReward(this.data).then(res => {
+            this.getRewardsData().then(re => {
+            this.saved.setupBlock = true;
+            this.activeStep = "rewardsBlock";
+            this.$refs.rewardHead.classList.remove("disabled");
+            this.$root.$emit("bv::toggle::collapse", "setupBlock");
+            this.$root.$emit("bv::toggle::collapse", "rewardsBlock");
+          }); 
+        });
+        /*Axios.post('https://jai.devam.pro/gr/admin/rewards?id_shop=1226&admin_email=jayakumar@appsmav.com', this.data, headersData).then((res) => {
+          console.log("RESPONSE RECEIVED: ", res);
+        }).catch(err => {
+          console.log("###############   ERROR   ###################");
+          console.log(err);
+        }); */
+        
+        
+
       }
       // On response call this
       this.closeModal()

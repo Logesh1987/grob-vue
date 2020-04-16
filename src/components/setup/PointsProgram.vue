@@ -1,10 +1,10 @@
 <template>
-  <div class="setupSteps" v-bind:class="{disabled: !enabled}">
+  <div class="setupSteps" v-bind:class="{disabled: !purchase_status}">
     <div class="stepHead">
       <h3>Points Program</h3>
       <p>Start rewarding your customers for purchases</p>
       <label class="switch" for="pointsProgram">
-        <input type="checkbox" name="mainSwitch" v-model="enabled" id="pointsProgram" />
+        <input type="checkbox" name="mainSwitch" v-model="purchase_status" id="pointsProgram" />
         <i></i>
       </label>
     </div>
@@ -24,16 +24,16 @@
           <RadioGroup
             name="loyaltyPoints"
             :options="{
-              fixed: 'Fixed',
-              percentage: 'Percentage'
+              0: 'Fixed',
+              1: 'Percentage'
             }"
-            v-model="lPoints"
+            v-model="is_points_percentage"
           ></RadioGroup>
           <br />
           <br />
           <div
             id="input_fixed"
-            v-if="lPoints === 'fixed'"
+            v-if="is_points_percentage == 0"
             class="loyaltyPtForm form-row align-items-start"
           >
             <div class="form-group fLabel col-md-5">
@@ -44,10 +44,10 @@
                 class="form-control"
                 id="purchaseFor"
                 name="purchaseFor"
-                v-model.trim="priceValue"
+                v-model.trim="price"
               />
-              <em class="error" v-if="!$v.priceValue.required">Field is required</em>
-              <em class="error" v-if="!$v.priceValue.minValue">Need a minimum value of {{$v.priceValue.$params.minValue.min}}</em>
+              <em class="error" v-if="!$v.price.required">Field is required</em>
+              <em class="error" v-if="!$v.price.minValue">Need a minimum value of {{$v.price.$params.minValue.min}}</em>
             </div>
             <div class="col-md-2 text-center mt-4 pt-1">to get</div>
             <div class="form-group fLabel col-md-5">
@@ -57,16 +57,16 @@
                 class="form-control"
                 id="rewardPoint"
                 name="rewardPoint"
-                v-model="rewardPoint"
+                v-model="points"
               />
-              <em class="error" v-if="!$v.rewardPoint.required">Field is required</em>
-              <em class="error" v-if="!$v.rewardPoint.minValue">Need a minimum value of {{$v.rewardPoint.$params.minValue.min}}</em>
+              <em class="error" v-if="!$v.points.required">Field is required</em>
+              <em class="error" v-if="!$v.points.minValue">Need a minimum value of {{$v.points.$params.minValue.min}}</em>
             </div>
           </div>
           <div
             id="input_percentage"
             class="loyaltyPtForm form-row"
-            v-if="lPoints === 'percentage'"
+            v-if="is_points_percentage == 1"
           >
             <div class="form-group fLabel col-md-5">
               <label for="purchasePercent">% of purchase amount.</label>
@@ -75,10 +75,10 @@
                 class="form-control"
                 id="purchasePercent"
                 name="purchasePercent"
-                v-model="percentageValue"
+                v-model="points_percentage"
               />
-              <em class="error" v-if="!$v.percentageValue.required">Field is required</em>
-              <em class="error" v-if="!$v.percentageValue.minValue">Need a minimum value of {{$v.percentageValue.$params.minValue.min}}</em>
+              <em class="error" v-if="!$v.points_percentage.required">Field is required</em>
+              <em class="error" v-if="!$v.points_percentage.minValue">Need a minimum value of {{$v.points_percentage.$params.minValue.min}}</em>
             </div>
           </div>
         </form>
@@ -117,16 +117,16 @@ export default {
     }
   },
   validations: {
-    priceValue: {
-      required: requiredIf(function() {return this.enabled && this.lPoints === "fixed"}),
+    price: {
+      required: requiredIf(function() {return this.purchase_status && this.is_points_percentage == 0}),
       minValue: minValue(10)
     },
-    rewardPoint: {
-      required: requiredIf(function() {return this.enabled && this.lPoints === "fixed"}),
+    points: {
+      required: requiredIf(function() {return this.purchase_status && this.is_points_percentage == 0}),
       minValue: minValue(10)
     },
-    percentageValue: {
-      required: requiredIf(function() {return this.enabled && this.lPoints === "percentage"}),
+    points_percentage: {
+      required: requiredIf(function() {return this.purchase_status && this.is_points_percentage == 1}),
       minValue: minValue(10)
     }
   }

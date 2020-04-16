@@ -1,10 +1,10 @@
 <template>
-  <div class="setupSteps" v-bind:class="{disabled: !enabled}">
+  <div class="setupSteps" v-bind:class="{disabled: !redeem_purchase_status}">
     <div class="stepHead">
       <h3>Pay by Points</h3>
       <p>Setup if customers can pay using their points</p>
       <label class="switch" for="payPoints">
-        <input type="checkbox" name="mainSwitch" v-model="enabled" id="payPoints" />
+        <input type="checkbox" name="mainSwitch" v-model="redeem_purchase_status" id="payPoints" />
         <i></i>
       </label>
     </div>
@@ -25,7 +25,7 @@
                 class="form-control"
                 id="pbpRewardpoints"
                 name="pbpRewardpoints"
-                v-model="rewardPoint"
+                v-model="redeem_point_per_dollar"
               />
             </div>
             <div class="col-md-2 text-center mt-4">
@@ -35,11 +35,11 @@
                 data-img="https://picsum.photos/id/1082/640/480"
               >Sample</a>
             </div>
-            <label class="error col-md-10" v-if="!$v.rewardPoint.required">Field is required</label>
+            <label class="error col-md-10" v-if="!$v.redeem_point_per_dollar.required">Field is required</label>
             <label
               class="error col-md-10"
-              v-if="!$v.rewardPoint.minValue"
-            >Need a minimum value of {{$v.rewardPoint.$params.minValue.min}}</label>
+              v-if="!$v.redeem_point_per_dollar.minValue"
+            >Need a minimum value of {{$v.redeem_point_per_dollar.$params.minValue.min}}</label>
           </div>
         </form>
       </div>
@@ -66,9 +66,9 @@ export default {
     }
   },
   validations: {
-    rewardPoint: {
+    redeem_point_per_dollar: {
       required: requiredIf(function() {
-        return this.enabled;
+        return this.redeem_purchase_status;
       }),
       minValue: minValue(100)
     }

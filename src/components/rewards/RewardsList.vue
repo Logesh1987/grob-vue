@@ -17,9 +17,9 @@
         <hr />
         <div class="details">
           <span>Qty</span>
-          <strong>{{ item.quantity }}</strong>
+          <strong>{{ item.quantity > 0 ? item.quantity : 'Unlimited' }}</strong>
           <span>Required Points</span>
-          <strong>{{ item.required_minimum_points }} Pts</strong>
+          <strong>{{ item.required_minimum_points }} {{ item.required_minimum_points > 1 ? 'Pts' : 'Point'}}</strong>
         </div>
       </div>
       <div class="rewardControls">
@@ -33,7 +33,7 @@
           <input type="checkbox" checked id="r1" />
           <i></i>
         </label>
-        <a href="#">
+        <a href="#" @click.prevent="handleDeleteRewards(item.id)">
           <i class="material-icons">delete_outline</i>
         </a>
       </div>
@@ -42,17 +42,33 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
+
 export default {
   name: "RewardsList",
-  props: ["data", "setEditReward", "showModal"],
+  props: ["data", "setEditReward", "setDeleteReward", "showModal"],
   data: function() {
     return this.data;
   },
 
   methods: {
+    ...mapActions([
+      "deleteReward",
+      "getRewardsData"
+    ]),
     handleEditRewards: function(id) {
-      this.setEditReward(id);
-      this.showModal();
+      this.updateReward(this.data).then(res => {
+          this.getRewardsData().then(re => {
+          this.saved.setupBlock = true;
+        }); 
+      });
+    },
+    handleDeleteRewards: function(id) {
+      this.deleteReward(id).then(res => {
+          this.getRewardsData().then(re => {
+
+        }); 
+      });
     }
   }
 };

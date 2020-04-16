@@ -1,15 +1,15 @@
 <template>
-  <div class="setupSteps" v-bind:class="{disabled: !enabled}">
+  <div class="setupSteps" v-bind:class="{disabled: !bonus_status}">
     <div class="stepHead">
       <h3>Sign Up Bonus</h3>
       <p>Reward customers for creating an account on your store</p>
       <label class="switch" for="signupBonus">
-        <input type="checkbox" name="mainSwitch" v-model="enabled" id="signupBonus" />
+        <input type="checkbox" name="mainSwitch" v-model="bonus_status" id="signupBonus" />
         <i></i>
       </label>
     </div>
     <div class="stepBody">
-      <div v-if="!enabled" class="alert alert-warning upmarketing">
+      <div v-if="!bonus_status" class="alert alert-warning upmarketing">
         This feature could boost your sales by
         <br />200% from our customers reviews
       </div>
@@ -23,10 +23,10 @@
                 class="form-control"
                 name="welcomeBonus"
                 id="welcomeBonus"
-                v-model.trim="welcome_points"
+                v-model.trim="welcome_bonus"
               />
-              <em class="error" v-if="!$v.welcome_points.required">Field is required</em>
-              <em class="error" v-if="!$v.welcome_points.minValue">Need a minimum value of {{$v.welcome_points.$params.minValue.min}}</em>
+              <em class="error" v-if="!$v.welcome_bonus.required">Field is required</em>
+              <em class="error" v-if="!$v.welcome_bonus.minValue">Need a minimum value of {{$v.welcome_bonus.$params.minValue.min}}</em>
             </div>
           </div>
           <!-- <br><h6>Welcome Note</h6>
@@ -83,9 +83,9 @@ export default {
     }
   },
   validations: {
-    welcome_points: {
+    welcome_bonus: {
       required: requiredIf(function() {
-        return this.enabled;
+        return this.bonus_status;
       }),
       minValue: minValue(100)
     }

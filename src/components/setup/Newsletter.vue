@@ -1,10 +1,10 @@
 <template>
-  <div class="setupSteps" v-bind:class="{disabled: !enabled}">
+  <div class="setupSteps" v-bind:class="{disabled: status != 1}">
     <div class="stepHead">
       <h3>Subscribe to Newsletter Setup</h3>
       <p>Incentivize users for signing up to your newsletters.</p>
       <label class="switch" for="newsletterSetup">
-        <input type="checkbox" v-model="enabled" id="newsletterSetup" />
+        <input type="checkbox" v-model="status" id="newsletterSetup" />
         <i></i>
       </label>
     </div>
@@ -18,13 +18,13 @@
               class="form-control"
               id="subscribeRewards"
               name="subscribeRewards"
-              v-model="rewardPoint"
+              v-model="worth_entries"
             />
-            <em class="error" v-if="!$v.rewardPoint.required">Field is required</em>
+            <em class="error" v-if="!$v.worth_entries.required">Field is required</em>
             <em
               class="error"
-              v-if="!$v.rewardPoint.minValue"
-            >Need a minimum value of {{$v.rewardPoint.$params.minValue.min}}</em>
+              v-if="!$v.worth_entries.minValue"
+            >Need a minimum value of {{$v.worth_entries.$params.minValue.min}}</em>
           </div>
         </form>
       </div>
@@ -60,9 +60,9 @@ export default {
     }
   },
   validations: {
-    rewardPoint: {
+    worth_entries: {
       required: requiredIf(function() {
-        return this.enabled;
+        return this.status;
       }),
       minValue: minValue(100)
     }

@@ -1,10 +1,10 @@
 <template>
-  <div class="setupSteps" v-bind:class="{ disabled: !enabled }">
+  <div class="setupSteps" v-bind:class="{ disabled: status != 1 }">
     <div class="stepHead">
       <h3>Twitter Share Setup</h3>
       <p>When members share your message on Twitter</p>
       <label class="switch" for="twShareSetup">
-        <input type="checkbox" name="mainSwitch" v-model="enabled" id="twShareSetup" />
+        <input type="checkbox" name="mainSwitch" v-model="status" id="twShareSetup" />
         <i></i>
       </label>
     </div>
@@ -18,13 +18,13 @@
               class="form-control"
               id="twRewardPoint"
               name="twRewardPoint"
-              v-model="rewardPoint"
+              v-model="worth_entries"
             />
-            <em class="error" v-if="!$v.rewardPoint.required">Field is required</em>
+            <em class="error" v-if="!$v.worth_entries.required">Field is required</em>
             <em
               class="error"
-              v-if="!$v.rewardPoint.minValue"
-            >Need a minimum value of {{$v.rewardPoint.$params.minValue.min}}</em>
+              v-if="!$v.worth_entries.minValue"
+            >Need a minimum value of {{$v.worth_entries.$params.minValue.min}}</em>
           </div>
           <div class="form-group fLabel mb-5 col-md-12">
             <label for="inputEmail4">Twitter Share Text</label>
@@ -33,10 +33,10 @@
               cols="30"
               rows="3"
               id="twSharetxt"
-              v-model="share_text"
+              v-model="settings.tweet"
               name="twSharetxt"
             ></textarea>
-            <em class="error" v-if="!$v.share_text.required">Field is required</em>
+           <!-- <em class="error" v-if="!$v.tweet.required">Field is required</em>  -->
             <a
               href="#"
               class="btn btn-link mt-2 p-0 sampleModalTrigger"
@@ -52,9 +52,9 @@
               class="form-control"
               id="twConnectUrl"
               name="twConnectUrl"
-              v-model="url"
+              v-model="settings.tweet_url"
             />
-            <em class="error" v-if="!$v.url.required">Field is required</em>
+            <!--<em class="error" v-if="!$v.tweet_url.required">Field is required</em>-->
           </div>
           <!-- <div class="col-md-12 ">
                             <div class="custom-control d-flex scale-8 to-00 custom-checkbox">
@@ -96,22 +96,22 @@ export default {
     }
   },
   validations: {
-    rewardPoint: {
+    worth_entries: {
       required: requiredIf(function() {
-        return this.enabled;
+        return this.status;
       }),
       minValue: minValue(100)
     },
-    share_text: {
+    /*tweet: {
       required: requiredIf(function() {
-        return this.enabled;
+        return this.status;
       })
     },
-    url: {
+    tweet_url: {
       required: requiredIf(function() {
-        return this.enabled;
+        return this.status;
       })
-    }
+    }*/
   }
 };
 </script>

@@ -1,10 +1,10 @@
 <template>
-  <div class="setupSteps" v-bind:class="{disabled: !enabled}">
+  <div class="setupSteps" v-bind:class="{disabled: !review_status}">
     <div class="stepHead">
       <h3>WOOReview Rewards</h3>
       <p>Reward reviews of products, services by incentivizing</p>
       <label class="switch" for="wooSetup">
-        <input type="checkbox" name="mainSwitch" v-model="enabled" id="wooSetup" />
+        <input type="checkbox" name="mainSwitch" v-model="review_status" id="wooSetup" />
         <i></i>
       </label>
     </div>
@@ -18,19 +18,19 @@
               class="form-control"
               id="wooRewards"
               name="wooRewards"
-              v-model="rewardPoint"
+              v-model="points"
             />
-            <em class="error" v-if="!$v.rewardPoint.required">Field is required</em>
+            <em class="error" v-if="!$v.points.required">Field is required</em>
             <em
               class="error"
-              v-if="!$v.rewardPoint.minValue"
-            >Need a minimum value of {{$v.rewardPoint.$params.minValue.min}}</em>
+              v-if="!$v.points.minValue"
+            >Need a minimum value of {{$v.points.$params.minValue.min}}</em>
           </div>
           <div class="col-md-12">
             <div class="custom-control d-flex scale-8 to-00 custom-checkbox">
               <input
                 type="checkbox"
-                v-model="approvedReviews"
+                v-model="is_approved_only"
                 class="custom-control-input"
                 id="woo"
               />
@@ -71,9 +71,9 @@ export default {
     }
   },
   validations: {
-    rewardPoint: {
+    points: {
       required: requiredIf(function() {
-        return this.enabled;
+        return this.review_status;
       }),
       minValue: minValue(100)
     }

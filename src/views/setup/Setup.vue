@@ -55,63 +55,63 @@
                     <PointsProgram
                       ref="PointsProgram"
                       :reset="resetSetupBlock"
-                      :data="data.setup.points_program"
+                      :data="data.setup.points_setup"
                     />
                   </swiper-slide>
                   <swiper-slide data-ref="SignupBonus">
                     <SignupBonus
                       ref="SignupBonus"
                       :reset="resetSetupBlock"
-                      :data="data.setup.signup_bonus"
+                      :data="data.setup.points_setup"
                     />
                   </swiper-slide>
                   <swiper-slide data-ref="PaybyPoints">
                     <PaybyPoints
                       ref="PaybyPoints"
                       :reset="resetSetupBlock"
-                      :data="data.setup.payby_points"
+                      :data="data.setup.points_setup"
                     />
                   </swiper-slide>
                   <swiper-slide data-ref="ReferralProgram">
                     <ReferralProgram
                       ref="ReferralProgram"
                       :reset="resetSetupBlock"
-                      :data="data.setup.referral_program"
+                      :data="data.setup.referral"
                     />
                   </swiper-slide>
                   <swiper-slide data-ref="FacebookShare">
                     <FacebookShare
                       ref="FacebookShare"
                       :reset="resetSetupBlock"
-                      :data="data.setup.facebook_share"
+                      :data="data.setup.entries.facebook_share"
                     />
                   </swiper-slide>
                   <swiper-slide data-ref="TwitterShare">
                     <TwitterShare
                       ref="TwitterShare"
                       :reset="resetSetupBlock"
-                      :data="data.setup.twitter_share"
+                      :data="data.setup.entries.twitter_tweet"
                     />
                   </swiper-slide>
                   <swiper-slide data-ref="BirthdayRewards">
                     <BirthdayRewards
                       ref="BirthdayRewards"
                       :reset="resetSetupBlock"
-                      :data="data.setup.birthday_rewards"
+                      :data="data.setup.events.member_birthday"
                     />
                   </swiper-slide>
                   <swiper-slide data-ref="WooRewards">
                     <WooRewards
                       ref="WooRewards"
                       :reset="resetSetupBlock"
-                      :data="data.setup.woo_rewards"
+                      :data="data.setup.reviews.woo_reviews"
                     />
                   </swiper-slide>
                   <swiper-slide data-ref="Newsletter">
                     <Newsletter
                       ref="Newsletter"
                       :reset="resetSetupBlock"
-                      :data="data.setup.news_letter"
+                      :data="data.setup.entries.newsletter_subscription"
                     />
                   </swiper-slide>
                 </swiper>
@@ -131,7 +131,7 @@
                   >Next</button>
                 </div>
               </div>
-              <footer class="saveBar" v-if="swipe.isEnd">
+              <footer class="saveBar" >
                 <div class="container">
                   <div class="row justify-content-between">
                     <ul class="footProgress">
