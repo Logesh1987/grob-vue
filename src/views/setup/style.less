@@ -199,7 +199,9 @@
 				height: 10px;
 				margin: 0 5px;
 				position: relative;
+				pointer-events: none;
 				overflow: hidden;
+				line-height: 0.35;
 				&:before {
 					font-family: "Material Icons";
 					color: #fff;
@@ -221,8 +223,10 @@
 						display: block;
 					}
 				}
-				&.swiper-pagination-bullet-completed {
+				&[data-completed='completed'] {
 					background: #51ba31;
+					pointer-events: auto;
+					cursor: pointer;
 					opacity: 1;
 					&:before {
 						content: 'check';
