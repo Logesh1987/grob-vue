@@ -142,13 +142,15 @@
     "is_new_fo": "1",
     "styles_data": {
       "font_family_main": "'Courier New', Courier, monospace",
-      "font_color_main": "#03ff19",
+      "font_color_main": "#0004f4",
       "font_color_hover": "#000",
       "bg_color_button": "#000000",
       "font_family_button": "BARIOLREGULAR_0",
       "font_color_button": "#ffffff",
       "font_color_hover_button": "#000000",
-      "signup_button_text": "Create Account"
+      "signup_button_text": "Create Account",
+      "norm_txt_color": "#1ed911",
+      "norm_bg_color": "#000000"
     },
     "fonts": [
       {
@@ -225,7 +227,7 @@
       "widget_sub_text": "",
       "widget_click_navigate": "lightbox",
       "contest_actions_to_show": "0",
-      "widget_logo_img": "",
+      "widget_logo_img": "https://image.flaticon.com/icons/svg/2781/2781195.svg",
       "widget_bg_img": "",
       "widget_bg_check": "0",
       "w_desktop_view": "compact",

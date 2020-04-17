@@ -705,6 +705,44 @@
 			background: #549d90 !important;
 		}
 	}
+	.widgetIconSelector {
+		flex-grow: 1;
+		border: 1px solid #ced4da;
+		border-radius: 0.25rem;
+		margin: 0;
+		button {
+			color: #666;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			text-align: left;
+			img {
+				width: 50px;
+			}
+			&:after {
+				font-size: 1.5rem;
+			}
+		}
+		ul {
+			padding: 5px;
+		}
+		li {
+			width: 50%;
+			display: inline-block;
+			box-sizing: border-box;
+			border: 1px solid #ced4da;
+			&.active a {
+				background-color: #ced4da;
+			}
+			a {
+				display: block;
+				padding: 5px 5px;
+			}
+			img {
+				width: 100%;
+			}
+		}
+	}
 }
 .themeSetupTab {
 	background-color: #f0f0f0;

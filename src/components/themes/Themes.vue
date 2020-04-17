@@ -36,10 +36,7 @@
               </div>
             </nav>
             <div class="tab-content" id="popup-tabContent">
-              <div
-                class="tab-pane active"
-                id="nav-mobile"
-              >
+              <div class="tab-pane active" id="nav-mobile">
                 <h6 class="mb-4">
                   <strong>Popup styles</strong>
                 </h6>
@@ -63,8 +60,15 @@
                 >
                   <label for="family" class="col-md-5 p-0 m-0">Text Colors</label>
                   <verte picker="square" v-model="pData.styles_data.font_color_main" model="hex">
-                      <input type="text" v-model="pData.styles_data.font_color_main" class="form-control" />                    
-                      <span class="palette" :style="{'backgroundColor': pData.styles_data.font_color_main}"></span>
+                    <input
+                      type="text"
+                      v-model="pData.styles_data.font_color_main"
+                      class="form-control"
+                    />
+                    <span
+                      class="palette"
+                      :style="{'backgroundColor': pData.styles_data.font_color_main}"
+                    ></span>
                   </verte>
                 </div>
                 <div
@@ -135,8 +139,8 @@
                     </span>
                   </div>
                   <verte picker="square" v-model="pData.bg_color" model="hex">
-                      <input type="text" v-model="pData.bg_color" class="form-control" />                    
-                      <span class="palette" :style="{'backgroundColor': pData.bg_color}"></span>
+                    <input type="text" v-model="pData.bg_color" class="form-control" />
+                    <span class="palette" :style="{'backgroundColor': pData.bg_color}"></span>
                   </verte>
                 </div>
                 <button
@@ -271,11 +275,51 @@
                   id="color-picker-component"
                   class="form-group d-flex flex-row align-items-center colorpicker-component"
                 >
-                  <label for="family" class="col-md-5 p-0 m-0">Text Colors</label>
-                  <verte picker="square" v-model="pData.styles_data.font_color_main" model="hex">
-                      <input type="text" v-model="pData.styles_data.font_color_main" class="form-control" />                    
-                      <span class="palette" :style="{'backgroundColor': pData.styles_data.font_color_main}"></span>
+                  <label for="family" class="col-md-5 p-0 m-0">Text Color</label>
+                  <verte picker="square" v-model="wData.style_data.norm_txt_color" model="hex">
+                    <input
+                      type="text"
+                      v-model="wData.style_data.norm_txt_color"
+                      class="form-control"
+                    />
+                    <span
+                      class="palette"
+                      :style="{'backgroundColor': wData.style_data.norm_txt_color}"
+                    ></span>
                   </verte>
+                </div>
+                <div
+                  id="color-picker-component"
+                  class="form-group d-flex flex-row align-items-center colorpicker-component"
+                >
+                  <label for="family" class="col-md-5 p-0 m-0">BG Color</label>
+                  <verte picker="square" v-model="wData.style_data.norm_bg_color" model="hex">
+                    <input
+                      type="text"
+                      v-model="wData.style_data.norm_bg_color"
+                      class="form-control"
+                    />
+                    <span
+                      class="palette"
+                      :style="{'backgroundColor': wData.style_data.norm_bg_color}"
+                    ></span>
+                  </verte>
+                </div>
+                <div class="form-group d-flex align-items-center">
+                  <label for="icon" class="col-md-5 p-0 m-0">Widget Icon</label>
+                  <b-dropdown variant="outline-light" class="widgetIconSelector">
+                    <template v-slot:button-content>
+                      <img :src="wData.style_data.widget_logo_img" alt />
+                    </template>
+                    <b-dropdown-item
+                      v-for="icon in icons"
+                      :key="icon"
+                      :class="{'active': wData.style_data.widget_logo_img === icon}"
+                      @click.prevent="wData.style_data.widget_logo_img = icon"
+                    >
+                      <img :src="icon" alt />
+                    </b-dropdown-item>
+                  </b-dropdown>
                 </div>
               </div>
             </b-collapse>
@@ -298,18 +342,24 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
-  import Verte from 'verte';
-  import 'verte/dist/verte.css';
+import Verte from "verte";
+import "verte/dist/verte.css";
 export default {
   name: "Themes",
-  components: {Verte},
+  components: { Verte },
   data: function() {
     return {
       tabIndex: 0,
       activePsetup: "mobile",
       activeWidget: 0,
       pData: null,
-      wData: null
+      wData: null,
+      icons: [
+        "https://image.flaticon.com/icons/svg/2781/2781195.svg",
+        "https://image.flaticon.com/icons/svg/2781/2781257.svg",
+        "https://image.flaticon.com/icons/svg/2781/2781267.svg",
+        "https://image.flaticon.com/icons/svg/2781/2781263.svg"
+      ]
     };
   },
   computed: {
