@@ -196,8 +196,8 @@
                   >Next</button>
                 </div>
               </div>
-              <!--<footer class="saveBar" v-if="swipe.isEnd">-->
-              <footer class="saveBar">
+              <footer class="saveBar" v-if="swipe.isEnd">
+              <!--<footer class="saveBar">-->
                 <div class="container">
                   <div class="row justify-content-between">
                     <ul class="footProgress">

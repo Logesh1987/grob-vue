@@ -132,9 +132,9 @@ export default new Vuex.Store({
     },
     getWidgetData: ({commit, state}) => {      
       return Axios.get("https://jai.devam.pro/gr/admin/widgets?id_shop=1226&admin_email=jayakumar@appsmav.com").then(res => {
-        console.log("#####################################################");
-        console.log(JSON.stringify(res.data.data));
-        console.log("#####################################################");
+        //console.log("#####################################################");
+        //console.log(JSON.stringify(res.data.data));
+        //console.log("#####################################################");
         commit('updateWidgetData', res.data.data);
         return state.widgetData;
       });
