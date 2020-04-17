@@ -167,9 +167,9 @@
             <b-tabs v-model="activeWidget" nav-wrapper-class="widget-tabs-nav">
               <b-tab title="Mobile" class="widget-tabs-panes" active>
                 <div class="form-group">
-                  <label>Widget Placement</label>
+                  <label>Widget Placement - MObile</label>
                   <select class="form-control" v-model="wData.style_data.mobile_position">
-                    <option v-for="value in wData.widget_position" :key="value">{{value}}</option>
+                    <option v-for="value in wData.mobile_widget_position" :key="value">{{value}}</option>
                   </select>
                 </div>
                 <div class="form-group mt-4">
@@ -200,7 +200,7 @@
                     <input
                       type="radio"
                       id="wm-look-3"
-                      value="hide"
+                      value="hidden"
                       v-model="wData.style_data.w_mobile_view"
                       name="wm-look"
                       class="custom-control-input"
@@ -217,7 +217,7 @@
               <b-tab title="Desktop" class="widget-tabs-panes">
                 <div class="form-group">
                   <label>Widget Placement</label>
-                  <select class="form-control" v-model="wData.style_data.mobile_position">
+                  <select class="form-control" v-model="wData.position">
                     <option v-for="value in wData.widget_position" :key="value">{{value}}</option>
                   </select>
                 </div>
@@ -249,7 +249,7 @@
                     <input
                       type="radio"
                       id="wd-look-3"
-                      value="hide"
+                      value="hidden"
                       v-model="wData.style_data.w_desktop_view"
                       name="wd-look"
                       class="custom-control-input"
