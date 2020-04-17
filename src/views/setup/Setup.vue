@@ -196,7 +196,8 @@
                   >Next</button>
                 </div>
               </div>
-              <footer class="saveBar" v-if="swipe.isEnd">
+              <!--<footer class="saveBar" v-if="swipe.isEnd">-->
+              <footer class="saveBar">
                 <div class="container">
                   <div class="row justify-content-between">
                     <ul class="footProgress">
@@ -412,14 +413,15 @@ export default {
     Themes
   },
   computed: {
-    ...mapState(["setupData", "rewardsData", "popupData"])
+    ...mapState(["setupData", "rewardsData", "popupData", "widgetData"])
   },
   methods: {
     ...mapActions([
       "getSetupData",
       "saveSetupData",
       "getRewardsData",
-      "getPopupData"
+      "getPopupData",
+      "getWidgetData"
     ]),
     swiperScte() {
       this.swipe.isBeginning = this.$refs.setupSwiper.$swiper.isBeginning;
@@ -485,6 +487,11 @@ export default {
         this.$root.$emit("bv::toggle::collapse", "rewardsBlock");
         this.$root.$emit("bv::toggle::collapse", "themesBlock");
       });
+
+      /*this.getWidgetData().then(res => {
+        console.log("GOT Widget Data");
+      });*/
+
     },
     setEditReward(id) {
       this.editRewardId = id ? id : null;

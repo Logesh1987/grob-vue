@@ -21,14 +21,14 @@
         </div>
       </div>
       <div class="rewardControls">
-        <a href="#" class="text-success">
+       <!-- <a href="#" class="text-success">
           <i class="material-icons">check</i>
-        </a>
+        </a>  -->
         <a href="#" @click.prevent="handleEditRewards(item.id)">
           <i class="icon-undefined"></i>
         </a>
         <label class="switch" :for="item.id">
-          <input type="checkbox" checked :id="item.id" @change="handleSwitch(item.id)" />
+          <input type="checkbox" :id="item.id" checked="false" true-value="1" false-value="0" v-model="item.status" @change="handleSwitch(item)" />
           <i></i>
         </label>
         <a href="#" @click.prevent="handleDeleteRewards(item.id)">
@@ -51,19 +51,26 @@ export default {
   methods: {
     ...mapActions([
       "getRewardsData",
-      "updateRewardStatus"
+      "updateReward",
+      "deleteReward"
     ]),
     handleEditRewards: function(id) {
       this.setEditReward(id);
       this.showModal();
     },
     handleDeleteRewards: function(id) {
-      this.setDeleteReward(id);
-      this.showModal();
+      this.deleteReward(id).then(res => {
+          /*this.getRewardsData().then(re => {
+            console.log("********************************************");
+          });*/
+          console.log("*******  DELETEED  ***********");
+      });
     },
-    handleSwitch: function(id) {
-      alert(id);
-      this.updateRewardStatus(id);
+    handleSwitch: function(item) {
+      item.status = (item.status == true) ? 1 : 0;
+      this.updateReward(item).then(res => {
+          console.log("********************************************");
+      });
     }
   }
 };

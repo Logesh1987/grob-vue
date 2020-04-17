@@ -38,7 +38,6 @@
             <div class="tab-content" id="popup-tabContent">
               <div
                 class="tab-pane active text-left"
-                v-if="activePsetup === 'mobile'"
                 id="nav-mobile"
               >
                 <h6 class="mb-4">
@@ -89,10 +88,10 @@
                 <button
                   type="submit"
                   class="btn btn-success mt-3"
-                  @click.prevent="activePsetup = 'desktop'"
+                  @click.prevent="handlePdataSave"
                 >Save and Next</button>
               </div>
-              <div
+              <!--<div
                 class="tab-pane active text-left"
                 v-if="activePsetup === 'desktop'"
                 id="nav-desktop"
@@ -147,7 +146,7 @@
                   class="btn btn-success mt-3"
                   @click.prevent="handlePdataSave"
                 >Save and Next</button>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -214,8 +213,8 @@
                 <button
                   type="submit"
                   class="btn btn-success mt-3"
-                  @click.prevent="activeWidget = 1"
-                >Save and Next</button>
+                 @click.prevent="handleSaveWidget"
+                >Save and Next - Mobile</button>
               </b-tab>
               <b-tab title="Desktop" class="widget-tabs-panes">
                 <div class="form-group">
@@ -260,6 +259,11 @@
                     <label class="custom-control-label" for="wd-look-3">Hide Widget</label>
                   </div>
                 </div>
+                <button
+                  type="submit"
+                  class="btn btn-success mt-3"
+                 @click.prevent="handleSaveWidget"
+                >Save and Next - Desktop</button>
               </b-tab>
             </b-tabs>
           </div>
@@ -269,7 +273,7 @@
     <footer class="saveBar" v-if="activeWidget">
       <div class="container">
         <div class="row justify-content-end">
-          <button class="btn btn-light" @click.prevent="handleSavePublish">
+          <button class="btn btn-light" @click.prevent="handleSaveWidget">
             Save and Publish
             <i class="material-icons">keyboard_arrow_right</i>
           </button>
@@ -293,21 +297,21 @@ export default {
     };
   },
   computed: {
-    ...mapState(["popupData"])
+    ...mapState(["popupData", "widgetData"])
   },
   methods: {
-    ...mapActions(["savePopupData", "getWidgetData", "saveWidgetData"]),
+    ...mapActions(["saveThemeSettings", "getWidgetData", "saveWidgetData"]),
     handlePdataSave: function() {
-      this.savePopupData(this.pData).then(res => {
+      this.saveThemeSettings(this.pData).then(res => {
         this.getWidgetData().then(response => {
           this.wData = response;
           this.tabIndex = 1;
         });
       });
     },
-    handleSavePublish: function() {
+    handleSaveWidget: function() {
       this.saveWidgetData(this.wData).then(res => {
-        this.$router.push('congrats')
+        //this.$router.push('congrats')
       })
     }
   },

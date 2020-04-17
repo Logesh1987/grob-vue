@@ -93,9 +93,9 @@
                 <div class="btn-group btnGrpToggle btnGrpCheck">
                   <input
                     type="checkbox"
-                    v-model="data.is_unlimited"
-                    true-value="1"
-                    false-value="0"
+                    v-model="data.quantity"
+                    true-value="0"
+                    false-value="1"
                     name="limitReferral"
                     id="limitReferral"
                   />
@@ -105,7 +105,7 @@
                   </label>
                 </div>
               </div>
-              <div v-if="data.is_unlimited === '0'" class="form-group fLabel col-md-3 p-0 mb-0">
+              <div v-if="data.quantity > 0" class="form-group fLabel col-md-3 p-0 mb-0">
                 <label for="rewardPoint">Enter Quantity</label>
                 <input
                   type="text"
@@ -226,7 +226,6 @@
 <script>
 import { mapState, mapActions } from "vuex";
 import RadioGroup from "@/components/RadioGroup";
-import Axios from "axios";
 
 export default {
   name: "RewardSettings",
@@ -236,12 +235,11 @@ export default {
     return {
       data: {},
       imgGroup: [
-        "https://i.picsum.photos/id/134/300/200.jpg",
-        "https://i.picsum.photos/id/256/300/200.jpg",
-        "https://i.picsum.photos/id/210/300/200.jpg",
-        "https://i.picsum.photos/id/348/300/200.jpg",
-        "https://i.picsum.photos/id/342/300/200.jpg",
-        "https://i.picsum.photos/id/321/300/200.jpg"
+        "https://s3.us-east-1.amazonaws.com/devam.pro/gr/master/upload/img/683/83/3683_loyalty_1587031987.png",
+        "https://s3.us-east-1.amazonaws.com/devam.pro/gr/master/upload/img/683/83/3683_loyalty_1587034530.png",
+        "https://s3.us-east-1.amazonaws.com/devam.pro/gr/master/upload/img/683/83/3683_loyalty_1587032899.png",
+        "https://s3.us-east-1.amazonaws.com/devam.pro/gr/master/upload/img/683/83/3683_loyalty_1587033446.png",
+        "https://s3.us-east-1.amazonaws.com/devam.pro/gr/master/upload/img/683/83/3683_loyalty_1587033494.png"
       ],
       newSettings: {
         name: "Default title",
@@ -273,44 +271,27 @@ export default {
       "updateReward"
     ]),
     getDataById: function(id) {
-      return this.rewardsData.find(data => data.id === id);
+      return this.rewardsData.find(data => data.id == id);
     },
     handleSubmit: function() {
-      if(this.id) {
-        // EDIT REWARD - post functionality 
+      // EDIT REWARD - post functionality 
+      if (this.id) {
         this.updateReward(this.data).then(res => {
-            this.getRewardsData().then(re => {
-            this.saved.setupBlock = true;
-            this.activeStep = "rewardsBlock";
-            this.$refs.rewardHead.classList.remove("disabled");
-            this.$root.$emit("bv::toggle::collapse", "setupBlock");
-            this.$root.$emit("bv::toggle::collapse", "rewardsBlock");
+          this.getRewardsData().then(re => {
+            console.log("Reward updated SUccessfuly");
           }); 
         });
         
       } else {
         // ADD REWARD - post functionality 
+        this.data.status = 1; 
         this.addReward(this.data).then(res => {
-            this.getRewardsData().then(re => {
-            this.saved.setupBlock = true;
-            this.activeStep = "rewardsBlock";
-            this.$refs.rewardHead.classList.remove("disabled");
-            this.$root.$emit("bv::toggle::collapse", "setupBlock");
-            this.$root.$emit("bv::toggle::collapse", "rewardsBlock");
+          this.getRewardsData().then(re => {
+            console.log("Reward Added SUccessfuly");
           }); 
         });
-        /*Axios.post('https://jai.devam.pro/gr/admin/rewards?id_shop=1226&admin_email=jayakumar@appsmav.com', this.data, headersData).then((res) => {
-          console.log("RESPONSE RECEIVED: ", res);
-        }).catch(err => {
-          console.log("###############   ERROR   ###################");
-          console.log(err);
-        }); */
-        
-        
-
       }
-      // On response call this
-      this.closeModal()
+      this.closeModal();
     }
   },
   mounted: function() {
