@@ -15,7 +15,7 @@
               v-if="activePsetup === 'desktop'"
             />
           </div>
-          <div class="col-md-5">
+          <div class="col-md-5 text-left">
             <nav>
               <div class="nav nav-pills mb-4" id="popup-tab" role="tablist">
                 <a
@@ -37,7 +37,7 @@
             </nav>
             <div class="tab-content" id="popup-tabContent">
               <div
-                class="tab-pane active text-left"
+                class="tab-pane active"
                 id="nav-mobile"
               >
                 <h6 class="mb-4">
@@ -62,16 +62,10 @@
                   class="form-group d-flex flex-row align-items-center colorpicker-component"
                 >
                   <label for="family" class="col-md-5 p-0 m-0">Text Colors</label>
-                  <div class="cPicker col-md-7 p-0">
-                    <input
-                      type="text"
-                      v-model="pData.styles_data.font_color_main"
-                      class="form-control"
-                    />
-                    <span class="input-group-addon">
-                      <i></i>
-                    </span>
-                  </div>
+                  <verte picker="square" v-model="pData.styles_data.font_color_main" model="hex">
+                      <input type="text" v-model="pData.styles_data.font_color_main" class="form-control" />                    
+                      <span class="palette" :style="{'backgroundColor': pData.styles_data.font_color_main}"></span>
+                  </verte>
                 </div>
                 <div
                   id="color-picker-component"
@@ -140,6 +134,10 @@
                       <i></i>
                     </span>
                   </div>
+                  <verte picker="square" v-model="pData.bg_color" model="hex">
+                      <input type="text" v-model="pData.bg_color" class="form-control" />                    
+                      <span class="palette" :style="{'backgroundColor': pData.bg_color}"></span>
+                  </verte>
                 </div>
                 <button
                   type="submit"
@@ -266,6 +264,21 @@
                 >Save and Next - Desktop</button>
               </b-tab>
             </b-tabs>
+            <b-button v-b-toggle.advanceSetting class="btnAdvancedSettings">Advanced Settings</b-button>
+            <b-collapse id="advanceSetting" class="mt-2">
+              <div class="tab-content widget-tabs-panes">
+                <div
+                  id="color-picker-component"
+                  class="form-group d-flex flex-row align-items-center colorpicker-component"
+                >
+                  <label for="family" class="col-md-5 p-0 m-0">Text Colors</label>
+                  <verte picker="square" v-model="pData.styles_data.font_color_main" model="hex">
+                      <input type="text" v-model="pData.styles_data.font_color_main" class="form-control" />                    
+                      <span class="palette" :style="{'backgroundColor': pData.styles_data.font_color_main}"></span>
+                  </verte>
+                </div>
+              </div>
+            </b-collapse>
           </div>
         </div>
       </b-tab>
@@ -285,8 +298,11 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
+  import Verte from 'verte';
+  import 'verte/dist/verte.css';
 export default {
   name: "Themes",
+  components: {Verte},
   data: function() {
     return {
       tabIndex: 0,
