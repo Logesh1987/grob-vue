@@ -155,17 +155,8 @@
       </b-tab>
       <b-tab title="Widget Setup" class="widgetSetup">
         <div class="row justify-content-between">
-          <div class="col-md-7">
-            <img
-              src="@/images/widget_preview_mobile.jpg"
-              class="previewImg"
-              v-if="activeWidget === 0"
-            />
-            <img
-              src="@/images/widget_preview_desktop.jpg"
-              class="previewImg"
-              v-if="activeWidget === 1"
-            />
+          <div class="col-md-7" v-if="wData">
+            <WidgetPreview :type="activeWidget" :data="wData" />            
           </div>
           <div class="col-md-5 text-left" v-if="wData">
             <b-tabs v-model="activeWidget" nav-wrapper-class="widget-tabs-nav">
@@ -276,7 +267,7 @@
                   class="form-group d-flex flex-row align-items-center colorpicker-component"
                 >
                   <label for="family" class="col-md-5 p-0 m-0">Text Color</label>
-                  <verte picker="square" v-model="wData.style_data.norm_txt_color" model="hex">
+                  <verte picker="square" :enableAlpha="false" v-model="wData.style_data.norm_txt_color" model="hex">
                     <input
                       type="text"
                       v-model="wData.style_data.norm_txt_color"
@@ -293,7 +284,7 @@
                   class="form-group d-flex flex-row align-items-center colorpicker-component"
                 >
                   <label for="family" class="col-md-5 p-0 m-0">BG Color</label>
-                  <verte picker="square" v-model="wData.style_data.norm_bg_color" model="hex">
+                  <verte picker="square" :enableAlpha="false" v-model="wData.style_data.norm_bg_color" model="hex">
                     <input
                       type="text"
                       v-model="wData.style_data.norm_bg_color"
@@ -343,10 +334,11 @@
 <script>
 import { mapState, mapActions } from "vuex";
 import Verte from "verte";
+import WidgetPreview from "@/components/themes/WidgetPreview";
 import "verte/dist/verte.css";
 export default {
   name: "Themes",
-  components: { Verte },
+  components: { Verte, WidgetPreview },
   data: function() {
     return {
       tabIndex: 0,
