@@ -14,7 +14,7 @@
         <form id="form-payby-points" class="mb-0">
           <div class="form-row align-items-start">
             <div class="form-group fLabel col-md-2">
-              <div class="input-group-prepend">€</div>
+              <div class="input-group-prepend">{{ currency }}</div>
               <input type="number" readonly class="form-control" id="inputEmail4" value="1" />
             </div>
             <div class="col-md-3 text-center mt-4 pt-1">is equal to</div>

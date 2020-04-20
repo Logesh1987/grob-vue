@@ -76,12 +76,10 @@
                   class="form-group d-flex flex-row align-items-center colorpicker-component"
                 >
                   <label for="family" class="col-md-5 p-0 m-0">BG Colors</label>
-                  <div class="cPicker col-md-7 p-0">
+                  <verte picker="square" v-model="pData.bg_color" model="hex">
                     <input type="text" v-model="pData.bg_color" class="form-control" />
-                    <span class="input-group-addon">
-                      <i></i>
-                    </span>
-                  </div>
+                    <span class="palette" :style="{'backgroundColor': pData.bg_color}"></span>
+                  </verte>
                 </div>
                 <button
                   type="submit"
@@ -148,7 +146,7 @@
                   class="btn btn-success mt-3"
                   @click.prevent="handlePdataSave"
                 >Save and Next</button>
-              </div> -->
+              </div>-->
             </div>
           </div>
         </div>
@@ -156,13 +154,13 @@
       <b-tab title="Widget Setup" class="widgetSetup">
         <div class="row justify-content-between">
           <div class="col-md-7" v-if="wData">
-            <WidgetPreview :type="activeWidget" :data="wData" />            
+            <WidgetPreview :type="activeWidget" :data="wData" />
           </div>
           <div class="col-md-5 text-left" v-if="wData">
             <b-tabs v-model="activeWidget" nav-wrapper-class="widget-tabs-nav">
               <b-tab title="Mobile" class="widget-tabs-panes" active>
                 <div class="form-group">
-                  <label>Widget Placement - MObile</label>
+                  <label>Widget Placement - Mobile</label>
                   <select class="form-control" v-model="wData.style_data.mobile_position">
                     <option v-for="value in wData.mobile_widget_position" :key="value">{{value}}</option>
                   </select>
@@ -206,8 +204,8 @@
                 <button
                   type="submit"
                   class="btn btn-success mt-3"
-                 @click.prevent="handleSaveWidget"
-                >Save and Next - Mobile</button>
+                  @click.prevent="activeWidget = 1"
+                >Save and Next</button>
               </b-tab>
               <b-tab title="Desktop" class="widget-tabs-panes">
                 <div class="form-group">
@@ -252,11 +250,11 @@
                     <label class="custom-control-label" for="wd-look-3">Hide Widget</label>
                   </div>
                 </div>
-                <button
+                <!-- <button
                   type="submit"
                   class="btn btn-success mt-3"
-                 @click.prevent="handleSaveWidget"
-                >Save and Next - Desktop</button>
+                  @click.prevent="handleSaveWidget"
+                >Save and Next - Desktop</button> -->
               </b-tab>
             </b-tabs>
             <b-button v-b-toggle.advanceSetting class="btnAdvancedSettings">Advanced Settings</b-button>
@@ -267,7 +265,12 @@
                   class="form-group d-flex flex-row align-items-center colorpicker-component"
                 >
                   <label for="family" class="col-md-5 p-0 m-0">Text Color</label>
-                  <verte picker="square" :enableAlpha="false" v-model="wData.style_data.norm_txt_color" model="hex">
+                  <verte
+                    picker="square"
+                    :enableAlpha="false"
+                    v-model="wData.style_data.norm_txt_color"
+                    model="hex"
+                  >
                     <input
                       type="text"
                       v-model="wData.style_data.norm_txt_color"
@@ -284,7 +287,12 @@
                   class="form-group d-flex flex-row align-items-center colorpicker-component"
                 >
                   <label for="family" class="col-md-5 p-0 m-0">BG Color</label>
-                  <verte picker="square" :enableAlpha="false" v-model="wData.style_data.norm_bg_color" model="hex">
+                  <verte
+                    picker="square"
+                    :enableAlpha="false"
+                    v-model="wData.style_data.norm_bg_color"
+                    model="hex"
+                  >
                     <input
                       type="text"
                       v-model="wData.style_data.norm_bg_color"
@@ -318,11 +326,26 @@
         </div>
       </b-tab>
     </b-tabs>
-    <footer class="saveBar" v-if="activeWidget">
+    <footer class="saveBar final" v-if="tabIndex">
+      <i class="dots"></i>
       <div class="container">
-        <div class="row justify-content-end">
+        <div class="row justify-content-between">
+          <ul class="footProgress">
+            <li class="completed">
+              <i class="material-icons">check</i>
+            </li>
+            <li class="completed">
+              <i class="material-icons">check</i>
+            </li>
+            <li class="completed">
+              <i class="material-icons">check</i>
+            </li>
+            <li class="text">
+              You’ve completed all steps. <br/>Proceed to live your program
+            </li>
+          </ul>
           <button class="btn btn-light" @click.prevent="handleSaveWidget">
-            Save and Publish
+            Publish Now
             <i class="material-icons">keyboard_arrow_right</i>
           </button>
         </div>
@@ -369,8 +392,8 @@ export default {
     },
     handleSaveWidget: function() {
       this.saveWidgetData(this.wData).then(res => {
-        //this.$router.push('congrats')
-      })
+        this.$router.push('congrats')
+      });
     }
   },
   mounted: function() {

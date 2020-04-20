@@ -142,7 +142,7 @@
               v-if="realtime_coupon_type_friend != 3"
             >
               <div class="form-group fLabel col-md-6">
-                <div class="input-group-prepend">€</div>
+                <div class="input-group-prepend">{{ currency }}</div>
                 <label for>Max. Coupon Value</label>
                 <input type="number" class="form-control" id="rpMcv" name="rpMcv" v-model="realtime_coupon_value_friend" />
                 <em class="error" v-if="!$v.realtime_coupon_value_friend.required">Field is required</em>
@@ -151,7 +151,7 @@
             </div>
             <div class="row col-md-12">
               <div class="mb-0 form-group fLabel col-md-6">
-                <div class="input-group-prepend">€</div>
+                <div class="input-group-prepend">{{ currency }}</div>
                 <label for>Minimum Spend Value</label>
                 <input type="number" class="form-control" id="rpMsv" name="rpMsv" v-model="realtime_min_order_friend" />
                 <em class="error" v-if="!$v.realtime_min_order_friend.required">Field is required</em>
@@ -182,7 +182,7 @@ import { required, minValue, requiredIf } from "vuelidate/lib/validators";
 
 export default {
   name: "ReferralProgram",
-  props: ["data"],
+  props: ["data", 'currency'],
   mixins: [validationMixin],
   components: { RadioGroup },
   data: function() {

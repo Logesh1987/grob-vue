@@ -77,6 +77,7 @@
                       ref="ReferralProgram"
                       :reset="resetSetupBlock"
                       :data="data.setup.referral"
+                      :currency="data.setup.points_setup.currency"
                     />
                   </swiper-slide>
                   <swiper-slide data-ref="FacebookShare">
@@ -197,7 +198,7 @@
                 </div>
               </div>
               <footer class="saveBar" v-if="swipe.isEnd">
-              <!--<footer class="saveBar">-->
+                <i class="dots"></i>
                 <div class="container">
                   <div class="row justify-content-between">
                     <ul class="footProgress">
@@ -250,6 +251,7 @@
                 </div>
               </b-card-text>
               <footer class="saveBar" v-if="activeStep === 'rewardsBlock'">
+                <i class="dots"></i>
                 <div class="container">
                   <div class="row justify-content-between">
                     <ul class="footProgress">
@@ -262,7 +264,7 @@
                       <li>3</li>
                     </ul>
                     <button class="btn btn-light" @click.prevent="saveRewards">
-                      Save and Next
+                      Proceed to Themes
                       <i class="material-icons">keyboard_arrow_right</i>
                     </button>
                   </div>

@@ -94,13 +94,33 @@
 		}
 	}
 	footer.saveBar {
-		background-color: rgba(0, 0, 0, 0.555);
+		background-color: #3C3C3C;
 		padding: 20px;
 		position: fixed;
 		width: 100%;
 		left: 0;
 		bottom: 0;
 		z-index: 10;
+		i.dots {
+			background: url('../../images/rainbow-dots.png') no-repeat;
+			left: 0;
+			right: 0;
+			top: -20px;
+			bottom: 0;
+			position: absolute;
+			pointer-events: none;
+			max-width: 1022px;
+			margin: auto;
+			&:before {
+				content: '';
+				display: block;
+				padding-bottom: 50%;
+			}
+		}
+		.container {
+			position: relative;
+			z-index: 3;
+		}
 		.footProgress {
 			list-style: none;
 			margin: 0;
@@ -158,6 +178,31 @@
 				color: #fff;
 				display: inline-block;
 				margin-left: 15px;
+			}
+		}
+		&.final {
+			background-color: #21AE2F;
+			.footProgress {
+				li {
+					&.completed {
+						border: none;
+						background-color: #fff;
+						color: #21AE2F;
+						&:nth-of-type(3) {
+							margin-right: 20px;
+							&::after {
+								display: none;
+							}
+						}
+					}
+					&.text {
+						width: auto;
+						height: auto;
+						border: none;
+						text-align: left;
+					}
+
+				}
 			}
 		}
 	}
@@ -567,12 +612,16 @@
 		a {
 			color: rgba(0, 0, 0, 0.5);
 			display: inline-block;
-			font-size: 35px;
+			font-size: 28px;
+			line-height: 1;
 			i {
 				font-size: inherit;
 				&.icon-undefined {
 					font-size: 0.8em;
 				}
+			}
+			&:last-of-type {
+				line-height: 0.6;
 			}
 		}
 	}
@@ -689,7 +738,7 @@
 		margin: 2.5rem 0;
 		position: relative;
 		&:after {
-			content: '+';
+			content: '-';
 			position: absolute;
 			right: 0;
 			top: 0;
@@ -698,7 +747,7 @@
 			margin: 0.7rem 0.8em;
 		}
 		&.collapsed:after {
-			content: '-';
+			content: '+';
 		}
 		&:active {
 			border-color: #549d90 !important;

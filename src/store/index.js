@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import Axios from "axios";
+import {getCurrencySymbol} from '@/utils'
 
 Vue.use(Vuex);
 
@@ -33,11 +34,13 @@ export default new Vuex.Store({
       //return Axios.get("http://localhost:3000/setup").then(res => {
         //alert("TEST");
       return Axios.get("https://jai.devam.pro/gr/admin/onboarding?id_shop=1226&admin_email=jayakumar@appsmav.com").then(res => {
-        commit('updateSetupData', res.data.data);
+        const tempData = res.data.data;
+        tempData.points_setup.currency = getCurrencySymbol(tempData.points_setup.currency);
+        commit('updateSetupData', tempData);
         //console.log("*****************************************************");
         //console.log(JSON.stringify(res.data.data));
         //console.log("*****************************************************");
-        return res.data.data;
+        return tempData;
       });
     },
     saveSetupData: ({ commit }, payload) => {

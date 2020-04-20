@@ -37,7 +37,7 @@
             class="loyaltyPtForm form-row align-items-start"
           >
             <div class="form-group fLabel col-md-5">
-              <div class="input-group-prepend">€</div>
+              <div class="input-group-prepend">{{ vData.currency }}</div>
               <label for="purchaseFor">Purchase for</label>
               <input
                 type="number"

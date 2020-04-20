@@ -24,13 +24,13 @@
        <!-- <a href="#" class="text-success">
           <i class="material-icons">check</i>
         </a>  -->
-        <a href="#" @click.prevent="handleEditRewards(item.id)">
-          <i class="icon-undefined"></i>
-        </a>
         <label class="switch" :for="item.id">
           <input type="checkbox" :id="item.id" checked="false" true-value="1" false-value="0" v-model="item.status" @change="handleSwitch(item)" />
           <i></i>
         </label>
+        <a href="#" @click.prevent="handleEditRewards(item.id)">
+          <i class="icon-undefined"></i>
+        </a>
         <a href="#" @click.prevent="handleDeleteRewards(item.id)">
           <i class="material-icons">delete_outline</i>
         </a>
