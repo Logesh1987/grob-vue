@@ -301,7 +301,7 @@
       id="modal-skip"
       ref="modalSkip"
       hide-footer
-      title="asdasd"
+      hide-header
       centered
       modal-class="setupModal modal-skip"
       body-class="d-flex flex-column align-items-center"
@@ -312,12 +312,12 @@
           You have made some change
           <br />What should wee do?
         </h5>
-        <a href="congrats.html" class="btn btn-success pr-5 pl-5 mt-4 mb-4">Save and Proceed</a>
-        <a href="congrats.html" class="text-success">
+        <router-link to="/congrats" class="btn btn-success pr-5 pl-5 mt-4 mb-4">Save and Proceed</router-link>
+        <router-link to="/congrats" class="text-success">
           <u>
             <small>Reset all and LIVE</small>
           </u>
-        </a>
+        </router-link>
       </template>
     </b-modal>
 

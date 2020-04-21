@@ -4,16 +4,18 @@
       <b-tab title="Popup Setup" class="popupSetup" active>
         <div class="row justify-content-between">
           <div class="col-md-7">
-            <img
-              src="@/images/popup_preview_mobile.jpg"
-              class="previewImg"
-              v-if="activePsetup === 'mobile'"
-            />
-            <img
-              src="@/images/popup_preview_desktop.jpg"
-              class="previewImg"
-              v-if="activePsetup === 'desktop'"
-            />
+            <div class="pMobile previewPop" v-if="activePsetup === 'mobile'">
+              <img src="@/images/popup_preview_mobile.jpg" class="previewImg" />
+              <div class="popup" :style="{'backgroundColor': pData.bg_color}">
+                <div class="textBox" :style="{'backgroundColor': pData.styles_data.font_color_main}"></div>
+              </div>
+            </div>
+            <div class="pDesktop previewPop" v-if="activePsetup === 'desktop'">
+              <img src="@/images/popup_preview_desktop.jpg" class="previewImg" />
+              <div class="popup" :style="{'backgroundColor': pData.bg_color}">
+                <div class="textBox" :style="{'backgroundColor': pData.styles_data.font_color_main}"></div>
+              </div>
+            </div>
           </div>
           <div class="col-md-5 text-left">
             <nav>
@@ -254,7 +256,7 @@
                   type="submit"
                   class="btn btn-success mt-3"
                   @click.prevent="handleSaveWidget"
-                >Save and Next - Desktop</button> -->
+                >Save and Next - Desktop</button>-->
               </b-tab>
             </b-tabs>
             <b-button v-b-toggle.advanceSetting class="btnAdvancedSettings">Advanced Settings</b-button>
@@ -341,7 +343,8 @@
               <i class="material-icons">check</i>
             </li>
             <li class="text">
-              You’ve completed all steps. <br/>Proceed to live your program
+              You’ve completed all steps.
+              <br />Proceed to live your program
             </li>
           </ul>
           <button class="btn btn-light" @click.prevent="handleSaveWidget">
@@ -392,7 +395,7 @@ export default {
     },
     handleSaveWidget: function() {
       this.saveWidgetData(this.wData).then(res => {
-        this.$router.push('congrats')
+        this.$router.push("congrats");
       });
     }
   },
