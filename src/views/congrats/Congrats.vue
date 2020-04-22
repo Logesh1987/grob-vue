@@ -103,6 +103,25 @@
               </div>
 
               <div class="setupContainer" id="setupAccordion">
+                <b-card no-body>
+                  <b-card-header
+                    v-b-toggle.accordion-1
+                    class="justify-content-start align-items-center"
+                    role="tab"
+                  >
+                    <h2>1. Setup</h2>
+                    <div class="alert alert-warning d-inline-flex align-items-center mb-0 ml-2">
+                      <i class="text-primary material-icons mr-2">info</i>
+                      You can edit, pause any setup anytime
+                    </div>
+                    <!-- <b-button block href="#" v-b-toggle.accordion-1 variant="info">Accordion 1</b-button> -->
+                  </b-card-header>
+                  <b-collapse id="accordion-1" accordion="my-accordion" role="tabpanel">
+                    <b-card-body>
+                      <SetupList />
+                    </b-card-body>
+                  </b-collapse>
+                </b-card>
                 <div class="card">
                   <div
                     class="card-header justify-content-start align-items-center collapsed"
@@ -117,7 +136,6 @@
                       You can edit, pause any setup anytime
                     </div>
                   </div>
-
                   <div
                     id="setup"
                     class="collapse"
@@ -1058,6 +1076,8 @@ import "bootstrap-vue/dist/bootstrap-vue.css";
 import "@/styles/overwrite-bootstrap.css";
 import "@/views/setup/style.less";
 import "./congrats.less";
+import { mapState, mapActions } from "vuex";
+import SetupList from "@/components/congrats/SetupList";
 
 // Install BootstrapVue
 Vue.use(BootstrapVue);
@@ -1065,7 +1085,7 @@ Vue.use(IconsPlugin);
 
 export default {
   name: "Congrats",
-  components: { Fragment },
+  components: { Fragment, SetupList },
   data: function() {
     return {
       live: true,
@@ -1081,10 +1101,24 @@ export default {
           "Difficult to learn",
           "Others"
         ]
+      },
+      data: {
+        rewards: null,
+        popup: null,
+        widget: null
       }
     };
   },
+  computed: {
+    ...mapState(["rewardsData", "popupData", "widgetData"])
+  },
   methods: {
+    ...mapActions([
+      "saveSetupData",
+      "getRewardsData",
+      "getPopupData",
+      "getWidgetData"
+    ]),
     handleRating(rate) {
       this.feedback.rating = rate;
       if (this.feedback.rating < 5) {
@@ -1118,6 +1152,11 @@ export default {
       // POST CALL THEN
       this.$bvModal.hide("feedbackModal");
     }
+  },
+  mounted: function() {
+    this.data.rewards = JSON.parse(JSON.stringify(this.rewardsData));
+    this.data.popup = JSON.parse(JSON.stringify(this.popupData));
+    this.data.widget = JSON.parse(JSON.stringify(this.widgetData));
   }
 };
 </script>

@@ -3,8 +3,8 @@
     <div class="stepHead">
       <h3>Points Program</h3>
       <p>Start rewarding your customers for purchases</p>
-      <label class="switch" for="pointsProgram">
-        <input type="checkbox" name="mainSwitch" v-model="vData.purchase_status" id="pointsProgram" />
+      <label class="switch" for="d22">
+        <input type="checkbox" name="mainSwitch" v-model="vData.purchase_status" id="d22" />
         <i></i>
       </label>
     </div>
