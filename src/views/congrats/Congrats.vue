@@ -957,16 +957,16 @@
               data-reply="Thank you for your feedback!"
             >How was your onboarding experience?</p>
             <div class="rating feedbackRating">
-              <Fragment v-for="n in 5" :key="n">
+              <Fragment v-for="n in 5" :key="'r'+n">
                 <input
                   type="radio"
-                  :id="'star'+(6-n)"
+                  :id="'rStar'+(6-n)"
                   name="rate"
                   :value="6-n"
                   :checked="(6-n) == feedback.rating"
                 />
                 <label
-                  :for="'star'+(6-n)"
+                  :for="'rStar'+(6-n)"
                   @click="handleRating(6-n)"
                   title="text"
                 >{{6-n}} stars {{feedback.rating}}</label>
@@ -993,15 +993,19 @@
         </h5>
         <div class="d-flex align-items-center justify-content-center p-3">
           <div class="rating popupRate">
-            <Fragment v-for="n in 5" :key="n">
+            <Fragment v-for="n in 5" :key="'p'+n">
               <input
                 type="radio"
-                :id="'star'+(6-n)"
-                name="rate"
+                :id="'pStar'+(6-n)"
+                name="star"
                 :value="6-n"
                 :checked="(6-n) == feedback.rating"
               />
-              <label :for="'star'+(6-n)" @click="handleRating(6-n)" title="text">{{6-n}} stars  {{feedback.rating}}</label>
+              <label
+                :for="'pStar'+(6-n)"
+                @click="handleRating(6-n)"
+                title="text"
+              >{{6-n}} stars {{feedback.rating}}</label>
             </Fragment>
           </div>
         </div>
