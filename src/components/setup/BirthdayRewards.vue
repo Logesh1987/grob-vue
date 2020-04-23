@@ -7,12 +7,12 @@
         <br />prompting visitors and members to
         enter a date
       </p>
-      <label class="switch" for="bdaySetup">
+      <label class="switch" for="d12">
         <input
           type="checkbox"
           name="mainSwitch"
           v-model="status"
-          id="bdaySetup"
+          id="d12"
         />
         <i></i>
       </label>

@@ -3,12 +3,12 @@
     <div class="stepHead">
       <h3>Referral Program</h3>
       <p>Setup refer a friend program</p>
-      <label class="switch" for="referralProgram">
+      <label class="switch" for="d41">
         <input
           type="checkbox"
           name="mainSwitch"
           v-model="status"
-          id="referralProgram"
+          id="d41"
         />
         <i></i>
       </label>
@@ -155,7 +155,6 @@
                 <label for>Minimum Spend Value</label>
                 <input type="number" class="form-control" id="rpMsv" name="rpMsv" v-model="realtime_min_order_friend" />
                 <em class="error" v-if="!$v.realtime_min_order_friend.required">Field is required</em>
-                <em class="error" v-if="!$v.realtime_min_order_friend.minValue">Need a minimum value of {{$v.realtime_min_order_friend.$params.minValue.min}}</em>
               </div>
             </div>
           </div>
@@ -208,8 +207,7 @@ export default {
       minValue: minValue(20)
     },
     realtime_min_order_friend: {
-      required: requiredIf(function() {return this.status}),
-      minValue: minValue(1)
+      required: requiredIf(function() {return this.status})
     }
 
     // welcome_points: {

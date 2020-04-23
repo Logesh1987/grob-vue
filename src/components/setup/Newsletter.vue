@@ -3,8 +3,8 @@
     <div class="stepHead">
       <h3>Subscribe to Newsletter Setup</h3>
       <p>Incentivize users for signing up to your newsletters.</p>
-      <label class="switch" for="newsletterSetup">
-        <input type="checkbox" v-model="status" id="newsletterSetup" />
+      <label class="switch" for="d31">
+        <input type="checkbox" v-model="status" id="d31" />
         <i></i>
       </label>
     </div>

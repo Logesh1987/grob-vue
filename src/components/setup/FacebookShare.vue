@@ -3,8 +3,8 @@
     <div class="stepHead">
       <h3>Facebook Share Setup</h3>
       <p>When members share your message on Facebook</p>
-      <label class="switch" for="fbShareSetup">
-        <input type="checkbox" name="mainSwitch" v-model="status" id="fbShareSetup" />
+      <label class="switch" for="d16">
+        <input type="checkbox" name="mainSwitch" v-model="status" id="d16" />
         <i></i>
       </label>
     </div>

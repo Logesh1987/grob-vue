@@ -3,8 +3,8 @@
     <div class="stepHead">
       <h3>Sign Up Bonus</h3>
       <p>Reward customers for creating an account on your store</p>
-      <label class="switch" for="signupBonus">
-        <input type="checkbox" name="mainSwitch" v-model="bonus_status" id="signupBonus" />
+      <label class="switch" for="d23">
+        <input type="checkbox" name="mainSwitch" v-model="bonus_status" id="d23" />
         <i></i>
       </label>
     </div>

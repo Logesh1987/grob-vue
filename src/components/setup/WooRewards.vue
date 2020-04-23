@@ -3,8 +3,8 @@
     <div class="stepHead">
       <h3>WOOReview Rewards</h3>
       <p>Reward reviews of products, services by incentivizing</p>
-      <label class="switch" for="wooSetup">
-        <input type="checkbox" name="mainSwitch" v-model="review_status" id="wooSetup" />
+      <label class="switch" for="d20">
+        <input type="checkbox" name="mainSwitch" v-model="review_status" id="d20" />
         <i></i>
       </label>
     </div>

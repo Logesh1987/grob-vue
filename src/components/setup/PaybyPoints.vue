@@ -3,8 +3,8 @@
     <div class="stepHead">
       <h3>Pay by Points</h3>
       <p>Setup if customers can pay using their points</p>
-      <label class="switch" for="payPoints">
-        <input type="checkbox" name="mainSwitch" v-model="redeem_purchase_status" id="payPoints" />
+      <label class="switch" for="d25">
+        <input type="checkbox" name="mainSwitch" v-model="redeem_purchase_status" id="d25" />
         <i></i>
       </label>
     </div>

@@ -3,8 +3,8 @@
     <div class="stepHead">
       <h3>Twitter Share Setup</h3>
       <p>When members share your message on Twitter</p>
-      <label class="switch" for="twShareSetup">
-        <input type="checkbox" name="mainSwitch" v-model="status" id="twShareSetup" />
+      <label class="switch" for="d13">
+        <input type="checkbox" name="mainSwitch" v-model="status" id="d13" />
         <i></i>
       </label>
     </div>
@@ -83,7 +83,7 @@ import { validationMixin } from "vuelidate";
 import { required, minValue, requiredIf } from "vuelidate/lib/validators";
 
 export default {
-  name: "FacebookShare",
+  name: "Twitterhare",
   props: ["data"],
   mixins: [validationMixin],
   data: function() {
