@@ -7,13 +7,19 @@
             <div class="pMobile previewPop" v-if="activePsetup === 'mobile'">
               <img src="@/images/popup_preview_mobile.jpg" class="previewImg" />
               <div class="popup" :style="{'backgroundColor': pData.bg_color}">
-                <div class="textBox" :style="{'backgroundColor': pData.styles_data.font_color_main}"></div>
+                <div
+                  class="textBox"
+                  :style="{'backgroundColor': pData.styles_data.font_color_main}"
+                ></div>
               </div>
             </div>
             <div class="pDesktop previewPop" v-if="activePsetup === 'desktop'">
               <img src="@/images/popup_preview_desktop.jpg" class="previewImg" />
               <div class="popup" :style="{'backgroundColor': pData.bg_color}">
-                <div class="textBox" :style="{'backgroundColor': pData.styles_data.font_color_main}"></div>
+                <div
+                  class="textBox"
+                  :style="{'backgroundColor': pData.styles_data.font_color_main}"
+                ></div>
               </div>
             </div>
           </div>
@@ -87,7 +93,7 @@
                   type="submit"
                   class="btn btn-success mt-3"
                   @click.prevent="handlePdataSave"
-                >Save and Next</button>
+                >{{ page == 'setup' ? 'Save and Next' : 'Save Popup'}}</button>
               </div>
               <!--<div
                 class="tab-pane active text-left"
@@ -153,7 +159,7 @@
           </div>
         </div>
       </b-tab>
-      <b-tab title="Widget Setup" class="widgetSetup">
+      <b-tab title="Widget Setup" class="widgetSetup" :disabled="wData ? false : true">
         <div class="row justify-content-between">
           <div class="col-md-7" v-if="wData">
             <WidgetPreview :type="activeWidget" :data="wData" />
@@ -252,11 +258,12 @@
                     <label class="custom-control-label" for="wd-look-3">Hide Widget</label>
                   </div>
                 </div>
-                <!-- <button
+                <button
                   type="submit"
                   class="btn btn-success mt-3"
+                  v-if="page === 'congrats'"
                   @click.prevent="handleSaveWidget"
-                >Save and Next - Desktop</button>-->
+                >Save Widget</button>
               </b-tab>
             </b-tabs>
             <b-button v-b-toggle.advanceSetting class="btnAdvancedSettings">Advanced Settings</b-button>
@@ -328,7 +335,7 @@
         </div>
       </b-tab>
     </b-tabs>
-    <footer class="saveBar final" v-if="tabIndex">
+    <footer class="saveBar final" v-if="tabIndex && page == 'setup'">
       <i class="dots"></i>
       <div class="container">
         <div class="row justify-content-between">
@@ -365,6 +372,7 @@ import "verte/dist/verte.css";
 export default {
   name: "Themes",
   components: { Verte, WidgetPreview },
+  props: ["page"],
   data: function() {
     return {
       tabIndex: 0,
@@ -383,19 +391,30 @@ export default {
   computed: {
     ...mapState(["popupData", "widgetData"])
   },
+  watch: {
+    widgetData: function() {
+      if (this.page === "congrats") {
+            this.wData = this.widgetData;
+      }
+    }
+  },
   methods: {
     ...mapActions(["saveThemeSettings", "getWidgetData", "saveWidgetData"]),
     handlePdataSave: function() {
       this.saveThemeSettings(this.pData).then(res => {
-        this.getWidgetData().then(response => {
-          this.wData = response;
-          this.tabIndex = 1;
-        });
+        if (this.page === "setup") {
+          this.getWidgetData().then(response => {
+            this.wData = response;
+            this.tabIndex = 1;
+          });
+        }
       });
     },
     handleSaveWidget: function() {
       this.saveWidgetData(this.wData).then(res => {
-        this.$router.push("congrats");
+        if (this.page === "setup") {
+          this.$router.push("congrats");
+        }
       });
     }
   },

@@ -288,7 +288,7 @@
           <b-collapse id="themesBlock" accordion="my-accordion" role="tabpanel">
             <b-card-body>
               <b-card-text>
-                <Themes v-if="popupData" />
+                <Themes v-if="popupData" page="setup" />
               </b-card-text>
             </b-card-body>
           </b-collapse>

@@ -122,665 +122,47 @@
                     </b-card-body>
                   </b-collapse>
                 </b-card>
-                <div class="card rewardsBlock">
-                  <div
-                    class="card-header collapsed"
-                    data-toggle="collapse"
-                    data-target="#rewards"
-                    aria-expanded="true"
-                    aria-controls="rewards"
+                <b-card no-body>
+                  <b-card-header
+                    v-b-toggle.accordion-2
+                    class="justify-content-start align-items-center"
+                    role="tab"
                   >
                     <h2>2. Rewards</h2>
-                    <div class="additionalElements">
-                      <a href="#" class="btn btn-success addReward">Add Reward</a>
-                    </div>
-                  </div>
-
-                  <div
-                    id="rewards"
-                    class="collapse"
-                    aria-labelledby="headingOne"
-                    data-parent="#setupAccordion"
-                  >
-                    <div class="card-body">
-                      <div class="rewardList">
-                        <div class="rewardItem">
-                          <div class="rewardDragger">
-                            <i class="material-icons">reorder</i>
-                          </div>
-                          <div class="rewardThumb">
-                            <figure style="background-image: url(https://picsum.photos/300/200)"></figure>
-                          </div>
-                          <div class="rewardInfo">
-                            <h5>
-                              <strong>$5 off coupon</strong>
-                            </h5>
-                            <p>Redeem $5 off coupon for 500 points</p>
-                            <hr />
-                            <div class="details">
-                              <span>Qty</span>
-                              <strong>Unlimited</strong>
-                              <span>Required Points</span>
-                              <strong>500 Pts</strong>
-                            </div>
-                          </div>
-                          <div class="rewardControls">
-                            <a href="#">
-                              <i class="icon-undefined"></i>
-                            </a>
-                            <label class="switch" for="r1">
-                              <input type="checkbox" checked id="r1" />
-                              <i></i>
-                            </label>
-                            <a href="#">
-                              <i class="material-icons">delete_outline</i>
-                            </a>
-                          </div>
-                        </div>
-                        <div class="rewardItem">
-                          <div class="rewardDragger">
-                            <i class="material-icons">reorder</i>
-                          </div>
-                          <div class="rewardThumb">
-                            <figure style="background-image: url(https://picsum.photos/305/200)"></figure>
-                          </div>
-                          <div class="rewardInfo">
-                            <h5>
-                              <strong>$25 off coupon</strong>
-                            </h5>
-                            <p>Redeem $25 off coupon for 1500 points</p>
-                            <hr />
-                            <div class="details">
-                              <span>Qty</span>
-                              <strong>Unlimited</strong>
-                              <span>Required Points</span>
-                              <strong>500 Pts</strong>
-                            </div>
-                          </div>
-                          <div class="rewardControls">
-                            <a href="#">
-                              <i class="icon-undefined"></i>
-                            </a>
-                            <label class="switch" for="r1">
-                              <input type="checkbox" checked id="r1" />
-                              <i></i>
-                            </label>
-                            <a href="#">
-                              <i class="material-icons">delete_outline</i>
-                            </a>
-                          </div>
-                        </div>
+                    <button
+                      @click.stop="rewardModalOpen"
+                      class="btn btn-success ml-3"
+                    >Add Reward</button>
+                  </b-card-header>
+                  <b-collapse id="accordion-2" accordion="my-accordion" role="tabpanel">
+                    <b-card-body>
+                      <div v-if="rewardsData">
+                        <RewardsList
+                          :data="rewardsData"
+                          :setEditReward="setEditReward"
+                          :showModal="rewardModalOpen"
+                        />
                       </div>
-                      <br />
-                      <h6 class="mt-3 mb-3 pausedRewardHead">Paused Rewards (During Setup)</h6>
-                      <br />
-                      <div class="rewardList">
-                        <div class="rewardItem">
-                          <div class="rewardDragger">
-                            <i class="material-icons">reorder</i>
-                          </div>
-                          <div class="rewardThumb">
-                            <figure style="background-image: url(https://picsum.photos/305/200)"></figure>
-                          </div>
-                          <div class="rewardInfo">
-                            <h5>
-                              <strong>$25 off coupon</strong>
-                            </h5>
-                            <p>Redeem $25 off coupon for 1500 points</p>
-                            <hr />
-                            <div class="details">
-                              <span>Qty</span>
-                              <strong>Unlimited</strong>
-                              <span>Required Points</span>
-                              <strong>500 Pts</strong>
-                            </div>
-                          </div>
-                          <div class="rewardControls">
-                            <a href="#">
-                              <i class="icon-undefined"></i>
-                            </a>
-                            <label class="switch" for="r4">
-                              <input type="checkbox" id="r4" />
-                              <i></i>
-                            </label>
-                            <a href="#">
-                              <i class="material-icons">delete_outline</i>
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="card themesBlock">
-                  <div
-                    class="card-header collapsed"
-                    data-toggle="collapse"
-                    data-target="#themes"
-                    aria-expanded="true"
-                    aria-controls="themes"
+                    </b-card-body>
+                  </b-collapse>
+                </b-card>
+                <b-card no-body>
+                  <b-card-header
+                    v-b-toggle.accordion-3
+                    class="justify-content-start align-items-center"
+                    role="tab"
                   >
                     <h2>3. Themes</h2>
-                  </div>
-                  <div
-                    id="themes"
-                    class="collapse"
-                    aria-labelledby="headingOne"
-                    data-parent="#setupAccordion"
-                  >
-                    <div class="card-body">
-                      <nav class="themeSetupTab">
-                        <div class="nav nav-tabs" id="theme-setup" role="tablist">
-                          <a
-                            class="nav-item nav-link active"
-                            data-toggle="tab"
-                            href="#popup-tab"
-                            role="tab"
-                            aria-controls="popup-tab"
-                            aria-selected="true"
-                          >
-                            Popup
-                            Setup
-                          </a>
-                          <a
-                            class="nav-item nav-link"
-                            data-toggle="tab"
-                            href="#widget-tab"
-                            role="tab"
-                            aria-controls="widget-tab"
-                            aria-selected="false"
-                          >
-                            Widget
-                            Setup
-                          </a>
-                        </div>
-                      </nav>
-                      <div class="tab-content" id="theme-setupContent">
-                        <div
-                          class="tab-pane fade show active popupSetup"
-                          id="popup-tab"
-                          role="tabpanel"
-                          aria-labelledby="popup-tab"
-                        >
-                          <div class="row justify-content-between">
-                            <div class="col-md-7">
-                              <img src="images/popup_preview_mobile.jpg" class="previewImg" />
-                              <img src="images/popup_preview_desktop.jpg" class="previewImg" />
-                            </div>
-                            <div class="col-md-5">
-                              <nav>
-                                <div class="nav nav-pills mb-4" id="popup-tab" role="tablist">
-                                  <a
-                                    class="nav-item nav-link active"
-                                    id="nav-mobile-tab"
-                                    data-toggle="tab"
-                                    href="#nav-mobile"
-                                    role="tab"
-                                    aria-controls="nav-mobile"
-                                    aria-selected="true"
-                                  >Mobile</a>
-                                  <a
-                                    class="nav-item nav-link"
-                                    id="nav-desktop-tab"
-                                    data-toggle="tab"
-                                    href="#nav-desktop"
-                                    role="tab"
-                                    aria-controls="nav-desktop"
-                                    aria-selected="false"
-                                  >Desktop</a>
-                                </div>
-                              </nav>
-                              <div class="tab-content" id="popup-tabContent">
-                                <div
-                                  class="tab-pane fade show active"
-                                  id="nav-mobile"
-                                  role="tabpanel"
-                                  aria-labelledby="nav-mobile-tab"
-                                >
-                                  <h6 class="mb-4">
-                                    <strong>Popup styles</strong>
-                                  </h6>
-                                  <div class="form-group">
-                                    <label>Font Family</label>
-                                    <select class="form-control" id="family">
-                                      <option>Monserrat</option>
-                                      <option>Arial</option>
-                                      <option>Helvetica</option>
-                                      <option>Serif</option>
-                                      <option>Impact</option>
-                                    </select>
-                                  </div>
-                                  <div
-                                    id="color-picker-component"
-                                    class="form-group d-flex flex-row align-items-center colorpicker-component"
-                                  >
-                                    <label for="family" class="col-md-5 p-0 m-0">
-                                      Text
-                                      Colors
-                                    </label>
-                                    <div class="cPicker col-md-7 p-0">
-                                      <input type="text" value="#38a677" class="form-control" />
-                                      <span class="input-group-addon">
-                                        <i></i>
-                                      </span>
-                                    </div>
-                                  </div>
-                                  <div
-                                    id="color-picker-component"
-                                    class="form-group d-flex flex-row align-items-center colorpicker-component"
-                                  >
-                                    <label for="family" class="col-md-5 p-0 m-0">
-                                      BG
-                                      Colors
-                                    </label>
-                                    <div class="cPicker col-md-7 p-0">
-                                      <input type="text" value="#38a677" class="form-control" />
-                                      <span class="input-group-addon">
-                                        <i></i>
-                                      </span>
-                                    </div>
-                                  </div>
-                                  <button type="submit" class="btn btn-success mt-3">
-                                    Save
-                                    and Next
-                                  </button>
-                                </div>
-                                <div
-                                  class="tab-pane fade"
-                                  id="nav-desktop"
-                                  role="tabpanel"
-                                  aria-labelledby="nav-desktop-tab"
-                                >
-                                  <h6>
-                                    <strong>Desktop Popup styles</strong>
-                                  </h6>
-                                  <div class="form-group">
-                                    <label>Font Family</label>
-                                    <select class="form-control" id="family">
-                                      <option>Monserrat</option>
-                                      <option>Arial</option>
-                                      <option>Helvetica</option>
-                                      <option>Serif</option>
-                                      <option>Impact</option>
-                                    </select>
-                                  </div>
-                                  <div
-                                    id="color-picker-component"
-                                    class="form-group d-flex flex-row align-items-center colorpicker-component"
-                                  >
-                                    <label for="family" class="col-md-5 p-0 m-0">
-                                      Text
-                                      Colors
-                                    </label>
-                                    <div class="cPicker col-md-7 p-0">
-                                      <input type="text" value="#38a677" class="form-control" />
-                                      <span class="input-group-addon">
-                                        <i></i>
-                                      </span>
-                                    </div>
-                                  </div>
-                                  <div
-                                    id="color-picker-component"
-                                    class="form-group d-flex flex-row align-items-center colorpicker-component"
-                                  >
-                                    <label for="family" class="col-md-5 p-0 m-0">
-                                      BG
-                                      Colors
-                                    </label>
-                                    <div class="cPicker col-md-7 p-0">
-                                      <input type="text" value="#38a677" class="form-control" />
-                                      <span class="input-group-addon">
-                                        <i></i>
-                                      </span>
-                                    </div>
-                                  </div>
-                                  <button type="submit" class="btn btn-success mt-3">
-                                    Save
-                                    and Next
-                                  </button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div
-                          class="tab-pane fade widgetSetup"
-                          id="widget-tab"
-                          role="tabpanel"
-                          aria-labelledby="widget-tab"
-                        >
-                          <div class="row justify-content-between">
-                            <div class="col-md-7">
-                              <img src="images/widget_preview_mobile.jpg" class="previewImg" />
-                              <img src="images/widget_preview_desktop.jpg" class="previewImg" />
-                            </div>
-                            <div class="col-md-5">
-                              <ul
-                                class="nav nav-tabs widget-tabs-nav"
-                                id="widgetPlacement"
-                                role="tablist"
-                              >
-                                <li class="nav-item">
-                                  <a
-                                    class="nav-link active"
-                                    id="widget-placement-mobile-tab"
-                                    data-toggle="tab"
-                                    href="#widget-placement-mobile"
-                                    role="tab"
-                                    aria-controls="widget-placement-mobile"
-                                    aria-selected="true"
-                                    v-on:click="themes.active_widget = 'mobile'"
-                                  >Mobile</a>
-                                </li>
-                                <li class="nav-item">
-                                  <a
-                                    class="nav-link"
-                                    id="widget-placement-desktop-tab"
-                                    data-toggle="tab"
-                                    href="#widget-placement-desktop"
-                                    role="tab"
-                                    aria-controls="widget-placement-desktop"
-                                    aria-selected="false"
-                                    v-on:click="themes.active_widget = 'desktop'"
-                                  >Desktop</a>
-                                </li>
-                              </ul>
-                              <div
-                                class="tab-content widget-tabs-panes"
-                                id="widgetPlacementContent"
-                              >
-                                <div
-                                  class="tab-pane fade show active"
-                                  id="widget-placement-mobile"
-                                  role="tabpanel"
-                                  aria-labelledby="widget-placement-mobile-tab"
-                                >
-                                  <div class="form-group">
-                                    <label>Widget Placement</label>
-                                    <select class="form-control">
-                                      <option>Mid Right</option>
-                                      <option>Mid Left</option>
-                                      <option>Top Right</option>
-                                      <option>Top Left</option>
-                                      <option>Bottom Right</option>
-                                      <option>Bottom Left</option>
-                                    </select>
-                                  </div>
-                                  <div class="form-group mt-4">
-                                    <label>Widget Look</label>
-                                    <div class="custom-control custom-radio">
-                                      <input
-                                        type="radio"
-                                        id="wm-look-1"
-                                        name="wm-look"
-                                        class="custom-control-input"
-                                      />
-                                      <label class="custom-control-label" for="wm-look-1">Compact</label>
-                                    </div>
-                                    <div class="custom-control custom-radio">
-                                      <input
-                                        type="radio"
-                                        id="wm-look-2"
-                                        name="wm-look"
-                                        class="custom-control-input"
-                                      />
-                                      <label class="custom-control-label" for="wm-look-2">Full</label>
-                                    </div>
-                                    <div class="custom-control custom-radio">
-                                      <input
-                                        type="radio"
-                                        id="wm-look-3"
-                                        name="wm-look"
-                                        class="custom-control-input"
-                                      />
-                                      <label
-                                        class="custom-control-label"
-                                        for="wm-look-3"
-                                      >Hide Widget</label>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div
-                                  class="tab-pane fade"
-                                  id="widget-placement-desktop"
-                                  role="tabpanel"
-                                  aria-labelledby="widget-placement-desktop-tab"
-                                >
-                                  <div class="form-group">
-                                    <label>Widget Placement Desktop</label>
-                                    <select class="form-control">
-                                      <option>Mid Right</option>
-                                      <option>Mid Left</option>
-                                      <option>Top Right</option>
-                                      <option>Top Left</option>
-                                      <option>Bottom Right</option>
-                                      <option>Bottom Left</option>
-                                    </select>
-                                  </div>
-                                  <div class="form-group mt-4">
-                                    <label>Widget Look Desktop</label>
-                                    <div class="custom-control custom-radio">
-                                      <input
-                                        type="radio"
-                                        id="wd-look-1"
-                                        name="wd-look"
-                                        class="custom-control-input"
-                                      />
-                                      <label class="custom-control-label" for="wd-look-1">Compact</label>
-                                    </div>
-                                    <div class="custom-control custom-radio">
-                                      <input
-                                        type="radio"
-                                        id="wd-look-2"
-                                        name="wd-look"
-                                        class="custom-control-input"
-                                      />
-                                      <label class="custom-control-label" for="wd-look-2">Full</label>
-                                    </div>
-                                    <div class="custom-control custom-radio">
-                                      <input
-                                        type="radio"
-                                        id="wd-look-3"
-                                        name="wd-look"
-                                        class="custom-control-input"
-                                      />
-                                      <label
-                                        class="custom-control-label"
-                                        for="wd-look-3"
-                                      >Hide Widget</label>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <a
-                                class="btn btn-default btnAdvancedSettings collapsed"
-                                data-toggle="collapse"
-                                href="#advanceSettings"
-                                role="button"
-                                aria-expanded="false"
-                                aria-controls="widgetAdvanced"
-                              >Advanced Settings</a>
-                              <div class="collapse multi-collapse" id="advanceSettings">
-                                <ul
-                                  class="nav nav-tabs widget-tabs-nav"
-                                  id="widgetAdvanced"
-                                  role="tablist"
-                                >
-                                  <li class="nav-item">
-                                    <a
-                                      class="nav-link active"
-                                      id="widget-text-tab"
-                                      data-toggle="tab"
-                                      href="#widget-text"
-                                      role="tab"
-                                      aria-controls="widget-text"
-                                      aria-selected="true"
-                                    >Text</a>
-                                  </li>
-                                  <li class="nav-item">
-                                    <a
-                                      class="nav-link"
-                                      id="widget-icons-tab"
-                                      data-toggle="tab"
-                                      href="#widget-icons"
-                                      role="tab"
-                                      aria-controls="widget-icons"
-                                      aria-selected="false"
-                                    >Icon & BG</a>
-                                  </li>
-                                  <li class="nav-item">
-                                    <a
-                                      class="nav-link"
-                                      id="widget-shape-tab"
-                                      data-toggle="tab"
-                                      href="#widget-shape"
-                                      role="tab"
-                                      aria-controls="widget-shape"
-                                      aria-selected="false"
-                                    >Shape</a>
-                                  </li>
-                                </ul>
-                                <div
-                                  class="tab-content widget-tabs-panes"
-                                  id="widgetAdvancedContent"
-                                >
-                                  <div
-                                    class="tab-pane fade show active"
-                                    id="widget-text"
-                                    role="tabpanel"
-                                    aria-labelledby="widget-text-tab"
-                                  >
-                                    <div class="form-group">
-                                      <label>Widget Title</label>
-                                      <input type="text" value="Rewards" class="form-control" />
-                                    </div>
-                                    <div class="form-group">
-                                      <label>Widget Subtext</label>
-                                      <textarea name class="form-control" cols="30" rows="3">Mid Right</textarea>
-                                    </div>
-                                    <hr class="mb-5 mt-5" />
-                                    <h6 class="mb-4">
-                                      <strong>Text Styles</strong>
-                                    </h6>
-                                    <div class="form-group">
-                                      <label>Font Family</label>
-                                      <select class="form-control" id="family">
-                                        <option>Monserrat</option>
-                                        <option>Arial</option>
-                                        <option>Helvetica</option>
-                                        <option>Serif</option>
-                                        <option>Impact</option>
-                                      </select>
-                                    </div>
-                                    <div
-                                      id="color-picker-component"
-                                      class="form-group d-flex flex-row align-items-center colorpicker-component"
-                                    >
-                                      <label for="family" class="col-md-5 p-0 m-0">
-                                        Text
-                                        Colors
-                                      </label>
-                                      <div class="cPicker col-md-7 p-0">
-                                        <input type="text" value="#38a677" class="form-control" />
-                                        <span class="input-group-addon">
-                                          <i></i>
-                                        </span>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div
-                                    class="tab-pane fade"
-                                    id="widget-icons"
-                                    role="tabpanel"
-                                    aria-labelledby="widget-icons-tab"
-                                  >
-                                    <div
-                                      id="color-picker-component"
-                                      class="form-group d-flex flex-row align-items-center colorpicker-component"
-                                    >
-                                      <label for="family" class="col-md-5 p-0 m-0">
-                                        Icon BG
-                                        Color
-                                      </label>
-                                      <div class="cPicker col-md-7 p-0">
-                                        <input type="text" value="#ffffff" class="form-control" />
-                                        <span class="input-group-addon">
-                                          <i></i>
-                                        </span>
-                                      </div>
-                                    </div>
-                                    <div
-                                      id="color-picker-component"
-                                      class="form-group d-flex flex-row align-items-center colorpicker-component"
-                                    >
-                                      <label for="family" class="col-md-5 p-0 m-0">
-                                        BG
-                                        Color
-                                      </label>
-                                      <div class="cPicker col-md-7 p-0">
-                                        <input type="text" value="#389F48" class="form-control" />
-                                        <span class="input-group-addon">
-                                          <i></i>
-                                        </span>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div
-                                    class="tab-pane fade"
-                                    id="widget-shape"
-                                    role="tabpanel"
-                                    aria-labelledby="widget-shape-tab"
-                                  >
-                                    <div class="form-group">
-                                      <label class="mb-4">
-                                        Widget corner
-                                        roundness
-                                      </label>
-                                      <input type="range" data-rangeslider />
-                                    </div>
-                                    <div class="form-group">
-                                      <label class="mb-4 mt-5">Widget size</label>
-                                      <input type="range" data-rangeslider />
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                  </b-card-header>
+                  <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
+                    <b-card-body>
+                      <div class="themesBlock">
+                        <Themes v-if="popupData" page="congrats" />
                       </div>
-                    </div>
-                  </div>
-                </div>
+                    </b-card-body>
+                  </b-collapse>
+                </b-card>
               </div>
-              <!-- <div class="setupList">
-                            <ul>
-                                <li>
-                                    <a href="./setup.html" class="gotoLink"></a>
-                                    <h5 class="m-0">1. Setup</h5>
-                                    <div>
-                                        <i class="material-icons text-success mr-4">done</i>
-                                        <i class="icon-undefined mr-4"></i>
-                                    </div>
-                                </li>
-                                <li>
-                                    <a href="./setup.html" class="gotoLink"></a>
-                                    <h5 class="m-0">2. Rewards</h5>
-                                    <div>
-                                        <i class="material-icons text-success mr-4">done</i>
-                                        <i class="icon-undefined mr-4"></i>
-                                    </div>
-                                </li>
-                                <li>
-                                    <a href="./setup.html" class="gotoLink"></a>
-                                    <h5 class="m-0">3. Themes</h5>
-                                    <div>
-                                        <i class="material-icons text-success mr-4">done</i>
-                                        <i class="icon-undefined mr-4"></i>
-                                    </div>
-                                </li>
-                            </ul>
-              </div>-->
             </div>
           </div>
         </div>
@@ -882,6 +264,24 @@
         </div>
       </template>
     </b-modal>
+    
+    <!-- REWARD MODAL -->
+    <b-modal
+      id="modal-reward"
+      ref="modalSkip"
+      hide-footer
+      hide-header-close
+      title="Add Reward setup"
+      centered
+      modal-class="setupModal  modal-1 modal-reward"
+      dialog-class="addRewardsModal"
+      body-class="d-flex flex-column"
+    >
+      <template v-slot:default>
+        <a href @click.prevent="rewardModalClose" aria-label="Close">&times;</a>
+        <RewardSettings :id="editRewardId" :closeModal="rewardModalClose" />
+      </template>
+    </b-modal>
   </div>
 </template>
 
@@ -896,6 +296,9 @@ import "@/views/setup/style.less";
 import "./congrats.less";
 import { mapState, mapActions } from "vuex";
 import SetupList from "@/components/congrats/SetupList";
+import RewardsList from "@/components/rewards/RewardsList";
+import RewardSettings from "@/components/rewards/RewardSettings";
+import Themes from "@/components/themes/Themes";
 
 // Install BootstrapVue
 Vue.use(BootstrapVue);
@@ -903,7 +306,7 @@ Vue.use(IconsPlugin);
 
 export default {
   name: "Congrats",
-  components: { Fragment, SetupList },
+  components: { Fragment, SetupList, RewardsList, RewardSettings, Themes },
   data: function() {
     return {
       live: true,
@@ -920,6 +323,7 @@ export default {
           "Others"
         ]
       },
+      editRewardId: null,
       data: {
         rewards: null,
         popup: null,
@@ -969,12 +373,28 @@ export default {
       // PARAMS READY TO POST
       // POST CALL THEN
       this.$bvModal.hide("feedbackModal");
-    }
+    },
+    setEditReward(id) {
+      this.editRewardId = id ? id : null;
+    },
+    rewardModalClose() {
+      this.$bvModal.hide("modal-reward");
+      this.setEditReward(null);
+    },
+    rewardModalOpen() {
+      this.$bvModal.show("modal-reward");
+    },
   },
-  mounted: function() {
-    this.data.rewards = JSON.parse(JSON.stringify(this.rewardsData));
-    this.data.popup = JSON.parse(JSON.stringify(this.popupData));
-    this.data.widget = JSON.parse(JSON.stringify(this.widgetData));
+  mounted: function() {    
+    if (this.rewardsData == null) {
+      this.getRewardsData()
+    }
+    if (this.popupData == null) {
+      this.getPopupData()
+    }
+    if (this.widgetData == null) {
+      this.getWidgetData()
+    }
   }
 };
 </script>
