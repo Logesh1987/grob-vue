@@ -4,7 +4,12 @@
       <h3>Points Program</h3>
       <p>Purchase rewards for customers</p>
       <label class="switch" for="card-pointsProgram">
-        <input type="checkbox" v-model="data.purchase_status" @change="saveData" id="card-pointsProgram" />
+        <input
+          type="checkbox"
+          v-model="data.purchase_status"
+          @change="saveData"
+          id="card-pointsProgram"
+        />
         <i></i>
       </label>
     </div>
@@ -29,7 +34,11 @@
         </div>
       </template>
       <template v-slot:modal-footer>
-        <b-button variant="outline-secondary" class="float-right" @click.prevent="cancelModal">Cancel</b-button>
+        <b-button
+          variant="outline-secondary"
+          class="float-right"
+          @click.prevent="cancelModal"
+        >Cancel</b-button>
         <b-button variant="warning" class="float-right" @click.prevent="updateData">Save & update</b-button>
       </template>
     </b-modal>
