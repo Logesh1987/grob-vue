@@ -100,7 +100,7 @@ export default {
       required: requiredIf(function() {
         return this.status;
       }),
-      minValue: minValue(100)
+      minValue: minValue(1)
     },
     /*tweet: {
       required: requiredIf(function() {

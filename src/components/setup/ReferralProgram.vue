@@ -196,15 +196,15 @@ export default {
   validations: {
     referrer_reward_points: {
       required: requiredIf(function() {return this.status && this.is_rwd_points_percentage == 0}),
-      minValue: minValue(10)
+      minValue: minValue(1)
     },
     rwd_points_percentage: {
       required: requiredIf(function() {return this.status && this.is_rwd_points_percentage == 0}),
-      minValue: minValue(10)
+      minValue: minValue(1)
     },
     realtime_coupon_value_friend: {
       required: requiredIf(function() {return this.status && this.realtime_coupon_type_friend != 3}),
-      minValue: minValue(20)
+      minValue: minValue(1)
     },
     realtime_min_order_friend: {
       required: requiredIf(function() {return this.status})

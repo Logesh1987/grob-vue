@@ -70,7 +70,7 @@ export default {
       required: requiredIf(function() {
         return this.redeem_purchase_status;
       }),
-      minValue: minValue(100)
+      minValue: minValue(1)
     }
   }
 };

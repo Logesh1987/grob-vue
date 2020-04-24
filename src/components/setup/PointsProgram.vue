@@ -127,15 +127,15 @@ export default {
     vData : {
       price: {
         required: requiredIf(function() {return this.purchase_status && this.is_points_percentage == 0}),
-        minValue: minValue(10)
+        minValue: minValue(1)
       },
       points: {
         required: requiredIf(function() {return this.purchase_status && this.is_points_percentage == 0}),
-        minValue: minValue(10)
+        minValue: minValue(1)
       },
       points_percentage: {
         required: requiredIf(function() {return this.purchase_status && this.is_points_percentage == 1}),
-        minValue: minValue(10)
+        minValue: minValue(100)
       }
     }
   }
