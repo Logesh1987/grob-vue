@@ -139,6 +139,7 @@ export default new Vuex.Store({
         //console.log(JSON.stringify(res.data.data));
         //console.log("#####################################################");
         commit('updateWidgetData', res.data.data);
+        console.log(',.,.,.,.')
         return state.widgetData;
       });
     },
@@ -155,6 +156,10 @@ export default new Vuex.Store({
       })
     },
   },
-  getters: {},
+  getters: {
+    getWidgetStore: state => {
+      return state.widgetData
+    }
+  },
   modules: {}
 });

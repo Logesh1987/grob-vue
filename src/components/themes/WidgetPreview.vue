@@ -72,10 +72,6 @@ import "@/styles/gr_widget.less";
 export default {
   name: "WidgetPreview",
   props: ["data", "type"],
-  mounted: function() {
-    console.log(this.type);
-    console.log(this.data);
-  }
 };
 </script>
 

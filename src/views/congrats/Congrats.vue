@@ -385,7 +385,7 @@ export default {
       this.$bvModal.show("modal-reward");
     },
   },
-  mounted: function() {    
+  mounted: function() {
     if (this.rewardsData == null) {
       this.getRewardsData()
     }
@@ -400,4 +400,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+
+// save icon second time on touch
+// setup steps save to local storage
+// reset settings add popup
+
 </style>

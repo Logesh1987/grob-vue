@@ -393,8 +393,10 @@ export default {
   },
   watch: {
     widgetData: function() {
+      console.log('watch')
       if (this.page === "congrats") {
             this.wData = this.widgetData;
+            console.log(this.wData, '|||')
       }
     }
   },
