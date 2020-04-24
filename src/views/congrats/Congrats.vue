@@ -21,7 +21,7 @@
                     <strong>LIVE</strong>
                     {{live}}
                   </h6>
-                  <label class="switch" for="programSwitch">
+                  <label class="switch" for="programSwitch-1" @click="toggleStatus">
                     <input type="checkbox" v-model="live" id="programSwitch" />
                     <i></i>
                   </label>
@@ -116,7 +116,7 @@
                     </div>
                     <!-- <b-button block href="#" v-b-toggle.accordion-1 variant="info">Accordion 1</b-button> -->
                   </b-card-header>
-                  <b-collapse id="accordion-1" accordion="my-accordion" role="tabpanel">
+                  <b-collapse id="accordion-1" visible accordion="my-accordion" role="tabpanel">
                     <b-card-body>
                       <SetupList />
                     </b-card-body>
@@ -129,10 +129,7 @@
                     role="tab"
                   >
                     <h2>2. Rewards</h2>
-                    <button
-                      @click.stop="rewardModalOpen"
-                      class="btn btn-success ml-3"
-                    >Add Reward</button>
+                    <button @click.stop="rewardModalOpen" class="btn btn-success ml-3">Add Reward</button>
                   </b-card-header>
                   <b-collapse id="accordion-2" accordion="my-accordion" role="tabpanel">
                     <b-card-body>
@@ -264,7 +261,7 @@
         </div>
       </template>
     </b-modal>
-    
+
     <!-- REWARD MODAL -->
     <b-modal
       id="modal-reward"
@@ -341,6 +338,10 @@ export default {
       "getPopupData",
       "getWidgetData"
     ]),
+    toggleStatus() {
+      // POST API CALL to ON/OFF then...
+      setTimeout(e => (this.live = !this.live), 1000);
+    },
     handleRating(rate) {
       this.feedback.rating = rate;
       if (this.feedback.rating < 5) {
@@ -383,26 +384,32 @@ export default {
     },
     rewardModalOpen() {
       this.$bvModal.show("modal-reward");
-    },
+    }
   },
   mounted: function() {
     if (this.rewardsData == null) {
-      this.getRewardsData()
+      this.getRewardsData();
     }
     if (this.popupData == null) {
-      this.getPopupData()
+      this.getPopupData();
     }
     if (this.widgetData == null) {
-      this.getWidgetData()
+      this.getWidgetData();
     }
   }
 };
 </script>
 
 <style lang="less" scoped>
-
-// save icon second time on touch
 // setup steps save to local storage
 // reset settings add popup
 
+// SETUP
+// Do not close all three
+// save & proceed - save setup & goto themes - remove from rewards
+// on change setup value from other block - show save & proceed to rewards
+// on click reset - set the block values & post api
+
+// Congrats
+// open all by default
 </style>

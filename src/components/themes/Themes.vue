@@ -170,7 +170,11 @@
                 <div class="form-group">
                   <label>Widget Placement - Mobile</label>
                   <select class="form-control" v-model="wData.style_data.mobile_position">
-                    <option v-for="value in wData.mobile_widget_position" :key="value">{{value}}</option>
+                    <option
+                      v-for="(value, name) in wData.mobile_widget_position"
+                      :value="name"
+                      :key="value"
+                    >{{value}}</option>
                   </select>
                 </div>
                 <div class="form-group mt-4">
@@ -218,8 +222,12 @@
               <b-tab title="Desktop" class="widget-tabs-panes">
                 <div class="form-group">
                   <label>Widget Placement</label>
-                  <select class="form-control" v-model="wData.position">
-                    <option v-for="value in wData.widget_position" :key="value">{{value}}</option>
+                  <select class="form-control" v-model="wData.data.position">
+                    <option
+                      v-for="(value, name) in wData.widget_position"
+                      :value="name"
+                      :key="value"
+                    >{{value}}</option>
                   </select>
                 </div>
                 <div class="form-group mt-4">
@@ -392,11 +400,9 @@ export default {
     ...mapState(["popupData", "widgetData"])
   },
   watch: {
-    widgetData: function() {
-      console.log('watch')
+    "$store.state.widgetData": function() {
       if (this.page === "congrats") {
-            this.wData = this.widgetData;
-            console.log(this.wData, '|||')
+        this.wData = this.widgetData;
       }
     }
   },

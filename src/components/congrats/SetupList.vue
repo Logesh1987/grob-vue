@@ -56,12 +56,13 @@
         :cancelSave="cancelSave"
       />
     </div>
-    <div v-if="this.$refs.pausedItem && this.$refs.pausedItem.querySelector('.setupItemList')">
+    <!-- <div v-if="this.$refs.pausedItem && this.$refs.pausedItem.querySelector('.setupItemList')"> -->
+    <div>
       <br />
       <h6 class="mt-3 col-12 mb-3 pausedRewardHead p-0">
         <strong>Paused Rewards (During Setup)</strong>
       </h6>
-    </div>    
+    </div>
     <div class="setupItemContainer pausedItem" ref="pausedItem" v-if="this.data">
       <CardPointsProgram
         v-if="!data.points_setup.purchase_status"
@@ -169,7 +170,6 @@ export default {
         this.data = JSON.parse(JSON.stringify(res));
       });
     } else this.data = JSON.parse(JSON.stringify(this.setupData));
-
   }
 };
 </script>
