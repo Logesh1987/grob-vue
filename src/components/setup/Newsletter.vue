@@ -1,5 +1,5 @@
 <template>
-  <div class="setupSteps" v-bind:class="{disabled: status != 1}">
+  <div class="setupSteps" v-bind:class="{disabled: status != '1'}">
     <div class="stepHead">
       <h3>Subscribe to Newsletter Setup</h3>
       <p>Incentivize users for signing up to your newsletters.</p>

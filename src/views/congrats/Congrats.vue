@@ -412,8 +412,8 @@ export default {
 
 // SETUP
 // Do not close all three
-// save & proceed - save setup & goto themes - remove from rewards
-// on change setup value from other block - show save & proceed to rewards
+// save & proceed - save setup & goto themes - remove from rewards - DONE
+// on change setup value from other block - show save & proceed to rewards - DONE
 // on click reset - set the block values & post api
 
 // Congrats

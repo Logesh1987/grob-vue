@@ -239,6 +239,15 @@
 		}
 		.setupSwiper-pagination {
 			position: static;
+			&[data-completed='completed'] .swiper-pagination-bullet {
+				background: #51ba31;
+				pointer-events: auto;
+				cursor: pointer;
+				opacity: 1;
+				&:before {
+					content: 'check';
+				}
+			}
 			.swiper-pagination-bullet {
 				width: 10px;
 				height: 10px;
