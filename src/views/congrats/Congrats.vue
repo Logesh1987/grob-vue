@@ -339,7 +339,7 @@ export default {
       "updateLoyaltyStatus"
     ]),
     toggleStatus() {
-      var status = !this.live ? 0 : 1;
+      var status = !this.live ? 1 : 0;
       this.updateLoyaltyStatus(status).then(res => {
         //console.log("-------------------------------------");
         console.log(res);
