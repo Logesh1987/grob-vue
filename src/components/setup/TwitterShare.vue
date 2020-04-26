@@ -4,7 +4,7 @@
       <h3>Twitter Share Setup</h3>
       <p>When members share your message on Twitter</p>
       <label class="switch" for="d13">
-        <input type="checkbox" name="mainSwitch" v-model="status" id="d13" />
+        <input type="checkbox" true-value="1" false-value="0" name="mainSwitch" v-model="status" id="d13" />
         <i></i>
       </label>
     </div>

@@ -267,8 +267,9 @@ export default {
   },
   mounted: function() {
     this.$refs.fullpage.init();
-    Axios.get("http://localhost:3000/guide").then(({data}) => {
-      this.likes = data["totallikes"];
+    Axios.get("https://jai.devam.pro/gr/admin/onboarding/activeSites?id_shop=1302&admin_email=jayakumar@appsmav.com").then(({data}) => {
+      if (data.data.happy_customers != 'undefined')
+        this.likes = data.data.happy_customers;
     });
   }
 };

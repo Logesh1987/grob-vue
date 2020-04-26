@@ -4,7 +4,7 @@
       <h3>Subscribe to Newsletter Setup</h3>
       <p>Incentivize users for signing up to your newsletters.</p>
       <label class="switch" for="card-ns">
-        <input type="checkbox" v-model="data.status" @change="saveData" id="card-ns" />
+        <input type="checkbox" true-value="1" false-value="0" v-model="data.status" @change="saveData" id="card-ns" />
         <i></i>
       </label>
     </div>

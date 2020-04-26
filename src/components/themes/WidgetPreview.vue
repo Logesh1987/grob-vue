@@ -6,17 +6,17 @@
         <div
           class="am-widgetbar-side-drawer am-widgetbar am-widgetbar-gratisfaction GRWidget"
           :class="[
-            (data.style_data.w_mobile_view === 'compact') ? 'am-mob-compact' : (data.style_data.w_mobile_view === 'hidden') ? 'am-mob-hidden' : 'am-mob-full',
-            (data.style_data.mobile_position === 'mid') ? 'am-mob-mid' : (data.style_data.mobile_position === 'left' ? 'am-mob-left' : '')
+            (data.data.style_data.w_mobile_view === 'compact') ? 'am-mob-compact' : (data.data.style_data.w_mobile_view === 'hidden') ? 'am-mob-hidden' : 'am-mob-full',
+            (data.data.style_data.mobile_position === 'mid') ? 'am-mob-mid' : (data.data.style_data.mobile_position === 'left' ? 'am-mob-left' : '')
         ]"
-          :style="{'backgroundColor': data.style_data.norm_bg_color}"
+          :style="{'backgroundColor': data.data.style_data.norm_bg_color}"
         >
           <div class="am-GRwidgetbar-box">
             <!-- <div class="am-GRwidgetbar-bg-image" style="background-image: url('');"></div> -->
             <div class="am-widgetbar-content">
               <div class="am-widgetbar-logo-wrap">
                 <img
-                  :src="data.style_data.widget_logo_img"
+                  :src="data.data.style_data.widget_logo_img"
                   class="widgetLogoImg am-widgetbar-logo"
                   id="right-vertical-logo-img"
                 />
@@ -25,7 +25,7 @@
                 <div
                   class="am-widgetbar-maintitle"
                   id="side-bar-vert-title"
-                  :style="{'color': data.style_data.norm_txt_color}"
+                  :style="{'color': data.data.style_data.norm_txt_color}"
                 >REWARDS</div>
                 <div class="am-widgetbar-subtitle" id="right-bar-vert-sub-title"></div>
               </div>
@@ -39,15 +39,15 @@
       <div class="wContainer desktop">
         <div
           class="am-widgetbar am-widgetbar-gratisfaction GRWidget"
-          :class="[data.data.position ? `am-widgetbar-${data.data.position}` : 'am-hidden', (data.style_data.w_desktop_view === 'compact') ? 'am-compact' : (data.style_data.w_desktop_view === 'hidden') ? 'am-hidden' : '']"
-          :style="{'backgroundColor': data.style_data.norm_bg_color}"
+          :class="[data.data.position ? `am-widgetbar-${data.data.position}` : 'am-hidden', (data.data.style_data.w_desktop_view === 'compact') ? 'am-compact' : (data.data.style_data.w_desktop_view === 'hidden') ? 'am-hidden' : '']"
+          :style="{'backgroundColor': data.data.style_data.norm_bg_color}"
         >
           <div class="am-GRwidgetbar-box">
             <!-- <div class="am-GRwidgetbar-bg-image" style="background-image: url('');"></div> -->
             <div class="am-widgetbar-content">
               <div class="am-widgetbar-logo-wrap">
                 <img
-                  :src="data.style_data.widget_logo_img"
+                  :src="data.data.style_data.widget_logo_img"
                   class="widgetLogoImg am-widgetbar-logo"
                   id="right-vertical-logo-img"
                 />
@@ -56,7 +56,7 @@
                 <div
                   class="am-widgetbar-maintitle"
                   id="side-bar-vert-title"
-                  :style="{'color': data.style_data.norm_txt_color}"
+                  :style="{'color': data.data.style_data.norm_txt_color}"
                 >REWARDS</div>
                 <div class="am-widgetbar-subtitle" id="right-bar-vert-sub-title"></div>
               </div>

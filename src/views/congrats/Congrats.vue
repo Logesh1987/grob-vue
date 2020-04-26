@@ -19,9 +19,8 @@
                     Your Loyalty
                     <br />Program is
                     <strong>LIVE</strong>
-                    {{live}}
                   </h6>
-                  <label class="switch" for="programSwitch-1" @click="toggleStatus">
+                  <label class="switch" for="programSwitch-1" @click="toggleStatus()">
                     <input type="checkbox" v-model="live" id="programSwitch" />
                     <i></i>
                   </label>
@@ -306,7 +305,7 @@ export default {
   components: { Fragment, SetupList, RewardsList, RewardSettings, Themes },
   data: function() {
     return {
-      live: true,
+      live: 1,
       feedback: {
         rating: null,
         selectedImprovePoint: [],
@@ -336,9 +335,16 @@ export default {
       "saveSetupData",
       "getRewardsData",
       "getPopupData",
-      "getWidgetData"
+      "getWidgetData",
+      "updateLoyaltyStatus"
     ]),
     toggleStatus() {
+      var status = !this.live ? 0 : 1;
+      this.updateLoyaltyStatus(status).then(res => {
+        //console.log("-------------------------------------");
+        console.log(res);
+        //console.log("-------------------------------------");
+      });
       // POST API CALL to ON/OFF then...
       setTimeout(e => (this.live = !this.live), 1000);
     },

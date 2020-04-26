@@ -34,7 +34,7 @@ export default new Vuex.Store({
 			//return Axios.get("http://localhost:3000/setup").then(res => {
 			//alert("TEST");
 			return Axios.get(
-				'https://jai.devam.pro/gr/admin/onboarding?id_shop=1300&admin_email=jayakumar@appsmav.com'
+				'https://jai.devam.pro/gr/admin/onboarding?id_shop=1302&admin_email=jayakumar@appsmav.com'
 			).then((res) => {
 				const tempData = res.data.data;
 				tempData.points_setup.currency = getCurrencySymbol(tempData.points_setup.currency);
@@ -58,7 +58,7 @@ export default new Vuex.Store({
 
 			//return Axios.post("https://jai.devam.pro/gr/", postData, headersData).then(res => {
 			return Axios.post(
-				'https://jai.devam.pro/gr/admin/onboarding?id_shop=1300&admin_email=jayakumar@appsmav.com',
+				'https://jai.devam.pro/gr/admin/onboarding?id_shop=1302&admin_email=jayakumar@appsmav.com',
 				payload,
 				headersData
 			)
@@ -73,7 +73,7 @@ export default new Vuex.Store({
 		},
 		getRewardsData: ({ commit, state }) => {
 			return Axios.get(
-				'https://jai.devam.pro/gr/admin/rewards?id_shop=1300&admin_email=jayakumar@appsmav.com'
+				'https://jai.devam.pro/gr/admin/rewards?id_shop=1302&admin_email=jayakumar@appsmav.com'
 			).then((res) => {
 				commit('updateRewardsData', res.data.data);
 				return state.rewardsData;
@@ -89,7 +89,7 @@ export default new Vuex.Store({
 				}
 			};
 			let result = Axios.post(
-				'https://jai.devam.pro/gr/admin/rewards?id_shop=1300&admin_email=jayakumar@appsmav.com',
+				'https://jai.devam.pro/gr/admin/rewards?id_shop=1302&admin_email=jayakumar@appsmav.com',
 				payload,
 				headersData
 			)
@@ -111,7 +111,7 @@ export default new Vuex.Store({
 				}
 			};
 			let result = Axios.put(
-				'https://jai.devam.pro/gr/admin/rewards?id_shop=1300&admin_email=jayakumar@appsmav.com',
+				'https://jai.devam.pro/gr/admin/rewards?id_shop=1302&admin_email=jayakumar@appsmav.com',
 				payload,
 				headersData
 			)
@@ -126,7 +126,7 @@ export default new Vuex.Store({
 
 		deleteReward: ({ commit, state }, id) => {
 			Axios.delete(
-				'https://jai.devam.pro/gr/admin/rewards?id_shop=1300&admin_email=jayakumar@appsmav.com&id=' + id
+				'https://jai.devam.pro/gr/admin/rewards?id_shop=1302&admin_email=jayakumar@appsmav.com&id=' + id
 			)
 				.then((res) => {
 					if (res.data.data.status != undefined && res.data.data.status == 'success') {
@@ -145,7 +145,7 @@ export default new Vuex.Store({
 		getPopupData: ({ commit, state }) => {
 			//return Axios.get("http://localhost:3000/themes").then(res => {
 			return Axios.get(
-				'https://jai.devam.pro/gr/admin/themes?id_shop=1300&admin_email=jayakumar@appsmav.com'
+				'https://jai.devam.pro/gr/admin/themes?id_shop=1302&admin_email=jayakumar@appsmav.com'
 			).then((res) => {
 				commit('updatePopupData', res.data.data);
 				return state.popupData;
@@ -159,7 +159,7 @@ export default new Vuex.Store({
 				}
 			};
 			return Axios.put(
-				'https://jai.devam.pro/gr/admin/themes?id_shop=1300&admin_email=jayakumar@appsmav.com',
+				'https://jai.devam.pro/gr/admin/themes?id_shop=1302&admin_email=jayakumar@appsmav.com',
 				payload,
 				headersData
 			).then((res) => {
@@ -169,7 +169,7 @@ export default new Vuex.Store({
 		},
 		getWidgetData: ({ commit, state }) => {
 			return Axios.get(
-				'https://jai.devam.pro/gr/admin/widgets?id_shop=1300&admin_email=jayakumar@appsmav.com'
+				'https://jai.devam.pro/gr/admin/widgets?id_shop=1302&admin_email=jayakumar@appsmav.com'
 			).then((res) => {
 				//console.log("#####################################################");
 				//console.log(JSON.stringify(res.data.data));
@@ -186,11 +186,27 @@ export default new Vuex.Store({
 				}
 			};
 			return Axios.put(
-				'https://jai.devam.pro/gr/admin/widgets?id_shop=1300&admin_email=jayakumar@appsmav.com',
+				'https://jai.devam.pro/gr/admin/widgets?id_shop=1302&admin_email=jayakumar@appsmav.com',
 				payload,
 				headersData
 			).then((res) => {
 				commit('updateWidgetData', payload);
+				return res;
+			});
+		},
+		updateLoyaltyStatus: ({ commit }, status) => {
+			let headersData = {
+				headers: {
+					'Content-Type': 'text/plain',
+					Accept: '*/*'
+				}
+			};
+			return Axios.post(
+				'https://jai.devam.pro/gr/admin/onboarding/updateLoyalty?id_shop=1302&admin_email=jayakumar@appsmav.com',
+				{'status':status},
+				headersData
+			).then((res) => {
+				//commit('updateWidgetData', status);
 				return res;
 			});
 		}

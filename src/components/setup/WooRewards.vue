@@ -30,6 +30,8 @@
             <div class="custom-control d-flex scale-8 to-00 custom-checkbox">
               <input
                 type="checkbox"
+                true-value="1"
+                false-value="0"
                 v-model="is_approved_only"
                 class="custom-control-input"
                 id="woo"

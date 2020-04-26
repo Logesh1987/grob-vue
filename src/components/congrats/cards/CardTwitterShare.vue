@@ -4,7 +4,7 @@
       <h3>Twitter Share Setup</h3>
       <p>When members share your message on Twitter</p>
       <label class="switch" for="card-twshare">
-        <input type="checkbox" v-model="data.status" @change="saveData" id="card-twshare" />
+        <input type="checkbox" true-value="1" false-value="0" v-model="data.status" @change="saveData" id="card-twshare" />
         <i></i>
       </label>
     </div>

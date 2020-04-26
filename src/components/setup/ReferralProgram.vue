@@ -8,6 +8,8 @@
           type="checkbox"
           name="mainSwitch"
           v-model="status"
+          true-value="1" 
+          false-value="0"
           id="d41"
         />
         <i></i>

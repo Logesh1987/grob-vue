@@ -169,9 +169,9 @@
               <b-tab title="Mobile" class="widget-tabs-panes" active>
                 <div class="form-group">
                   <label>Widget Placement - Mobile</label>
-                  <select class="form-control" v-model="wData.style_data.mobile_position">
+                  <select class="form-control" v-model="wData.data.style_data.mobile_position">
                     <option
-                      v-for="(value, name) in wData.mobile_widget_position"
+                      v-for="(value, name) in wData.data.mobile_widget_position"
                       :value="name"
                       :key="value"
                     >{{value}}</option>
@@ -184,7 +184,7 @@
                       type="radio"
                       id="wm-look-1"
                       value="compact"
-                      v-model="wData.style_data.w_mobile_view"
+                      v-model="wData.data.style_data.w_mobile_view"
                       name="wm-look"
                       class="custom-control-input"
                     />
@@ -195,7 +195,7 @@
                       type="radio"
                       id="wm-look-2"
                       value="full"
-                      v-model="wData.style_data.w_mobile_view"
+                      v-model="wData.data.style_data.w_mobile_view"
                       name="wm-look"
                       class="custom-control-input"
                     />
@@ -206,7 +206,7 @@
                       type="radio"
                       id="wm-look-3"
                       value="hidden"
-                      v-model="wData.style_data.w_mobile_view"
+                      v-model="wData.data.style_data.w_mobile_view"
                       name="wm-look"
                       class="custom-control-input"
                     />
@@ -224,7 +224,7 @@
                   <label>Widget Placement</label>
                   <select class="form-control" v-model="wData.data.position">
                     <option
-                      v-for="(value, name) in wData.widget_position"
+                      v-for="(value, name) in wData.data.widget_position"
                       :value="name"
                       :key="value"
                     >{{value}}</option>
@@ -237,7 +237,7 @@
                       type="radio"
                       id="wd-look-1"
                       value="compact"
-                      v-model="wData.style_data.w_desktop_view"
+                      v-model="wData.data.style_data.w_desktop_view"
                       name="wd-look"
                       class="custom-control-input"
                     />
@@ -248,7 +248,7 @@
                       type="radio"
                       id="wd-look-2"
                       value="full"
-                      v-model="wData.style_data.w_desktop_view"
+                      v-model="wData.data.style_data.w_desktop_view"
                       name="wd-look"
                       class="custom-control-input"
                     />
@@ -259,7 +259,7 @@
                       type="radio"
                       id="wd-look-3"
                       value="hidden"
-                      v-model="wData.style_data.w_desktop_view"
+                      v-model="wData.data.style_data.w_desktop_view"
                       name="wd-look"
                       class="custom-control-input"
                     />
@@ -285,17 +285,17 @@
                   <verte
                     picker="square"
                     :enableAlpha="false"
-                    v-model="wData.style_data.norm_txt_color"
+                    v-model="wData.data.style_data.norm_txt_color"
                     model="hex"
                   >
                     <input
                       type="text"
-                      v-model="wData.style_data.norm_txt_color"
+                      v-model="wData.data.style_data.norm_txt_color"
                       class="form-control"
                     />
                     <span
                       class="palette"
-                      :style="{'backgroundColor': wData.style_data.norm_txt_color}"
+                      :style="{'backgroundColor': wData.data.style_data.norm_txt_color}"
                     ></span>
                   </verte>
                 </div>
@@ -307,17 +307,17 @@
                   <verte
                     picker="square"
                     :enableAlpha="false"
-                    v-model="wData.style_data.norm_bg_color"
+                    v-model="wData.data.style_data.norm_bg_color"
                     model="hex"
                   >
                     <input
                       type="text"
-                      v-model="wData.style_data.norm_bg_color"
+                      v-model="wData.data.style_data.norm_bg_color"
                       class="form-control"
                     />
                     <span
                       class="palette"
-                      :style="{'backgroundColor': wData.style_data.norm_bg_color}"
+                      :style="{'backgroundColor': wData.data.style_data.norm_bg_color}"
                     ></span>
                   </verte>
                 </div>
@@ -325,13 +325,13 @@
                   <label for="icon" class="col-md-5 p-0 m-0">Widget Icon</label>
                   <b-dropdown variant="outline-light" class="widgetIconSelector">
                     <template v-slot:button-content>
-                      <img :src="wData.style_data.widget_logo_img" alt />
+                      <img :src="wData.data.style_data.widget_logo_img" alt />
                     </template>
                     <b-dropdown-item
                       v-for="icon in icons"
                       :key="icon"
-                      :class="{'active': wData.style_data.widget_logo_img === icon}"
-                      @click.prevent="wData.style_data.widget_logo_img = icon"
+                      :class="{'active': wData.data.style_data.widget_logo_img === icon}"
+                      @click.prevent="wData.data.style_data.widget_logo_img = icon"
                     >
                       <img :src="icon" alt />
                     </b-dropdown-item>
@@ -419,7 +419,7 @@ export default {
       });
     },
     handleSaveWidget: function() {
-      this.saveWidgetData(this.wData).then(res => {
+      this.saveWidgetData(this.wData.data).then(res => {
         if (this.page === "setup") {
           this.$router.push("congrats");
         }
