@@ -200,8 +200,19 @@
                       </div>
                     </div>
                   </b-tab>
-                  <b-tab title="Manual" disabled>
-                    <p>I'm the second tab</p>
+                  <b-tab title="Manual">                    
+                      <div class="row col-md-12">
+                        <div class="mb-0 form-group fLabel col-md-10">
+                          <label for>Manual coupons</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="mcoupn"
+                            name="mcoupn"
+                          />
+                          <small>Add Coupons as comma separated values</small>
+                        </div>
+                      </div>
                   </b-tab>
                 </b-tabs>
               </div>

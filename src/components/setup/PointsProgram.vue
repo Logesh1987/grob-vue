@@ -4,7 +4,14 @@
       <h3>Points Program</h3>
       <p>Start rewarding your customers for purchases</p>
       <label class="switch" for="d22">
-        <input type="checkbox" true-value="1" false-value="0" name="mainSwitch" v-model="vData.purchase_status" id="d22" />
+        <input
+          type="checkbox"
+          true-value="1"
+          false-value="0"
+          name="mainSwitch"
+          v-model="vData.purchase_status"
+          id="d22"
+        />
         <i></i>
       </label>
     </div>
@@ -47,7 +54,10 @@
                 v-model.trim="vData.price"
               />
               <em class="error" v-if="!$v.vData.price.required">Field is required</em>
-              <em class="error" v-if="!$v.vData.price.minValue">Need a minimum value of {{$v.vData.price.$params.minValue.min}}</em>
+              <em
+                class="error"
+                v-if="!$v.vData.price.minValue"
+              >Need a minimum value of {{$v.vData.price.$params.minValue.min}}</em>
             </div>
             <div class="col-md-2 text-center mt-4 pt-1">to get</div>
             <div class="form-group fLabel col-md-5">
@@ -60,7 +70,10 @@
                 v-model="vData.points"
               />
               <em class="error" v-if="!$v.vData.points.required">Field is required</em>
-              <em class="error" v-if="!$v.vData.points.minValue">Need a minimum value of {{$v.vData.points.$params.minValue.min}}</em>
+              <em
+                class="error"
+                v-if="!$v.vData.points.minValue"
+              >Need a minimum value of {{$v.vData.points.$params.minValue.min}}</em>
             </div>
           </div>
           <div
@@ -78,18 +91,17 @@
                 v-model="vData.points_percentage"
               />
               <em class="error" v-if="!$v.vData.points_percentage.required">Field is required</em>
-              <em class="error" v-if="!$v.vData.points_percentage.minValue">Need a minimum value of {{$v.vData.points_percentage.$params.minValue.min}}</em>
+              <em
+                class="error"
+                v-if="!$v.vData.points_percentage.minValue"
+              >Need a minimum value of {{$v.vData.points_percentage.$params.minValue.min}}</em>
             </div>
           </div>
         </form>
       </div>
     </div>
     <div class="stepFoot d-flex justify-content-end">
-      <a
-        href="#"
-        class="resetSetting"
-        @click.prevent="reset('points_setup')"
-      >
+      <a href="#" class="resetSetting" @click.prevent="resetSettings">
         <i class="material-icons">refresh</i>
         <u>Reset to recommended settings</u>
       </a>
@@ -99,42 +111,57 @@
 
 <script>
 import RadioGroup from "@/components/RadioGroup";
-import { validationMixin } from 'vuelidate';
-import { required, minValue, requiredIf } from 'vuelidate/lib/validators';
+import { validationMixin } from "vuelidate";
+import { required, minValue, requiredIf } from "vuelidate/lib/validators";
 
 export default {
   name: "PointsProgram",
-  props: ["data", "reset"],
+  props: ["data", "reset", "default"],
   mixins: [validationMixin],
   components: { RadioGroup },
   data: function() {
     return {
       vData: this.data
-    }
+    };
   },
   methods: {
     submit() {
-      this.$v.$touch()
-      return !this.$v.$invalid
+      this.$v.$touch();
+      return !this.$v.$invalid;
+    },
+    resetSettings() {      
+      this.vData.purchase_status = this.default.purchase_status;
+      this.vData.is_points_percentage = this.default.is_points_percentage;
+      this.vData.price = this.default.price;
+      this.vData.points = this.default.points;
+      this.vData.points_percentage = this.default.points_percentage;
+
+      this.reset();
     }
   },
   watch: {
     data() {
-      this.vData = this.data
+      this.vData = this.data;
     }
   },
   validations: {
-    vData : {
+    vData: {
       price: {
-        required: requiredIf(function() {return this.purchase_status && this.is_points_percentage == 0}),
+        required: requiredIf(function() {
+          return this.purchase_status && this.is_points_percentage == 0;
+        }),
         minValue: minValue(1)
       },
       points: {
-        required: requiredIf(function() {return this.purchase_status && this.is_points_percentage == 0}),
+        required: requiredIf(function() {
+          return this.purchase_status && this.is_points_percentage == 0;
+        }),
         minValue: minValue(1)
       },
       points_percentage: {
-        required: requiredIf(function() {return this.purchase_status && this.is_points_percentage == 1}),
+        required: requiredIf(function() {
+          return this.purchase_status && this.is_points_percentage == 1;
+        }),
         minValue: minValue(1)
       }
     }

@@ -24,7 +24,7 @@
             </ul>
           </div>
         </div>
-        <div class="skipSteps">
+        <div class="skipSteps" v-if="!saved.rewardsBlock">
           <p>
             <strong>SKIP ALL STEPS?</strong>
             Proceed with recommended settings
@@ -56,6 +56,7 @@
                       ref="PointsProgram"
                       :reset="resetSetupBlock"
                       :data="data.setup.points_setup"
+                      :default="defaultSetup.points_setup"
                     />
                   </swiper-slide>
                   <swiper-slide data-ref="SignupBonus">
@@ -197,8 +198,7 @@
                   >Next</button>
                 </div>
               </div>
-             <!-- <footer class="saveBar" v-if="swipe.isEnd"> -->
-              <footer class="saveBar">
+              <footer class="saveBar" v-if="swipe.isEnd || setupTouched">
                 <i class="dots"></i>
                 <div class="container">
                   <div class="row justify-content-between">
@@ -209,7 +209,15 @@
                       <li>2</li>
                       <li>3</li>
                     </ul>
-                    <button class="btn btn-light" @click.prevent="saveSetup">
+                    <button
+                      v-if="setupTouched"
+                      class="btn btn-light"
+                      @click.prevent="saveSetup('touchSave')"
+                    >
+                      Save
+                      <i class="material-icons">keyboard_arrow_right</i>
+                    </button>
+                    <button v-else class="btn btn-light" @click.prevent="saveSetup">
                       Proceed to Rewards
                       <i class="material-icons">keyboard_arrow_right</i>
                     </button>
@@ -313,12 +321,32 @@
           You have made some change
           <br />What should wee do?
         </h5>
-        <router-link to="/congrats" class="btn btn-success pr-5 pl-5 mt-4 mb-4">Save and Proceed</router-link>
+        <button
+          @click.prevent="saveAndGotoThemes"
+          class="btn btn-success pr-5 pl-5 mt-4 mb-4"
+        >Save and Proceed</button>
         <router-link to="/congrats" class="text-success">
           <u>
             <small>Reset all and LIVE</small>
           </u>
         </router-link>
+      </template>
+    </b-modal>
+
+    <!-- RESET MODAL -->
+    <b-modal
+      id="modal-reset"
+      ref="modalReset"
+      hide-footer
+      hide-header
+      centered
+      modal-class="setupModal modal-reset"
+      body-class="d-flex flex-column align-items-center"
+    >
+      <template v-slot:default="{ hide }">
+        <a href class="bvClose" @click.prevent="hide()">&times;</a>
+        <h5>Are you sure? Do you wish to reset</h5>
+        <button @click.prevent class="btn btn-success pr-5 pl-5 mt-4 mb-4">confirm</button>
       </template>
     </b-modal>
 
@@ -379,6 +407,7 @@ export default {
         rewardsBlock: false,
         themesBlock: false
       },
+      setupTouched: false,
       swipe: {
         isBeginning: true,
         isEnd: false,
@@ -416,7 +445,23 @@ export default {
     Themes
   },
   computed: {
-    ...mapState(["setupData", "rewardsData", "popupData", "widgetData"])
+    ...mapState([
+      "setupData",
+      "rewardsData",
+      "popupData",
+      "widgetData",
+      "defaultSetup"
+    ])
+  },
+  watch: {
+    "data.setup": {
+      handler() {
+        if (this.saved.rewardsBlock && this.activeStep === "setupBlock") {
+          this.setupTouched = true;
+        }
+      },
+      deep: true
+    }
   },
   methods: {
     ...mapActions([
@@ -444,7 +489,7 @@ export default {
           .querySelector(
             `.swiper-pagination-bullet[data-id='${this.$refs.setupSwiper.$swiper.realIndex}']`
           )
-          .setAttribute('data-completed', "completed");
+          .setAttribute("data-completed", "completed");
         this.$refs.setupSwiper.$swiper.slideNext();
       }
     },
@@ -458,41 +503,54 @@ export default {
       }
     },
     toggleCollapse(id) {
-      if (document.querySelector(".completeSteps"))
-        document.querySelector(".completeSteps").remove();
+      if (id === this.activeStep) {
+        this.$root.$emit("bv::toggle::collapse", id);
+      } else {
+        if (document.querySelector(".completeSteps"))
+          document.querySelector(".completeSteps").remove();
 
-      if(this.activeStep == null) {
-        window.localStorage.setItem('inProgress', id)
+        if (this.activeStep == null) {
+          window.localStorage.setItem("inProgress", id);
+        }
+        this.activeStep = id;
       }
-
-      id === this.activeStep
-        ? (this.activeStep = null)
-        : (this.activeStep = id);
     },
-    resetSetupBlock(key) {
-      console.log(JSON.stringify(this.data.setup[key]));
-      console.log(JSON.stringify(this.setupData[key]));
-      this.data.setup[key] = { ...this.setupData[key] };
+    resetSetupBlock() {
+      console.log(this.data.setup, "this.data.setup");
     },
-    saveSetup() {
+    saveSetup(src) {
       this.saveSetupData(this.data.setup).then(res => {
         this.getRewardsData().then(re => {
-          this.setProgress("rewardsBlock")
+          this.setupTouched = false;
+          if (src !== "touchSave") {
+            this.setProgress("rewardsBlock");
+          }
         });
       });
     },
     saveRewards() {
       this.getPopupData().then(res => {
-          this.setProgress("themesBlock")
+        this.setProgress("themesBlock");
       });
 
       /*this.getWidgetData().then(res => {
         console.log("GOT Widget Data");
       });*/
-
     },
     setEditReward(id) {
       this.editRewardId = id ? id : null;
+    },
+    saveAndGotoThemes() {
+      this.saveSetupData(this.data.setup).then(res => {
+        this.getPopupData().then(res => {
+          this.setProgress("themesBlock");
+          this.$bvModal.hide("modal-skip");
+          this.getRewardsData();
+          document
+            .querySelector(".setupSwiper-pagination")
+            .setAttribute("data-completed", "completed");
+        });
+      });
     },
     rewardModalClose() {
       this.$bvModal.hide("modal-reward");
@@ -501,35 +559,40 @@ export default {
     rewardModalOpen() {
       this.$bvModal.show("modal-reward");
     },
-    setProgress(block) {      
+    setProgress(block) {
       this.activeStep = block;
       this.$root.$emit("bv::toggle::collapse", block);
-      window.localStorage.setItem('inProgress', block)
-      const savedKeys = Object.keys(this.saved)
-      const index = savedKeys.indexOf(block)
-      for(var i=0; i<=index; i++) {
-        document.querySelector(`.${savedKeys[i]} .card-header`).classList.remove('disabled')
+      window.localStorage.setItem("inProgress", block);
+      const savedKeys = Object.keys(this.saved);
+      const index = savedKeys.indexOf(block);
+      for (var i = 0; i <= index; i++) {
+        document
+          .querySelector(`.${savedKeys[i]} .card-header`)
+          .classList.remove("disabled");
         this.saved[savedKeys[i]] = true;
       }
     }
   },
   mounted: function() {
-    const inProgress = window.localStorage.getItem('inProgress')
-    this.getSetupData().then(
-      res => {
-        this.data.setup = JSON.parse(JSON.stringify(res))
-        if(inProgress) {
-          document.querySelector(".completeSteps").remove();
-          this.setProgress(inProgress)
-          if(inProgress === 'rewardsBlock') {
-            this.getRewardsData()
-          }
-          if(inProgress === 'themesBlock') {
-            this.getPopupData().then(re => this.getRewardsData())
-          }
+    const inProgress = window.localStorage.getItem("inProgress");
+    this.getSetupData().then(res => {
+      this.data.setup = JSON.parse(JSON.stringify(res));
+      if (inProgress) {
+        document.querySelector(".completeSteps").remove();
+        this.setProgress(inProgress);
+        if (inProgress !== "setupBlock") {
+          document
+            .querySelector(".setupSwiper-pagination")
+            .setAttribute("data-completed", "completed");
+        }
+        if (inProgress === "rewardsBlock") {
+          this.getRewardsData();
+        }
+        if (inProgress === "themesBlock") {
+          this.getPopupData().then(re => this.getRewardsData());
         }
       }
-    );
+    });
   }
 };
 </script>

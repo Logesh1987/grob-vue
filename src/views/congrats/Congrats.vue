@@ -1,7 +1,7 @@
 <template>
   <div class="grOnboarding">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-    <div class="congratsPage" :class="{'paused': !live}">
+    <div class="congratsPage" :class="{'paused': live == '0'}">
       <header>
         <div class="contentArea">
           <a href="#" class="logo">
@@ -21,7 +21,7 @@
                     <strong>LIVE</strong>
                   </h6>
                   <label class="switch" for="programSwitch-1" @click="toggleStatus()">
-                    <input type="checkbox" v-model="live" id="programSwitch" />
+                    <input type="checkbox" v-model="live" true-value="1" false-value="0" id="programSwitch" />
                     <i></i>
                   </label>
                 </div>
@@ -115,7 +115,7 @@
                     </div>
                     <!-- <b-button block href="#" v-b-toggle.accordion-1 variant="info">Accordion 1</b-button> -->
                   </b-card-header>
-                  <b-collapse id="accordion-1" visible accordion="my-accordion" role="tabpanel">
+                  <b-collapse id="accordion-1" visible accordion="my-accordion1" role="tabpanel">
                     <b-card-body>
                       <SetupList />
                     </b-card-body>
@@ -130,7 +130,7 @@
                     <h2>2. Rewards</h2>
                     <button @click.stop="rewardModalOpen" class="btn btn-success ml-3">Add Reward</button>
                   </b-card-header>
-                  <b-collapse id="accordion-2" accordion="my-accordion" role="tabpanel">
+                  <b-collapse id="accordion-2" visible accordion="my-accordion2" role="tabpanel">
                     <b-card-body>
                       <div v-if="rewardsData">
                         <RewardsList
@@ -150,7 +150,7 @@
                   >
                     <h2>3. Themes</h2>
                   </b-card-header>
-                  <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
+                  <b-collapse id="accordion-3" visible accordion="my-accordion3" role="tabpanel">
                     <b-card-body>
                       <div class="themesBlock">
                         <Themes v-if="popupData" page="congrats" />
@@ -305,7 +305,7 @@ export default {
   components: { Fragment, SetupList, RewardsList, RewardSettings, Themes },
   data: function() {
     return {
-      live: 1,
+      live: null,
       feedback: {
         rating: null,
         selectedImprovePoint: [],
@@ -328,7 +328,13 @@ export default {
     };
   },
   computed: {
-    ...mapState(["rewardsData", "popupData", "widgetData"])
+    ...mapState(["setupData", "rewardsData", "popupData", "widgetData"])
+    
+  },
+  watch: {
+    setupData: function() {
+      this.live = this.setupData.campaign.status;
+    }
   },
   methods: {
     ...mapActions([
@@ -339,15 +345,14 @@ export default {
       "updateLoyaltyStatus"
     ]),
     toggleStatus() {
-      var status = !this.live ? 1 : 0;
-      this.updateLoyaltyStatus(status).then(res => {
+      var newStatus = this.live ==  "0" ? "1" : "0";
+      this.updateLoyaltyStatus(newStatus).then(res => {
         //console.log("-------------------------------------");
-        console.log(res);
+        this.live = this.setupData.campaign.status
         //console.log("-------------------------------------");
         //setTimeout(e => (this.live = !this.live), 1000);
         this.live = !this.live
       });
-      // POST API CALL to ON/OFF then...
     },
     handleRating(rate) {
       this.feedback.rating = rate;
@@ -412,11 +417,16 @@ export default {
 // reset settings add popup
 
 // SETUP
-// Do not close all three
-// save & proceed - save setup & goto themes - remove from rewards
-// on change setup value from other block - show save & proceed to rewards
+// Do not close all three - DONE
+// save & proceed - save setup & goto themes - remove from rewards - DONE
+// on change setup value from other block - show save & proceed to rewards - DONE
 // on click reset - set the block values & post api
 
 // Congrats
 // open all by default
+
+
+// --- widget setup - ux call
+// --- congrats live mapping
+// --- Reset settings
 </style>
