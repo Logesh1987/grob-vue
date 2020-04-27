@@ -4,7 +4,7 @@
       <h3>WOOReview Rewards</h3>
       <p>Reward reviews of products, services by incentivizing</p>
       <label class="switch" for="d20">
-        <input type="checkbox" name="mainSwitch" v-model="review_status" id="d20" />
+        <input type="checkbox" true-value="1" false-value="0" name="mainSwitch" v-model="review_status" id="d20" />
         <i></i>
       </label>
     </div>

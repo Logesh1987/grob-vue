@@ -4,7 +4,7 @@
       <h3>Referral Program</h3>
       <p>Setup refer a friend program</p>
       <label class="switch" for="card-rp">
-        <input type="checkbox" v-model="data.status" @change="saveData" id="card-rp" />
+        <input type="checkbox" true-value="1" false-value="0" v-model="data.status" @change="saveData" id="card-rp" />
         <i></i>
       </label>
     </div>

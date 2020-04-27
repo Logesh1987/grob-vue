@@ -6,6 +6,8 @@
       <label class="switch" for="card-pointsProgram">
         <input
           type="checkbox"
+          true-value="1"
+          false-value="0"
           v-model="data.purchase_status"
           @change="saveData"
           id="card-pointsProgram"

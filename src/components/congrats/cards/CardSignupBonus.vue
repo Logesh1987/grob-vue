@@ -4,7 +4,7 @@
       <h3>Sign Up Bonus</h3>
       <p>Reward customers for creating an account on your store</p>
       <label class="switch" for="card-signupbonus">
-        <input type="checkbox" v-model="data.bonus_status" @change="saveData" id="card-signupbonus" />
+        <input type="checkbox" true-value="1" false-value="0" v-model="data.bonus_status" @change="saveData" id="card-signupbonus" />
         <i></i>
       </label>
     </div>

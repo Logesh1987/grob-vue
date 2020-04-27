@@ -166,7 +166,7 @@
                         <RadioGroup
                           v-model="data.realtime_coupon.type"
                           name="cTyp"
-                          :options="{'1': 'Fixed off', '2': 'Percentage off', '3': 'Free shipping'}"
+                          :options="{'2': 'Fixed off', '1': 'Percentage off', '3': 'Free shipping'}"
                         />
                       </div>
                       <div

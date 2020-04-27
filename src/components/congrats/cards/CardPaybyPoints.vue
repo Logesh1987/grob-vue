@@ -4,7 +4,7 @@
       <h3>Pay by Points</h3>
       <p>Setup if customers can pay using their points</p>
       <label class="switch" for="card-paybypoint">
-        <input type="checkbox" v-model="data.redeem_purchase_status" @change="saveData" id="card-paybypoint" />
+        <input type="checkbox" true-value="1" false-value="0" v-model="data.redeem_purchase_status" @change="saveData" id="card-paybypoint" />
         <i></i>
       </label>
     </div>

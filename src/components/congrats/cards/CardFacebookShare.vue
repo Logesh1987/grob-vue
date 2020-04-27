@@ -4,7 +4,7 @@
       <h3>Facebook Share Setup</h3>
       <p>When members share your message on Facebook</p>
       <label class="switch" for="card-fbshare">
-        <input type="checkbox" v-model="data.status" @change="saveData" id="card-fbshare" />
+        <input type="checkbox" true-value="1" false-value="0" v-model="data.status" @change="saveData" id="card-fbshare" />
         <i></i>
       </label>
     </div>
