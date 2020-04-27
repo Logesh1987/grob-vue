@@ -344,9 +344,10 @@ export default {
         //console.log("-------------------------------------");
         console.log(res);
         //console.log("-------------------------------------");
+        //setTimeout(e => (this.live = !this.live), 1000);
+        this.live = !this.live
       });
       // POST API CALL to ON/OFF then...
-      setTimeout(e => (this.live = !this.live), 1000);
     },
     handleRating(rate) {
       this.feedback.rating = rate;

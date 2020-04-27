@@ -14,9 +14,6 @@ export default new Vuex.Store({
 	},
 	mutations: {
 		updateSetupData: (state, payload) => {
-			//console.log("#####################################################");
-			//console.log(JSON.stringify(payload));
-			//console.log("#####################################################");
 			state.setupData = payload;
 		},
 		updateRewardsData: (state, payload) => {
