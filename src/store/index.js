@@ -2,11 +2,13 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import Axios from 'axios';
 import { getCurrencySymbol } from '@/utils';
+import defaultData from './default-setup'
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
 	state: {
+		defaultSetup: defaultData,
 		setupData: null,
 		rewardsData: null,
 		popupData: null,

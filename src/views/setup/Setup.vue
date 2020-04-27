@@ -56,6 +56,7 @@
                       ref="PointsProgram"
                       :reset="resetSetupBlock"
                       :data="data.setup.points_setup"
+                      :default="defaultSetup.points_setup"
                     />
                   </swiper-slide>
                   <swiper-slide data-ref="SignupBonus">
@@ -208,7 +209,11 @@
                       <li>2</li>
                       <li>3</li>
                     </ul>
-                    <button v-if="setupTouched" class="btn btn-light" @click.prevent="saveSetup('touchSave')">
+                    <button
+                      v-if="setupTouched"
+                      class="btn btn-light"
+                      @click.prevent="saveSetup('touchSave')"
+                    >
                       Save
                       <i class="material-icons">keyboard_arrow_right</i>
                     </button>
@@ -328,6 +333,23 @@
       </template>
     </b-modal>
 
+    <!-- RESET MODAL -->
+    <b-modal
+      id="modal-reset"
+      ref="modalReset"
+      hide-footer
+      hide-header
+      centered
+      modal-class="setupModal modal-reset"
+      body-class="d-flex flex-column align-items-center"
+    >
+      <template v-slot:default="{ hide }">
+        <a href class="bvClose" @click.prevent="hide()">&times;</a>
+        <h5>Are you sure? Do you wish to reset</h5>
+        <button @click.prevent class="btn btn-success pr-5 pl-5 mt-4 mb-4">confirm</button>
+      </template>
+    </b-modal>
+
     <!-- REWARD MODAL -->
     <b-modal
       id="modal-reward"
@@ -423,7 +445,13 @@ export default {
     Themes
   },
   computed: {
-    ...mapState(["setupData", "rewardsData", "popupData", "widgetData"])
+    ...mapState([
+      "setupData",
+      "rewardsData",
+      "popupData",
+      "widgetData",
+      "defaultSetup"
+    ])
   },
   watch: {
     "data.setup": {
@@ -475,21 +503,20 @@ export default {
       }
     },
     toggleCollapse(id) {
-      if (document.querySelector(".completeSteps"))
-        document.querySelector(".completeSteps").remove();
+      if (id === this.activeStep) {
+        this.$root.$emit("bv::toggle::collapse", id);
+      } else {
+        if (document.querySelector(".completeSteps"))
+          document.querySelector(".completeSteps").remove();
 
-      if (this.activeStep == null) {
-        window.localStorage.setItem("inProgress", id);
+        if (this.activeStep == null) {
+          window.localStorage.setItem("inProgress", id);
+        }
+        this.activeStep = id;
       }
-
-      id === this.activeStep
-        ? (this.activeStep = null)
-        : (this.activeStep = id);
     },
-    resetSetupBlock(key) {
-      console.log(JSON.stringify(this.data.setup[key]));
-      console.log(JSON.stringify(this.setupData[key]));
-      this.data.setup[key] = { ...this.setupData[key] };
+    resetSetupBlock() {
+      console.log(this.data.setup, "this.data.setup");
     },
     saveSetup(src) {
       this.saveSetupData(this.data.setup).then(res => {
@@ -519,7 +546,9 @@ export default {
           this.setProgress("themesBlock");
           this.$bvModal.hide("modal-skip");
           this.getRewardsData();
-          document.querySelector('.setupSwiper-pagination').setAttribute('data-completed', 'completed');
+          document
+            .querySelector(".setupSwiper-pagination")
+            .setAttribute("data-completed", "completed");
         });
       });
     },
@@ -552,7 +581,9 @@ export default {
         document.querySelector(".completeSteps").remove();
         this.setProgress(inProgress);
         if (inProgress !== "setupBlock") {
-          document.querySelector('.setupSwiper-pagination').setAttribute('data-completed', 'completed');
+          document
+            .querySelector(".setupSwiper-pagination")
+            .setAttribute("data-completed", "completed");
         }
         if (inProgress === "rewardsBlock") {
           this.getRewardsData();
