@@ -61,7 +61,7 @@
                     </p>
                   </li>
                 </ul>
-                <a href="#" class="btn gotoDashboard">
+                <a href="https://jai.devam.pro/gr/admin#/view/campaigns" class="btn gotoDashboard">
                   Go to Dashboard
                   <i class="material-icons">chevron_right</i>
                 </a>

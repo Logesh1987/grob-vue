@@ -25,6 +25,12 @@
                 name="bRewards"
                 v-model="points.nb_points"
               />
+              <em class="error" v-if="!$v.points.nb_points.required">Field is required</em>
+              <em
+                class="error"
+                v-if="!$v.points.nb_points.minValue"
+              >Need a minimum value of {{$v.points.nb_points.$params.minValue.min}}</em>
+              <em class="error" v-if="!$v.points.nb_points.maxLength">Allowed {{$v.points.nb_points.$params.maxLength.max}} digits max</em>
             </div>
             <div class="col-md-5 p-0 asideInfo">to users when they enter their birthday</div>
             <label for="bRewards" generated="true" class="error col-md-10"></label>
@@ -40,6 +46,12 @@
                 name="obRewards"
                 v-model="reward.points.r_nb_points"
               />
+              <em class="error" v-if="!$v.reward.points.r_nb_points.required">Field is required</em>
+              <em
+                class="error"
+                v-if="!$v.reward.points.r_nb_points.minValue"
+              >Need a minimum value of {{$v.reward.points.r_nb_points.$params.minValue.min}}</em>
+              <em class="error" v-if="!$v.reward.points.r_nb_points.maxLength">Allowed {{$v.reward.points.r_nb_points.$params.maxLength.max}} digits max</em>
             </div>
             <div class="col-md-5 p-0 asideInfo">on the birthday</div>
             <label for="obRewards" generated="true" class="error col-md-10"></label>
@@ -76,7 +88,7 @@
 
 <script>
 import { validationMixin } from "vuelidate";
-import { required, minValue, requiredIf } from "vuelidate/lib/validators";
+import { required, minValue, maxLength, requiredIf } from "vuelidate/lib/validators";
 
 export default {
   name: "BirthdayRewards",
@@ -97,7 +109,8 @@ export default {
         required: requiredIf(function() {
           return this.status;
         }),
-        minValue: minValue(100)
+        minValue: minValue(1),
+        maxLength: maxLength(5)
       }
     },
     reward: {
@@ -106,7 +119,8 @@ export default {
           required: requiredIf(function() {
             return this.status;
           }),
-          minValue: minValue(100)
+          minValue: minValue(1),
+          maxLength: maxLength(5)
         }
       }
     }

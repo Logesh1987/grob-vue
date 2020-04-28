@@ -40,6 +40,10 @@
               class="error col-md-10"
               v-if="!$v.redeem_point_per_dollar.minValue"
             >Need a minimum value of {{$v.redeem_point_per_dollar.$params.minValue.min}}</label>
+            <label
+              class="error col-md-10"
+              v-if="!$v.redeem_point_per_dollar.maxLength"
+            >Allowed {{$v.redeem_point_per_dollar.$params.maxLength.max}} digits max</label>
           </div>
         </form>
       </div>
@@ -50,7 +54,7 @@
 
 <script>
 import { validationMixin } from "vuelidate";
-import { required, minValue, requiredIf } from "vuelidate/lib/validators";
+import { required, minValue, maxLength, requiredIf } from "vuelidate/lib/validators";
 
 export default {
   name: "PaybyPoints",
@@ -70,7 +74,8 @@ export default {
       required: requiredIf(function() {
         return this.redeem_purchase_status;
       }),
-      minValue: minValue(1)
+      minValue: minValue(1),
+      maxLength: maxLength(6)
     }
   }
 };

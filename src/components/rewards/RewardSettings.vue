@@ -204,7 +204,7 @@
                     <div class="row col-md-12">
                       <div class="mb-0 form-group fLabel col-md-10">
                         <label for>Manual coupons</label>
-                        <input type="text" class="form-control" id="mcoupn" name="mcoupn" />
+                        <input type="text" class="form-control" v-model="data.manual_coupon" id="mcoupn" name="mcoupn" />
                         <small>Add Coupons as comma separated values</small>
                       </div>
                     </div>

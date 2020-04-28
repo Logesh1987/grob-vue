@@ -47,6 +47,7 @@
                   />
                 <em class="error" v-if="!$v.referrer_reward_points.required">Field is required</em>
                 <em class="error" v-if="!$v.referrer_reward_points.minValue">Need a minimum value of {{$v.referrer_reward_points.$params.minValue.min}}</em>
+                <em class="error" v-if="!$v.referrer_reward_points.maxLength">Allowed {{$v.referrer_reward_points.$params.maxLength.max}} digits max</em> 
                 </div>
                 <div class="col-md-5 p-0 d-flex align-items-center">
                   <small>
@@ -73,6 +74,7 @@
                   />
                 <em class="error" v-if="!$v.rwd_points_percentage.required">Field is required</em>
                 <em class="error" v-if="!$v.rwd_points_percentage.minValue">Need a minimum value of {{$v.rwd_points_percentage.$params.minValue.min}}</em>
+                <em class="error" v-if="!$v.rwd_points_percentage.maxLength">Allowed {{$v.rwd_points_percentage.$params.maxLength.max}} digits max</em> 
                 </div>
                 <div class="col-md-5 p-0 d-flex align-items-center">
                   <small>
@@ -149,6 +151,7 @@
                 <input type="number" class="form-control" id="rpMcv" name="rpMcv" v-model="realtime_coupon_value_friend" />
                 <em class="error" v-if="!$v.realtime_coupon_value_friend.required">Field is required</em>
                 <em class="error" v-if="!$v.realtime_coupon_value_friend.minValue">Need a minimum value of {{$v.realtime_coupon_value_friend.$params.minValue.min}}</em>
+                <em class="error" v-if="!$v.realtime_coupon_value_friend.maxLength">Allowed {{$v.realtime_coupon_value_friend.$params.maxLength.max}} digits max</em> 
               </div>
             </div>
             <div class="row col-md-12">
@@ -157,6 +160,7 @@
                 <label for>Minimum Spend Value</label>
                 <input type="number" class="form-control" id="rpMsv" name="rpMsv" v-model="realtime_min_order_friend" />
                 <em class="error" v-if="!$v.realtime_min_order_friend.required">Field is required</em>
+                <em class="error" v-if="!$v.realtime_min_order_friend.maxLength">Allowed {{$v.realtime_min_order_friend.$params.maxLength.max}} digits max</em> 
               </div>
             </div>
           </div>
@@ -179,7 +183,7 @@
 <script>
 import RadioGroup from "@/components/RadioGroup";
 import { validationMixin } from "vuelidate";
-import { required, minValue, requiredIf } from "vuelidate/lib/validators";
+import { required, minValue, maxLength, requiredIf } from "vuelidate/lib/validators";
 
 export default {
   name: "ReferralProgram",
@@ -198,18 +202,22 @@ export default {
   validations: {
     referrer_reward_points: {
       required: requiredIf(function() {return this.status && this.is_rwd_points_percentage == 0}),
-      minValue: minValue(1)
+      minValue: minValue(1),
+      maxLength: maxLength(6)
     },
     rwd_points_percentage: {
       required: requiredIf(function() {return this.status && this.is_rwd_points_percentage == 0}),
-      minValue: minValue(1)
+      minValue: minValue(1),
+      maxLength: maxLength(6)
     },
     realtime_coupon_value_friend: {
       required: requiredIf(function() {return this.status && this.realtime_coupon_type_friend != 3}),
-      minValue: minValue(1)
+      minValue: minValue(1),
+      maxLength: maxLength(6)
     },
     realtime_min_order_friend: {
-      required: requiredIf(function() {return this.status})
+      required: requiredIf(function() {return this.status}),
+      maxLength: maxLength(6)
     }
 
     // welcome_points: {

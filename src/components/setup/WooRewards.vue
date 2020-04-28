@@ -25,6 +25,7 @@
               class="error"
               v-if="!$v.points.minValue"
             >Need a minimum value of {{$v.points.$params.minValue.min}}</em>
+            <em class="error" v-if="!$v.points.maxLength">Allowed {{$v.points.$params.maxLength.max}} digits max</em>
           </div>
           <div class="col-md-12">
             <div class="custom-control d-flex scale-8 to-00 custom-checkbox">
@@ -57,7 +58,7 @@
 
 <script>
 import { validationMixin } from "vuelidate";
-import { required, minValue, requiredIf } from "vuelidate/lib/validators";
+import { required, minValue, maxLength, requiredIf } from "vuelidate/lib/validators";
 
 export default {
   name: "WooRewards",
@@ -77,7 +78,8 @@ export default {
       required: requiredIf(function() {
         return this.review_status;
       }),
-      minValue: minValue(1)
+      minValue: minValue(1),
+      maxLength: maxLength(5)
     }
   }
 };

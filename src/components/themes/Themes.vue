@@ -168,7 +168,7 @@
             <b-tabs v-model="activeWidget" nav-wrapper-class="widget-tabs-nav">
               <b-tab title="Mobile" class="widget-tabs-panes" active>
                 <div class="form-group">
-                  <label>Widget Placement - Mobile</label>
+                  <label>Widget Placement</label>
                   <select class="form-control" v-model="wData.data.style_data.mobile_position">
                     <option
                       v-for="(value, name) in wData.data.mobile_widget_position"

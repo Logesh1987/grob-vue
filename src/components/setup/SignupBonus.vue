@@ -27,6 +27,7 @@
               />
               <em class="error" v-if="!$v.welcome_bonus.required">Field is required</em>
               <em class="error" v-if="!$v.welcome_bonus.minValue">Need a minimum value of {{$v.welcome_bonus.$params.minValue.min}}</em>
+              <em class="error" v-if="!$v.welcome_bonus.maxLength">Allowed {{$v.welcome_bonus.$params.maxLength.max}} digits max</em>
             </div>
           </div>
           <!-- <br><h6>Welcome Note</h6>
@@ -67,7 +68,7 @@
 
 <script>
 import { validationMixin } from "vuelidate";
-import { required, minValue, requiredIf } from "vuelidate/lib/validators";
+import { required, minValue, maxLength, requiredIf } from "vuelidate/lib/validators";
 
 export default {
   name: "SignupBonus",
@@ -87,7 +88,8 @@ export default {
       required: requiredIf(function() {
         return this.bonus_status;
       }),
-      minValue: minValue(1)
+      minValue: minValue(1),
+      maxLength: maxLength(6)
     }
   }
 };

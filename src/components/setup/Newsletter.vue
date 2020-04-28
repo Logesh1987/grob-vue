@@ -25,6 +25,7 @@
               class="error"
               v-if="!$v.worth_entries.minValue"
             >Need a minimum value of {{$v.worth_entries.$params.minValue.min}}</em>
+            <em class="error" v-if="!$v.worth_entries.maxLength">Allowed {{$v.worth_entries.$params.maxLength.max}} digits max</em>
           </div>
         </form>
       </div>
@@ -44,7 +45,7 @@
 
 <script>
 import { validationMixin } from "vuelidate";
-import { required, minValue, requiredIf } from "vuelidate/lib/validators";
+import { required, minValue, maxLength, requiredIf } from "vuelidate/lib/validators";
 
 export default {
   name: "Newsletter",
@@ -64,7 +65,8 @@ export default {
       required: requiredIf(function() {
         return this.status;
       }),
-      minValue: minValue(1)
+      minValue: minValue(1),
+      maxLength: maxLength(5)
     }
   }
 };

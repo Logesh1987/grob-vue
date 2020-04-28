@@ -25,6 +25,8 @@
               class="error"
               v-if="!$v.worth_entries.minValue"
             >Need a minimum value of {{$v.worth_entries.$params.minValue.min}}</em>
+            <em class="error" v-if="!$v.worth_entries.maxLength">Allowed {{$v.worth_entries.$params.maxLength.max}} digits max</em>
+            
           </div>
           <div class="form-group fLabel mb-5 col-md-12">
             <label for="inputEmail4">Facebook Share Text</label>
@@ -36,7 +38,7 @@
               v-model="settings.share_desc"
               name="fbSharetxt"
             ></textarea>
-            <!--<em class="error" v-if="!$v.share_desc.required">Field is required</em>-->
+            <em class="error" v-if="!$v.settings.share_desc.required">Field is required</em>
             <a
               href="#"
               class="btn btn-link mt-2 p-0 sampleModalTrigger"
@@ -54,7 +56,8 @@
               name="fbConnectUrl"
               v-model="settings.landing_url"
             />
-            <!--<em class="error" v-if="!$v.landing_url.required">Field is required</em>-->
+            <em class="error" v-if="!$v.settings.landing_url.required">Field is required</em>
+            <em class="error" v-if="!$v.settings.landing_url.url">Please fill valid URL</em>
           </div>
           <!-- <div class="col-md-12 ">
                             <div class="custom-control d-flex scale-8 to-00 custom-checkbox">
@@ -80,7 +83,7 @@
 
 <script>
 import { validationMixin } from "vuelidate";
-import { required, minValue, requiredIf } from "vuelidate/lib/validators";
+import { required, url, minValue, maxLength, requiredIf } from "vuelidate/lib/validators";
 
 export default {
   name: "FacebookShare",
@@ -100,18 +103,22 @@ export default {
       required: requiredIf(function() {
         return this.status;
       }),
-      minValue: minValue(0)
+      minValue: minValue(0),
+      maxLength: maxLength(5)
     },
- /*   share_desc: {
-      required: requiredIf(function() {
-        return this.status;
-      })
-    },
-    landing_url: {
-      required: requiredIf(function() {
-        return this.status;
-      })
-    } */
+    settings: {
+      share_desc: {
+        required: requiredIf(function() {
+          return this.status;
+        })
+      },
+      landing_url: {
+        required: requiredIf(function() {
+          return this.status;
+        }),
+        url
+      } 
+    }
   }
 };
 </script>
