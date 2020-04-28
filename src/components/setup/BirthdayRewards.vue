@@ -23,7 +23,7 @@
           <div class="row mr-0 ml-0 mt-2 mb-0 align-items-center">
             <div class="form-group fLabel mt-0 mb-0 col-md-5">
               <label for="bRewards">Reward Point</label>
-              <input type="number" class="form-control" id="bRewards" name="bRewards" v-model="nb_points" />
+              <input type="number" class="form-control" id="bRewards" name="bRewards" v-model="points.nb_points" />
             </div>
             <div class="col-md-5 p-0 asideInfo">to users when they enter their birthday</div>
             <label for="bRewards" generated="true" class="error col-md-10"></label>
@@ -32,7 +32,7 @@
           <div class="row mr-0 ml-0 mt-2 mb-0 align-items-center">
             <div class="form-group fLabel mt-0 mb-0 col-md-5">
               <label for="obRewards">Reward Point</label>
-              <input type="number" class="form-control" id="obRewards" name="obRewards" v-model="ob_points" />
+              <input type="number" class="form-control" id="obRewards" name="obRewards" v-model="reward.points.r_nb_points" />
             </div>
             <div class="col-md-5 p-0 asideInfo">on the birthday</div>
             <label for="obRewards" generated="true" class="error col-md-10"></label>
@@ -91,7 +91,7 @@ export default {
       }),
       minValue: minValue(100)
     },
-    ob_points: {
+    r_nb_points: {
       required: requiredIf(function() {
         return this.status;
       }),

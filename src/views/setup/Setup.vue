@@ -99,7 +99,7 @@
                     <BirthdayRewards
                       ref="BirthdayRewards"
                       :reset="resetSetupBlock"
-                      :data="data.setup.events.member_birthday"
+                      :data="data.setup.events"
                     />
                   </swiper-slide>
                   <swiper-slide data-ref="WooRewards">
