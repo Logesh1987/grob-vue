@@ -21,12 +21,19 @@
                     <strong>LIVE</strong>
                   </h6>
                   <label class="switch" for="programSwitch-1" @click="toggleStatus()">
-                    <input type="checkbox" v-model="live" true-value="1" false-value="0" id="programSwitch" />
+                    <input
+                      type="checkbox"
+                      v-model="live"
+                      true-value="1"
+                      false-value="0"
+                      id="programSwitch"
+                    />
                     <i></i>
                   </label>
                 </div>
                 <a
-                  href="https://maverickmav.org/css4/"
+                  v-if="setupData"
+                  :href="setupData.shop.url"
                   target="_blank"
                   class="btn btn-outline-dark"
                 >
@@ -329,7 +336,6 @@ export default {
   },
   computed: {
     ...mapState(["setupData", "rewardsData", "popupData", "widgetData"])
-    
   },
   watch: {
     setupData: function() {
@@ -345,13 +351,10 @@ export default {
       "updateLoyaltyStatus"
     ]),
     toggleStatus() {
-      var newStatus = this.live ==  "0" ? "1" : "0";
+      var newStatus = this.live == "0" ? "1" : "0";
       this.updateLoyaltyStatus(newStatus).then(res => {
         //console.log("-------------------------------------");
-        this.live = this.setupData.campaign.status
-        //console.log("-------------------------------------");
-        //setTimeout(e => (this.live = !this.live), 1000);
-        this.live = !this.live
+        this.live = newStatus;
       });
     },
     handleRating(rate) {
@@ -414,19 +417,18 @@ export default {
 
 <style lang="less" scoped>
 // setup steps save to local storage
-// reset settings add popup
 
 // SETUP
 // Do not close all three - DONE
 // save & proceed - save setup & goto themes - remove from rewards - DONE
 // on change setup value from other block - show save & proceed to rewards - DONE
-// on click reset - set the block values & post api
 
 // Congrats
-// open all by default
-
+// open all by default - DONE
+// --- congrats live mapping - DONE
 
 // --- widget setup - ux call
-// --- congrats live mapping
+// reset settings add popup
+// on click reset - set the block values & post api
 // --- Reset settings
 </style>
