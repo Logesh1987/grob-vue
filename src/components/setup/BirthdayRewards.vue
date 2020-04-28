@@ -85,17 +85,23 @@ export default {
     }
   },
   validations: {
-    nb_points: {
-      required: requiredIf(function() {
-        return this.status;
-      }),
-      minValue: minValue(100)
+    points: {
+      nb_points: {
+        required: requiredIf(function() {
+          return this.status;
+        }),
+        minValue: minValue(100)
+      }
     },
-    r_nb_points: {
-      required: requiredIf(function() {
-        return this.status;
-      }),
-      minValue: minValue(100)
+    reward: {
+      points: {
+        r_nb_points: {
+          required: requiredIf(function() {
+            return this.status;
+          }),
+          minValue: minValue(100)
+        }
+      }
     }
   }
 };
