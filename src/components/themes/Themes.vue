@@ -389,10 +389,10 @@ export default {
       pData: null,
       wData: null,
       icons: [
-        "https://image.flaticon.com/icons/svg/2781/2781195.svg",
-        "https://image.flaticon.com/icons/svg/2781/2781257.svg",
-        "https://image.flaticon.com/icons/svg/2781/2781267.svg",
-        "https://image.flaticon.com/icons/svg/2781/2781263.svg"
+        "https://upload-icon.s3.us-east-2.amazonaws.com/uploads/icons/png/8066178361581426688-64.png",
+        "https://upload-icon.s3.us-east-2.amazonaws.com/uploads/icons/png/13305864831581426691-64.png",
+        "https://upload-icon.s3.us-east-2.amazonaws.com/uploads/icons/png/2388916001581426689-64.png",
+        "https://upload-icon.s3.us-east-2.amazonaws.com/uploads/icons/png/12989878351582634759-64.png"
       ]
     };
   },

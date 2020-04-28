@@ -200,19 +200,14 @@
                       </div>
                     </div>
                   </b-tab>
-                  <b-tab title="Manual">                    
-                      <div class="row col-md-12">
-                        <div class="mb-0 form-group fLabel col-md-10">
-                          <label for>Manual coupons</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            id="mcoupn"
-                            name="mcoupn"
-                          />
-                          <small>Add Coupons as comma separated values</small>
-                        </div>
+                  <b-tab title="Manual">
+                    <div class="row col-md-12">
+                      <div class="mb-0 form-group fLabel col-md-10">
+                        <label for>Manual coupons</label>
+                        <input type="text" class="form-control" id="mcoupn" name="mcoupn" />
+                        <small>Add Coupons as comma separated values</small>
                       </div>
+                    </div>
                   </b-tab>
                 </b-tabs>
               </div>
@@ -258,7 +253,8 @@ export default {
         required_minimum_points: 100,
         is_unlimited: 1,
         quantity: 0,
-        image_url: "",
+        image_url:
+          "https://s3.us-east-1.amazonaws.com/devam.pro/gr/master/upload/img/683/83/3683_loyalty_1587031987.png",
         type: "Coupon",
         is_coupon: 1,
         order: 1,
@@ -276,30 +272,25 @@ export default {
     ...mapState(["rewardsData"])
   },
   methods: {
-    ...mapActions([
-      "addReward",
-      "getRewardsData",
-      "updateReward"
-    ]),
+    ...mapActions(["addReward", "getRewardsData", "updateReward"]),
     getDataById: function(id) {
       return this.rewardsData.find(data => data.id == id);
     },
     handleSubmit: function() {
-      // EDIT REWARD - post functionality 
+      // EDIT REWARD - post functionality
       if (this.id) {
         this.updateReward(this.data).then(res => {
           this.getRewardsData().then(re => {
             console.log("Reward updated SUccessfuly");
-          }); 
+          });
         });
-        
       } else {
-        // ADD REWARD - post functionality 
-        this.data.status = 1; 
+        // ADD REWARD - post functionality
+        this.data.status = 1;
         this.addReward(this.data).then(res => {
           this.getRewardsData().then(re => {
             console.log("Reward Added SUccessfuly");
-          }); 
+          });
         });
       }
       this.closeModal();
