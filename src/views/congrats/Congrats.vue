@@ -1,6 +1,7 @@
 <template>
   <div class="grOnboarding">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <Loader v-if="loading" />
     <div class="congratsPage" :class="{'paused': live == '0'}">
       <header>
         <div class="contentArea">
@@ -302,6 +303,7 @@ import SetupList from "@/components/congrats/SetupList";
 import RewardsList from "@/components/rewards/RewardsList";
 import RewardSettings from "@/components/rewards/RewardSettings";
 import Themes from "@/components/themes/Themes";
+import Loader from "@/components/Loader";
 
 // Install BootstrapVue
 Vue.use(BootstrapVue);
@@ -309,7 +311,14 @@ Vue.use(IconsPlugin);
 
 export default {
   name: "Congrats",
-  components: { Fragment, SetupList, RewardsList, RewardSettings, Themes },
+  components: {
+    Loader,
+    Fragment,
+    SetupList,
+    RewardsList,
+    RewardSettings,
+    Themes
+  },
   data: function() {
     return {
       live: null,
@@ -335,7 +344,13 @@ export default {
     };
   },
   computed: {
-    ...mapState(["setupData", "rewardsData", "popupData", "widgetData"])
+    ...mapState([
+      "loading",
+      "setupData",
+      "rewardsData",
+      "popupData",
+      "widgetData"
+    ])
   },
   watch: {
     setupData: function() {

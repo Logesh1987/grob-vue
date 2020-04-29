@@ -2,12 +2,13 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import Axios from 'axios';
 import { getCurrencySymbol } from '@/utils';
-import defaultData from './default-setup'
+import defaultData from './default-setup';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
 	state: {
+		loading: false,
 		defaultSetup: defaultData,
 		setupData: null,
 		rewardsData: null,
@@ -15,6 +16,12 @@ export default new Vuex.Store({
 		widgetData: null
 	},
 	mutations: {
+		enableLoader: (state) => {
+			state.loading = true;
+		},
+		disableLoader: (state) => {
+			state.loading = false;
+		},
 		updateSetupData: (state, payload) => {
 			state.setupData = payload;
 		},
@@ -30,14 +37,14 @@ export default new Vuex.Store({
 	},
 	actions: {
 		getSetupData: ({ commit, state }) => {
-			//return Axios.get("http://localhost:3000/setup").then(res => {
-			//alert("TEST");
+			commit('enableLoader');
 			return Axios.get(
 				'https://jai.devam.pro/gr/admin/onboarding?id_shop=1307&admin_email=jayakumar@appsmav.com'
 			).then((res) => {
 				const tempData = res.data.data;
 				tempData.points_setup.currency = getCurrencySymbol(tempData.points_setup.currency);
 				commit('updateSetupData', tempData);
+				commit('disableLoader');
 				//console.log("*****************************************************");
 				//console.log(JSON.stringify(res.data.data));
 				//console.log("*****************************************************");
@@ -54,6 +61,7 @@ export default new Vuex.Store({
 					Accept: '*/*'
 				}
 			};
+			commit('enableLoader');
 
 			//return Axios.post("https://jai.devam.pro/gr/", postData, headersData).then(res => {
 			return Axios.post(
@@ -63,7 +71,7 @@ export default new Vuex.Store({
 			)
 				.then((res) => {
 					commit('updateSetupData', payload);
-					console.log(res);
+					commit('disableLoader');
 					return res;
 				})
 				.catch((err) => {
@@ -71,10 +79,12 @@ export default new Vuex.Store({
 				});
 		},
 		getRewardsData: ({ commit, state }) => {
+			commit('enableLoader');
 			return Axios.get(
 				'https://jai.devam.pro/gr/admin/rewards?id_shop=1307&admin_email=jayakumar@appsmav.com'
 			).then((res) => {
 				commit('updateRewardsData', res.data.data);
+				commit('disableLoader');
 				return state.rewardsData;
 			});
 		},
@@ -87,12 +97,14 @@ export default new Vuex.Store({
 					Accept: '*/*'
 				}
 			};
+			commit('enableLoader');
 			let result = Axios.post(
 				'https://jai.devam.pro/gr/admin/rewards?id_shop=1307&admin_email=jayakumar@appsmav.com',
 				payload,
 				headersData
 			)
 				.then((res) => {
+					commit('disableLoader');
 					return res;
 				})
 				.catch((err) => {
@@ -109,12 +121,14 @@ export default new Vuex.Store({
 					Accept: '*/*'
 				}
 			};
+			commit('enableLoader');
 			let result = Axios.put(
 				'https://jai.devam.pro/gr/admin/rewards?id_shop=1307&admin_email=jayakumar@appsmav.com',
 				payload,
 				headersData
 			)
 				.then((res) => {
+					commit('disableLoader');
 					return res;
 				})
 				.catch((err) => {
@@ -124,6 +138,7 @@ export default new Vuex.Store({
 		},
 
 		deleteReward: ({ commit, state }, id) => {
+			commit('enableLoader');
 			Axios.delete(
 				'https://jai.devam.pro/gr/admin/rewards?id_shop=1307&admin_email=jayakumar@appsmav.com&id=' + id
 			)
@@ -135,6 +150,7 @@ export default new Vuex.Store({
 							return item['id'] != id;
 						});
 						commit('updateRewardsData', myNewArray);
+						commit('disableLoader');
 					}
 				})
 				.catch((err) => {
@@ -142,11 +158,12 @@ export default new Vuex.Store({
 				});
 		},
 		getPopupData: ({ commit, state }) => {
-			//return Axios.get("http://localhost:3000/themes").then(res => {
+			commit('enableLoader');
 			return Axios.get(
 				'https://jai.devam.pro/gr/admin/themes?id_shop=1307&admin_email=jayakumar@appsmav.com'
 			).then((res) => {
 				commit('updatePopupData', res.data.data);
+				commit('disableLoader');
 				return state.popupData;
 			});
 		},
@@ -157,16 +174,19 @@ export default new Vuex.Store({
 					Accept: '*/*'
 				}
 			};
+			commit('enableLoader');
 			return Axios.put(
 				'https://jai.devam.pro/gr/admin/themes?id_shop=1307&admin_email=jayakumar@appsmav.com',
 				payload,
 				headersData
 			).then((res) => {
 				commit('updatePopupData', payload);
+				commit('disableLoader');
 				return res;
 			});
 		},
 		getWidgetData: ({ commit, state }) => {
+			commit('enableLoader');
 			return Axios.get(
 				'https://jai.devam.pro/gr/admin/widgets?id_shop=1307&admin_email=jayakumar@appsmav.com'
 			).then((res) => {
@@ -174,6 +194,7 @@ export default new Vuex.Store({
 				//console.log(JSON.stringify(res.data.data));
 				//console.log("#####################################################");
 				commit('updateWidgetData', res.data);
+				commit('disableLoader');
 				return state.widgetData;
 			});
 		},
@@ -184,12 +205,14 @@ export default new Vuex.Store({
 					Accept: '*/*'
 				}
 			};
+			commit('enableLoader');
 			return Axios.put(
 				'https://jai.devam.pro/gr/admin/widgets?id_shop=1307&admin_email=jayakumar@appsmav.com',
 				payload,
 				headersData
 			).then((res) => {
 				commit('updateWidgetData', payload);
+				commit('disableLoader');
 				return res;
 			});
 		},
@@ -200,12 +223,13 @@ export default new Vuex.Store({
 					Accept: '*/*'
 				}
 			};
+			commit('enableLoader');
 			return Axios.post(
 				'https://jai.devam.pro/gr/admin/onboarding/updateLoyalty?id_shop=1307&admin_email=jayakumar@appsmav.com',
-				{'status':status},
+				{ status: status },
 				headersData
 			).then((res) => {
-				//commit('updateWidgetData', status);
+				commit('disableLoader');
 				return res;
 			});
 		}
