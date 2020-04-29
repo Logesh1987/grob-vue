@@ -529,6 +529,7 @@ export default {
     },
     saveRewards() {
       this.getPopupData().then(res => {
+        this.getWidgetData();
         this.setProgress("themesBlock");
       });
 
@@ -545,6 +546,7 @@ export default {
           this.setProgress("themesBlock");
           this.$bvModal.hide("modal-skip");
           this.getRewardsData();
+          this.getWidgetData();
           document
             .querySelector(".setupSwiper-pagination")
             .setAttribute("data-completed", "completed");
@@ -588,7 +590,10 @@ export default {
           this.getRewardsData();
         }
         if (inProgress === "themesBlock") {
-          this.getPopupData().then(re => this.getRewardsData());
+          this.getPopupData().then(re => {
+            this.getRewardsData();
+            this.getWidgetData();
+          });
         }
       }
     });

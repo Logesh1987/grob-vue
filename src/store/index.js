@@ -211,7 +211,7 @@ export default new Vuex.Store({
 				payload,
 				headersData
 			).then((res) => {
-				commit('updateWidgetData', payload);
+				commit('updateWidgetData', payload.data);
 				commit('disableLoader');
 				return res;
 			});
