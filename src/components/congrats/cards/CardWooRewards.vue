@@ -4,7 +4,14 @@
       <h3>WOOReview Rewards</h3>
       <p>Reward reviews of products, services by incentivizing</p>
       <label class="switch" for="card-woor">
-        <input type="checkbox" true-value="1" false-value="0" v-model="data.review_status" @change="saveData" id="card-woor" />
+        <input
+          type="checkbox"
+          true-value="1"
+          false-value="0"
+          v-model="data.review_status"
+          @change="saveData"
+          id="card-woor"
+        />
         <i></i>
       </label>
     </div>
@@ -23,7 +30,7 @@
     >
       <template v-slot:default>
         <div class="setupContainer">
-          <WooRewards :data="data" />
+          <WooRewards :data="data" :default="defaultSetup.woo_review" />
         </div>
       </template>
       <template v-slot:modal-footer>
@@ -39,10 +46,14 @@
 </template>
 <script>
 import WooRewards from "@/components/setup/WooRewards.vue";
+import { mapState } from "vuex";
 export default {
   name: "CardWooRewards",
   props: ["data", "saveData", "cancelSave"],
   components: { WooRewards },
+  computed: {
+    ...mapState(["defaultSetup"])
+  },
   methods: {
     updateData() {
       this.saveData();

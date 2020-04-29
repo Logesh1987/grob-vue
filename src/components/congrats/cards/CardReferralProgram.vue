@@ -4,14 +4,23 @@
       <h3>Referral Program</h3>
       <p>Setup refer a friend program</p>
       <label class="switch" for="card-rp">
-        <input type="checkbox" true-value="1" false-value="0" v-model="data.status" @change="saveData" id="card-rp" />
+        <input
+          type="checkbox"
+          true-value="1"
+          false-value="0"
+          v-model="data.status"
+          @change="saveData"
+          id="card-rp"
+        />
         <i></i>
       </label>
     </div>
     <div class="setupListBody">
       <ul class="mt-4 mb-4">
         <li>1 referral to have {{data.is_rwd_points_percentage ? data.rwd_points_percentage : data.referrer_reward_points}} reward {{data.is_rwd_points_percentage ? 'percentage' : 'points'}}</li>
-        <li v-if="data.realtime_coupon_type_friend ==  3 ">Free shipping, {{parseInt(data.realtime_min_order_friend) ? data.realtime_min_order_friend : 'no'}} minimum value </li>
+        <li
+          v-if="data.realtime_coupon_type_friend ==  3 "
+        >Free shipping, {{parseInt(data.realtime_min_order_friend) ? data.realtime_min_order_friend : 'no'}} minimum value</li>
         <li v-else>
           {{data.realtime_coupon_type_friend == 1 ? data.realtime_coupon_value_friend : data.realtime_coupon_type_friend == 2 ? data.realtime_coupon_value_friend+'%': ''}}
           coupon with {{data.realtime_coupon_type_friend == 1 ? 'Fixed' : data.realtime_coupon_type_friend == 2 ? 'Percentage': ''}} off,
@@ -29,7 +38,7 @@
     >
       <template v-slot:default>
         <div class="setupContainer">
-          <ReferralProgram :data="data" />
+          <ReferralProgram :data="data" :default="defaultSetup.referral_program" />
         </div>
       </template>
       <template v-slot:modal-footer>
@@ -45,10 +54,14 @@
 </template>
 <script>
 import ReferralProgram from "@/components/setup/ReferralProgram.vue";
+import { mapState } from "vuex";
 export default {
   name: "CardReferralProgram",
   props: ["data", "saveData", "cancelSave"],
   components: { ReferralProgram },
+  computed: {
+    ...mapState(["defaultSetup"])
+  },
   methods: {
     updateData() {
       this.saveData();

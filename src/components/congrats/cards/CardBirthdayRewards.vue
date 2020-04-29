@@ -27,11 +27,15 @@
     >
       <template v-slot:default>
         <div class="setupContainer">
-          <BirthdayRewards :data="data" />
+          <BirthdayRewards :data="data" :default="defaultSetup.birthday_event" />
         </div>
       </template>
       <template v-slot:modal-footer>
-        <b-button variant="outline-secondary" class="float-right" @click.prevent="cancelModal">Cancel</b-button>
+        <b-button
+          variant="outline-secondary"
+          class="float-right"
+          @click.prevent="cancelModal"
+        >Cancel</b-button>
         <b-button variant="warning" class="float-right" @click.prevent="updateData">Save & update</b-button>
       </template>
     </b-modal>
@@ -39,10 +43,14 @@
 </template>
 <script>
 import BirthdayRewards from "@/components/setup/BirthdayRewards.vue";
+import { mapState } from "vuex";
 export default {
   name: "CardBirthdayRewards",
   props: ["data", "saveData", "cancelSave"],
   components: { BirthdayRewards },
+  computed: {
+    ...mapState(["defaultSetup"])
+  },
   methods: {
     updateData() {
       this.saveData();

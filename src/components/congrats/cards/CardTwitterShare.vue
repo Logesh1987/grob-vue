@@ -4,7 +4,14 @@
       <h3>Twitter Share Setup</h3>
       <p>When members share your message on Twitter</p>
       <label class="switch" for="card-twshare">
-        <input type="checkbox" true-value="1" false-value="0" v-model="data.status" @change="saveData" id="card-twshare" />
+        <input
+          type="checkbox"
+          true-value="1"
+          false-value="0"
+          v-model="data.status"
+          @change="saveData"
+          id="card-twshare"
+        />
         <i></i>
       </label>
     </div>
@@ -23,11 +30,15 @@
     >
       <template v-slot:default>
         <div class="setupContainer">
-          <TwitterShare :data="data" />
+          <TwitterShare :data="data" :default="defaultSetup.twitter_share" />
         </div>
       </template>
       <template v-slot:modal-footer>
-        <b-button variant="outline-secondary" class="float-right" @click.prevent="cancelModal">Cancel</b-button>
+        <b-button
+          variant="outline-secondary"
+          class="float-right"
+          @click.prevent="cancelModal"
+        >Cancel</b-button>
         <b-button variant="warning" class="float-right" @click.prevent="updateData">Save & update</b-button>
       </template>
     </b-modal>
@@ -35,10 +46,14 @@
 </template>
 <script>
 import TwitterShare from "@/components/setup/TwitterShare.vue";
+import { mapState } from "vuex";
 export default {
   name: "CardTwitterShare",
   props: ["data", "saveData", "cancelSave"],
   components: { TwitterShare },
+  computed: {
+    ...mapState(["defaultSetup"])
+  },
   methods: {
     updateData() {
       this.saveData();

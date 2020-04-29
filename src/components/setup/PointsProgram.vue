@@ -146,9 +146,11 @@ export default {
       this.data.price = this.default.price;
       this.data.points = this.default.points;
       this.data.points_percentage = this.default.points_percentage;
-      setTimeout(() => {
-        this.triggerReset();
-      }, 500);
+      if (this.triggerReset) {
+        setTimeout(() => {
+          this.triggerReset();
+        }, 500);
+      }
     }
   },
   watch: {

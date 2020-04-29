@@ -64,9 +64,11 @@ export default {
     },
     resetSettings() {
       this.data.worth_entries = this.default.worth_entries;
-      setTimeout(() => {
-        this.triggerReset();
-      }, 500);
+      if (this.triggerReset) {
+        setTimeout(() => {
+          this.triggerReset();
+        }, 500);
+      }
     }
   },
   validations: {

@@ -97,9 +97,11 @@ export default {
     },
     resetSettings() {
       this.data.welcome_bonus = this.default.welcome_bonus;
-      setTimeout(() => {
-        this.triggerReset();
-      }, 500);
+      if (this.triggerReset) {
+        setTimeout(() => {
+          this.triggerReset();
+        }, 500);
+      }
     }
   },
   validations: {

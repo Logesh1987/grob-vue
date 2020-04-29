@@ -110,9 +110,11 @@ export default {
       this.data.worth_entries = this.default.worth_entries;
       this.data.settings.share_desc = this.default.share_desc;
       this.data.settings.landing_url = this.default.landing_url;
-      setTimeout(() => {
-        this.triggerReset();
-      }, 500);
+      if (this.triggerReset) {
+        setTimeout(() => {
+          this.triggerReset();
+        }, 500);
+      }
     }
   },
   validations: {

@@ -111,9 +111,11 @@ export default {
     resetSettings() {
       this.data.points.nb_points = this.default.entry_points;
       this.data.reward.points.r_nb_points = this.default.birthday_points;
-      setTimeout(() => {
-        this.triggerReset();
-      }, 500);
+      if (this.triggerReset) {
+        setTimeout(() => {
+          this.triggerReset();
+        }, 500);
+      }
     }
   },
   validations: {

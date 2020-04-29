@@ -4,7 +4,14 @@
       <h3>Pay by Points</h3>
       <p>Setup if customers can pay using their points</p>
       <label class="switch" for="card-paybypoint">
-        <input type="checkbox" true-value="1" false-value="0" v-model="data.redeem_purchase_status" @change="saveData" id="card-paybypoint" />
+        <input
+          type="checkbox"
+          true-value="1"
+          false-value="0"
+          v-model="data.redeem_purchase_status"
+          @change="saveData"
+          id="card-paybypoint"
+        />
         <i></i>
       </label>
     </div>
@@ -27,7 +34,11 @@
         </div>
       </template>
       <template v-slot:modal-footer>
-        <b-button variant="outline-secondary" class="float-right" @click.prevent="cancelModal">Cancel</b-button>
+        <b-button
+          variant="outline-secondary"
+          class="float-right"
+          @click.prevent="cancelModal"
+        >Cancel</b-button>
         <b-button variant="warning" class="float-right" @click.prevent="updateData">Save & update</b-button>
       </template>
     </b-modal>

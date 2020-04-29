@@ -32,7 +32,7 @@
     >
       <template v-slot:default>
         <div class="setupContainer">
-          <PointsProgram :data="data" />
+          <PointsProgram ref="PointsProgram" :data="data" :default="defaultSetup.points_program" />
         </div>
       </template>
       <template v-slot:modal-footer>
@@ -48,10 +48,14 @@
 </template>
 <script>
 import PointsProgram from "@/components/setup/PointsProgram.vue";
+import { mapState } from "vuex";
 export default {
   name: "CardPointsProgram",
   props: ["data", "saveData", "cancelSave"],
   components: { PointsProgram },
+  computed: {
+    ...mapState(["defaultSetup"])
+  },
   methods: {
     updateData() {
       this.saveData();

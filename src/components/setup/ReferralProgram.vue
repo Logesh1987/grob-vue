@@ -230,9 +230,11 @@ export default {
       this.data.realtime_min_order_friend = this.default.realtime_min_order_friend;
       this.data.is_rwd_points_percentage = this.default.is_rwd_points_percentage;
       this.data.realtime_coupon_type_friend = this.default.realtime_coupon_type_friend;
-      setTimeout(() => {
-        this.triggerReset();
-      }, 500);
+      if (this.triggerReset) {
+        setTimeout(() => {
+          this.triggerReset();
+        }, 500);
+      }
     }
   },
   validations: {

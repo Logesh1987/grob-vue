@@ -110,9 +110,11 @@ export default {
       this.worth_entries = this.default.worth_entries;
       this.settings.tweet = this.default.tweet;
       this.settings.tweet_url = this.default.tweet_url;
-      setTimeout(() => {
-        this.triggerReset();
-      }, 500);
+      if (this.triggerReset) {
+        setTimeout(() => {
+          this.triggerReset();
+        }, 500);
+      }
     }
   },
   validations: {

@@ -85,9 +85,11 @@ export default {
     resetSettings() {
       this.data.points = this.default.points;
       this.data.is_approved_only = this.default.is_approved_only;
-      setTimeout(() => {
-        this.triggerReset();
-      }, 500);
+      if (this.triggerReset) {
+        setTimeout(() => {
+          this.triggerReset();
+        }, 500);
+      }
     }
   },
   validations: {

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="setupItemContainer" v-if="this.data">
+    <div class="setupItemContainer" v-if="data">
       <CardPointsProgram
         v-if="data.points_setup.purchase_status"
         :data="data.points_setup"
@@ -38,8 +38,8 @@
         :cancelSave="cancelSave"
       />
       <CardBirthdayRewards
-        v-if="data.events.member_birthday.status"
-        :data="data.events.member_birthday"
+        v-if="data.events.status"
+        :data="data.events"
         :saveData="saveData"
         :cancelSave="cancelSave"
       />
@@ -101,8 +101,8 @@
         :cancelSave="cancelSave"
       />
       <CardBirthdayRewards
-        v-if="!data.events.member_birthday.status"
-        :data="data.events.member_birthday"
+        v-if="!data.events.status"
+        :data="data.events"
         :saveData="saveData"
         :cancelSave="cancelSave"
       />
