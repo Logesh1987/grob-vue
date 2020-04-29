@@ -74,7 +74,12 @@
 
 <script>
 import { validationMixin } from "vuelidate";
-import { required, minValue, requiredIf } from "vuelidate/lib/validators";
+import {
+  required,
+  minValue,
+  requiredIf,
+  maxLength
+} from "vuelidate/lib/validators";
 import ResetBlock from "./ResetBlock";
 
 export default {
