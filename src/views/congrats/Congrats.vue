@@ -1,6 +1,7 @@
 <template>
   <div class="grOnboarding">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <Loader v-if="loading" />
     <div class="congratsPage" :class="{'paused': live == '0'}">
       <header>
         <div class="contentArea">
@@ -302,6 +303,7 @@ import SetupList from "@/components/congrats/SetupList";
 import RewardsList from "@/components/rewards/RewardsList";
 import RewardSettings from "@/components/rewards/RewardSettings";
 import Themes from "@/components/themes/Themes";
+import Loader from "@/components/Loader";
 
 // Install BootstrapVue
 Vue.use(BootstrapVue);
@@ -309,7 +311,14 @@ Vue.use(IconsPlugin);
 
 export default {
   name: "Congrats",
-  components: { Fragment, SetupList, RewardsList, RewardSettings, Themes },
+  components: {
+    Loader,
+    Fragment,
+    SetupList,
+    RewardsList,
+    RewardSettings,
+    Themes
+  },
   data: function() {
     return {
       live: null,
@@ -335,7 +344,13 @@ export default {
     };
   },
   computed: {
-    ...mapState(["setupData", "rewardsData", "popupData", "widgetData"])
+    ...mapState([
+      "loading",
+      "setupData",
+      "rewardsData",
+      "popupData",
+      "widgetData"
+    ])
   },
   watch: {
     setupData: function() {
@@ -411,6 +426,9 @@ export default {
     }
   },
   mounted: function() {
+    if (window.localStorage.getItem("inProgress") !== "themesBlock") {
+      this.$router.push("setup");
+    }
     if (this.rewardsData == null) {
       this.getRewardsData();
     }
@@ -436,8 +454,8 @@ export default {
 // open all by default - DONE
 // --- congrats live mapping - DONE
 
-// --- widget setup - ux call
-// reset settings add popup
-// on click reset - set the block values & post api
-// --- Reset settings
+// --- widget setup - ux call - DONE
+// reset settings add popup - DONE
+// on click reset - set the block values & post api - DONE
+// --- Reset settings - DONE
 </style>

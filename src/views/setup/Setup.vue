@@ -1,6 +1,7 @@
 <template>
   <div class="grOnboarding">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <Loader v-if="loading" />
     <div class="setupPage">
       <header>
         <div class="grad">
@@ -380,6 +381,7 @@ import Newsletter from "@/components/setup/Newsletter";
 import RewardsList from "@/components/rewards/RewardsList";
 import RewardSettings from "@/components/rewards/RewardSettings";
 import Themes from "@/components/themes/Themes";
+import Loader from "@/components/Loader";
 
 // Install BootstrapVue
 Vue.use(BootstrapVue);
@@ -429,10 +431,12 @@ export default {
     FacebookShare,
     RewardsList,
     RewardSettings,
-    Themes
+    Themes,
+    Loader
   },
   computed: {
     ...mapState([
+      "loading",
       "setupData",
       "rewardsData",
       "popupData",
@@ -525,6 +529,7 @@ export default {
     },
     saveRewards() {
       this.getPopupData().then(res => {
+        this.getWidgetData();
         this.setProgress("themesBlock");
       });
 
@@ -541,6 +546,7 @@ export default {
           this.setProgress("themesBlock");
           this.$bvModal.hide("modal-skip");
           this.getRewardsData();
+          this.getWidgetData();
           document
             .querySelector(".setupSwiper-pagination")
             .setAttribute("data-completed", "completed");
@@ -584,7 +590,10 @@ export default {
           this.getRewardsData();
         }
         if (inProgress === "themesBlock") {
-          this.getPopupData().then(re => this.getRewardsData());
+          this.getPopupData().then(re => {
+            this.getRewardsData();
+            this.getWidgetData();
+          });
         }
       }
     });

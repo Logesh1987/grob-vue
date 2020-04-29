@@ -400,10 +400,11 @@ export default {
     ...mapState(["popupData", "widgetData"])
   },
   watch: {
-    "$store.state.widgetData": function() {
-      if (this.page === "congrats") {
+    "$store.state.widgetData": {
+      handler() {
         this.wData = this.widgetData;
-      }
+      },
+      deep: true
     }
   },
   methods: {
@@ -411,10 +412,7 @@ export default {
     handlePdataSave: function() {
       this.saveThemeSettings(this.pData).then(res => {
         if (this.page === "setup") {
-          this.getWidgetData().then(response => {
-            this.wData = response;
-            this.tabIndex = 1;
-          });
+          this.tabIndex = 1;
         }
       });
     },
