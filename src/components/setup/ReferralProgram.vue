@@ -8,7 +8,7 @@
           type="checkbox"
           name="mainSwitch"
           v-model="status"
-          true-value="1" 
+          true-value="1"
           false-value="0"
           id="d41"
         />
@@ -30,11 +30,7 @@
                 v-model="is_rwd_points_percentage"
               ></RadioGroup>
             </div>
-            <div
-              class="referralOffer"
-              id="referral_fixed"
-              v-if="is_rwd_points_percentage == 0"
-            >
+            <div class="referralOffer" id="referral_fixed" v-if="is_rwd_points_percentage == 0">
               <div class="d-flex">
                 <div class="mt-2 mb-2 form-group fLabel col-md-5">
                   <label for>Reward points</label>
@@ -45,9 +41,15 @@
                     name="rpRewardpoints"
                     v-model="referrer_reward_points"
                   />
-                <em class="error" v-if="!$v.referrer_reward_points.required">Field is required</em>
-                <em class="error" v-if="!$v.referrer_reward_points.minValue">Need a minimum value of {{$v.referrer_reward_points.$params.minValue.min}}</em>
-                <em class="error" v-if="!$v.referrer_reward_points.maxLength">Allowed {{$v.referrer_reward_points.$params.maxLength.max}} digits max</em> 
+                  <em class="error" v-if="!$v.referrer_reward_points.required">Field is required</em>
+                  <em
+                    class="error"
+                    v-if="!$v.referrer_reward_points.minValue"
+                  >Need a minimum value of {{$v.referrer_reward_points.$params.minValue.min}}</em>
+                  <em
+                    class="error"
+                    v-if="!$v.referrer_reward_points.maxLength"
+                  >Allowed {{$v.referrer_reward_points.$params.maxLength.max}} digits max</em>
                 </div>
                 <div class="col-md-5 p-0 d-flex align-items-center">
                   <small>
@@ -72,9 +74,15 @@
                     name="rpRewardpoints"
                     v-model="rwd_points_percentage"
                   />
-                <em class="error" v-if="!$v.rwd_points_percentage.required">Field is required</em>
-                <em class="error" v-if="!$v.rwd_points_percentage.minValue">Need a minimum value of {{$v.rwd_points_percentage.$params.minValue.min}}</em>
-                <em class="error" v-if="!$v.rwd_points_percentage.maxLength">Allowed {{$v.rwd_points_percentage.$params.maxLength.max}} digits max</em> 
+                  <em class="error" v-if="!$v.rwd_points_percentage.required">Field is required</em>
+                  <em
+                    class="error"
+                    v-if="!$v.rwd_points_percentage.minValue"
+                  >Need a minimum value of {{$v.rwd_points_percentage.$params.minValue.min}}</em>
+                  <em
+                    class="error"
+                    v-if="!$v.rwd_points_percentage.maxLength"
+                  >Allowed {{$v.rwd_points_percentage.$params.maxLength.max}} digits max</em>
                 </div>
                 <div class="col-md-5 p-0 d-flex align-items-center">
                   <small>
@@ -141,26 +149,44 @@
                 v-model="realtime_coupon_type_friend"
               ></RadioGroup>
             </div>
-            <div
-              class="row col-md-12 maxCouponValue"
-              v-if="realtime_coupon_type_friend != 3"
-            >
+            <div class="row col-md-12 maxCouponValue" v-if="realtime_coupon_type_friend != 3">
               <div class="form-group fLabel col-md-6">
                 <div class="input-group-prepend">{{ currency }}</div>
                 <label for>Max. Coupon Value</label>
-                <input type="number" class="form-control" id="rpMcv" name="rpMcv" v-model="realtime_coupon_value_friend" />
+                <input
+                  type="number"
+                  class="form-control"
+                  id="rpMcv"
+                  name="rpMcv"
+                  v-model="realtime_coupon_value_friend"
+                />
                 <em class="error" v-if="!$v.realtime_coupon_value_friend.required">Field is required</em>
-                <em class="error" v-if="!$v.realtime_coupon_value_friend.minValue">Need a minimum value of {{$v.realtime_coupon_value_friend.$params.minValue.min}}</em>
-                <em class="error" v-if="!$v.realtime_coupon_value_friend.maxLength">Allowed {{$v.realtime_coupon_value_friend.$params.maxLength.max}} digits max</em> 
+                <em
+                  class="error"
+                  v-if="!$v.realtime_coupon_value_friend.minValue"
+                >Need a minimum value of {{$v.realtime_coupon_value_friend.$params.minValue.min}}</em>
+                <em
+                  class="error"
+                  v-if="!$v.realtime_coupon_value_friend.maxLength"
+                >Allowed {{$v.realtime_coupon_value_friend.$params.maxLength.max}} digits max</em>
               </div>
             </div>
             <div class="row col-md-12">
               <div class="mb-0 form-group fLabel col-md-6">
                 <div class="input-group-prepend">{{ currency }}</div>
                 <label for>Minimum Spend Value</label>
-                <input type="number" class="form-control" id="rpMsv" name="rpMsv" v-model="realtime_min_order_friend" />
+                <input
+                  type="number"
+                  class="form-control"
+                  id="rpMsv"
+                  name="rpMsv"
+                  v-model="realtime_min_order_friend"
+                />
                 <em class="error" v-if="!$v.realtime_min_order_friend.required">Field is required</em>
-                <em class="error" v-if="!$v.realtime_min_order_friend.maxLength">Allowed {{$v.realtime_min_order_friend.$params.maxLength.max}} digits max</em> 
+                <em
+                  class="error"
+                  v-if="!$v.realtime_min_order_friend.maxLength"
+                >Allowed {{$v.realtime_min_order_friend.$params.maxLength.max}} digits max</em>
               </div>
             </div>
           </div>
@@ -168,14 +194,7 @@
       </div>
     </div>
     <div class="stepFoot d-flex justify-content-end">
-      <a
-        href="#"
-        class="resetSetting"
-        onclick="document.getElementById('form-referral-program').reset();"
-      >
-        <i class="material-icons">refresh</i>
-        <u>Reset to recommended settings</u>
-      </a>
+      <ResetBlock :handleReset="resetSettings" id="ReferralProgram" />
     </div>
   </div>
 </template>
@@ -183,13 +202,14 @@
 <script>
 import RadioGroup from "@/components/RadioGroup";
 import { validationMixin } from "vuelidate";
-import { required, minValue, maxLength, requiredIf } from "vuelidate/lib/validators";
+import { required, minValue, requiredIf } from "vuelidate/lib/validators";
+import ResetBlock from "./ResetBlock";
 
 export default {
   name: "ReferralProgram",
-  props: ["data", 'currency'],
+  props: ["data", "currency", "default", "triggerReset"],
   mixins: [validationMixin],
-  components: { RadioGroup },
+  components: { RadioGroup, ResetBlock },
   data: function() {
     return this.data;
   },
@@ -197,26 +217,45 @@ export default {
     submit() {
       this.$v.$touch();
       return !this.$v.$invalid;
+    },
+    resetSettings() {
+      this.data.referrer_reward_points = this.default.referrer_reward_points;
+      this.data.rwd_points_percentage = this.default.rwd_points_percentage;
+      this.data.realtime_coupon_value_friend = this.default.realtime_coupon_value_friend;
+      this.data.realtime_min_order_friend = this.default.realtime_min_order_friend;
+      this.data.is_rwd_points_percentage = this.default.is_rwd_points_percentage;
+      this.data.realtime_coupon_type_friend = this.default.realtime_coupon_type_friend;
+      setTimeout(() => {
+        this.triggerReset();
+      }, 500);
     }
   },
   validations: {
     referrer_reward_points: {
-      required: requiredIf(function() {return this.status && this.is_rwd_points_percentage == 0}),
+      required: requiredIf(function() {
+        return this.status && this.is_rwd_points_percentage == 0;
+      }),
       minValue: minValue(1),
       maxLength: maxLength(6)
     },
     rwd_points_percentage: {
-      required: requiredIf(function() {return this.status && this.is_rwd_points_percentage == 0}),
+      required: requiredIf(function() {
+        return this.status && this.is_rwd_points_percentage == 0;
+      }),
       minValue: minValue(1),
       maxLength: maxLength(6)
     },
     realtime_coupon_value_friend: {
-      required: requiredIf(function() {return this.status && this.realtime_coupon_type_friend != 3}),
+      required: requiredIf(function() {
+        return this.status && this.realtime_coupon_type_friend != 3;
+      }),
       minValue: minValue(1),
       maxLength: maxLength(6)
     },
     realtime_min_order_friend: {
-      required: requiredIf(function() {return this.status}),
+      required: requiredIf(function() {
+        return this.status;
+      }),
       maxLength: maxLength(6)
     }
 

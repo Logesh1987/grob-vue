@@ -4,7 +4,14 @@
       <h3>Twitter Share Setup</h3>
       <p>When members share your message on Twitter</p>
       <label class="switch" for="d13">
-        <input type="checkbox" true-value="1" false-value="0" name="mainSwitch" v-model="status" id="d13" />
+        <input
+          type="checkbox"
+          true-value="1"
+          false-value="0"
+          name="mainSwitch"
+          v-model="status"
+          id="d13"
+        />
         <i></i>
       </label>
     </div>
@@ -21,8 +28,14 @@
               v-model="worth_entries"
             />
             <em class="error" v-if="!$v.worth_entries.required">Field is required</em>
-            <em class="error" v-if="!$v.worth_entries.minValue">Need a minimum value of {{$v.worth_entries.$params.minValue.min}}</em>
-            <em class="error" v-if="!$v.worth_entries.maxLength">Allowed {{$v.worth_entries.$params.maxLength.max}} digits max</em>
+            <em
+              class="error"
+              v-if="!$v.worth_entries.minValue"
+            >Need a minimum value of {{$v.worth_entries.$params.minValue.min}}</em>
+            <em
+              class="error"
+              v-if="!$v.worth_entries.maxLength"
+            >Allowed {{$v.worth_entries.$params.maxLength.max}} digits max</em>
           </div>
           <div class="form-group fLabel mb-5 col-md-12">
             <label for="inputEmail4">Twitter Share Text</label>
@@ -65,26 +78,21 @@
       </div>
     </div>
     <div class="stepFoot d-flex justify-content-end">
-      <a
-        href="#"
-        class="resetSetting"
-        onclick="document.getElementById('form-points-program').reset();"
-      >
-        <i class="material-icons">refresh</i>
-        <u>Reset to recommended settings</u>
-      </a>
+      <ResetBlock :handleReset="resetSettings" id="Twittershare" />
     </div>
   </div>
 </template>
 
 <script>
 import { validationMixin } from "vuelidate";
-import { required, minValue, maxLength, url, requiredIf } from "vuelidate/lib/validators";
+import { required, minValue, requiredIf } from "vuelidate/lib/validators";
+import ResetBlock from "./ResetBlock";
 
 export default {
-  name: "Twitterhare",
-  props: ["data"],
+  name: "Twittershare",
+  props: ["data", "default", "triggerReset"],
   mixins: [validationMixin],
+  components: { ResetBlock },
   data: function() {
     return this.data;
   },
@@ -92,6 +100,14 @@ export default {
     submit() {
       this.$v.$touch();
       return !this.$v.$invalid;
+    },
+    resetSettings() {
+      this.worth_entries = this.default.worth_entries;
+      this.settings.tweet = this.default.tweet;
+      this.settings.tweet_url = this.default.tweet_url;
+      setTimeout(() => {
+        this.triggerReset();
+      }, 500);
     }
   },
   validations: {
@@ -114,7 +130,7 @@ export default {
         }),
         url
       }
-    }    
+    }
   }
 };
 </script>

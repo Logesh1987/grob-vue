@@ -4,7 +4,14 @@
       <h3>Pay by Points</h3>
       <p>Setup if customers can pay using their points</p>
       <label class="switch" for="d25">
-        <input type="checkbox" name="mainSwitch" true-value="1" false-value="0" v-model="redeem_purchase_status" id="d25" />
+        <input
+          type="checkbox"
+          name="mainSwitch"
+          true-value="1"
+          false-value="0"
+          v-model="redeem_purchase_status"
+          id="d25"
+        />
         <i></i>
       </label>
     </div>
@@ -35,7 +42,10 @@
                 data-img="https://picsum.photos/id/1082/640/480"
               >Sample</a>
             </div>
-            <label class="error col-md-10" v-if="!$v.redeem_point_per_dollar.required">Field is required</label>
+            <label
+              class="error col-md-10"
+              v-if="!$v.redeem_point_per_dollar.required"
+            >Field is required</label>
             <label
               class="error col-md-10"
               v-if="!$v.redeem_point_per_dollar.minValue"

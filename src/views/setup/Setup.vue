@@ -54,66 +54,69 @@
                   <swiper-slide data-ref="PointsProgram">
                     <PointsProgram
                       ref="PointsProgram"
-                      :reset="resetSetupBlock"
                       :data="data.setup.points_setup"
-                      :default="defaultSetup.points_setup"
+                      :default="defaultSetup.points_program"
+                      :triggerReset="triggerReset"
                     />
                   </swiper-slide>
                   <swiper-slide data-ref="SignupBonus">
                     <SignupBonus
                       ref="SignupBonus"
-                      :reset="resetSetupBlock"
                       :data="data.setup.points_setup"
+                      :default="defaultSetup.signup_bonus"
+                      :triggerReset="triggerReset"
                     />
                   </swiper-slide>
                   <swiper-slide data-ref="PaybyPoints">
-                    <PaybyPoints
-                      ref="PaybyPoints"
-                      :reset="resetSetupBlock"
-                      :data="data.setup.points_setup"
-                    />
+                    <PaybyPoints ref="PaybyPoints" :data="data.setup.points_setup" />
                   </swiper-slide>
                   <swiper-slide data-ref="ReferralProgram">
                     <ReferralProgram
                       ref="ReferralProgram"
-                      :reset="resetSetupBlock"
                       :data="data.setup.referral"
                       :currency="data.setup.points_setup.currency"
+                      :default="defaultSetup.referral_program"
+                      :triggerReset="triggerReset"
                     />
                   </swiper-slide>
                   <swiper-slide data-ref="FacebookShare">
                     <FacebookShare
                       ref="FacebookShare"
-                      :reset="resetSetupBlock"
                       :data="data.setup.entries.facebook_share"
+                      :default="defaultSetup.facebook_share"
+                      :triggerReset="triggerReset"
                     />
                   </swiper-slide>
                   <swiper-slide data-ref="TwitterShare">
                     <TwitterShare
                       ref="TwitterShare"
-                      :reset="resetSetupBlock"
                       :data="data.setup.entries.twitter_tweet"
+                      :default="defaultSetup.twitter_share"
+                      :triggerReset="triggerReset"
                     />
                   </swiper-slide>
                   <swiper-slide data-ref="BirthdayRewards">
                     <BirthdayRewards
                       ref="BirthdayRewards"
-                      :reset="resetSetupBlock"
                       :data="data.setup.events"
+                      :default="defaultSetup.birthday_event"
+                      :triggerReset="triggerReset"
                     />
                   </swiper-slide>
                   <swiper-slide data-ref="WooRewards">
                     <WooRewards
                       ref="WooRewards"
-                      :reset="resetSetupBlock"
                       :data="data.setup.reviews.woo_reviews"
+                      :default="defaultSetup.woo_review"
+                      :triggerReset="triggerReset"
                     />
                   </swiper-slide>
                   <swiper-slide data-ref="Newsletter">
                     <Newsletter
                       ref="Newsletter"
-                      :reset="resetSetupBlock"
                       :data="data.setup.entries.newsletter_subscription"
+                      :default="defaultSetup.newsletter"
+                      :triggerReset="triggerReset"
                     />
                   </swiper-slide>
                 </swiper>
@@ -333,23 +336,6 @@
       </template>
     </b-modal>
 
-    <!-- RESET MODAL -->
-    <b-modal
-      id="modal-reset"
-      ref="modalReset"
-      hide-footer
-      hide-header
-      centered
-      modal-class="setupModal modal-reset"
-      body-class="d-flex flex-column align-items-center"
-    >
-      <template v-slot:default="{ hide }">
-        <a href class="bvClose" @click.prevent="hide()">&times;</a>
-        <h5>Are you sure? Do you wish to reset</h5>
-        <button @click.prevent class="btn btn-success pr-5 pl-5 mt-4 mb-4">confirm</button>
-      </template>
-    </b-modal>
-
     <!-- REWARD MODAL -->
     <b-modal
       id="modal-reward"
@@ -408,6 +394,7 @@ export default {
         themesBlock: false
       },
       setupTouched: false,
+      reset: false,
       swipe: {
         isBeginning: true,
         isEnd: false,
@@ -461,6 +448,14 @@ export default {
         }
       },
       deep: true
+    },
+    reset: function() {
+      if (this.setupTouched) {
+        this.setupTouched = false;
+        this.saveSetupData(this.data.setup).then(res => {
+          this.reset = false;
+        });
+      }
     }
   },
   methods: {
@@ -515,8 +510,8 @@ export default {
         this.activeStep = id;
       }
     },
-    resetSetupBlock() {
-      console.log(this.data.setup, "this.data.setup");
+    triggerReset() {
+      this.reset = true;
     },
     saveSetup(src) {
       this.saveSetupData(this.data.setup).then(res => {

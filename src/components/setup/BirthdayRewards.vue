@@ -30,7 +30,10 @@
                 class="error"
                 v-if="!$v.points.nb_points.minValue"
               >Need a minimum value of {{$v.points.nb_points.$params.minValue.min}}</em>
-              <em class="error" v-if="!$v.points.nb_points.maxLength">Allowed {{$v.points.nb_points.$params.maxLength.max}} digits max</em>
+              <em
+                class="error"
+                v-if="!$v.points.nb_points.maxLength"
+              >Allowed {{$v.points.nb_points.$params.maxLength.max}} digits max</em>
             </div>
             <div class="col-md-5 p-0 asideInfo">to users when they enter their birthday</div>
             <label for="bRewards" generated="true" class="error col-md-10"></label>
@@ -51,7 +54,10 @@
                 class="error"
                 v-if="!$v.reward.points.r_nb_points.minValue"
               >Need a minimum value of {{$v.reward.points.r_nb_points.$params.minValue.min}}</em>
-              <em class="error" v-if="!$v.reward.points.r_nb_points.maxLength">Allowed {{$v.reward.points.r_nb_points.$params.maxLength.max}} digits max</em>
+              <em
+                class="error"
+                v-if="!$v.reward.points.r_nb_points.maxLength"
+              >Allowed {{$v.reward.points.r_nb_points.$params.maxLength.max}} digits max</em>
             </div>
             <div class="col-md-5 p-0 asideInfo">on the birthday</div>
             <label for="obRewards" generated="true" class="error col-md-10"></label>
@@ -74,26 +80,21 @@
       </div>
     </div>
     <div class="stepFoot d-flex justify-content-end">
-      <a
-        href="#"
-        class="resetSetting"
-        onclick="document.getElementById('form-birthday-rewards').reset();"
-      >
-        <i class="material-icons">refresh</i>
-        <u>Reset to recommended settings</u>
-      </a>
+      <ResetBlock :handleReset="resetSettings" id="BirthdayRewards" />
     </div>
   </div>
 </template>
 
 <script>
 import { validationMixin } from "vuelidate";
-import { required, minValue, maxLength, requiredIf } from "vuelidate/lib/validators";
+import { required, minValue, requiredIf } from "vuelidate/lib/validators";
+import ResetBlock from "./ResetBlock";
 
 export default {
   name: "BirthdayRewards",
-  props: ["data"],
+  props: ["data", "default", "triggerReset"],
   mixins: [validationMixin],
+  components: { ResetBlock },
   data: function() {
     return this.data;
   },
@@ -101,6 +102,13 @@ export default {
     submit() {
       this.$v.$touch();
       return !this.$v.$invalid;
+    },
+    resetSettings() {
+      this.data.points.nb_points = this.default.entry_points;
+      this.data.reward.points.r_nb_points = this.default.birthday_points;
+      setTimeout(() => {
+        this.triggerReset();
+      }, 500);
     }
   },
   validations: {

@@ -4,7 +4,14 @@
       <h3>WOOReview Rewards</h3>
       <p>Reward reviews of products, services by incentivizing</p>
       <label class="switch" for="d20">
-        <input type="checkbox" true-value="1" false-value="0" name="mainSwitch" v-model="review_status" id="d20" />
+        <input
+          type="checkbox"
+          true-value="1"
+          false-value="0"
+          name="mainSwitch"
+          v-model="review_status"
+          id="d20"
+        />
         <i></i>
       </label>
     </div>
@@ -25,7 +32,10 @@
               class="error"
               v-if="!$v.points.minValue"
             >Need a minimum value of {{$v.points.$params.minValue.min}}</em>
-            <em class="error" v-if="!$v.points.maxLength">Allowed {{$v.points.$params.maxLength.max}} digits max</em>
+            <em
+              class="error"
+              v-if="!$v.points.maxLength"
+            >Allowed {{$v.points.$params.maxLength.max}} digits max</em>
           </div>
           <div class="col-md-12">
             <div class="custom-control d-flex scale-8 to-00 custom-checkbox">
@@ -44,25 +54,20 @@
       </div>
     </div>
     <div class="stepFoot d-flex justify-content-end">
-      <a
-        href="#"
-        class="resetSetting"
-        onclick="document.getElementById('form-woo-rewards').reset();"
-      >
-        <i class="material-icons">refresh</i>
-        <u>Reset to recommended settings</u>
-      </a>
+      <ResetBlock :handleReset="resetSettings" id="WooRewards" />
     </div>
   </div>
 </template>
 
 <script>
 import { validationMixin } from "vuelidate";
-import { required, minValue, maxLength, requiredIf } from "vuelidate/lib/validators";
+import { required, minValue, requiredIf } from "vuelidate/lib/validators";
+import ResetBlock from "./ResetBlock";
 
 export default {
   name: "WooRewards",
-  props: ["data"],
+  props: ["data", "default", "triggerReset"],
+  components: { ResetBlock },
   mixins: [validationMixin],
   data: function() {
     return this.data;
@@ -71,6 +76,13 @@ export default {
     submit() {
       this.$v.$touch();
       return !this.$v.$invalid;
+    },
+    resetSettings() {
+      this.data.points = this.default.points;
+      this.data.is_approved_only = this.default.is_approved_only;
+      setTimeout(() => {
+        this.triggerReset();
+      }, 500);
     }
   },
   validations: {

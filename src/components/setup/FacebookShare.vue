@@ -4,7 +4,14 @@
       <h3>Facebook Share Setup</h3>
       <p>When members share your message on Facebook</p>
       <label class="switch" for="d16">
-        <input type="checkbox" true-value="1" false-value="0" name="mainSwitch" v-model="status" id="d16" />
+        <input
+          type="checkbox"
+          true-value="1"
+          false-value="0"
+          name="mainSwitch"
+          v-model="status"
+          id="d16"
+        />
         <i></i>
       </label>
     </div>
@@ -25,8 +32,10 @@
               class="error"
               v-if="!$v.worth_entries.minValue"
             >Need a minimum value of {{$v.worth_entries.$params.minValue.min}}</em>
-            <em class="error" v-if="!$v.worth_entries.maxLength">Allowed {{$v.worth_entries.$params.maxLength.max}} digits max</em>
-            
+            <em
+              class="error"
+              v-if="!$v.worth_entries.maxLength"
+            >Allowed {{$v.worth_entries.$params.maxLength.max}} digits max</em>
           </div>
           <div class="form-group fLabel mb-5 col-md-12">
             <label for="inputEmail4">Facebook Share Text</label>
@@ -69,26 +78,21 @@
       </div>
     </div>
     <div class="stepFoot d-flex justify-content-end">
-      <a
-        href="#"
-        class="resetSetting"
-        onclick="document.getElementById('form-points-program').reset();"
-      >
-        <i class="material-icons">refresh</i>
-        <u>Reset to recommended settings</u>
-      </a>
+      <ResetBlock :handleReset="resetSettings" id="FacebookShare" />
     </div>
   </div>
 </template>
 
 <script>
 import { validationMixin } from "vuelidate";
-import { required, url, minValue, maxLength, requiredIf } from "vuelidate/lib/validators";
+import { required, minValue, requiredIf } from "vuelidate/lib/validators";
+import ResetBlock from "./ResetBlock";
 
 export default {
   name: "FacebookShare",
-  props: ["data"],
+  props: ["data", "default", "triggerReset"],
   mixins: [validationMixin],
+  components: { ResetBlock },
   data: function() {
     return this.data;
   },
@@ -96,6 +100,14 @@ export default {
     submit() {
       this.$v.$touch();
       return !this.$v.$invalid;
+    },
+    resetSettings() {
+      this.data.worth_entries = this.default.worth_entries;
+      this.data.settings.share_desc = this.default.share_desc;
+      this.data.settings.landing_url = this.default.landing_url;
+      setTimeout(() => {
+        this.triggerReset();
+      }, 500);
     }
   },
   validations: {
@@ -117,7 +129,7 @@ export default {
           return this.status;
         }),
         url
-      } 
+      }
     }
   }
 };

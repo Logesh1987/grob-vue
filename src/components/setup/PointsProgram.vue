@@ -109,10 +109,7 @@
       </div>
     </div>
     <div class="stepFoot d-flex justify-content-end">
-      <a href="#" class="resetSetting" @click.prevent="resetSettings">
-        <i class="material-icons">refresh</i>
-        <u>Reset to recommended settings</u>
-      </a>
+      <ResetBlock :handleReset="resetSettings" id="PointsProgram" />
     </div>
   </div>
 </template>
@@ -120,13 +117,14 @@
 <script>
 import RadioGroup from "@/components/RadioGroup";
 import { validationMixin } from "vuelidate";
-import { required, minValue, maxLength, requiredIf } from "vuelidate/lib/validators";
+import { required, minValue, requiredIf } from "vuelidate/lib/validators";
+import ResetBlock from "./ResetBlock";
 
 export default {
   name: "PointsProgram",
-  props: ["data", "reset", "default"],
+  props: ["data", "default", "triggerReset"],
   mixins: [validationMixin],
-  components: { RadioGroup },
+  components: { RadioGroup, ResetBlock },
   data: function() {
     return {
       vData: this.data
@@ -137,14 +135,15 @@ export default {
       this.$v.$touch();
       return !this.$v.$invalid;
     },
-    resetSettings() {      
-      this.vData.purchase_status = this.default.purchase_status;
-      this.vData.is_points_percentage = this.default.is_points_percentage;
-      this.vData.price = this.default.price;
-      this.vData.points = this.default.points;
-      this.vData.points_percentage = this.default.points_percentage;
-
-      this.reset();
+    resetSettings() {
+      this.data.purchase_status = this.default.purchase_status;
+      this.data.is_points_percentage = this.default.is_points_percentage;
+      this.data.price = this.default.price;
+      this.data.points = this.default.points;
+      this.data.points_percentage = this.default.points_percentage;
+      setTimeout(() => {
+        this.triggerReset();
+      }, 500);
     }
   },
   watch: {

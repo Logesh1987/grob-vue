@@ -4,7 +4,14 @@
       <h3>Sign Up Bonus</h3>
       <p>Reward customers for creating an account on your store</p>
       <label class="switch" for="d23">
-        <input type="checkbox" name="mainSwitch" true-value="1" false-value="0" v-model="bonus_status" id="d23" />
+        <input
+          type="checkbox"
+          name="mainSwitch"
+          true-value="1"
+          false-value="0"
+          v-model="bonus_status"
+          id="d23"
+        />
         <i></i>
       </label>
     </div>
@@ -26,8 +33,14 @@
                 v-model.trim="welcome_bonus"
               />
               <em class="error" v-if="!$v.welcome_bonus.required">Field is required</em>
-              <em class="error" v-if="!$v.welcome_bonus.minValue">Need a minimum value of {{$v.welcome_bonus.$params.minValue.min}}</em>
-              <em class="error" v-if="!$v.welcome_bonus.maxLength">Allowed {{$v.welcome_bonus.$params.maxLength.max}} digits max</em>
+              <em
+                class="error"
+                v-if="!$v.welcome_bonus.minValue"
+              >Need a minimum value of {{$v.welcome_bonus.$params.minValue.min}}</em>
+              <em
+                class="error"
+                v-if="!$v.welcome_bonus.maxLength"
+              >Allowed {{$v.welcome_bonus.$params.maxLength.max}} digits max</em>
             </div>
           </div>
           <!-- <br><h6>Welcome Note</h6>
@@ -54,26 +67,21 @@
       </div>
     </div>
     <div class="stepFoot d-flex justify-content-end">
-      <a
-        href="#"
-        class="resetSetting"
-        onclick="document.getElementById('form-signup-bonus').reset();"
-      >
-        <i class="material-icons">refresh</i>
-        <u>Reset to recommended settings</u>
-      </a>
+      <ResetBlock :handleReset="resetSettings" id="SignupBonus" />
     </div>
   </div>
 </template>
 
 <script>
 import { validationMixin } from "vuelidate";
-import { required, minValue, maxLength, requiredIf } from "vuelidate/lib/validators";
+import { required, minValue, requiredIf } from "vuelidate/lib/validators";
+import ResetBlock from "./ResetBlock";
 
 export default {
   name: "SignupBonus",
-  props: ["data"],
+  props: ["data", "default", "triggerReset"],
   mixins: [validationMixin],
+  components: { ResetBlock },
   data: function() {
     return this.data;
   },
@@ -81,6 +89,12 @@ export default {
     submit() {
       this.$v.$touch();
       return !this.$v.$invalid;
+    },
+    resetSettings() {
+      this.data.welcome_bonus = this.default.welcome_bonus;
+      setTimeout(() => {
+        this.triggerReset();
+      }, 500);
     }
   },
   validations: {

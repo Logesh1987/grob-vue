@@ -25,31 +25,29 @@
               class="error"
               v-if="!$v.worth_entries.minValue"
             >Need a minimum value of {{$v.worth_entries.$params.minValue.min}}</em>
-            <em class="error" v-if="!$v.worth_entries.maxLength">Allowed {{$v.worth_entries.$params.maxLength.max}} digits max</em>
+            <em
+              class="error"
+              v-if="!$v.worth_entries.maxLength"
+            >Allowed {{$v.worth_entries.$params.maxLength.max}} digits max</em>
           </div>
         </form>
       </div>
     </div>
     <div class="stepFoot d-flex justify-content-end">
-      <a
-        href="#"
-        class="resetSetting"
-        onclick="document.getElementById('form-signup-bonus').reset();"
-      >
-        <i class="material-icons">refresh</i>
-        <u>Reset to recommended settings</u>
-      </a>
+      <ResetBlock :handleReset="resetSettings" id="Newsletter" />
     </div>
   </div>
 </template>
 
 <script>
 import { validationMixin } from "vuelidate";
-import { required, minValue, maxLength, requiredIf } from "vuelidate/lib/validators";
+import { required, minValue, requiredIf } from "vuelidate/lib/validators";
+import ResetBlock from "./ResetBlock";
 
 export default {
   name: "Newsletter",
-  props: ["data"],
+  props: ["data", "default", "triggerReset"],
+  components: { ResetBlock },
   mixins: [validationMixin],
   data: function() {
     return this.data;
@@ -58,6 +56,12 @@ export default {
     submit() {
       this.$v.$touch();
       return !this.$v.$invalid;
+    },
+    resetSettings() {
+      this.data.worth_entries = this.default.worth_entries;
+      setTimeout(() => {
+        this.triggerReset();
+      }, 500);
     }
   },
   validations: {
