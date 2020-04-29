@@ -417,6 +417,9 @@ export default {
     }
   },
   mounted: function() {
+    if (window.localStorage.getItem("inProgress") !== "themesBlock") {
+      this.$router.push("setup");
+    }
     if (this.rewardsData == null) {
       this.getRewardsData();
     }
@@ -442,8 +445,8 @@ export default {
 // open all by default - DONE
 // --- congrats live mapping - DONE
 
-// --- widget setup - ux call
-// reset settings add popup
-// on click reset - set the block values & post api
-// --- Reset settings
+// --- widget setup - ux call - DONE
+// reset settings add popup - DONE
+// on click reset - set the block values & post api - DONE
+// --- Reset settings - DONE
 </style>
