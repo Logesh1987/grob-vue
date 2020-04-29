@@ -63,13 +63,13 @@ export default {
           /*this.getRewardsData().then(re => {
             console.log("********************************************");
           });*/
-          console.log("*******  DELETEED  ***********");
+         // console.log("*******  DELETEED  ***********");
       });
     },
     handleSwitch: function(item) {
       item.status = (item.status == true) ? 1 : 0;
       this.updateReward(item).then(res => {
-          console.log("********************************************");
+          //console.log("********************************************");
       });
     }
   }

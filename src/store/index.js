@@ -208,6 +208,22 @@ export default new Vuex.Store({
 				//commit('updateWidgetData', status);
 				return res;
 			});
+		},
+		submitReview: ({ commit }, review) => {
+			let headersData = {
+				headers: {
+					'Content-Type': 'text/plain',
+					Accept: '*/*'
+				}
+			};
+			return Axios.post(
+				'https://jai.devam.pro/gr/admin/onboarding/review?id_shop=1307&admin_email=jayakumar@appsmav.com',
+				review,
+				headersData
+			).then((res) => {
+				//commit('updateWidgetData', status);
+				return res;
+			});
 		}
 	},
 	getters: {},

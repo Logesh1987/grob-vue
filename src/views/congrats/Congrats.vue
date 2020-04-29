@@ -348,12 +348,12 @@ export default {
       "getRewardsData",
       "getPopupData",
       "getWidgetData",
-      "updateLoyaltyStatus"
+      "updateLoyaltyStatus",
+      "submitReview"
     ]),
     toggleStatus() {
       var newStatus = this.live == "0" ? "1" : "0";
       this.updateLoyaltyStatus(newStatus).then(res => {
-        //console.log("-------------------------------------");
         this.live = newStatus;
       });
     },
@@ -363,6 +363,12 @@ export default {
         this.$bvModal.show("feedbackModal");
       } else {
         // PROCEED WITH CALL ON 5 STARS
+        let params = {
+          rating: this.feedback.rating
+        };
+        this.submitReview(params).then(res => {
+            console.log("******************REVIEW**************************");
+        });
       }
     },
     pushPoint(point) {
@@ -385,7 +391,10 @@ export default {
       if (this.$refs.feedbackTxt.value.length) {
         params.customfeed = this.$refs.feedbackTxt.value;
       }
-      console.log(params);
+      this.submitReview(params).then(res => {
+          console.log("******************REVIEW**************************");
+      });
+      //console.log(params);
       // PARAMS READY TO POST
       // POST CALL THEN
       this.$bvModal.hide("feedbackModal");
