@@ -16,7 +16,7 @@
       </label>
     </div>
     <div class="stepBody">
-      <div v-if="!bonus_status" class="alert alert-warning upmarketing">
+      <div v-if="bonus_status == '0'" class="alert alert-warning upmarketing">
         This feature could boost your sales by
         <br />200% from our customers reviews
       </div>
