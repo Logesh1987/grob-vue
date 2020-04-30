@@ -165,9 +165,6 @@
         :title-link-class="[!enableWidget ? 'disabled' : '']"
       >
         <div class="row justify-content-between">
-          <div class="col-md-7" v-if="wData">
-            <WidgetPreview :type="activeWidget" :data="wData" />
-          </div>
           <div class="col-md-5 text-left" v-if="wData">
             <b-tabs v-model="activeWidget" nav-wrapper-class="widget-tabs-nav">
               <b-tab title="Mobile" class="widget-tabs-panes" active>
@@ -343,6 +340,9 @@
                 </div>
               </div>
             </b-collapse>
+          </div>
+          <div class="col-md-7" v-if="wData">
+            <WidgetPreview :type="activeWidget" :data="wData" />
           </div>
         </div>
       </b-tab>

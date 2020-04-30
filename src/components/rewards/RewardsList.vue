@@ -1,5 +1,5 @@
 <template>
-  <div class="rewardList" v-if="data">
+  <div class="rewardList" v-if="data && data.length">
     <div class="rewardItem" v-for="item in data" :key="item.id">
       <div class="rewardDragger">
         <i class="material-icons">reorder</i>
@@ -68,6 +68,12 @@
         >cancel</button>
       </template>
     </b-modal>
+  </div>
+  <div class="rewardList" v-else>
+    <p class="text-center no-rewards">
+      <span class="material-icons text-danger mb-2">warning</span>
+      No rewards available. Add rewards
+    </p>
   </div>
 </template>
 
