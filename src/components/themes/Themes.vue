@@ -159,7 +159,11 @@
           </div>
         </div>
       </b-tab>
-      <b-tab title="Widget Setup" class="widgetSetup" :disabled="wData ? false : true">
+      <b-tab
+        title="Widget Setup"
+        class="widgetSetup"
+        :title-link-class="[!enableWidget ? 'disabled' : '']"
+      >
         <div class="row justify-content-between">
           <div class="col-md-7" v-if="wData">
             <WidgetPreview :type="activeWidget" :data="wData" />
@@ -386,6 +390,7 @@ export default {
       tabIndex: 0,
       activePsetup: "mobile",
       activeWidget: 0,
+      enableWidget: false,
       pData: null,
       wData: null,
       icons: [
@@ -412,7 +417,9 @@ export default {
     handlePdataSave: function() {
       this.saveThemeSettings(this.pData).then(res => {
         if (this.page === "setup") {
+          this.enableWidget = true;
           this.tabIndex = 1;
+          console.log(this.tabIndex);
         }
       });
     },
@@ -426,6 +433,7 @@ export default {
   },
   mounted: function() {
     this.pData = this.popupData;
+    if (this.page === "congrats") this.enableWidget = true;
   }
 };
 </script>
