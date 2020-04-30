@@ -1,5 +1,5 @@
 <template>
-  <div class="setupSteps" v-bind:class="{disabled: !status}">
+  <div class="setupSteps" v-bind:class="{disabled: status == '0'}">
     <div class="stepHead">
       <h3>Birthday Rewards</h3>
       <p>

@@ -1,5 +1,5 @@
 <template>
-  <div class="setupSteps" v-bind:class="{disabled: !bonus_status}">
+  <div class="setupSteps" v-bind:class="{disabled: bonus_status == '0'}">
     <div class="stepHead">
       <h3>Sign Up Bonus</h3>
       <p>Reward customers for creating an account on your store</p>

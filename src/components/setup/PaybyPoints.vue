@@ -1,5 +1,5 @@
 <template>
-  <div class="setupSteps" v-bind:class="{disabled: !redeem_purchase_status}">
+  <div class="setupSteps" v-bind:class="{disabled: redeem_purchase_status == '0'}">
     <div class="stepHead">
       <h3>Pay by Points</h3>
       <p>Setup if customers can pay using their points</p>
@@ -64,7 +64,12 @@
 
 <script>
 import { validationMixin } from "vuelidate";
-import { required, minValue, maxLength, requiredIf } from "vuelidate/lib/validators";
+import {
+  required,
+  minValue,
+  maxLength,
+  requiredIf
+} from "vuelidate/lib/validators";
 
 export default {
   name: "PaybyPoints",
