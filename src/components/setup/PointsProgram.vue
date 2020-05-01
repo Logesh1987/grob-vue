@@ -1,5 +1,5 @@
 <template>
-  <div class="setupSteps" v-bind:class="{disabled: !vData.purchase_status}">
+  <div class="setupSteps" v-bind:class="{disabled: vData.purchase_status == '0'}">
     <div class="stepHead">
       <h3>Points Program</h3>
       <p>Start rewarding your customers for purchases</p>

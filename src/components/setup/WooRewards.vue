@@ -1,5 +1,5 @@
 <template>
-  <div class="setupSteps" v-bind:class="{disabled: !review_status}">
+  <div class="setupSteps" v-bind:class="{disabled: review_status == '0'}">
     <div class="stepHead">
       <h3>WOOReview Rewards</h3>
       <p>Reward reviews of products, services by incentivizing</p>

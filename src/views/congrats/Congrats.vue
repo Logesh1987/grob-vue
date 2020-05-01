@@ -136,10 +136,12 @@
                     role="tab"
                   >
                     <h2>2. Rewards</h2>
-                    <button @click.stop="rewardModalOpen" class="btn btn-success ml-3">Add Reward</button>
                   </b-card-header>
                   <b-collapse id="accordion-2" visible accordion="my-accordion2" role="tabpanel">
                     <b-card-body>
+                      <div class="text-right">
+                        <button @click.stop="rewardModalOpen" class="btn btn-success">Add Reward</button>
+                      </div>
                       <div v-if="rewardsData">
                         <RewardsList
                           :data="rewardsData"

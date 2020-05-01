@@ -246,15 +246,17 @@
             @click="toggleCollapse('rewardsBlock')"
           >
             <h2>2. Rewards</h2>
-            <button
-              v-if="activeStep === 'rewardsBlock'"
-              @click.stop="rewardModalOpen"
-              class="btn btn-success"
-            >Add Reward</button>
           </b-card-header>
           <b-collapse id="rewardsBlock" accordion="my-accordion" role="tabpanel">
-            <b-card-body>
+            <b-card-body class="p-0">
               <b-card-text>
+                <div class="text-right">
+                  <button
+                    v-if="activeStep === 'rewardsBlock'"
+                    @click.stop="rewardModalOpen"
+                    class="btn btn-success"
+                  >Add Reward</button>
+                </div>
                 <div v-if="rewardsData">
                   <RewardsList
                     :data="rewardsData"

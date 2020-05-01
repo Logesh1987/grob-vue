@@ -1,5 +1,5 @@
 <template>
-  <div class="setupSteps" v-bind:class="{disabled: !bonus_status}">
+  <div class="setupSteps" v-bind:class="{disabled: bonus_status == '0'}">
     <div class="stepHead">
       <h3>Sign Up Bonus</h3>
       <p>Reward customers for creating an account on your store</p>
@@ -16,7 +16,7 @@
       </label>
     </div>
     <div class="stepBody">
-      <div v-if="!bonus_status" class="alert alert-warning upmarketing">
+      <div v-if="bonus_status == '0'" class="alert alert-warning upmarketing">
         This feature could boost your sales by
         <br />200% from our customers reviews
       </div>

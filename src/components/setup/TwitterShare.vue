@@ -1,5 +1,5 @@
 <template>
-  <div class="setupSteps" v-bind:class="{ disabled: status != 1 }">
+  <div class="setupSteps" v-bind:class="{ disabled: status == '0' }">
     <div class="stepHead">
       <h3>Twitter Share Setup</h3>
       <p>When members share your message on Twitter</p>
