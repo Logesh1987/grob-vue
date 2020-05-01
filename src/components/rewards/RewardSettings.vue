@@ -245,7 +245,8 @@ export default {
         "https://s3.us-east-1.amazonaws.com/devam.pro/gr/master/upload/img/683/83/3683_loyalty_1587034530.png",
         "https://s3.us-east-1.amazonaws.com/devam.pro/gr/master/upload/img/683/83/3683_loyalty_1587032899.png",
         "https://s3.us-east-1.amazonaws.com/devam.pro/gr/master/upload/img/683/83/3683_loyalty_1587033446.png",
-        "https://s3.us-east-1.amazonaws.com/devam.pro/gr/master/upload/img/683/83/3683_loyalty_1587033494.png"
+        "https://s3.us-east-1.amazonaws.com/devam.pro/gr/master/upload/img/683/83/3683_loyalty_1587033494.png",
+        "https://s3.us-east-1.amazonaws.com/devam.pro/gr/master/upload/img/683/83/3683_loyalty_1587034530.png"
       ],
       newSettings: {
         name: "Default title",

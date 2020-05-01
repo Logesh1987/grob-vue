@@ -541,10 +541,10 @@ export default {
       this.editRewardId = id ? id : null;
     },
     saveAndGotoThemes() {
+      this.$bvModal.hide("modal-skip");
       this.saveSetupData(this.data.setup).then(res => {
         this.getPopupData().then(res => {
           this.setProgress("themesBlock");
-          this.$bvModal.hide("modal-skip");
           this.getRewardsData();
           this.getWidgetData();
           document

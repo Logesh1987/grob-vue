@@ -190,9 +190,6 @@ export default new Vuex.Store({
 			return Axios.get(
 				'https://jai.devam.pro/gr/admin/widgets?id_shop=1307&admin_email=jayakumar@appsmav.com'
 			).then((res) => {
-				//console.log("#####################################################");
-				//console.log(JSON.stringify(res.data.data));
-				//console.log("#####################################################");
 				commit('updateWidgetData', res.data);
 				commit('disableLoader');
 				return state.widgetData;

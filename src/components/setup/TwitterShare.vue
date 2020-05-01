@@ -89,7 +89,8 @@ import {
   required,
   minValue,
   requiredIf,
-  maxLength
+  maxLength,
+  url
 } from "vuelidate/lib/validators";
 import ResetBlock from "./ResetBlock";
 
@@ -134,7 +135,8 @@ export default {
       tweet_url: {
         required: requiredIf(function() {
           return this.status;
-        })
+        }),
+        url
       }
     }
   }
