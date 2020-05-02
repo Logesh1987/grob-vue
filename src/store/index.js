@@ -13,7 +13,8 @@ export default new Vuex.Store({
 		setupData: null,
 		rewardsData: null,
 		popupData: null,
-		widgetData: null
+		widgetData: null,
+		sampleImg: null
 	},
 	mutations: {
 		enableLoader: (state) => {
@@ -33,6 +34,9 @@ export default new Vuex.Store({
 		},
 		updateWidgetData: (state, payload) => {
 			state.widgetData = payload;
+		},
+		updateSampleImg: (state, payload) => {
+			state.sampleImg = payload;
 		}
 	},
 	actions: {
@@ -248,6 +252,9 @@ export default new Vuex.Store({
 				//commit('updateWidgetData', status);
 				return res;
 			});
+		},
+		setSample: ({ commit, state }, url) => {
+			commit('updateSampleImg', url);
 		}
 	},
 	getters: {},

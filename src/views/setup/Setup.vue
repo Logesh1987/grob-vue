@@ -356,6 +356,8 @@
         <RewardSettings :id="editRewardId" :closeModal="rewardModalClose" />
       </template>
     </b-modal>
+
+    <SamplePreview />
   </div>
 </template>
 
@@ -384,6 +386,7 @@ import RewardsList from "@/components/rewards/RewardsList";
 import RewardSettings from "@/components/rewards/RewardSettings";
 import Themes from "@/components/themes/Themes";
 import Loader from "@/components/Loader";
+import SamplePreview from "@/components/SamplePreview";
 
 // Install BootstrapVue
 Vue.use(BootstrapVue);
@@ -434,7 +437,8 @@ export default {
     RewardsList,
     RewardSettings,
     Themes,
-    Loader
+    Loader,
+    SamplePreview
   },
   computed: {
     ...mapState([

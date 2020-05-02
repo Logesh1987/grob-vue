@@ -51,7 +51,7 @@
             <a
               href="#"
               class="btn btn-link mt-2 p-0 sampleModalTrigger"
-              data-img="https://picsum.photos/id/1073/640/480"
+              @click.prevent="setSample('https://picsum.photos/id/1043/640/480')"
             >
               <small>Sample</small>
             </a>
@@ -92,6 +92,7 @@ import {
   maxLength
 } from "vuelidate/lib/validators";
 import ResetBlock from "./ResetBlock";
+import { mapActions } from "vuex";
 
 export default {
   name: "Twittershare",
@@ -102,6 +103,7 @@ export default {
     return this.data;
   },
   methods: {
+    ...mapActions(["setSample"]),
     submit() {
       this.$v.$touch();
       return !this.$v.$invalid;
