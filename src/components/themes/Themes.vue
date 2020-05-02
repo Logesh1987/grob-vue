@@ -164,20 +164,13 @@
         class="widgetSetup"
         :title-link-class="[!enableWidget ? 'disabled' : '']"
       >
-        <div class="row justify-content-between">
-          <div class="col-md-5 text-left" v-if="wData">
+        <div class="row justify-content-between" v-if="wData">
+          <div class="col-md-7" >
+            <WidgetPreview :type="activeWidget" :data="wData" />
+          </div>
+          <div class="col-md-5 text-left">
             <b-tabs v-model="activeWidget" nav-wrapper-class="widget-tabs-nav">
               <b-tab title="Mobile" class="widget-tabs-panes" active>
-                <div class="form-group">
-                  <label>Widget Placement</label>
-                  <select class="form-control" v-model="wData.data.style_data.mobile_position">
-                    <option
-                      v-for="(value, name) in wData.data.mobile_widget_position"
-                      :value="name"
-                      :key="value"
-                    >{{value}}</option>
-                  </select>
-                </div>
                 <div class="form-group mt-4">
                   <label>Widget Look</label>
                   <div class="custom-control custom-radio">
@@ -213,6 +206,16 @@
                     />
                     <label class="custom-control-label" for="wm-look-3">Hide Widget</label>
                   </div>
+                </div>
+                <div class="form-group" v-if="wData.data.style_data.w_mobile_view == 'compact'">
+                  <label>Widget Placement</label>
+                  <select class="form-control" v-model="wData.data.style_data.mobile_position">
+                    <option
+                      v-for="(value, name) in wData.data.mobile_widget_position"
+                      :value="name"
+                      :key="value"
+                    >{{value}}</option>
+                  </select>
                 </div>
                 <button
                   type="submit"
@@ -340,9 +343,6 @@
                 </div>
               </div>
             </b-collapse>
-          </div>
-          <div class="col-md-7" v-if="wData">
-            <WidgetPreview :type="activeWidget" :data="wData" />
           </div>
         </div>
       </b-tab>
