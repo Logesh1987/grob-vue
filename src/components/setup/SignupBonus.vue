@@ -17,8 +17,8 @@
     </div>
     <div class="stepBody">
       <div v-if="bonus_status == '0'" class="alert alert-warning upmarketing">
-        This feature could boost your sales by
-        <br />200% from our customers reviews
+        <p class="m-0">This feature could boost your sales by 200%</p>
+        <b-button size="sm" variant="outline-dark" @click.prevent="bonus_status = '1'">Undo</b-button>
       </div>
       <div class="stepWrapper">
         <form id="form-signup-bonus" class="mb-0">

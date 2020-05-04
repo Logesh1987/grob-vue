@@ -55,7 +55,7 @@ export default {
   components: { ResetBlock },
   mixins: [validationMixin],
   data: function() {
-    return this.data;
+    return this.data.newsletter_subscription;
   },
   methods: {
     submit() {

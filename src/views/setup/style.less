@@ -95,13 +95,14 @@
 		}
 	}
 	footer.saveBar {
-		background-color: #3c3c3c;
+		background-color: #e0711f;
 		padding: 20px;
 		position: fixed;
 		width: 100%;
 		left: 0;
 		bottom: 0;
 		z-index: 10;
+		animation: slideToTop 1s forwards;
 		i.dots {
 			background: url('../../images/rainbow-dots.png') no-repeat;
 			left: 0;
@@ -205,6 +206,14 @@
 				}
 			}
 		}
+	}
+}
+@keyframes slideToTop {
+	from {
+		transform: translateY(100%);
+	}
+	to {
+		transform: translateY(0%);
 	}
 }
 .setupContainer {
@@ -367,9 +376,6 @@
 		max-width: 500px;
 		margin: auto;
 		&.disabled {
-			.upmarketing {
-				display: block;
-			}
 			.stepWrapper,
 			.stepFoot {
 				pointer-events: none;
@@ -378,16 +384,20 @@
 		}
 	}
 	.upmarketing {
+		background-color: #ffdb71;
 		position: absolute;
+		z-index: 2;
 		width: 100%;
 		left: 0;
-		border-radius: 5px;
-		padding: 10px;
+		border-radius: 5px 5px 0 0;
+		padding: 10px 25px;
 		text-align: center;
 		top: 0;
 		font-size: 14px;
-		color: #856404;
-		display: none;
+		color: #202020;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
 	}
 	.stepHead {
 		position: relative;

@@ -100,7 +100,7 @@ export default {
   mixins: [validationMixin],
   components: { ResetBlock },
   data: function() {
-    return this.data;
+    return this.data.facebook_share;
   },
   methods: {
     ...mapActions(["setSample"]),

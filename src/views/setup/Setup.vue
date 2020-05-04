@@ -51,6 +51,7 @@
                   ref="setupSwiper"
                   :options="swiperOptions"
                   @slideChangeTransitionEnd="swiperScte"
+                  @ready="checkSetupProgress"
                 >
                   <swiper-slide data-ref="PointsProgram">
                     <PointsProgram
@@ -83,7 +84,7 @@
                   <swiper-slide data-ref="FacebookShare">
                     <FacebookShare
                       ref="FacebookShare"
-                      :data="data.setup.entries.facebook_share"
+                      :data="data.setup.entries"
                       :default="defaultSetup.facebook_share"
                       :triggerReset="triggerReset"
                     />
@@ -91,7 +92,7 @@
                   <swiper-slide data-ref="TwitterShare">
                     <TwitterShare
                       ref="TwitterShare"
-                      :data="data.setup.entries.twitter_tweet"
+                      :data="data.setup.entries"
                       :default="defaultSetup.twitter_share"
                       :triggerReset="triggerReset"
                     />
@@ -107,7 +108,7 @@
                   <swiper-slide data-ref="WooRewards">
                     <WooRewards
                       ref="WooRewards"
-                      :data="data.setup.reviews.woo_reviews"
+                      :data="data.setup.reviews"
                       :default="defaultSetup.woo_review"
                       :triggerReset="triggerReset"
                     />
@@ -115,7 +116,7 @@
                   <swiper-slide data-ref="Newsletter">
                     <Newsletter
                       ref="Newsletter"
-                      :data="data.setup.entries.newsletter_subscription"
+                      :data="data.setup.entries"
                       :default="defaultSetup.newsletter"
                       :triggerReset="triggerReset"
                     />
@@ -472,6 +473,7 @@ export default {
     ...mapActions([
       "getSetupData",
       "saveSetupData",
+      "savePartialSetup",
       "getRewardsData",
       "getPopupData",
       "getWidgetData"
@@ -496,6 +498,13 @@ export default {
           )
           .setAttribute("data-completed", "completed");
         this.$refs.setupSwiper.$swiper.slideNext();
+        if (!this.saved.rewardsBlock) {
+          this.savePartialSetup(this.$refs[re].data);
+          window.localStorage.setItem(
+            "setupProgress",
+            this.$refs.setupSwiper.$swiper.realIndex
+          );
+        }
       }
     },
     swiperPrev() {
@@ -528,6 +537,7 @@ export default {
         this.getRewardsData().then(re => {
           this.setupTouched = false;
           if (src !== "touchSave") {
+            window.localStorage.removeItem("setupProgress");
             this.setProgress("rewardsBlock");
           }
         });
@@ -538,10 +548,6 @@ export default {
         this.getWidgetData();
         this.setProgress("themesBlock");
       });
-
-      /*this.getWidgetData().then(res => {
-        console.log("GOT Widget Data");
-      });*/
     },
     setEditReward(id) {
       this.editRewardId = id ? id : null;
@@ -577,6 +583,18 @@ export default {
           .querySelector(`.${savedKeys[i]} .card-header`)
           .classList.remove("disabled");
         this.saved[savedKeys[i]] = true;
+      }
+    },
+    checkSetupProgress() {
+      if (window.localStorage.getItem("inProgress") == "setupBlock") {
+        const progressindex = window.localStorage.getItem("setupProgress");
+        const paginations = document.querySelectorAll(
+          ".swiper-pagination-bullet"
+        );
+        this.$refs.setupSwiper.$swiper.slideTo(progressindex);
+        for (var i = 0; i < progressindex; i++) {
+          paginations[i].setAttribute("data-completed", "completed");
+        }
       }
     }
   },
