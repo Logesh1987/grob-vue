@@ -243,8 +243,11 @@
 			justify-content: space-between;
 			align-items: center;
 		}
-		.btn.disabled {
-			pointer-events: none !important;
+		.btn {
+			border-radius: 5px;
+			&.disabled {
+				pointer-events: none !important;
+			}
 		}
 		.setupSwiper-pagination {
 			position: static;
@@ -459,17 +462,6 @@
 		i.info {
 			color: #1064ff;
 		}
-		.floaterTxt {
-			color: #1b708e;
-			background-color: #e5eff5;
-			padding: 20px;
-			border-radius: 10px;
-			position: absolute;
-			left: 0;
-			top: 0;
-			width: 190px;
-			transform: translate(15%, 0);
-		}
 	}
 	.greetingTemplate {
 		background: #fef9f3;
@@ -522,6 +514,29 @@
 			font-size: 13px;
 			text-align: center;
 		}
+	}
+}
+.floaterTxt {
+	color: #1b708e;
+	background-color: #e5eff5;
+	padding: 15px;
+	border-radius: 10px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 210px;
+	line-height: 1.3;
+	transform: translate(15%, 0);
+	.arrow {
+		display: none;
+	}
+	.tooltip-inner {
+		text-align: left;
+		color: inherit;
+		background: none;
+		padding: 0;
+		margin: 0;
+		border-radius: 0;
 	}
 }
 .switch {

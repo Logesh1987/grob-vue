@@ -17,13 +17,18 @@
     </div>
     <div class="stepBody">
       <div class="recommendFloater">
-        <i class="material-icons info">info</i>
-        <div class="floaterTxt">
+        <i id="recommend" class="material-icons info">info</i>
+        <b-tooltip
+          target="recommend"
+          ref="recommend"
+          custom-class="floaterTxt"
+          placement="rightbottom"
+        >
           <i class="material-icons badge badge-pill badge-warning">star</i>
           Recommended setting it up as 1:1, And, you can control the redemption value through
           "2.Rewards
           Section"
-        </div>
+        </b-tooltip>
       </div>
       <div class="stepWrapper">
         <h6>Loyalty Points</h6>
