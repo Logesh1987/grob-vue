@@ -3,7 +3,26 @@
     <b-tabs v-if="pData" v-model="tabIndex" nav-wrapper-class="themeSetupTab">
       <b-tab title="Popup Setup" class="popupSetup" active>
         <div class="row justify-content-between">
-          <div class="col-md-7">
+          <div class="col-md-7 p-0 popPreview">
+            <nav>
+              <div class="nav nav-pills mb-4" id="popup-tab" role="tablist">
+                <a
+                  class="nav-item nav-link"
+                  :class="{'active' : activePsetup === 'mobile'}"
+                  id="nav-mobile-tab"
+                  href="#nav-mobile"
+                  @click.prevent="activePsetup = 'mobile'"
+                >Mobile</a>
+                <a
+                  class="nav-item nav-link"
+                  :class="{'active' : activePsetup === 'desktop'}"
+                  id="nav-desktop-tab"
+                  data-toggle="tab"
+                  href="#nav-desktop"
+                  @click.prevent="activePsetup = 'desktop'"
+                >Desktop</a>
+              </div>
+            </nav>
             <div class="pMobile previewPop" v-if="activePsetup === 'mobile'">
               <img src="@/images/popup_preview_mobile.jpg" class="previewImg" />
               <div class="popup" :style="{'backgroundColor': pData.bg_color}">
@@ -24,25 +43,6 @@
             </div>
           </div>
           <div class="col-md-5 text-left">
-            <nav>
-              <div class="nav nav-pills mb-4" id="popup-tab" role="tablist">
-                <a
-                  class="nav-item nav-link"
-                  :class="{'active' : activePsetup === 'mobile'}"
-                  id="nav-mobile-tab"
-                  href="#nav-mobile"
-                  @click.prevent="activePsetup = 'mobile'"
-                >Mobile</a>
-                <a
-                  class="nav-item nav-link"
-                  :class="{'active' : activePsetup === 'desktop'}"
-                  id="nav-desktop-tab"
-                  data-toggle="tab"
-                  href="#nav-desktop"
-                  @click.prevent="activePsetup = 'desktop'"
-                >Desktop</a>
-              </div>
-            </nav>
             <div class="tab-content" id="popup-tabContent">
               <div class="tab-pane active" id="nav-mobile">
                 <h6 class="mb-4">
@@ -165,7 +165,7 @@
         :title-link-class="[!enableWidget ? 'disabled' : '']"
       >
         <div class="row justify-content-between" v-if="wData">
-          <div class="col-md-7" >
+          <div class="col-md-7">
             <WidgetPreview :type="activeWidget" :data="wData" />
           </div>
           <div class="col-md-5 text-left">
