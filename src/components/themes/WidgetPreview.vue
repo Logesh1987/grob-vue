@@ -82,15 +82,16 @@ export default {
 .wContainer {
   position: absolute;
   &.desktop {
-    width: 100%;
-    top: 25px;
-    bottom: 0;
+    top: 16%;
+    bottom: 9%;
+    left: 8.5%;
+    right: 7.5%;
   }
   &.mobile {
-    left: 30%;
-    right: 28%;
-    top: 15%;
-    bottom: 15%;
+    left: 32%;
+    right: 31%;
+    top: 18%;
+    bottom: 18%;
   }
 }
 </style>
