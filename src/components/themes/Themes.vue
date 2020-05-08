@@ -3,27 +3,7 @@
     <b-tabs v-if="pData" v-model="tabIndex" nav-wrapper-class="themeSetupTab">
       <b-tab title="Popup Setup" class="popupSetup" active>
         <div class="row justify-content-between">
-          <div class="col-md-7">
-            <div class="pMobile previewPop" v-if="activePsetup === 'mobile'">
-              <img src="@/images/popup_preview_mobile.jpg" class="previewImg" />
-              <div class="popup" :style="{'backgroundColor': pData.bg_color}">
-                <div
-                  class="textBox"
-                  :style="{'backgroundColor': pData.styles_data.font_color_main}"
-                ></div>
-              </div>
-            </div>
-            <div class="pDesktop previewPop" v-if="activePsetup === 'desktop'">
-              <img src="@/images/popup_preview_desktop.jpg" class="previewImg" />
-              <div class="popup" :style="{'backgroundColor': pData.bg_color}">
-                <div
-                  class="textBox"
-                  :style="{'backgroundColor': pData.styles_data.font_color_main}"
-                ></div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-5 text-left">
+          <div class="col-md-7 p-0 popPreview">
             <nav>
               <div class="nav nav-pills mb-4" id="popup-tab" role="tablist">
                 <a
@@ -43,6 +23,26 @@
                 >Desktop</a>
               </div>
             </nav>
+            <div class="pMobile previewPop" v-if="activePsetup === 'mobile'">
+              <img src="@/images/popup_preview_mobile.jpg" class="previewImg" />
+              <div class="popup" :style="{'backgroundColor': pData.bg_color}">
+                <div
+                  class="textBox"
+                  :style="{'backgroundColor': pData.styles_data.font_color_main}"
+                ></div>
+              </div>
+            </div>
+            <div class="pDesktop previewPop" v-if="activePsetup === 'desktop'">
+              <img src="@/images/popup_preview_desktop.jpg" class="previewImg" />
+              <div class="popup" :style="{'backgroundColor': pData.bg_color}">
+                <div
+                  class="textBox"
+                  :style="{'backgroundColor': pData.styles_data.font_color_main}"
+                ></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-5 text-left pr-0">
             <div class="tab-content" id="popup-tabContent">
               <div class="tab-pane active" id="nav-mobile">
                 <h6 class="mb-4">
@@ -156,6 +156,10 @@
                 >Save and Next</button>
               </div>-->
             </div>
+            <div class="sampleDemo">
+              <strong>Sample Demo:</strong>
+              <p>Shown the screens here are placeholder campaign, this may not resemble your setup.</p>
+            </div>
           </div>
         </div>
       </b-tab>
@@ -164,20 +168,13 @@
         class="widgetSetup"
         :title-link-class="[!enableWidget ? 'disabled' : '']"
       >
-        <div class="row justify-content-between">
-          <div class="col-md-5 text-left" v-if="wData">
+        <div class="row justify-content-between" v-if="wData">
+          <div class="col-md-7 p-0">
+            <WidgetPreview :type="activeWidget" :data="wData" />
+          </div>
+          <div class="col-md-5 pr-0 text-left">
             <b-tabs v-model="activeWidget" nav-wrapper-class="widget-tabs-nav">
               <b-tab title="Mobile" class="widget-tabs-panes" active>
-                <div class="form-group">
-                  <label>Widget Placement</label>
-                  <select class="form-control" v-model="wData.data.style_data.mobile_position">
-                    <option
-                      v-for="(value, name) in wData.data.mobile_widget_position"
-                      :value="name"
-                      :key="value"
-                    >{{value}}</option>
-                  </select>
-                </div>
                 <div class="form-group mt-4">
                   <label>Widget Look</label>
                   <div class="custom-control custom-radio">
@@ -212,6 +209,78 @@
                       class="custom-control-input"
                     />
                     <label class="custom-control-label" for="wm-look-3">Hide Widget</label>
+                  </div>
+                </div>
+                <div class="form-group" v-if="wData.data.style_data.w_mobile_view == 'compact'">
+                  <label>Widget Placement</label>
+                  <select class="form-control" v-model="wData.data.style_data.mobile_position">
+                    <option
+                      v-for="(value, name) in wData.data.mobile_widget_position"
+                      :value="name"
+                      :key="value"
+                    >{{value}}</option>
+                  </select>
+                </div>
+                <div
+                  id="color-picker-component"
+                  class="form-group d-flex flex-row align-items-center colorpicker-component"
+                >
+                  <label for="family" class="col-md-5 p-0 m-0">Text Color</label>
+                  <verte
+                    picker="square"
+                    :enableAlpha="false"
+                    v-model="wData.data.style_data.norm_txt_color"
+                    model="hex"
+                  >
+                    <input
+                      type="text"
+                      v-model="wData.data.style_data.norm_txt_color"
+                      class="form-control"
+                    />
+                    <span
+                      class="palette"
+                      :style="{'backgroundColor': wData.data.style_data.norm_txt_color}"
+                    ></span>
+                  </verte>
+                </div>
+                <div
+                  id="color-picker-component"
+                  class="form-group d-flex flex-row align-items-center colorpicker-component"
+                >
+                  <label for="family" class="col-md-5 p-0 m-0">BG Color</label>
+                  <verte
+                    picker="square"
+                    :enableAlpha="false"
+                    v-model="wData.data.style_data.norm_bg_color"
+                    model="hex"
+                  >
+                    <input
+                      type="text"
+                      v-model="wData.data.style_data.norm_bg_color"
+                      class="form-control"
+                    />
+                    <span
+                      class="palette"
+                      :style="{'backgroundColor': wData.data.style_data.norm_bg_color}"
+                    ></span>
+                  </verte>
+                </div>
+                <div class="form-group mt-4">
+                  <label>Widget Icon</label>
+                  <div class="iconSwiper">
+                    <swiper :options="swiperOptions">
+                      <swiper-slide v-for="(icon, index) in icons" :key="index">
+                        <div
+                          class="icon"
+                          :class="{'active': wData.data.style_data.widget_logo_img === icon}"
+                          @click.prevent="wData.data.style_data.widget_logo_img = icon"
+                        >
+                          <img :src="icon" alt />
+                        </div>
+                      </swiper-slide>
+                    </swiper>
+                    <div class="swiper-button-prev" slot="button-prev"></div>
+                    <div class="swiper-button-next" slot="button-next"></div>
                   </div>
                 </div>
                 <button
@@ -265,6 +334,68 @@
                       class="custom-control-input"
                     />
                     <label class="custom-control-label" for="wd-look-3">Hide Widget</label>
+                  </div>
+                </div>
+                <div
+                  id="color-picker-component"
+                  class="form-group d-flex flex-row align-items-center colorpicker-component"
+                >
+                  <label for="family" class="col-md-5 p-0 m-0">Text Color</label>
+                  <verte
+                    picker="square"
+                    :enableAlpha="false"
+                    v-model="wData.data.style_data.norm_txt_color"
+                    model="hex"
+                  >
+                    <input
+                      type="text"
+                      v-model="wData.data.style_data.norm_txt_color"
+                      class="form-control"
+                    />
+                    <span
+                      class="palette"
+                      :style="{'backgroundColor': wData.data.style_data.norm_txt_color}"
+                    ></span>
+                  </verte>
+                </div>
+                <div
+                  id="color-picker-component"
+                  class="form-group d-flex flex-row align-items-center colorpicker-component"
+                >
+                  <label for="family" class="col-md-5 p-0 m-0">BG Color</label>
+                  <verte
+                    picker="square"
+                    :enableAlpha="false"
+                    v-model="wData.data.style_data.norm_bg_color"
+                    model="hex"
+                  >
+                    <input
+                      type="text"
+                      v-model="wData.data.style_data.norm_bg_color"
+                      class="form-control"
+                    />
+                    <span
+                      class="palette"
+                      :style="{'backgroundColor': wData.data.style_data.norm_bg_color}"
+                    ></span>
+                  </verte>
+                </div>
+                <div class="form-group mt-4">
+                  <label>Widget Icon</label>
+                  <div class="iconSwiper">
+                    <swiper :options="swiperOptions">
+                      <swiper-slide v-for="(icon, index) in icons" :key="index">
+                        <div
+                          class="icon"
+                          :class="{'active': wData.data.style_data.widget_logo_img === icon}"
+                          @click.prevent="wData.data.style_data.widget_logo_img = icon"
+                        >
+                          <img :src="icon" alt />
+                        </div>
+                      </swiper-slide>
+                    </swiper>
+                    <div class="swiper-button-prev" slot="button-prev"></div>
+                    <div class="swiper-button-next" slot="button-next"></div>
                   </div>
                 </div>
                 <button
@@ -341,9 +472,6 @@
               </div>
             </b-collapse>
           </div>
-          <div class="col-md-7" v-if="wData">
-            <WidgetPreview :type="activeWidget" :data="wData" />
-          </div>
         </div>
       </b-tab>
     </b-tabs>
@@ -380,10 +508,21 @@
 import { mapState, mapActions } from "vuex";
 import Verte from "verte";
 import WidgetPreview from "@/components/themes/WidgetPreview";
+import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import "verte/dist/verte.css";
+import "swiper/css/swiper.css";
+
+const icon1 = require("@/images/icons/01.png");
+const icon2 = require("@/images/icons/02.png");
+const icon3 = require("@/images/icons/03.png");
+const icon4 = require("@/images/icons/04.png");
+const icon5 = require("@/images/icons/05.png");
+const icon6 = require("@/images/icons/06.png");
+const icon7 = require("@/images/icons/07.png");
+const icon8 = require("@/images/icons/08.png");
 export default {
   name: "Themes",
-  components: { Verte, WidgetPreview },
+  components: { Verte, WidgetPreview, Swiper, SwiperSlide },
   props: ["page"],
   data: function() {
     return {
@@ -393,12 +532,15 @@ export default {
       enableWidget: false,
       pData: null,
       wData: null,
-      icons: [
-        "https://upload-icon.s3.us-east-2.amazonaws.com/uploads/icons/png/8066178361581426688-64.png",
-        "https://upload-icon.s3.us-east-2.amazonaws.com/uploads/icons/png/13305864831581426691-64.png",
-        "https://upload-icon.s3.us-east-2.amazonaws.com/uploads/icons/png/2388916001581426689-64.png",
-        "https://upload-icon.s3.us-east-2.amazonaws.com/uploads/icons/png/12989878351582634759-64.png"
-      ]
+      icons: [icon1, icon2, icon3, icon4, icon5, icon6, icon7, icon8],
+      swiperOptions: {
+        slidesPerView: 3,
+        spaceBetween: 10,
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev"
+        }
+      }
     };
   },
   computed: {

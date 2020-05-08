@@ -39,8 +39,10 @@
               <a
                 href="#"
                 class="btn btn-link sampleModalTrigger"
-                data-img="https://picsum.photos/id/1082/640/480"
-              >Sample</a>
+                @click.prevent="setSample('https://picsum.photos/id/1082/640/480')"
+              >
+                <small>Sample</small>
+              </a>
             </div>
             <label
               class="error col-md-10"
@@ -70,6 +72,7 @@ import {
   maxLength,
   requiredIf
 } from "vuelidate/lib/validators";
+import { mapActions } from "vuex";
 
 export default {
   name: "PaybyPoints",
@@ -79,6 +82,7 @@ export default {
     return this.data;
   },
   methods: {
+    ...mapActions(["setSample"]),
     submit() {
       this.$v.$touch();
       return !this.$v.$invalid;

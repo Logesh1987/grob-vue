@@ -6,6 +6,13 @@ import defaultData from './default-setup';
 
 Vue.use(Vuex);
 
+const headersData = {
+	headers: {
+		'Content-Type': 'text/plain',
+		Accept: '*/*'
+	}
+};
+
 export default new Vuex.Store({
 	state: {
 		loading: false,
@@ -13,7 +20,8 @@ export default new Vuex.Store({
 		setupData: null,
 		rewardsData: null,
 		popupData: null,
-		widgetData: null
+		widgetData: null,
+		sampleImg: null
 	},
 	mutations: {
 		enableLoader: (state) => {
@@ -33,6 +41,9 @@ export default new Vuex.Store({
 		},
 		updateWidgetData: (state, payload) => {
 			state.widgetData = payload;
+		},
+		updateSampleImg: (state, payload) => {
+			state.sampleImg = payload;
 		}
 	},
 	actions: {
@@ -52,15 +63,6 @@ export default new Vuex.Store({
 			});
 		},
 		saveSetupData: ({ commit }, payload) => {
-			let headersData = {
-				headers: {
-					//'Access-Control-Allow-Origin': '*',
-					//'Access-Control-Allow-Methods': 'POST, GET, PUT, OPTIONS, DELETE',
-					//'Access-Control-Allow-Headers': 'Access-Control-Allow-Methods, Access-Control-Allow-Origin, Origin, Accept, Content-Type',
-					'Content-Type': 'text/plain',
-					Accept: '*/*'
-				}
-			};
 			commit('enableLoader');
 
 			//return Axios.post("https://jai.devam.pro/gr/", postData, headersData).then(res => {
@@ -78,6 +80,28 @@ export default new Vuex.Store({
 					console.log(err);
 				});
 		},
+		savePartialSetup: ({ commit, state }, payload) => {
+			const currentKey = Object.keys(payload)[0];
+			const stateKeys = Object.keys(state.setupData);
+			stateKeys.forEach((key) => {
+				if (Object.keys(state.setupData[key]).includes(currentKey)) {
+					const partialLoad = {
+						[key]: payload
+					};
+					Axios.post(
+						'https://jai.devam.pro/gr/admin/onboarding?id_shop=1307&admin_email=jayakumar@appsmav.com',
+						partialLoad,
+						headersData
+					)
+						.then((res) => {
+							return res;
+						})
+						.catch((err) => {
+							console.log(err);
+						});
+				}
+			});
+		},
 		getRewardsData: ({ commit, state }) => {
 			commit('enableLoader');
 			return Axios.get(
@@ -91,12 +115,6 @@ export default new Vuex.Store({
 
 		//Add new Reward
 		addReward: ({ commit }, payload) => {
-			let headersData = {
-				headers: {
-					'Content-Type': 'text/plain',
-					Accept: '*/*'
-				}
-			};
 			commit('enableLoader');
 			let result = Axios.post(
 				'https://jai.devam.pro/gr/admin/rewards?id_shop=1307&admin_email=jayakumar@appsmav.com',
@@ -115,12 +133,6 @@ export default new Vuex.Store({
 
 		//Update Rewards
 		updateReward: ({ commit }, payload) => {
-			let headersData = {
-				headers: {
-					'Content-Type': 'text/plain',
-					Accept: '*/*'
-				}
-			};
 			commit('enableLoader');
 			let result = Axios.put(
 				'https://jai.devam.pro/gr/admin/rewards?id_shop=1307&admin_email=jayakumar@appsmav.com',
@@ -168,12 +180,6 @@ export default new Vuex.Store({
 			});
 		},
 		saveThemeSettings: ({ commit }, payload) => {
-			let headersData = {
-				headers: {
-					'Content-Type': 'text/plain',
-					Accept: '*/*'
-				}
-			};
 			commit('enableLoader');
 			return Axios.put(
 				'https://jai.devam.pro/gr/admin/themes?id_shop=1307&admin_email=jayakumar@appsmav.com',
@@ -196,12 +202,6 @@ export default new Vuex.Store({
 			});
 		},
 		saveWidgetData: ({ commit }, payload) => {
-			let headersData = {
-				headers: {
-					'Content-Type': 'text/plain',
-					Accept: '*/*'
-				}
-			};
 			commit('enableLoader');
 			return Axios.put(
 				'https://jai.devam.pro/gr/admin/widgets?id_shop=1307&admin_email=jayakumar@appsmav.com',
@@ -214,12 +214,6 @@ export default new Vuex.Store({
 			});
 		},
 		updateLoyaltyStatus: ({ commit }, status) => {
-			let headersData = {
-				headers: {
-					'Content-Type': 'text/plain',
-					Accept: '*/*'
-				}
-			};
 			commit('enableLoader');
 			return Axios.post(
 				'https://jai.devam.pro/gr/admin/onboarding/updateLoyalty?id_shop=1307&admin_email=jayakumar@appsmav.com',
@@ -231,12 +225,6 @@ export default new Vuex.Store({
 			});
 		},
 		submitReview: ({ commit }, review) => {
-			let headersData = {
-				headers: {
-					'Content-Type': 'text/plain',
-					Accept: '*/*'
-				}
-			};
 			return Axios.post(
 				'https://jai.devam.pro/gr/admin/onboarding/review?id_shop=1307&admin_email=jayakumar@appsmav.com',
 				review,
@@ -245,6 +233,9 @@ export default new Vuex.Store({
 				//commit('updateWidgetData', status);
 				return res;
 			});
+		},
+		setSample: ({ commit, state }, url) => {
+			commit('updateSampleImg', url);
 		}
 	},
 	getters: {},

@@ -11,13 +11,16 @@
       hide-footer
       hide-header
       centered
-      modal-class="setupModal modal-skip"
-      body-class="d-flex flex-column align-items-center"
+      modal-class="modal-reset"
+      body-class
     >
       <template v-slot:default="{ hide }">
-        <a href class="bvClose" @click.prevent="hide()">&times;</a>
-        <h5>Are you sure? Do you wish to reset</h5>
-        <button @click.prevent="handleConfirm" class="btn btn-success pr-5 pl-5 mt-4 mb-4">confirm</button>
+        <h5>Reset to Default</h5>
+        <p>Reset will be applied only for this step</p>
+        <nav>
+          <b-button variant="success" @click.prevent="handleConfirm" class="px-5 py-3">Confirm</b-button>
+          <b-button variant="outline-secondary" @click.prevent="hide()" class="px-5 py-3">Cancel</b-button>
+        </nav>
       </template>
     </b-modal>
   </Fragment>
@@ -40,3 +43,29 @@ export default {
   }
 };
 </script>
+
+<style lang="less">
+.modal-reset {
+  .modal-content {
+    border-radius: 10px;
+    padding: 50px 80px;
+  }
+  .modal-body {
+    padding: 0;
+  }
+  p {
+    opacity: 0.5;
+  }
+  nav {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    button {
+      width: 48%;
+      &.btn-outline-secondary {
+        opacity: 0.5;
+      }
+    }
+  }
+}
+</style>

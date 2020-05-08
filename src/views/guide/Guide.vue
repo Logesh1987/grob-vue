@@ -37,9 +37,9 @@
             <h4 v-html="setup.desc"></h4>
             <nav class="stepsNav">
               <i></i>
-              <a href="#" @click.prevent="step=1">Setup</a>
-              <a href="#" @click.prevent="step=2">Rewards</a>
-              <a href="#" @click.prevent="step=3">Themes</a>
+              <a href="#" data-step="1" @click.prevent="step=1">Setup</a>
+              <a href="#" data-step="2" @click.prevent="step=2">Rewards</a>
+              <a href="#" data-step="3" @click.prevent="step=3">Themes</a>
             </nav>
             <div class="setupStepsWrapper">
               <div class="setupSteps step-1">
@@ -608,17 +608,17 @@ export default {
         }
       }
     }
-    [data-step="1"]& a[data-step="1"],
-    [data-step="2"]& a[data-step="2"],
-    [data-step="3"]& a[data-step="3"] {
-      color: @color2;
-      &:before {
-        color: #fff;
-        background-color: @color1;
-      }
-      &:after {
-        color: #fff;
-      }
+  }
+  &[data-step="1"] nav a[data-step="1"],
+  &[data-step="2"] nav a[data-step="2"],
+  &[data-step="3"] nav a[data-step="3"] {
+    color: @color2;
+    &:before {
+      color: #fff;
+      background-color: @color1;
+    }
+    &:after {
+      color: #fff;
     }
   }
 
