@@ -85,6 +85,18 @@
               false-value="0"
             />
             <label for="raa" class="m-0">Reward as a</label>
+            <div v-if="couponType == 0" class="recommendFloater float-right mr-2">
+              <i id="recommend" class="material-icons info">info</i>
+              <b-tooltip
+                target="recommend"
+                ref="recommend"
+                custom-class="floaterTxt"
+                placement="rightbottom"
+              >
+                <i class="material-icons badge badge-pill badge-warning">star</i>
+                We will create coupon automatically on your webstore
+              </b-tooltip>
+            </div>
           </div>
           <div class="col-6 p-0">
             <select class="form-control" v-model="couponType">
@@ -98,10 +110,6 @@
               v-if="couponType == 0"
             >
               <div class="col-md-12 mt-2 mb-3">
-                <div class="alert alert-warning d-flex align-items-center" role="alert">
-                  <span class="badge badge-pill badge-primary">i</span>
-                  We will create coupon automatically on your webstore
-                </div>
                 <RadioGroup
                   v-model="data.realtime_coupon.type"
                   name="cTyp"
