@@ -15,57 +15,63 @@
           <div class="row">
             <div class="col-md-3">
               <div class="controlBox">
-                <div class="d-flex justify-content-sm-between">
-                  <h6>
-                    Your Loyalty
-                    <br />Program is
-                    <strong>LIVE</strong>
-                  </h6>
-                  <label class="switch" for="programSwitch-1" @click="toggleStatus()">
-                    <input
-                      type="checkbox"
-                      v-model="live"
-                      true-value="1"
-                      false-value="0"
-                      id="programSwitch"
-                    />
-                    <i></i>
-                  </label>
+                <div class="controlSection">
+                  <div class="d-flex justify-content-sm-between mb-3">
+                    <h6>
+                      Your Loyalty
+                      <br />Program is
+                      <strong>LIVE</strong>
+                    </h6>
+                    <label class="switch" for="programSwitch-1" @click="toggleStatus()">
+                      <input
+                        type="checkbox"
+                        v-model="live"
+                        true-value="1"
+                        false-value="0"
+                        id="programSwitch"
+                      />
+                      <i></i>
+                    </label>
+                  </div>
+                  <a
+                    v-if="setupData"
+                    :href="setupData.shop.url"
+                    target="_blank"
+                    class="btn btn-outline-light"
+                  >
+                    Preview in your website
+                    <i class="material-icons">chevron_right</i>
+                  </a>
                 </div>
-                <a
-                  v-if="setupData"
-                  :href="setupData.shop.url"
-                  target="_blank"
-                  class="btn btn-outline-dark"
-                >
-                  Preview in your website
-                  <i class="material-icons">chevron_right</i>
-                </a>
-                <hr class="mt-4 mb-4" />
-                <h6>SUMMARY</h6>
-                <ul class="summaryPoints">
-                  <li>
-                    <p>
-                      Guest checklist shoud be optional - So customers shoud have the option to
-                      create
-                      an account
-                    </p>
-                  </li>
-                  <li>
-                    <p>You can enroll past customers</p>
-                  </li>
-                  <li>
-                    <p>
-                      You are giving 100 welcome points, puchase points = 1 point for every
-                      currency
-                      spent
-                    </p>
-                  </li>
-                </ul>
-                <a href="https://jai.devam.pro/gr/admin#/view/campaigns" class="btn gotoDashboard">
-                  Go to Dashboard
-                  <i class="material-icons">chevron_right</i>
-                </a>
+                <aside>
+                  <h6>SUMMARY</h6>
+                  <ul class="summaryPoints">
+                    <li>
+                      <p>
+                        Guest checklist shoud be optional - So customers shoud have the option to
+                        create
+                        an account
+                      </p>
+                    </li>
+                    <li>
+                      <p>You can enroll past customers</p>
+                    </li>
+                    <li>
+                      <p>
+                        You are giving 100 welcome points, puchase points = 1 point for every
+                        currency
+                        spent
+                      </p>
+                    </li>
+                  </ul>
+                  <a
+                    href="https://jai.devam.pro/gr/admin#/view/campaigns"
+                    class="btn gotoDashboard"
+                  >
+                    Go to Dashboard
+                    <i class="material-icons">chevron_right</i>
+                  </a>
+                </aside>
               </div>
               <div class="otherContents">
                 <ul>
@@ -384,7 +390,7 @@ export default {
           rating: this.feedback.rating
         };
         this.submitReview(params).then(res => {
-            console.log("******************REVIEW**************************");
+          console.log("******************REVIEW**************************");
         });
       }
     },
@@ -409,7 +415,7 @@ export default {
         params.customfeed = this.$refs.feedbackTxt.value;
       }
       this.submitReview(params).then(res => {
-          console.log("******************REVIEW**************************");
+        console.log("******************REVIEW**************************");
       });
       //console.log(params);
       // PARAMS READY TO POST

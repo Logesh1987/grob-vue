@@ -34,18 +34,36 @@
 		background-color: #fff;
 		border: 1px solid #e4e4e4;
 		border-radius: 5px;
-		padding: 30px 30px 2.8em;
 		margin-top: 50px;
 		position: relative;
+		> aside {
+			padding: 30px 30px 2.8em;
+		}
+		.controlSection {
+			padding: 30px;
+			background-color: #2eca71;
+			color: #fff;
+			.switch {
+				i {
+					background-color: #fff;
+					&:before {
+						background-color: #fa0914;
+					}
+				}
+				input:checked + i:before {
+					background-color: #2eca71;
+				}
+			}
+		}
 		.gotoDashboard {
 			position: absolute;
 			width: 100%;
 			left: 0;
 			bottom: 0;
-			background: #E4FFF0;
-			border-top: 1px solid #04A74C;
+			background: #e4fff0;
+			border-top: 1px solid #04a74c;
 			border-radius: 0;
-			color: #04A74C;
+			color: #04a74c;
 			padding: 0.6em 1em;
 			display: flex;
 			align-items: center;
@@ -54,14 +72,14 @@
 				background: #c9fbe0;
 			}
 		}
-		.btn-outline-dark {
+		.btn-outline-light {
 			margin-top: 1em;
 			border-radius: 5px;
 			font-size: 13px;
 			i.material-icons {
-				background: #343a40;
+				background: #fff;
 				border-radius: 50%;
-				color: #fff;
+				color: #2eca71;
 				font-size: 1.2em;
 				padding: 0.1em;
 				margin-left: 1em;
@@ -149,14 +167,15 @@
 	}
 	.statusRep {
 		position: relative;
+		z-index: 1;
 		&:before {
 			content: '';
 			display: block;
-			padding-bottom: 55%;
+			padding-bottom: 35%;
 		}
 		&:after {
 			content: '';
-			background: url('../../images/charectar-live.jpg') right bottom no-repeat;
+			background: url('../../images/charectar-live.png') right bottom no-repeat;
 			background-size: 100% auto;
 			position: absolute;
 			right: 0;
@@ -256,11 +275,10 @@
 			&.collapsed:after {
 				transform: translateY(-50%) rotate(-45deg);
 			}
-
 		}
 	}
 	h6.pausedRewardHead {
-		color: #549D90;
+		color: #549d90;
 	}
 	.setupItemContainer {
 		display: flex;
@@ -270,7 +288,7 @@
 	}
 	.setupItemList {
 		width: 48%;
-		border: 1px solid #C6C6C6;
+		border: 1px solid #c6c6c6;
 		border-radius: 3px;
 		padding: 30px;
 		margin-top: 20px;
@@ -280,7 +298,8 @@
 				font-weight: normal;
 				margin: 0;
 			}
-			h3, p {
+			h3,
+			p {
 				text-overflow: ellipsis;
 				overflow: hidden;
 				white-space: nowrap;
@@ -301,7 +320,7 @@
 					position: absolute;
 					left: 0;
 					top: 0;
-					color: #28A08C;
+					color: #28a08c;
 					font-size: 1.2em;
 					line-height: 1;
 				}
@@ -391,9 +410,15 @@
 				font-family: sans-serif;
 			}
 		}
+		.controlSection {
+			background-color: #fa0914;
+			.btn-outline-light i.material-icons {
+				color: #fa0914;
+			}
+		}
 		.statusRep {
 			&:after {
-				background-image: url('../../images/charectar-paused.jpg');
+				background-image: url('../../images/charectar-paused.png');
 			}
 			.head {
 				.live {
@@ -407,11 +432,11 @@
 	}
 }
 .rating {
-	 input {
+	input {
 		position: absolute;
 		top: -9999px;
 	}
-	 label {
+	label {
 		float: right;
 		width: 1em;
 		font-family: "Material Icons";
