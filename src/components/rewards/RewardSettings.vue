@@ -263,6 +263,8 @@ export default {
       },
       swiperOptions: {
         slidesPerView: 4,
+        observer: true,
+        observeParents: true,
         spaceBetween: 5,
         navigation: {
           nextEl: ".swiper-button-next",
