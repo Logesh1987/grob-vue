@@ -179,7 +179,7 @@
           </div>
         </div>
       </section>
-      <div class="rateExperience">
+      <div class="rateExperience" v-if="!this.feedback.submitted">
         <div class="contentArea">
           <div class="rateContainer d-flex align-items-center justify-content-between">
             <p
@@ -217,11 +217,7 @@
     >
       <template v-slot:default="{ hide }">
         <a href class="bvClose" @click.prevent="hide()">&times;</a>
-
-        <h5 class="mt-4">
-          <strong>Help us improve</strong>
-        </h5>
-        <div class="d-flex align-items-center justify-content-center p-3">
+        <div v-if="feedback.submitted" class="thanksFeedback d-flex flex-column align-items-center">
           <div class="rating popupRate">
             <Fragment v-for="n in 5" :key="'p'+n">
               <input
@@ -238,40 +234,64 @@
               >{{6-n}} stars {{feedback.rating}}</label>
             </Fragment>
           </div>
+          <p>Thank you for your feedback!</p>
         </div>
-        <div class="lowRatingFeedback">
-          <p class="text-info text-center">
-            <small>Let us know what went wrong</small>
-          </p>
-          <div class="predefinedFeedbacks d-flex flex-wrap justify-content-center">
-            <div
-              class="btn-group-toggle"
-              data-toggle="buttons"
-              v-for="(point, index) in feedback.improvePoints"
-              :key="index"
-            >
-              <label
-                class="btn"
-                :class="{'active': feedback.selectedImprovePoint.indexOf(point) > -1}"
-                @click.prevent="pushPoint(point)"
-              >{{ point }}</label>
+        <div v-else>
+          <h5 class="mt-4">
+            <strong>Help us improve</strong>
+          </h5>
+          <div class="d-flex align-items-center justify-content-center p-3">
+            <div class="rating popupRate">
+              <Fragment v-for="n in 5" :key="'p'+n">
+                <input
+                  type="radio"
+                  :id="'pStar'+(6-n)"
+                  name="star"
+                  :value="6-n"
+                  :checked="(6-n) == feedback.rating"
+                />
+                <label
+                  :for="'pStar'+(6-n)"
+                  @click="handleRating(6-n)"
+                  title="text"
+                >{{6-n}} stars {{feedback.rating}}</label>
+              </Fragment>
+            </div>
+          </div>
+          <div class="lowRatingFeedback">
+            <p class="text-info text-center">
+              <small>Let us know what went wrong</small>
+            </p>
+            <div class="predefinedFeedbacks d-flex flex-wrap justify-content-center">
+              <div
+                class="btn-group-toggle"
+                data-toggle="buttons"
+                v-for="(point, index) in feedback.improvePoints"
+                :key="index"
+              >
+                <label
+                  class="btn"
+                  :class="{'active': feedback.selectedImprovePoint.indexOf(point) > -1}"
+                  @click.prevent="pushPoint(point)"
+                >{{ point }}</label>
+              </div>
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-10 mt-3">
+                <textarea
+                  class="form-control"
+                  ref="feedbackTxt"
+                  id="exampleFormControlTextarea1"
+                  placeholder="Something else you want to say?"
+                  rows="4"
+                ></textarea>
+              </div>
             </div>
           </div>
           <div class="row justify-content-center">
-            <div class="col-10 mt-3">
-              <textarea
-                class="form-control"
-                ref="feedbackTxt"
-                id="exampleFormControlTextarea1"
-                placeholder="Something else you want to say?"
-                rows="4"
-              ></textarea>
+            <div class="col-10 mb-3 mt-3 justify-content-end d-flex">
+              <button type="submit" class="btn btn-success" @click.prevent="feedbackSubmit">Submit</button>
             </div>
-          </div>
-        </div>
-        <div class="row justify-content-center">
-          <div class="col-10 mb-3 mt-3 justify-content-end d-flex">
-            <button type="submit" class="btn btn-success" @click.prevent="feedbackSubmit">Submit</button>
           </div>
         </div>
       </template>
@@ -331,6 +351,7 @@ export default {
     return {
       live: null,
       feedback: {
+        submitted: null,
         rating: null,
         selectedImprovePoint: [],
         improvePoints: [
@@ -420,7 +441,8 @@ export default {
       //console.log(params);
       // PARAMS READY TO POST
       // POST CALL THEN
-      this.$bvModal.hide("feedbackModal");
+      this.feedback.submitted = true;
+      window.localStorage.setItem("feedbackSubmitted", this.feedback.rating);
     },
     setEditReward(id) {
       this.editRewardId = id ? id : null;
@@ -434,6 +456,9 @@ export default {
     }
   },
   mounted: function() {
+    this.feedback.rating = window.localStorage.getItem("feedbackSubmitted");
+    this.feedback.submitted = window.localStorage.getItem("feedbackSubmitted");
+
     if (window.localStorage.getItem("inProgress") !== "themesBlock") {
       this.$router.push("setup");
     }

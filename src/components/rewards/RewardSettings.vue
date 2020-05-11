@@ -88,14 +88,14 @@
           </div>
           <div class="col-6 p-0">
             <select class="form-control" v-model="couponType">
-              <option value="1">Automatic</option>
-              <option value="0">Manual</option>
+              <option value="0">Automatic</option>
+              <option value="1">Manual</option>
             </select>
           </div>
-          <div v-if="data.is_coupon === '1'">
+          <div v-if="data.is_coupon == 1">
             <div
               class="row pt-3 pb-3 mt-4 mb-4 border-top border-light border-bottom border-light"
-              v-if="couponType === '1'"
+              v-if="couponType == 0"
             >
               <div class="col-md-12 mt-2 mb-3">
                 <div class="alert alert-warning d-flex align-items-center" role="alert">
@@ -138,7 +138,7 @@
 
             <div
               class="col-md-12 mt-4 mb-4 pt-5 pb-5 border-top border-light border-bottom border-light"
-              v-if="couponType === '0'"
+              v-if="couponType == 1"
             >
               <div class="m-0 form-group fLabel">
                 <label for>Manual coupons</label>
@@ -156,10 +156,18 @@
         </div>
         <div class="row m-0 d-flex">
           <div class="cCheck col-8 p-0">
-            <input type="checkbox" name="lrpu" id="lrpu" v-model="data.quantity" true-value="0" />
+            <input
+              type="checkbox"
+              name="lrpu"
+              id="lrpu"
+              true-value="1"
+              false-value="0"
+              v-model="is_limited"
+              @change="is_limited == 0 ? data.quantity = 0 : ''"
+            />
             <label for="lrpu" class="m-0">Limit rewards per user</label>
           </div>
-          <div class="col-2 p-0" v-if="data.quantity">
+          <div class="col-2 p-0" v-if="is_limited === '1'">
             <div class="form-group m-0">
               <input
                 type="text"
@@ -230,12 +238,12 @@ export default {
         name: "Default title",
         description: "Default Description",
         required_minimum_points: 100,
-        is_unlimited: 1,
         quantity: 0,
         image_url:
           "https://s3.us-east-1.amazonaws.com/devam.pro/gr/master/upload/img/683/83/3683_loyalty_1587031987.png",
         type: "Coupon",
         is_coupon: 1,
+        manual_coupon: "",
         order: 1,
         realtime_coupon_on: 1,
         nb_rewards: 0,
@@ -253,6 +261,7 @@ export default {
           prevEl: ".swiper-button-prev"
         }
       },
+      is_limited: "1",
       couponType: "1"
     };
   },
@@ -288,8 +297,8 @@ export default {
     this.id
       ? (this.data = this.getDataById(this.id))
       : (this.data = this.newSettings);
-
-    this.couponType = this.data.manual_coupon.length ? "0" : "1";
+    this.couponType = this.data.manual_coupon.length ? "1" : "0";
+    this.is_limited = parseInt(this.data.quantity) ? "1" : "0";
   }
 };
 </script>
