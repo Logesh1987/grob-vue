@@ -3,6 +3,7 @@
     <div class="stepHead">
       <h3>WOOReview Rewards</h3>
       <p>Reward reviews of products, services by incentivizing</p>
+      <EnableFeature v-if="review_status == '0'" />
       <label class="switch" for="d20">
         <input
           type="checkbox"
@@ -60,6 +61,7 @@
 </template>
 
 <script>
+import EnableFeature from "./EnableFeature.vue";
 import { validationMixin } from "vuelidate";
 import {
   required,
@@ -72,7 +74,7 @@ import ResetBlock from "./ResetBlock";
 export default {
   name: "WooRewards",
   props: ["data", "default", "triggerReset"],
-  components: { ResetBlock },
+  components: { ResetBlock, EnableFeature },
   mixins: [validationMixin],
   data: function() {
     return this.data.woo_reviews;

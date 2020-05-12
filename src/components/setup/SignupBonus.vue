@@ -3,6 +3,7 @@
     <div class="stepHead">
       <h3>Sign Up Bonus</h3>
       <p>Reward customers for creating an account on your store</p>
+      <EnableFeature v-if="bonus_status == '0'" />
       <label class="switch" for="d23">
         <input
           type="checkbox"
@@ -73,6 +74,7 @@
 </template>
 
 <script>
+import EnableFeature from "./EnableFeature.vue";
 import { validationMixin } from "vuelidate";
 import {
   required,
@@ -86,7 +88,7 @@ export default {
   name: "SignupBonus",
   props: ["data", "default", "triggerReset"],
   mixins: [validationMixin],
-  components: { ResetBlock },
+  components: { ResetBlock, EnableFeature },
   data: function() {
     return this.data;
   },

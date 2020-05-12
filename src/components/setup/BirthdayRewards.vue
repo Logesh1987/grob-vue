@@ -7,6 +7,7 @@
         <br />prompting visitors and members to
         enter a date
       </p>
+      <EnableFeature v-if="status == '0'" />
       <label class="switch" for="d12">
         <input type="checkbox" name="mainSwitch" v-model="status" id="d12" />
         <i></i>
@@ -86,6 +87,7 @@
 </template>
 
 <script>
+import EnableFeature from './EnableFeature.vue'
 import { validationMixin } from "vuelidate";
 import {
   required,
@@ -99,7 +101,7 @@ export default {
   name: "BirthdayRewards",
   props: ["data", "default", "triggerReset"],
   mixins: [validationMixin],
-  components: { ResetBlock },
+  components: { ResetBlock, EnableFeature },
   data: function() {
     return this.data;
   },

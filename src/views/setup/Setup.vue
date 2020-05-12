@@ -8,6 +8,10 @@
           <a href="#" class="logo">
             <img src="@/images/logo_gr_white.png" alt="Gratisfaction" />
           </a>
+          <router-link to="/" class="viewOnboarding">
+            View Onboarding tutorial
+            <img src="@/images/icon-onboarding.png" alt />
+          </router-link>
         </div>
         <div class="head">
           <div>
@@ -251,19 +255,35 @@
           <b-collapse id="rewardsBlock" accordion="my-accordion" role="tabpanel">
             <b-card-body class="p-0">
               <b-card-text>
-                <div class="text-right">
-                  <button
-                    v-if="activeStep === 'rewardsBlock'"
-                    @click.stop="rewardModalOpen"
-                    class="btn btn-success"
-                  >Add Reward</button>
-                </div>
-                <div v-if="rewardsData">
+                <div v-if="rewardsData && rewardsData.length">
+                  <div class="text-right">
+                    <button
+                      v-if="activeStep === 'rewardsBlock'"
+                      @click.stop="rewardModalOpen"
+                      class="btn btn-success"
+                    >Add Reward</button>
+                  </div>
                   <RewardsList
                     :data="rewardsData"
                     :setEditReward="setEditReward"
                     :showModal="rewardModalOpen"
                   />
+                </div>
+                <div class="noRewards">
+                  <img src="@/images/no-reward.png" alt />
+                  <div>
+                    <div>
+                      <h3>No rewards found</h3>
+                      <p>
+                        <strong>Tip.</strong> Adding more rewards will increase your customer base.
+                      </p>
+                    </div>
+                    <button
+                      v-if="activeStep === 'rewardsBlock'"
+                      @click.stop="rewardModalOpen"
+                      class="btn btn-success"
+                    >+ Add Reward</button>
+                  </div>
                 </div>
               </b-card-text>
               <footer class="saveBar" v-if="activeStep === 'rewardsBlock'">

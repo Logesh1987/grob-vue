@@ -3,6 +3,7 @@
     <div class="stepHead">
       <h3>Twitter Share Setup</h3>
       <p>When members share your message on Twitter</p>
+      <EnableFeature v-if="status == '0'" />
       <label class="switch" for="d13">
         <input
           type="checkbox"
@@ -84,6 +85,7 @@
 </template>
 
 <script>
+import EnableFeature from "./EnableFeature.vue";
 import { validationMixin } from "vuelidate";
 import {
   required,
@@ -99,7 +101,7 @@ export default {
   name: "Twittershare",
   props: ["data", "default", "triggerReset"],
   mixins: [validationMixin],
-  components: { ResetBlock },
+  components: { ResetBlock, EnableFeature },
   data: function() {
     return this.data.twitter_tweet;
   },

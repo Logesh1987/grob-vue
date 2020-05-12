@@ -3,6 +3,7 @@
     <div class="stepHead">
       <h3>Pay by Points</h3>
       <p>Setup if customers can pay using their points</p>
+      <EnableFeature v-if="redeem_purchase_status == '0'" />
       <label class="switch" for="d25">
         <input
           type="checkbox"
@@ -65,6 +66,7 @@
 </template>
 
 <script>
+import EnableFeature from "./EnableFeature.vue";
 import { validationMixin } from "vuelidate";
 import {
   required,
@@ -78,6 +80,7 @@ export default {
   name: "PaybyPoints",
   props: ["data"],
   mixins: [validationMixin],
+  components: { EnableFeature },
   data: function() {
     return this.data;
   },

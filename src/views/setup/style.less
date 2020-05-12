@@ -8,6 +8,18 @@
 			position: relative;
 			text-align: left;
 			z-index: 1;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+		.viewOnboarding {
+			text-decoration: none;
+			font-size: 14px;
+			color: #fff;
+			img {
+				width: 30px;
+				margin-left: 10px;
+			}
 		}
 		a.logo {
 			display: inline-block;
@@ -593,10 +605,42 @@
 		margin-bottom: 30px;
 	}
 }
-.no-rewards {
-	span {
-		display: block;
-		font-size: 3em;
+.noRewards {
+	background-color: #ffe5af;
+	padding: 30px;
+	display: flex;
+	align-items: center;
+	img {
+		width: 175px;
+		margin-right: 30px;
+	}
+	> div {
+		padding: 30px 50px;
+		border: 2px dashed #979797;
+		border-radius: 10px;
+		display: flex;
+		text-align: left;
+		align-items: center;
+		> div {
+			padding-right: 100px;
+		}
+	}
+	.btn {
+		flex-shrink: 0;
+	}
+	h3 {
+		font-size: 16px;
+		color: #000;
+		font-weight: bold;
+		margin: 0 0 10px;
+	}
+	strong {
+		color: #ff10ca;
+	}
+	p {
+		font-size: 13px;
+		color: #007aff;
+		margin: 0;
 	}
 }
 .rewardItem {

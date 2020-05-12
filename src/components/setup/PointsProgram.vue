@@ -14,6 +14,7 @@
         />
         <i></i>
       </label>
+      <EnableFeature v-if="vData.purchase_status == '0'" />
     </div>
     <div class="stepBody">
       <div class="recommendFloater">
@@ -120,6 +121,7 @@
 </template>
 
 <script>
+import EnableFeature from "./EnableFeature.vue";
 import RadioGroup from "@/components/RadioGroup";
 import { validationMixin } from "vuelidate";
 import {
@@ -134,7 +136,7 @@ export default {
   name: "PointsProgram",
   props: ["data", "default", "triggerReset"],
   mixins: [validationMixin],
-  components: { RadioGroup, ResetBlock },
+  components: { RadioGroup, ResetBlock, EnableFeature },
   data: function() {
     return {
       vData: this.data

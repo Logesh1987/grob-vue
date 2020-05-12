@@ -24,11 +24,11 @@
               <img src="@/images/splash.png" />
             </figure>
             <h1>{{ landing.head }}</h1>
-            <button class="button buttonBlack" onclick="fullpage_api.moveTo(2)">
+            <router-link to="/setup" class="button buttonBlack">{{ landing.link }}</router-link>
+            <a href="#" class="skip" onclick="fullpage_api.moveTo(2)">
               {{ landing.button }}
               <i class="icon-right-arrow"></i>
-            </button>
-            <router-link to="/setup" class="skip">{{ landing.link }}</router-link>
+            </a>
           </div>
         </section>
         <section class="section sectionSetup" ref="sectionSetup" v-bind:data-step="step">
@@ -426,6 +426,7 @@ export default {
     transition: all 0.7s 0.8s;
   }
   .buttonBlack {
+    text-decoration: none;
     text-transform: uppercase;
     font-family: "Heebo";
     font-size: 1em;

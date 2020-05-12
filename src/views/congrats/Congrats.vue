@@ -4,10 +4,14 @@
     <Loader v-if="loading" />
     <div class="congratsPage" :class="{'paused': live == '0'}">
       <header>
-        <div class="contentArea">
+        <div class="contentArea d-flex align-items-center justify-content-between">
           <a href="#" class="logo">
             <img src="@/images/logo_gr.png" alt="Gratisfaction" />
           </a>
+          <router-link to="/" class="viewOnboarding">
+            View Onboarding tutorial
+            <img src="@/images/icon-onboarding-2.png" alt />
+          </router-link>
         </div>
       </header>
       <section>
@@ -185,8 +189,9 @@
             <p
               class="m-0"
               data-reply="Thank you for your feedback!"
+              ref="rcText"
             >How was your onboarding experience?</p>
-            <div class="rating feedbackRating">
+            <div class="rating feedbackRating" ref="rcRating">
               <Fragment v-for="n in 5" :key="'r'+n">
                 <input
                   type="radio"
@@ -412,6 +417,17 @@ export default {
         };
         this.submitReview(params).then(res => {
           console.log("******************REVIEW**************************");
+          this.$refs.rcText.innerHTML = this.$refs.rcText.getAttribute(
+            "data-reply"
+          );
+          this.$refs.rcRating.remove();
+          window.localStorage.setItem(
+            "feedbackSubmitted",
+            this.feedback.rating
+          );
+          setTimeout(() => {
+            this.feedback.submitted = true;
+          }, 3000);
         });
       }
     },

@@ -3,6 +3,7 @@
     <div class="stepHead">
       <h3>Referral Program</h3>
       <p>Setup refer a friend program</p>
+      <EnableFeature v-if="status == '0'" />
       <label class="switch" for="d41">
         <input
           type="checkbox"
@@ -200,6 +201,7 @@
 </template>
 
 <script>
+import EnableFeature from "./EnableFeature.vue";
 import RadioGroup from "@/components/RadioGroup";
 import { validationMixin } from "vuelidate";
 import {
@@ -214,7 +216,7 @@ export default {
   name: "ReferralProgram",
   props: ["data", "currency", "default", "triggerReset"],
   mixins: [validationMixin],
-  components: { RadioGroup, ResetBlock },
+  components: { RadioGroup, ResetBlock, EnableFeature },
   data: function() {
     return this.data;
   },

@@ -1,54 +1,316 @@
 {
   "data": {
-    "points_program": {
-      "enabled": false,
-      "lPoints": "fixed",
-      "priceValue": 10,
-      "percentageValue": 10,
-      "rewardPoint": 10
+    "shop": {
+      "id_shop": "1309",
+      "id_site": "3807",
+      "admin_email": "jayakumar@appsmav.com",
+      "shop_url": "http:\/\/maverickmav.org\/khaled",
+      "login_url": "http:\/\/maverickmav.org\/khaled\/my-account\/",
+      "plugin_type": "WP",
+      "shop_name": "WP",
+      "date_updated": "1588903832",
+      "id_install": null,
+      "lang": "en_US",
+      "wp_status": "activate",
+      "is_loyalty": "1",
+      "email_reply_to": "jayakumar@appsmav.com",
+      "email_from": null,
+      "site_name": "WP",
+      "url": "http:\/\/maverickmav.org\/khaled",
+      "terms_conditions": "",
+      "terms_url": null,
+      "logo": null,
+      "date_added": "1588903832",
+      "timezone": "America\/Chicago",
+      "max_users": "10",
+      "is_wl": "0",
+      "user_enroll_type": "enroll_direct",
+      "site_status": "1",
+      "exclusion_period": "0",
+      "date_blocker": "0",
+      "date_display": "d\/m\/Y",
+      "currency_settings": null
     },
-    "signup_bonus": {
-      "enabled": false,
-      "welcome_points": 100
+    "points_setup": {
+      "price": "1",
+      "points": "1",
+      "min_order": null,
+      "bonus_status": "1",
+      "purchase_status": "0",
+      "bonus": "",
+      "welcome_bonus": "100",
+      "welcome_title": "",
+      "app_lang": "en_US",
+      "purchase_redeem": "1",
+      "purchase_theme_status": "1",
+      "redeem_purchase_status": "1",
+      "redeem_theme_status": "1",
+      "redeem_point_per_dollar": "999999",
+      "login_url": "http:\/\/maverickmav.org\/khaled\/my-account\/",
+      "register_url": "http:\/\/maverickmav.org\/khaled\/my-account\/",
+      "terms_url": "",
+      "currency": "\u00a3",
+      "wpversion": "3.7.7",
+      "is_user_restricted": "0",
+      "is_show_non_loggedin": "1",
+      "restricted_user_roles": "",
+      "continue_shop_url": "",
+      "reward_points_type": "SUBTOTAL",
+      "is_points_percentage": "0",
+      "points_percentage": "100",
+      "tax_included_product": 0,
+      "tax_included_shipping": 0,
+      "id_shop": "1309",
+      "id_site": "3807",
+      "plugin_type": "WP"
     },
-    "payby_points": {
-      "enabled": false,
-      "rewardPoint": 100
+    "campaign": {
+      "id_competition": "3118",
+      "name": "Loyalty Rewards Program",
+      "date_start": "1588903832",
+      "date_end": "1588903832",
+      "timezone": "America\/Chicago",
+      "img_name": "",
+      "coming_soon": "",
+      "promo_url": "https:\/\/bit.ly\/3foZpE5",
+      "is_open": "1",
+      "bg_color": "#8796ff",
+      "referral_json_data": null,
+      "terms_text": "",
+      "privacy_text": "",
+      "status": "1",
+      "type": "referral",
+      "signup_type": "1",
+      "has_published": "1"
     },
-    "referral_program": {
-      "enabled": false,
-      "rpType": "fixed",
-      "rewardPoint": 100,
-      "rewardPercentage": 10,
-      "rpCouponType": "fixed",
-      "maxCouponVal": 20,
-      "minSpendVal": 1
+    "referral": {
+      "referrer_purchase": 0,
+      "goal": 1,
+      "enable_for_guest_order": 1,
+      "max_reward": 0,
+      "reward_type": "unique",
+      "referrer_reward_types": "points",
+      "referral_coupon_desc": "Share this coupon to give your friends an awesome offer! You\u2019ll earn rewards when they make a purchase.",
+      "referral_desc": "Invite your friends (Psst! We\u2019ll also give you an offer to share) and get rewards when they make a purchase!",
+      "referrer_reward_points": "100",
+      "status": 1,
+      "referrer_onesided": 0,
+      "is_new": 1,
+      "realtime_coupon_on_friend": 1,
+      "common_referrer_reward": null,
+      "realtime_coupon_type_friend": "1",
+      "realtime_coupon_value_friend": "100",
+      "realtime_min_order_friend": "0",
+      "realtime_coupon_type": 1,
+      "realtime_coupon_value": "10",
+      "realtime_min_order": "0",
+      "email_subject": "Give your friends a discount &amp; get rewarded",
+      "reward_subject": "Thank you for your referral",
+      "is_rwd_points_percentage": "0",
+      "rwd_points_percentage": "10",
+      "date_updated": 1589229243
     },
-    "facebook_share": {
-      "enabled": true,
-      "rewardPoint": 100,
-      "share_text": "Hey check out my new product.",
-      "url": "http://www.google.com/product.com"
+    "entries": {
+      "facebook_share": {
+        "type": "facebook_share",
+        "id_entry": "11512",
+        "id_site": "3807",
+        "id_competition": "3118",
+        "title": "Share on Facebook",
+        "worth_entries": "1",
+        "is_mandatory": "1",
+        "is_daily_entry": "1",
+        "is_notify": "1",
+        "form_fields": null,
+        "settings": {
+          "share_img": "",
+          "last_update": 1589229241,
+          "share_title": "Check out this website. They are amazing!",
+          "share_caption": "WP",
+          "share_desc": "You have to check out this website. They have amazing products &amp; service!",
+          "landing_url": "http:\/\/maverickmav.org\/khaled",
+          "mode_points": 1,
+          "mode_instant": 0,
+          "instant_reward": null,
+          "instant_reward_opt": 0,
+          "instant_reward_text": "",
+          "instant_reward_cpn": "",
+          "instant_reward_lnk": "",
+          "reward_type": 0,
+          "realtime_coupon_type": 1,
+          "realtime_coupon_value": 10,
+          "realtime_min_order": 0,
+          "currency": "",
+          "worth_entries": "1",
+          "mode_query": 0
+        },
+        "order_by": "1",
+        "status": "1"
+      },
+      "newsletter_subscription": {
+        "type": "newsletter_subscription",
+        "id_entry": "11515",
+        "id_site": "3807",
+        "id_competition": "3118",
+        "title": "Subscribe to our mailing list",
+        "worth_entries": "10",
+        "is_mandatory": "0",
+        "is_daily_entry": "0",
+        "is_notify": "0",
+        "form_fields": null,
+        "settings": {
+          "title": "Subscribe to our mailing list",
+          "esp_id": "",
+          "esp_list_id": "",
+          "esp_list_name": "",
+          "subscription_note": "",
+          "platform_marketing_permission": "0",
+          "enable_double_optin": "0",
+          "show_gdpr_msg": "0",
+          "mode_points": "1",
+          "mode_instant": "0",
+          "instant_reward": "",
+          "instant_reward_opt": "1",
+          "instant_reward_text": "",
+          "instant_reward_cpn": "",
+          "instant_reward_lnk": "",
+          "reward_type": "1",
+          "realtime_coupon_type": "1",
+          "realtime_coupon_value": "10",
+          "realtime_min_order": 0,
+          "currency": "",
+          "worth_entries": "10",
+          "mode_query": 0
+        },
+        "order_by": "1",
+        "status": "1"
+      },
+      "twitter_tweet": {
+        "type": "twitter_tweet",
+        "id_entry": "11513",
+        "id_site": "3807",
+        "id_competition": "3118",
+        "title": "Share on Twitter",
+        "worth_entries": "1",
+        "is_mandatory": "1",
+        "is_daily_entry": "1",
+        "is_notify": "1",
+        "form_fields": null,
+        "settings": {
+          "tweet": "You have to check out this website. They have amazing products &amp; service!",
+          "tweet_url": "http:\/\/maverickmav.org\/khaled",
+          "mode_points": 1,
+          "mode_instant": 0,
+          "instant_reward": null,
+          "instant_reward_opt": 0,
+          "instant_reward_text": "",
+          "instant_reward_cpn": "",
+          "instant_reward_lnk": "",
+          "reward_type": 0,
+          "realtime_coupon_type": 1,
+          "realtime_coupon_value": 10,
+          "realtime_min_order": 0,
+          "currency": "",
+          "worth_entries": "1",
+          "mode_query": 0
+        },
+        "order_by": "2",
+        "status": "1"
+      }
     },
-    "twitter_share": {
-      "enabled": true,
-      "rewardPoint": 100,
-      "share_text": "Hey check out my new product.",
-      "url": "http://www.google.com/product.com"
+    "events": {
+      "id_reminder": "430",
+      "name": "Enter your birthday",
+      "reminder_type": "member_birthday",
+      "other_reminder_type": "",
+      "is_year_required": 0,
+      "description": "",
+      "wish_description": "Happy Birthday",
+      "reward_description": "",
+      "has_points": "1",
+      "has_coupon": "0",
+      "bonus_days": 30,
+      "bonus_end_type": 1,
+      "bonus_end_days": "",
+      "points": {
+        "nb_points": 1
+      },
+      "status": "1",
+      "coupon": {
+        "coupon_type": "3",
+        "coupon_prefix": "GREVENT",
+        "coupon_value": "",
+        "min_purchase": "",
+        "min_purchase_days": "",
+        "coupon_redem_instruction": ""
+      },
+      "reward": {
+        "has_reward_points": 0,
+        "has_reward_coupon": 0,
+        "points": {
+          "r_nb_points": 1,
+          "is_points_purchase": false,
+          "min_points_purchase": 0
+        },
+        "coupon": {
+          "r_coupon_type": "3",
+          "r_coupon_prefix": "GREVENT",
+          "r_coupon_value": "",
+          "min_coupon_purchase": 0,
+          "r_coupon_redem_instruction": ""
+        }
+      },
+      "notify": {
+        "offerSubject": "",
+        "offerMsg": "",
+        "wishSubject": "",
+        "wishMsg": "",
+        "is_offer_enabled": 0,
+        "is_wish_enabled": 0,
+        "wish_notice_type": 2,
+        "wish_prior_days": ""
+      },
+      "json_emails": {
+        "reminder_offer": {
+          "msg": "<p>Hi [[User Name]],<\/p><p>It\u2019s not long until your [[Event Name]]!<\/p><p>Here\u2019s your gift for the big day in advance. You can redeem it in-store now.<\/p><p>[[NB Points]]<\/p><p>[[Coupon]]<\/p><p>[[Purchase Conditions]]<\/p><p>You can claim on a whole range of exciting products and rewards.<\/p><p>We hope you have a great day!<\/p><p>[[Site Name]]<\/p>",
+          "subject": "Hey [[User Name]]! your big day is nearly here! Unwrap your rewards"
+        },
+        "reminder_wish": {
+          "msg": "<p>Hi [[User Name]],<\/p><p>It\u2019s your [[Event Name]]!<\/p><p>Here\u2019s your gift! Redeem them in-store now.<\/p><p>[[NB Points]]<\/p><p>[[Coupon]]<\/p><p>[[Purchase Conditions]]<\/p><p>You can claim a whole range of exciting products and rewards. They\u2019ll add that little extra sparkle to your day.<\/p><p>We hope you have a great time!<\/p><p>[[Site Name]]<\/p>",
+          "subject": "Hey [[User Name]]! your big day is here! Unwrap your rewards"
+        }
+      }
     },
-    "birthday_rewards": {
-      "enabled": true,
-      "rewardPoint": 100,
-      "birthdayPoint": 100
+    "reviews": {
+      "woo_reviews": {
+        "id_entry": "11516",
+        "id_competition": "3118",
+        "review_status": "1",
+        "points": "1",
+        "settings": {
+          "max_per_product": "1",
+          "max_per_day": "10",
+          "review_label_status": 1,
+          "review_label": "Earn 10 points by reviewing this product.",
+          "earn_point_status": [
+            "approved"
+          ],
+          "subtract_point_status": [
+            "spam",
+            "trash"
+          ],
+          "subtract_point_period": "30",
+          "wp_review_status": 1
+        },
+        "is_approved_only": 1
+      }
     },
-    "woo_rewards": {
-      "enabled": true,
-      "rewardPoint": 100,
-      "approvedReviews": true
-    },
-    "news_letter": {
-      "enabled": true,
-      "rewardPoint": 100
+    "onboarding_review": {
+      "id_review": "12",
+      "id_site": "3807",
+      "rating": "2",
+      "improve_points": "",
+      "review": ""
     }
   }
 }

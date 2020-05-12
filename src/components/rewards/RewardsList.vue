@@ -69,12 +69,6 @@
       </template>
     </b-modal>
   </div>
-  <div class="rewardList" v-else>
-    <p class="text-center no-rewards">
-      <span class="material-icons text-danger mb-2">warning</span>
-      No rewards available. Add rewards
-    </p>
-  </div>
 </template>
 
 <script>

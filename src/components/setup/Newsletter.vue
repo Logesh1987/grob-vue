@@ -3,6 +3,7 @@
     <div class="stepHead">
       <h3>Subscribe to Newsletter Setup</h3>
       <p>Incentivize users for signing up to your newsletters.</p>
+      <EnableFeature v-if="status == '0'" />
       <label class="switch" for="d31">
         <input type="checkbox" true-value="1" false-value="0" v-model="status" id="d31" />
         <i></i>
@@ -40,6 +41,7 @@
 </template>
 
 <script>
+import EnableFeature from "./EnableFeature.vue";
 import { validationMixin } from "vuelidate";
 import {
   required,
@@ -52,7 +54,7 @@ import ResetBlock from "./ResetBlock";
 export default {
   name: "Newsletter",
   props: ["data", "default", "triggerReset"],
-  components: { ResetBlock },
+  components: { ResetBlock, EnableFeature },
   mixins: [validationMixin],
   data: function() {
     return this.data.newsletter_subscription;
