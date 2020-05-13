@@ -10,7 +10,7 @@
           </a>
           <router-link to="/" class="viewOnboarding">
             View Onboarding tutorial
-            <img src="@/images/icon-onboarding-2.png" alt />
+            <i class="icon-onboard"></i>
           </router-link>
         </div>
       </header>

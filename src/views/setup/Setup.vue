@@ -10,7 +10,7 @@
           </a>
           <router-link to="/" class="viewOnboarding">
             View Onboarding tutorial
-            <img src="@/images/icon-onboarding.png" alt />
+            <i class="icon-onboard"></i>
           </router-link>
         </div>
         <div class="head">
@@ -269,7 +269,7 @@
                     :showModal="rewardModalOpen"
                   />
                 </div>
-                <div class="noRewards">
+                <div class="noRewards" v-else>
                   <img src="@/images/no-reward.png" alt />
                   <div>
                     <div>
@@ -343,20 +343,33 @@
       body-class="d-flex flex-column align-items-center"
     >
       <template v-slot:default="{ hide }">
-        <a href class="bvClose" @click.prevent="hide()">&times;</a>
-        <h5>
-          You have made some change
-          <br />What should wee do?
-        </h5>
-        <button
-          @click.prevent="saveAndGotoThemes"
-          class="btn btn-success pr-5 pl-5 mt-4 mb-4"
-        >Save and Proceed</button>
-        <router-link to="/congrats" class="text-success">
-          <u>
-            <small>Reset all and LIVE</small>
-          </u>
-        </router-link>
+        <div class="partialEdited" v-if="partialSetup">
+          <a href @click.prevent="hide()" aria-label="Close">&times;</a>
+          <h5 class="mb-4 pb-3">
+            You have made some change
+            <br />What should we do?
+          </h5>
+          <nav class="d-flex">
+            <button @click.prevent="saveAndGotoThemes" class="btn btn-success">
+              <i class="icon-live-edited"></i>
+              <span>Live with my edited settings</span>
+            </button>
+            <button
+              @click.prevent="saveAndGotoThemes('reset')"
+              class="btn btn-outline-secondary ml-2"
+            >
+              <i class="icon-timeout"></i>
+              <span>Reset with factory setup</span>
+            </button>
+          </nav>
+        </div>
+        <div class="noneEdited" v-else>
+          <h5>Proceed with recommended settings</h5>
+          <nav>
+            <button @click.prevent="saveAndGotoThemes" class="btn btn-success px-5 my-4">Confirm</button>
+            <button @click.prevent="hide()" class="btn px-5 ml-2 btn-outline-secondary">Cancel</button>
+          </nav>
+        </div>
       </template>
     </b-modal>
 
@@ -421,6 +434,7 @@ export default {
         rewardsBlock: false,
         themesBlock: false
       },
+      partialSetup: false,
       setupTouched: false,
       reset: false,
       swipe: {
@@ -437,6 +451,7 @@ export default {
       },
       editRewardId: null,
       data: {
+        initialsetup: null,
         setup: null,
         rewards: null,
         popup: null
@@ -520,6 +535,7 @@ export default {
         this.$refs.setupSwiper.$swiper.slideNext();
         if (!this.saved.rewardsBlock) {
           this.savePartialSetup(this.$refs[re].data);
+          this.partialSetup = true;
           window.localStorage.setItem(
             "setupProgress",
             this.$refs.setupSwiper.$swiper.realIndex
@@ -572,9 +588,14 @@ export default {
     setEditReward(id) {
       this.editRewardId = id ? id : null;
     },
-    saveAndGotoThemes() {
+    saveAndGotoThemes(key) {
       this.$bvModal.hide("modal-skip");
-      this.saveSetupData(this.data.setup).then(res => {
+      let params = this.data.setup;
+      if (key === "reset") {
+        params = this.data.initialsetup;
+        this.data.setup = { ...this.data.initialsetup };
+      }
+      this.saveSetupData(params).then(res => {
         this.getPopupData().then(res => {
           this.setProgress("themesBlock");
           this.getRewardsData();
@@ -608,6 +629,10 @@ export default {
     checkSetupProgress() {
       if (window.localStorage.getItem("inProgress") == "setupBlock") {
         const progressindex = window.localStorage.getItem("setupProgress");
+        console.log(progressindex, "progressindexprogressindex");
+        if (progressindex !== null) {
+          this.partialSetup = true;
+        }
         const paginations = document.querySelectorAll(
           ".swiper-pagination-bullet"
         );
@@ -622,6 +647,7 @@ export default {
     const inProgress = window.localStorage.getItem("inProgress");
     this.getSetupData().then(res => {
       this.data.setup = JSON.parse(JSON.stringify(res));
+      this.data.initialsetup = JSON.parse(JSON.stringify(res));
       if (inProgress) {
         document.querySelector(".completeSteps").remove();
         this.setProgress(inProgress);
