@@ -9,7 +9,7 @@
         </div>
         <div class="iconSwiper cover mt-4">
           <swiper :options="swiperOptions">
-            <swiper-slide v-for="(img, index) in imgGroup" :key="index">
+            <swiper-slide v-for="(img, index) in rewardImages" :key="index">
               <div
                 class="icon"
                 :class="{active: data.image_url === img}"
@@ -212,17 +212,6 @@ import RadioGroup from "@/components/RadioGroup";
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import "swiper/css/swiper.css";
 
-const cover1 = require("@/images/cover/01.png");
-const cover2 = require("@/images/cover/02.png");
-const cover3 = require("@/images/cover/03.png");
-const cover4 = require("@/images/cover/04.png");
-const cover5 = require("@/images/cover/05.png");
-const cover6 = require("@/images/cover/06.png");
-const cover7 = require("@/images/cover/07.png");
-const cover8 = require("@/images/cover/08.png");
-const cover9 = require("@/images/cover/09.png");
-const cover10 = require("@/images/cover/10.png");
-
 export default {
   name: "RewardSettings",
   props: ["id", "closeModal"],
@@ -230,25 +219,13 @@ export default {
   data: function() {
     return {
       data: {},
-      imgGroup: [
-        cover1,
-        cover2,
-        cover3,
-        cover4,
-        cover5,
-        cover6,
-        cover7,
-        cover8,
-        cover9,
-        cover10
-      ],
       newSettings: {
         name: "Default title",
         description: "Default Description",
         required_minimum_points: 100,
         quantity: 0,
         image_url:
-          "https://s3.us-east-1.amazonaws.com/devam.pro/gr/master/upload/img/683/83/3683_loyalty_1587031987.png",
+          "https://jai.devam.pro/gr/public/assets/img/library/rewards/01.png",
         type: "Coupon",
         is_coupon: 1,
         manual_coupon: "",
@@ -276,7 +253,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["rewardsData"])
+    ...mapState(["rewardsData", "rewardImages"])
   },
   methods: {
     ...mapActions(["addReward", "getRewardsData", "updateReward"]),

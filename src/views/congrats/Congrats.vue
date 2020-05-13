@@ -416,7 +416,6 @@ export default {
           rating: this.feedback.rating
         };
         this.submitReview(params).then(res => {
-          console.log("******************REVIEW**************************");
           this.$refs.rcText.innerHTML = this.$refs.rcText.getAttribute(
             "data-reply"
           );
@@ -452,7 +451,7 @@ export default {
         params.customfeed = this.$refs.feedbackTxt.value;
       }
       this.submitReview(params).then(res => {
-        console.log("******************REVIEW**************************");
+        console.log("Review");
       });
       //console.log(params);
       // PARAMS READY TO POST

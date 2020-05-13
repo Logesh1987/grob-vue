@@ -269,7 +269,7 @@
                   <label>Widget Icon</label>
                   <div class="iconSwiper">
                     <swiper :options="swiperOptions">
-                      <swiper-slide v-for="(icon, index) in icons" :key="index">
+                      <swiper-slide v-for="(icon, index) in widgetIcons" :key="index">
                         <div
                           class="icon"
                           :class="{'active': wData.data.style_data.widget_logo_img === icon}"
@@ -384,7 +384,7 @@
                   <label>Widget Icon</label>
                   <div class="iconSwiper">
                     <swiper :options="swiperOptions">
-                      <swiper-slide v-for="(icon, index) in icons" :key="index">
+                      <swiper-slide v-for="(icon, index) in widgetIcons" :key="index">
                         <div
                           class="icon"
                           :class="{'active': wData.data.style_data.widget_logo_img === icon}"
@@ -447,14 +447,6 @@ import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import "verte/dist/verte.css";
 import "swiper/css/swiper.css";
 
-const icon1 = require("@/images/icons/01.png");
-const icon2 = require("@/images/icons/02.png");
-const icon3 = require("@/images/icons/03.png");
-const icon4 = require("@/images/icons/04.png");
-const icon5 = require("@/images/icons/05.png");
-const icon6 = require("@/images/icons/06.png");
-const icon7 = require("@/images/icons/07.png");
-const icon8 = require("@/images/icons/08.png");
 export default {
   name: "Themes",
   components: { Verte, WidgetPreview, Swiper, SwiperSlide },
@@ -467,7 +459,6 @@ export default {
       enableWidget: false,
       pData: null,
       wData: null,
-      icons: [icon1, icon2, icon3, icon4, icon5, icon6, icon7, icon8],
       swiperOptions: {
         slidesPerView: 3,
         spaceBetween: 10,
@@ -479,7 +470,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["popupData", "widgetData"])
+    ...mapState(["popupData", "widgetData", "widgetIcons"])
   },
   watch: {
     "$store.state.widgetData": {
@@ -496,7 +487,6 @@ export default {
         if (this.page === "setup") {
           this.enableWidget = true;
           this.tabIndex = 1;
-          console.log(this.tabIndex);
         }
       });
     },
