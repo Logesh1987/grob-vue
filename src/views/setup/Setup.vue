@@ -73,7 +73,7 @@
                       :triggerReset="triggerReset"
                     />
                   </swiper-slide>
-                  <swiper-slide data-ref="PaybyPoints">
+                  <swiper-slide v-if="data.setup.shop.plugin_type == 'WP'" data-ref="PaybyPoints">
                     <PaybyPoints ref="PaybyPoints" :data="data.setup.points_setup" />
                   </swiper-slide>
                   <swiper-slide data-ref="ReferralProgram">

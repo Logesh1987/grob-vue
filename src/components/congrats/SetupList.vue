@@ -14,7 +14,7 @@
         :cancelSave="cancelSave"
       />
       <CardPaybyPoints
-        v-if="data.points_setup.redeem_purchase_status"
+        v-if="data.points_setup.redeem_purchase_status && data.shop.plugin_type == 'WP'"
         :data="data.points_setup"
         :saveData="saveData"
         :cancelSave="cancelSave"

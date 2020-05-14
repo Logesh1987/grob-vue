@@ -225,7 +225,7 @@ export default {
         required_minimum_points: 100,
         quantity: 0,
         image_url:
-          "https://jai.devam.pro/gr/public/assets/img/library/rewards/01.png",
+          "https://jai.devam.pro/gr/public/assets/img/library/rewards/01-reward-icon.png",
         type: "Coupon",
         is_coupon: 1,
         manual_coupon: "",

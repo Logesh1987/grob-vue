@@ -268,7 +268,7 @@ export default {
   mounted: function() {
     this.$refs.fullpage.init();
     Axios.get(
-      "https://jai.devam.pro/gr/admin/onboarding/activeSites?id_shop=1312&admin_email=jayakumar@appsmav.com"
+      "https://jai.devam.pro/gr/admin/onboarding/activeSites?id_shop=1314&admin_email=jayakumar@appsmav.com"
     ).then(({ data }) => {
       console.log(data);
       if (data.data.happy_customers != "undefined")
