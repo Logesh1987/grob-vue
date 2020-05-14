@@ -48,15 +48,15 @@
             <label
               class="error col-md-10"
               v-if="!$v.redeem_point_per_dollar.required"
-            >Field is required</label>
+            >Please enter valid reward point</label>
             <label
               class="error col-md-10"
               v-if="!$v.redeem_point_per_dollar.minValue"
-            >Need a minimum value of {{$v.redeem_point_per_dollar.$params.minValue.min}}</label>
+            >Enter a minimum value of {{$v.redeem_point_per_dollar.$params.minValue.min}}</label>
             <label
               class="error col-md-10"
               v-if="!$v.redeem_point_per_dollar.maxLength"
-            >Allowed {{$v.redeem_point_per_dollar.$params.maxLength.max}} digits max</label>
+            >Allowed maximum of {{$v.redeem_point_per_dollar.$params.maxLength.max}} digits</label>
           </div>
         </form>
       </div>

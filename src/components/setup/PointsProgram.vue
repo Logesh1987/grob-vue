@@ -59,7 +59,7 @@
                 name="purchaseFor"
                 v-model.trim="vData.price"
               />
-              <em class="error" v-if="!$v.vData.price.required">Value is required</em>
+              <em class="error" v-if="!$v.vData.price.required">Please enter valid price</em>
               <em
                 class="error"
                 v-if="!$v.vData.price.minValue"
@@ -67,7 +67,7 @@
               <em
                 class="error"
                 v-if="!$v.vData.price.maxLength"
-              >Allowed {{$v.vData.price.$params.maxLength.max}} digits max</em>
+              >Allowed maximum of {{$v.vData.price.$params.maxLength.max}} digits</em>
             </div>
             <div class="col-md-2 text-center mt-4 pt-1">to get</div>
             <div class="form-group fLabel col-md-5">
@@ -79,7 +79,7 @@
                 name="rewardPoint"
                 v-model="vData.points"
               />
-              <em class="error" v-if="!$v.vData.points.required">Value is required</em>
+              <em class="error" v-if="!$v.vData.points.required">Please enter valid reward point</em>
               <em
                 class="error"
                 v-if="!$v.vData.points.minValue"
@@ -87,7 +87,7 @@
               <em
                 class="error"
                 v-if="!$v.vData.points.maxLength"
-              >Allowed {{$v.vData.points.$params.maxLength.max}} digits max</em>
+              >Allowed maximum of {{$v.vData.points.$params.maxLength.max}} digits</em>
             </div>
           </div>
           <div
@@ -104,11 +104,9 @@
                 name="purchasePercent"
                 v-model="vData.points_percentage"
               />
-              <em class="error" v-if="!$v.vData.points_percentage.required">Value is required</em>
-              <em
-                class="error"
-                v-if="!$v.vData.points_percentage.minValue"
-              >Need a minimum value of {{$v.vData.points_percentage.$params.minValue.min}}</em>
+              <em class="error" v-if="!$v.vData.points_percentage.required">Enter valid percentage</em>
+              <em class="error" v-if="!$v.vData.points_percentage.minValue">Points percentage can be between 1 to 1000</em>
+              <em class="error" v-if="!$v.vData.points_percentage.maxValue">Points percentage can be between 1 to 1000</em>
             </div>
           </div>
         </form>
@@ -128,7 +126,8 @@ import {
   required,
   minValue,
   requiredIf,
-  maxLength
+  maxLength,
+  maxValue
 } from "vuelidate/lib/validators";
 import ResetBlock from "./ResetBlock";
 
@@ -179,9 +178,10 @@ export default {
       },
       points_percentage: {
         required: requiredIf(function() {
-          return this.purchase_status && this.is_points_percentage == 1;
+          return this.vData.purchase_status && this.vData.is_points_percentage == 1;
         }),
-        minValue: minValue(1)
+        minValue: minValue(0),
+        maxValue: maxValue(1000)
       }
     }
   }

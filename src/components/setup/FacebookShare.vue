@@ -32,11 +32,11 @@
             <em
               class="error"
               v-if="!$v.worth_entries.minValue"
-            >Need a minimum value of {{$v.worth_entries.$params.minValue.min}}</em>
+            >Please enter points between 1 to 10000</em>
             <em
               class="error"
-              v-if="!$v.worth_entries.maxLength"
-            >Allowed {{$v.worth_entries.$params.maxLength.max}} digits max</em>
+              v-if="!$v.worth_entries.maxValue"
+            >Please enter points between 1 to 10000</em>
           </div>
           <div class="form-group fLabel mb-5 col-md-12">
             <label for="inputEmail4">Facebook Share Text</label>
@@ -91,7 +91,7 @@ import {
   required,
   minValue,
   requiredIf,
-  maxLength,
+  maxValue,
   url
 } from "vuelidate/lib/validators";
 import ResetBlock from "./ResetBlock";
@@ -128,7 +128,7 @@ export default {
         return this.status;
       }),
       minValue: minValue(0),
-      maxLength: maxLength(5)
+      maxValue: maxValue(10000)
     },
     settings: {
       share_desc: {

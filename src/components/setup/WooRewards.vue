@@ -32,11 +32,11 @@
             <em
               class="error"
               v-if="!$v.points.minValue"
-            >Need a minimum value of {{$v.points.$params.minValue.min}}</em>
+            >Enter a minimum value of {{$v.points.$params.minValue.min}}</em>
             <em
               class="error"
               v-if="!$v.points.maxLength"
-            >Allowed {{$v.points.$params.maxLength.max}} digits max</em>
+            >Allowed maximum of  {{$v.points.$params.maxLength.max}} digits</em>
           </div>
           <div class="col-md-12">
             <div class="custom-control d-flex scale-8 to-00 custom-checkbox">

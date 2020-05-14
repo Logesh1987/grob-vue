@@ -210,6 +210,7 @@
 import { mapState, mapActions } from "vuex";
 import RadioGroup from "@/components/RadioGroup";
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
+import { required, minValue, requiredIf, maxLength } from "vuelidate/lib/validators";
 import "swiper/css/swiper.css";
 
 export default {
@@ -286,6 +287,41 @@ export default {
       : (this.data = this.newSettings);
     this.couponType = this.data.manual_coupon.length ? "1" : "0";
     this.is_limited = parseInt(this.data.quantity) ? "1" : "0";
-  }
+  },
+  /*validations: {
+    data: {
+      name: {
+        required: requiredIf(function() {
+          alert(this.data.name);
+          return true;
+        }),
+      },
+      description: {
+        required: true
+      },
+      required_minimum_points: {
+        required: true,
+        minValue: minValue(1),
+        maxLength: maxLength(6)
+      },
+      realtime_coupon: {
+        amount: {
+          required: requiredIf(function() {
+            return this.status;
+          }),
+          minValue: minValue(1),
+          maxLength: maxLength(6)
+        },
+        minimum_order: {
+          required: requiredIf(function() {
+            return this.status;
+          }),
+          minValue: minValue(1),
+          maxLength: maxLength(6)
+        }        
+      } 
+    }  
+  },*/
 };
 </script>
+realtime_coupon.minimum_order

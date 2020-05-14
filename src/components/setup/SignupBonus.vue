@@ -33,15 +33,15 @@
                 id="welcomeBonus"
                 v-model.trim="welcome_bonus"
               />
-              <em class="error" v-if="!$v.welcome_bonus.required">Field is required</em>
+              <em class="error" v-if="!$v.welcome_bonus.required">Please enter valid bonus point</em>
               <em
                 class="error"
                 v-if="!$v.welcome_bonus.minValue"
-              >Need a minimum value of {{$v.welcome_bonus.$params.minValue.min}}</em>
+              >Enter a minimum value of {{$v.welcome_bonus.$params.minValue.min}}</em>
               <em
                 class="error"
                 v-if="!$v.welcome_bonus.maxLength"
-              >Allowed {{$v.welcome_bonus.$params.maxLength.max}} digits max</em>
+              >Allowed maximum of {{$v.welcome_bonus.$params.maxLength.max}} digits</em>
             </div>
           </div>
           <!-- <br><h6>Welcome Note</h6>

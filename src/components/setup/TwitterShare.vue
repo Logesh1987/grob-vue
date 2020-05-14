@@ -32,11 +32,11 @@
             <em
               class="error"
               v-if="!$v.worth_entries.minValue"
-            >Need a minimum value of {{$v.worth_entries.$params.minValue.min}}</em>
+            >Please enter points between 1 to 10000</em>
             <em
               class="error"
               v-if="!$v.worth_entries.maxLength"
-            >Allowed {{$v.worth_entries.$params.maxLength.max}} digits max</em>
+            >Please enter points between 1 to 10000</em>
           </div>
           <div class="form-group fLabel mb-5 col-md-12">
             <label for="inputEmail4">Twitter Share Text</label>

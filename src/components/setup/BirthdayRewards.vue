@@ -30,11 +30,11 @@
               <em
                 class="error"
                 v-if="!$v.points.nb_points.minValue"
-              >Need a minimum value of {{$v.points.nb_points.$params.minValue.min}}</em>
+              >Please enter points between 1 to 10000</em>
               <em
                 class="error"
-                v-if="!$v.points.nb_points.maxLength"
-              >Allowed {{$v.points.nb_points.$params.maxLength.max}} digits max</em>
+                v-if="!$v.points.nb_points.maxValue"
+              >Please enter points between 1 to 10000</em>
             </div>
             <div class="col-md-5 p-0 asideInfo">to users when they enter their birthday</div>
             <label for="bRewards" generated="true" class="error col-md-10"></label>
@@ -54,11 +54,11 @@
               <em
                 class="error"
                 v-if="!$v.reward.points.r_nb_points.minValue"
-              >Need a minimum value of {{$v.reward.points.r_nb_points.$params.minValue.min}}</em>
+              >Please enter points between 1 to 10000</em>
               <em
                 class="error"
-                v-if="!$v.reward.points.r_nb_points.maxLength"
-              >Allowed {{$v.reward.points.r_nb_points.$params.maxLength.max}} digits max</em>
+                v-if="!$v.reward.points.r_nb_points.maxValue"
+              >Please enter points between 1 to 10000</em>
             </div>
             <div class="col-md-5 p-0 asideInfo">on the birthday</div>
             <label for="obRewards" generated="true" class="error col-md-10"></label>
@@ -93,7 +93,7 @@ import {
   required,
   minValue,
   requiredIf,
-  maxLength
+  maxValue
 } from "vuelidate/lib/validators";
 import ResetBlock from "./ResetBlock";
 
@@ -127,7 +127,7 @@ export default {
           return this.status;
         }),
         minValue: minValue(1),
-        maxLength: maxLength(5)
+        maxValue: maxValue(10000)
       }
     },
     reward: {
@@ -137,7 +137,7 @@ export default {
             return this.status;
           }),
           minValue: minValue(1),
-          maxLength: maxLength(5)
+          maxValue: maxValue(10000)
         }
       }
     }

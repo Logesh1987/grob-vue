@@ -2,7 +2,7 @@
   <div class="setupItemList">
     <div class="stepHead">
       <h3>Points Program</h3>
-      <p>Purchase rewards for customers</p>
+      <p>Purchase rewards for customers ---</p>
       <label class="switch" for="card-pointsProgram">
         <input
           type="checkbox"
