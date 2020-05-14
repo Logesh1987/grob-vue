@@ -8,7 +8,7 @@
           type="checkbox"
           true-value="1"
           false-value="0"
-          v-model="data.review_status"
+          v-model="data.woo_reviews.review_status"
           @change="saveData"
           id="card-woor"
         />
@@ -17,7 +17,7 @@
     </div>
     <div class="setupListBody">
       <ul class="mt-4 mb-4">
-        <li>{{data.points}} Reward point for approved review</li>
+        <li>{{data.woo_reviews.points}} Reward point for approved review</li>
       </ul>
       <button class="btn btn-outline-dark pr-4 pl-4 mt-4" v-b-modal.modal-wrr>Edit</button>
     </div>
@@ -56,7 +56,7 @@ export default {
   },
   methods: {
     updateData() {
-      this.saveData();
+      this.saveData("reviews");
       this.$bvModal.hide("modal-wrr");
     },
     cancelModal() {

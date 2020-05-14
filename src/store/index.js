@@ -12,6 +12,7 @@ const headersData = {
 		Accept: '*/*'
 	}
 };
+const commonMessage = 'Something went wrong';
 
 export default new Vuex.Store({
 	state: {
@@ -23,7 +24,8 @@ export default new Vuex.Store({
 		popupData: null,
 		widgetData: null,
 		widgetIcons: null,
-		sampleImg: null
+		sampleImg: null,
+		commonError: null
 	},
 	mutations: {
 		enableLoader: (state) => {
@@ -52,23 +54,28 @@ export default new Vuex.Store({
 		},
 		updateSampleImg: (state, payload) => {
 			state.sampleImg = payload;
+		},
+		updateCommonError: (state, payload) => {
+			state.commonError = payload;
 		}
 	},
 	actions: {
 		getSetupData: ({ commit, state }) => {
 			commit('enableLoader');
-			return Axios.get(
-				'https://jai.devam.pro/gr/admin/onboarding?id_shop=1314&admin_email=jayakumar@appsmav.com'
-			).then((res) => {
-				const tempData = res.data.data;
-				tempData.points_setup.currency = getCurrencySymbol(tempData.points_setup.currency);
-				commit('updateSetupData', tempData);
-				commit('disableLoader');
-				//console.log("*****************************************************");
-				//console.log(JSON.stringify(res.data.data));
-				//console.log("*****************************************************");
-				return tempData;
-			});
+			return Axios.get('https://jai.devam.pro/gr/admin/onboarding?id_shop=1314&admin_email=jayakumar@appsmav.com')
+				.then((res) => {
+					const tempData = res.data.data;
+					tempData.points_setup.currency = getCurrencySymbol(tempData.points_setup.currency);
+					commit('updateSetupData', tempData);
+					commit('disableLoader');
+					//console.log("*****************************************************");
+					//console.log(JSON.stringify(res.data.data));
+					//console.log("*****************************************************");
+					return tempData;
+				})
+				.catch((err) => {
+					commit('updateCommonError', err.message ? err.message : commonMessage);
+				});
 		},
 		saveSetupData: ({ commit }, payload) => {
 			commit('enableLoader');
@@ -85,41 +92,43 @@ export default new Vuex.Store({
 					return res;
 				})
 				.catch((err) => {
-					console.log(err);
+					commit('updateCommonError', err.message ? err.message : commonMessage);
 				});
 		},
 		savePartialSetup: ({ commit, state }, payload) => {
 			const currentKey = Object.keys(payload)[0];
 			const stateKeys = Object.keys(state.setupData);
-			stateKeys.forEach((key) => {
+			return stateKeys.forEach((key) => {
 				if (Object.keys(state.setupData[key]).includes(currentKey)) {
 					const partialLoad = {
 						[key]: payload
 					};
-					Axios.post(
+					return Axios.post(
 						'https://jai.devam.pro/gr/admin/onboarding?id_shop=1314&admin_email=jayakumar@appsmav.com',
 						partialLoad,
 						headersData
 					)
 						.then((res) => {
-							return res;
+							return payload;
 						})
 						.catch((err) => {
-							console.log(err);
+							commit('updateCommonError', err.message ? err.message : commonMessage);
 						});
 				}
 			});
 		},
 		getRewardsData: ({ commit, state }) => {
 			commit('enableLoader');
-			return Axios.get(
-				'https://jai.devam.pro/gr/admin/rewards?id_shop=1314&admin_email=jayakumar@appsmav.com'
-			).then((res) => {
-				commit('updateRewardsData', res.data.data);
-				commit('updateRewardImages', res.data.images);
-				commit('disableLoader');
-				return state.rewardsData;
-			});
+			return Axios.get('https://jai.devam.pro/gr/admin/rewards?id_shop=1314&admin_email=jayakumar@appsmav.com')
+				.then((res) => {
+					commit('updateRewardsData', res.data.data);
+					commit('updateRewardImages', res.data.images);
+					commit('disableLoader');
+					return state.rewardsData;
+				})
+				.catch((err) => {
+					commit('updateCommonError', err.message ? err.message : commonMessage);
+				});
 		},
 
 		//Add new Reward
@@ -135,7 +144,7 @@ export default new Vuex.Store({
 					return res;
 				})
 				.catch((err) => {
-					console.log(err);
+					commit('updateCommonError', err.message ? err.message : commonMessage);
 				});
 			return result;
 		},
@@ -153,7 +162,7 @@ export default new Vuex.Store({
 					return res;
 				})
 				.catch((err) => {
-					console.log(err);
+					commit('updateCommonError', err.message ? err.message : commonMessage);
 				});
 			return result;
 		},
@@ -175,18 +184,20 @@ export default new Vuex.Store({
 					}
 				})
 				.catch((err) => {
-					console.log(err);
+					commit('updateCommonError', err.message ? err.message : commonMessage);
 				});
 		},
 		getPopupData: ({ commit, state }) => {
 			commit('enableLoader');
-			return Axios.get(
-				'https://jai.devam.pro/gr/admin/themes?id_shop=1314&admin_email=jayakumar@appsmav.com'
-			).then((res) => {
-				commit('updatePopupData', res.data.data);
-				commit('disableLoader');
-				return state.popupData;
-			});
+			return Axios.get('https://jai.devam.pro/gr/admin/themes?id_shop=1314&admin_email=jayakumar@appsmav.com')
+				.then((res) => {
+					commit('updatePopupData', res.data.data);
+					commit('disableLoader');
+					return state.popupData;
+				})
+				.catch((err) => {
+					commit('updateCommonError', err.message ? err.message : commonMessage);
+				});
 		},
 		saveThemeSettings: ({ commit }, payload) => {
 			commit('enableLoader');
@@ -194,22 +205,28 @@ export default new Vuex.Store({
 				'https://jai.devam.pro/gr/admin/themes?id_shop=1314&admin_email=jayakumar@appsmav.com',
 				payload,
 				headersData
-			).then((res) => {
-				commit('updatePopupData', payload);
-				commit('disableLoader');
-				return res;
-			});
+			)
+				.then((res) => {
+					commit('updatePopupData', payload);
+					commit('disableLoader');
+					return res;
+				})
+				.catch((err) => {
+					commit('updateCommonError', err.message ? err.message : commonMessage);
+				});
 		},
 		getWidgetData: ({ commit, state }) => {
 			commit('enableLoader');
-			return Axios.get(
-				'https://jai.devam.pro/gr/admin/widgets?id_shop=1314&admin_email=jayakumar@appsmav.com'
-			).then((res) => {
-				commit('updateWidgetData', res.data);
-				commit('updateWidgetIcons', res.data.icons);
-				commit('disableLoader');
-				return state.widgetData;
-			});
+			return Axios.get('https://jai.devam.pro/gr/admin/widgets?id_shop=1314&admin_email=jayakumar@appsmav.com')
+				.then((res) => {
+					commit('updateWidgetData', res.data);
+					commit('updateWidgetIcons', res.data.icons);
+					commit('disableLoader');
+					return state.widgetData;
+				})
+				.catch((err) => {
+					commit('updateCommonError', err.message ? err.message : commonMessage);
+				});
 		},
 		saveWidgetData: ({ commit }, payload) => {
 			commit('enableLoader');
@@ -217,11 +234,15 @@ export default new Vuex.Store({
 				'https://jai.devam.pro/gr/admin/widgets?id_shop=1314&admin_email=jayakumar@appsmav.com',
 				payload,
 				headersData
-			).then((res) => {
-				commit('updateWidgetData', payload.data);
-				commit('disableLoader');
-				return res;
-			});
+			)
+				.then((res) => {
+					commit('updateWidgetData', payload.data);
+					commit('disableLoader');
+					return res;
+				})
+				.catch((err) => {
+					commit('updateCommonError', err.message ? err.message : commonMessage);
+				});
 		},
 		updateLoyaltyStatus: ({ commit }, status) => {
 			commit('enableLoader');
@@ -229,23 +250,34 @@ export default new Vuex.Store({
 				'https://jai.devam.pro/gr/admin/onboarding/updateLoyalty?id_shop=1314&admin_email=jayakumar@appsmav.com',
 				{ status: status },
 				headersData
-			).then((res) => {
-				commit('disableLoader');
-				return res;
-			});
+			)
+				.then((res) => {
+					commit('disableLoader');
+					return res;
+				})
+				.catch((err) => {
+					commit('updateCommonError', err.message ? err.message : commonMessage);
+				});
 		},
 		submitReview: ({ commit }, review) => {
 			return Axios.post(
 				'https://jai.devam.pro/gr/admin/onboarding/review?id_shop=1314&admin_email=jayakumar@appsmav.com',
 				review,
 				headersData
-			).then((res) => {
-				//commit('updateWidgetData', status);
-				return res;
-			});
+			)
+				.then((res) => {
+					//commit('updateWidgetData', status);
+					return res;
+				})
+				.catch((err) => {
+					commit('updateCommonError', err.message ? err.message : commonMessage);
+				});
 		},
 		setSample: ({ commit, state }, url) => {
 			commit('updateSampleImg', url);
+		},
+		setCommonError: ({ commit }, msg) => {
+			commit('updateCommonError', msg);
 		}
 	},
 	getters: {},

@@ -9,7 +9,7 @@
           true-value="1"
           false-value="0"
           v-model="data.purchase_status"
-          @change="saveData"
+          @change="saveData('points_setup')"
           id="card-pointsProgram"
         />
         <i></i>
@@ -58,7 +58,7 @@ export default {
   },
   methods: {
     updateData() {
-      this.saveData();
+      this.saveData("points_setup");
       this.$bvModal.hide("modal-edit");
     },
     cancelModal() {

@@ -53,7 +53,7 @@ export default {
   },
   methods: {
     updateData() {
-      this.saveData();
+      this.saveData("events");
       this.$bvModal.hide("modal-bdr");
     },
     cancelModal() {

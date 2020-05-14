@@ -8,7 +8,7 @@
           type="checkbox"
           true-value="1"
           false-value="0"
-          v-model="data.status"
+          v-model="data.newsletter_subscription.status"
           @change="saveData"
           id="card-ns"
         />
@@ -17,7 +17,7 @@
     </div>
     <div class="setupListBody">
       <ul class="mt-4 mb-4">
-        <li>{{data.worth_entries}} Reward point for subscription</li>
+        <li>{{data.newsletter_subscription.worth_entries}} Reward point for subscription</li>
       </ul>
       <button class="btn btn-outline-dark pr-4 pl-4 mt-4" v-b-modal.modal-nl>Edit</button>
     </div>
@@ -56,7 +56,7 @@ export default {
   },
   methods: {
     updateData() {
-      this.saveData();
+      this.saveData("entries");
       this.$bvModal.hide("modal-nl");
     },
     cancelModal() {

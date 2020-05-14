@@ -2,56 +2,56 @@
   <div>
     <div class="setupItemContainer" v-if="data">
       <CardPointsProgram
-        v-if="data.points_setup.purchase_status"
+        v-if="data.points_setup.purchase_status == '1'"
         :data="data.points_setup"
         :saveData="saveData"
         :cancelSave="cancelSave"
       />
       <CardSignupBonus
-        v-if="data.points_setup.bonus_status"
+        v-if="data.points_setup.bonus_status == '1'"
         :data="data.points_setup"
         :saveData="saveData"
         :cancelSave="cancelSave"
       />
       <CardPaybyPoints
-        v-if="data.points_setup.redeem_purchase_status && data.shop.plugin_type == 'WP'"
+        v-if="data.points_setup.redeem_purchase_status == '1' && data.shop.plugin_type == 'WP'"
         :data="data.points_setup"
         :saveData="saveData"
         :cancelSave="cancelSave"
       />
       <CardReferralProgram
-        v-if="data.referral.status"
+        v-if="data.referral.status == '1'"
         :data="data.referral"
         :saveData="saveData"
         :cancelSave="cancelSave"
       />
       <CardFacebookShare
-        v-if="data.entries.facebook_share.status == 1"
-        :data="data.entries.facebook_share"
+        v-if="data.entries.facebook_share.status == '1'"
+        :data="data.entries"
         :saveData="saveData"
         :cancelSave="cancelSave"
       />
       <CardTwitterShare
-        v-if="data.entries.twitter_tweet.status == 1"
-        :data="data.entries.twitter_tweet"
+        v-if="data.entries.twitter_tweet.status == '1'"
+        :data="data.entries"
         :saveData="saveData"
         :cancelSave="cancelSave"
       />
       <CardBirthdayRewards
-        v-if="data.events.status"
+        v-if="data.events.status == '1'"
         :data="data.events"
         :saveData="saveData"
         :cancelSave="cancelSave"
       />
       <CardWooRewards
-        v-if="data.reviews.woo_reviews.review_status"
-        :data="data.reviews.woo_reviews"
+        v-if="data.reviews.woo_reviews.review_status == '1'"
+        :data="data.reviews"
         :saveData="saveData"
         :cancelSave="cancelSave"
       />
       <CardNewsletter
-        v-if="data.entries.newsletter_subscription.status == 1"
-        :data="data.entries.newsletter_subscription"
+        v-if="data.entries.newsletter_subscription.status == '1'"
+        :data="data.entries"
         :saveData="saveData"
         :cancelSave="cancelSave"
       />
@@ -65,56 +65,56 @@
     </div>
     <div class="setupItemContainer pausedItem" ref="pausedItem" v-if="this.data">
       <CardPointsProgram
-        v-if="!data.points_setup.purchase_status"
+        v-if="data.points_setup.purchase_status == '0'"
         :data="data.points_setup"
         :saveData="saveData"
         :cancelSave="cancelSave"
       />
       <CardSignupBonus
-        v-if="!data.points_setup.bonus_status"
+        v-if="data.points_setup.bonus_status == '0'"
         :data="data.points_setup"
         :saveData="saveData"
         :cancelSave="cancelSave"
       />
       <CardPaybyPoints
-        v-if="!data.points_setup.redeem_purchase_status"
+        v-if="data.points_setup.redeem_purchase_status == '0'"
         :data="data.points_setup"
         :saveData="saveData"
         :cancelSave="cancelSave"
       />
       <CardReferralProgram
-        v-if="!data.referral.status"
+        v-if="data.referral.status == '0'"
         :data="data.referral"
         :saveData="saveData"
         :cancelSave="cancelSave"
       />
       <CardFacebookShare
-        v-if="data.entries.facebook_share.status != 1"
-        :data="data.entries.facebook_share"
+        v-if="data.entries.facebook_share.status == '0'"
+        :data="data.entries"
         :saveData="saveData"
         :cancelSave="cancelSave"
       />
       <CardTwitterShare
-        v-if="data.entries.twitter_tweet.status != 1"
-        :data="data.entries.twitter_tweet"
+        v-if="data.entries.twitter_tweet.status == '0'"
+        :data="data.entries"
         :saveData="saveData"
         :cancelSave="cancelSave"
       />
       <CardBirthdayRewards
-        v-if="!data.events.status"
+        v-if="data.events.status == '0'"
         :data="data.events"
         :saveData="saveData"
         :cancelSave="cancelSave"
       />
       <CardWooRewards
-        v-if="!data.reviews.woo_reviews.review_status"
-        :data="data.reviews.woo_reviews"
+        v-if="data.reviews.woo_reviews.review_status == '0'"
+        :data="data.reviews"
         :saveData="saveData"
         :cancelSave="cancelSave"
       />
       <CardNewsletter
-        v-if="data.entries.newsletter_subscription.status != 1"
-        :data="data.entries.newsletter_subscription"
+        v-if="data.entries.newsletter_subscription.status == '0'"
+        :data="data.entries"
         :saveData="saveData"
         :cancelSave="cancelSave"
       />
@@ -154,11 +154,13 @@ export default {
     ...mapState(["setupData"])
   },
   methods: {
-    ...mapActions(["getSetupData", "saveSetupData"]),
-    saveData: function() {
-      this.saveSetupData(this.data).then(
-        res => (this.data = JSON.parse(JSON.stringify(this.setupData)))
-      );
+    ...mapActions(["getSetupData", "savePartialSetup"]),
+    saveData: function(key) {
+      this.savePartialSetup(this.data[key]).then(res => {
+        setTimeout(() => {
+          this.data[key] = res;
+        }, 1000);
+      });
     },
     cancelSave: function() {
       this.data = JSON.parse(JSON.stringify(this.setupData));

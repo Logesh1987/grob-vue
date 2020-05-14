@@ -64,7 +64,7 @@ export default {
   },
   methods: {
     updateData() {
-      this.saveData();
+      this.saveData("referral");
       this.$bvModal.hide("modal-rp");
     },
     cancelModal() {

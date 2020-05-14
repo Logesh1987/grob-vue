@@ -56,7 +56,7 @@ export default {
   },
   methods: {
     updateData() {
-      this.saveData();
+      this.saveData("points_setup");
       this.$bvModal.hide("modal-csb");
     },
     cancelModal() {

@@ -473,15 +473,20 @@ export default {
     ...mapState(["popupData", "widgetData", "widgetIcons"])
   },
   watch: {
-    "$store.state.widgetData": {
-      handler() {
-        this.wData = this.widgetData;
-      },
-      deep: true
-    }
+    // "$store.state.widgetData": {
+    //   handler() {
+    //     this.wData = this.widgetData;
+    //   },
+    //   deep: true
+    // }
   },
   methods: {
-    ...mapActions(["saveThemeSettings", "getWidgetData", "saveWidgetData"]),
+    ...mapActions([
+      "saveThemeSettings",
+      "getWidgetData",
+      "saveWidgetData",
+      "getPopupData"
+    ]),
     handlePdataSave: function() {
       this.saveThemeSettings(this.pData).then(res => {
         if (this.page === "setup") {
@@ -492,14 +497,21 @@ export default {
     },
     handleSaveWidget: function() {
       this.saveWidgetData(this.wData.data).then(res => {
+        console.log(this.wData, "ds");
         if (this.page === "setup") {
           this.$router.push("congrats");
         }
+        console.log(this.wData, "ds");
       });
     }
   },
   mounted: function() {
-    this.pData = this.popupData;
+    this.getPopupData().then(res => {
+      this.pData = res;
+    });
+    this.getWidgetData().then(res => {
+      this.wData = res;
+    });
     if (this.page === "congrats") this.enableWidget = true;
   }
 };

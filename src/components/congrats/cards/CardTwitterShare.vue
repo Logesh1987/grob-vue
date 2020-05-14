@@ -8,7 +8,7 @@
           type="checkbox"
           true-value="1"
           false-value="0"
-          v-model="data.status"
+          v-model="data.twitter_tweet.status"
           @change="saveData"
           id="card-twshare"
         />
@@ -17,7 +17,7 @@
     </div>
     <div class="setupListBody">
       <ul class="mt-4 mb-4">
-        <li>{{data.worth_entries}} Reward Point</li>
+        <li>{{data.twitter_tweet.worth_entries}} Reward Point</li>
       </ul>
       <button class="btn btn-outline-dark pr-4 pl-4 mt-4" v-b-modal.modal-tws>Edit</button>
     </div>
@@ -45,7 +45,7 @@
   </div>
 </template>
 <script>
-import TwitterShare from "@/components/setup/TwitterShare.vue";
+import TwitterShare from "@/components/setup/TwitterShare";
 import { mapState } from "vuex";
 export default {
   name: "CardTwitterShare",
@@ -56,7 +56,7 @@ export default {
   },
   methods: {
     updateData() {
-      this.saveData();
+      this.saveData("entries");
       this.$bvModal.hide("modal-tws");
     },
     cancelModal() {

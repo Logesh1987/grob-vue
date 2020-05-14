@@ -173,7 +173,7 @@
                   <b-collapse id="accordion-3" visible accordion="my-accordion3" role="tabpanel">
                     <b-card-body>
                       <div class="themesBlock">
-                        <Themes v-if="popupData" page="congrats" />
+                        <Themes page="congrats" />
                       </div>
                     </b-card-body>
                   </b-collapse>
@@ -319,6 +319,8 @@
         <RewardSettings :id="editRewardId" :closeModal="rewardModalClose" />
       </template>
     </b-modal>
+
+    <CommonError :error="commonError" />
   </div>
 </template>
 
@@ -337,6 +339,7 @@ import RewardsList from "@/components/rewards/RewardsList";
 import RewardSettings from "@/components/rewards/RewardSettings";
 import Themes from "@/components/themes/Themes";
 import Loader from "@/components/Loader";
+import CommonError from "@/components/CommonError";
 
 // Install BootstrapVue
 Vue.use(BootstrapVue);
@@ -350,7 +353,8 @@ export default {
     SetupList,
     RewardsList,
     RewardSettings,
-    Themes
+    Themes,
+    CommonError
   },
   data: function() {
     return {
@@ -383,7 +387,8 @@ export default {
       "setupData",
       "rewardsData",
       "popupData",
-      "widgetData"
+      "widgetData",
+      "commonError"
     ])
   },
   watch: {
@@ -479,12 +484,6 @@ export default {
     }
     if (this.rewardsData == null) {
       this.getRewardsData();
-    }
-    if (this.popupData == null) {
-      this.getPopupData();
-    }
-    if (this.widgetData == null) {
-      this.getWidgetData();
     }
   }
 };

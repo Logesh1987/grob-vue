@@ -569,15 +569,21 @@ export default {
       this.reset = true;
     },
     saveSetup(src) {
-      this.saveSetupData(this.data.setup).then(res => {
-        this.getRewardsData().then(re => {
-          this.setupTouched = false;
-          if (src !== "touchSave") {
-            window.localStorage.removeItem("setupProgress");
-            this.setProgress("rewardsBlock");
-          }
+      const re = document
+        .querySelector(".swiper-slide-active")
+        .getAttribute("data-ref");
+      const result = this.$refs[re].submit();
+      if (result) {
+        this.savePartialSetup(this.$refs[re].data).then(res => {
+          this.getRewardsData().then(re => {
+            this.setupTouched = false;
+            if (src !== "touchSave") {
+              window.localStorage.removeItem("setupProgress");
+              this.setProgress("rewardsBlock");
+            }
+          });
         });
-      });
+      }
     },
     saveRewards() {
       this.getPopupData().then(res => {
