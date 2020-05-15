@@ -533,14 +533,13 @@ export default {
           )
           .setAttribute("data-completed", "completed");
         this.$refs.setupSwiper.$swiper.slideNext();
-        if (!this.saved.rewardsBlock) {
-          this.savePartialSetup(this.$refs[re].data);
-          this.partialSetup = true;
-          window.localStorage.setItem(
-            "setupProgress",
-            this.$refs.setupSwiper.$swiper.realIndex
-          );
-        }
+        this.savePartialSetup(this.$refs[re].data);
+        this.partialSetup = true;
+        this.setupTouched = false;
+        window.localStorage.setItem(
+          "setupProgress",
+          this.$refs.setupSwiper.$swiper.realIndex
+        );
       }
     },
     swiperPrev() {
