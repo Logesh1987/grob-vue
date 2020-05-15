@@ -38,6 +38,7 @@
             </a>
           </label>
           <input type="text" v-model="data.name" class="form-control" />
+          <em class="error" v-if="!$v.data.name.required">Value is required</em>
         </div>
         <div class="form-group fLabel">
           <label for="desc">
@@ -52,6 +53,7 @@
             </a>
           </label>
           <textarea name class="form-control" v-model="data.description" cols="30" rows="3"></textarea>
+          <em class="error" v-if="!$v.data.description.required">Value is required</em>
         </div>
         <div class="form-group fLabel">
           <label for="rewardPoint">
@@ -73,6 +75,7 @@
             v-model="data.required_minimum_points"
             aria-invalid="false"
           />
+          <em class="error" v-if="!$v.data.required_minimum_points.required">Value is required</em>
         </div>
         <div class="row m-0 mb-3 d-flex align-items-center">
           <div class="cCheck col-6 p-0">
@@ -210,13 +213,26 @@
 import { mapState, mapActions } from "vuex";
 import RadioGroup from "@/components/RadioGroup";
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
-import { required, minValue, requiredIf, maxLength } from "vuelidate/lib/validators";
+import {
+  required,
+  minValue,
+  requiredIf,
+  maxLength
+} from "vuelidate/lib/validators";
 import "swiper/css/swiper.css";
+import { validationMixin } from "vuelidate";
+import {
+  required,
+  minValue,
+  requiredIf,
+  maxLength
+} from "vuelidate/lib/validators";
 
 export default {
   name: "RewardSettings",
   props: ["id", "closeModal"],
   components: { RadioGroup, Swiper, SwiperSlide },
+  mixins: [validationMixin],
   data: function() {
     return {
       data: {},
@@ -262,6 +278,9 @@ export default {
       return this.rewardsData.find(data => data.id == id);
     },
     handleSubmit: function() {
+      this.$v.$touch();
+      if (this.$v.$invalid) return false;
+
       // EDIT REWARD - post functionality
       if (this.id) {
         this.updateReward(this.data).then(res => {
@@ -322,6 +341,13 @@ export default {
       } 
     }  
   },*/
+  validations: {
+    data: {
+      name: { required },
+      description: { required },
+      required_minimum_points: { required }
+    }
+  }
 };
 </script>
 realtime_coupon.minimum_order
