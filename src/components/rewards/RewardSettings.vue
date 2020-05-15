@@ -38,7 +38,7 @@
             </a>
           </label>
           <input type="text" v-model="data.name" class="form-control" />
-          <em class="error" v-if="!$v.data.name.required">Value is required</em>
+          <em class="error" v-if="!$v.data.name.required">Please enter name</em>
         </div>
         <div class="form-group fLabel">
           <label for="desc">
@@ -53,7 +53,7 @@
             </a>
           </label>
           <textarea name class="form-control" v-model="data.description" cols="30" rows="3"></textarea>
-          <em class="error" v-if="!$v.data.description.required">Value is required</em>
+          <em class="error" v-if="!$v.data.description.required">Please enter description</em>
         </div>
         <div class="form-group fLabel">
           <label for="rewardPoint">
@@ -75,7 +75,13 @@
             v-model="data.required_minimum_points"
             aria-invalid="false"
           />
-          <em class="error" v-if="!$v.data.required_minimum_points.required">Value is required</em>
+          <em class="error" v-if="!$v.data.required_minimum_points.required">Please enter required points</em>
+          <em class="error" v-if="!$v.data.required_minimum_points.minValue"
+                  >Enter a minimum value of {{$v.data.required_minimum_points.$params.minValue.min}}</em>
+          <em
+            class="error"
+            v-if="!$v.data.required_minimum_points.maxLength"
+          >Allowed maximum of {{$v.data.required_minimum_points.$params.maxLength.max}} digits</em>
         </div>
         <div class="row m-0 mb-3 d-flex align-items-center">
           <div class="cCheck col-6 p-0">
@@ -130,6 +136,15 @@
                     name="rpMcv"
                     v-model="data.realtime_coupon.amount"
                   />
+                  <em class="error" v-if="!$v.data.realtime_coupon.amount.required">Please enter the Max. coupon value</em>
+                  <em
+                    class="error"
+                    v-if="!$v.data.realtime_coupon.amount.minValue"
+                  >Enter a minimum value of {{$v.data.realtime_coupon.amount.$params.minValue.min}}</em>
+                  <em
+                    class="error"
+                    v-if="!$v.data.realtime_coupon.amount.maxLength"
+                  >Allowed maximum of {{$v.data.realtime_coupon.amount.$params.maxLength.max}} digits</em>
                 </div>
               </div>
               <div class="col-md-6">
@@ -143,6 +158,15 @@
                     name="rpMsv"
                     v-model="data.realtime_coupon.minimum_order"
                   />
+                  <em class="error" v-if="!$v.data.realtime_coupon.minimum_order.required">Please enter the Max. coupon value</em>
+                  <em
+                    class="error"
+                    v-if="!$v.data.realtime_coupon.minimum_order.minValue"
+                  >Enter a minimum value of {{$v.data.realtime_coupon.minimum_order.$params.minValue.min}}</em>
+                  <em
+                    class="error"
+                    v-if="!$v.data.realtime_coupon.minimum_order.maxLength"
+                  >Allowed maximum of {{$v.data.realtime_coupon.minimum_order.$params.maxLength.max}} digits</em>
                 </div>
               </div>
             </div>
@@ -160,6 +184,7 @@
                   id="mcoupn"
                   name="mcoupn"
                 />
+                <em class="error" v-if="!$v.data.manual_coupon.required">Please enter coupons as comma separated values</em>
                 <small>Add Coupons as comma separated values</small>
               </div>
             </div>
@@ -188,6 +213,8 @@
                 v-model="data.quantity"
                 aria-invalid="false"
               />
+              <em class="error" v-if="!$v.data.quantity.required">Please enter the quantity</em>
+              <em class="error" v-if="!$v.data.quantity.maxLength">Allowed maximum of {{$v.data.quantity.$params.maxLength.max}} digits</em>
             </div>
           </div>
         </div>
@@ -334,12 +361,43 @@ export default {
         }        
       } 
     }  
-  },*/
+  },*/ 
   validations: {
     data: {
       name: { required },
       description: { required },
-      required_minimum_points: { required }
+      required_minimum_points: { 
+        required,
+        minValue: minValue(1),
+        maxLength: maxLength(6)
+      },
+      realtime_coupon: {
+        amount: {
+          required: requiredIf(function() {
+            return (this.data.is_coupon == 1 && this.couponType == 0 && this.data.realtime_coupon.type != 3);
+          }),
+          minValue: minValue(1),
+          maxLength: maxLength(6)
+        },
+        minimum_order: {
+          required: requiredIf(function() {
+            return (this.data.is_coupon == 1 && this.couponType == 0);
+          }),
+          minValue: minValue(0),
+          maxLength: maxLength(6)
+        }
+      },
+      manual_coupon: {
+        required: requiredIf(function() {
+          return (this.data.is_coupon == 1 && this.couponType == 1);
+        }),
+      },
+      quantity: {
+        required: requiredIf(function() {
+          return (this.is_limited == 1);
+        }),
+        maxLength: maxLength(6)
+      }
     }
   }
 };
