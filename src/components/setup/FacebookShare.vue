@@ -49,13 +49,13 @@
               name="fbSharetxt"
             ></textarea>
             <em class="error" v-if="!$v.settings.share_desc.required">Field is required</em>
-            <a
+            <!-- <a
               href="#"
               class="btn btn-link mt-2 p-0 sampleModalTrigger"
               @click.prevent="setSample('https://picsum.photos/id/1073/640/480')"
             >
               <small>Sample</small>
-            </a>
+            </a>-->
           </div>
           <div class="form-group fLabel col-md-12 mb-2">
             <label for="inputEmail4">Connect URL from facebook</label>

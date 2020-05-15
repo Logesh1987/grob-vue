@@ -36,7 +36,7 @@
                 v-model="redeem_point_per_dollar"
               />
             </div>
-            <div class="col-md-2 text-center mt-4">
+            <!-- <div class="col-md-2 text-center mt-4">
               <a
                 href="#"
                 class="btn btn-link sampleModalTrigger"
@@ -44,7 +44,7 @@
               >
                 <small>Sample</small>
               </a>
-            </div>
+            </div>-->
             <label
               class="error col-md-10"
               v-if="!$v.redeem_point_per_dollar.required"

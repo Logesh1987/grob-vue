@@ -1,60 +1,78 @@
 <template>
   <div>
     <div class="setupItemContainer" v-if="data">
-      <CardPointsProgram
-        v-if="data.points_setup.purchase_status == '1'"
-        :data="data.points_setup"
-        :saveData="saveData"
-        :cancelSave="cancelSave"
-      />
-      <CardSignupBonus
-        v-if="data.points_setup.bonus_status == '1'"
-        :data="data.points_setup"
-        :saveData="saveData"
-        :cancelSave="cancelSave"
-      />
-      <CardPaybyPoints
-        v-if="data.points_setup.redeem_purchase_status == '1' && data.shop.plugin_type == 'WP'"
-        :data="data.points_setup"
-        :saveData="saveData"
-        :cancelSave="cancelSave"
-      />
-      <CardReferralProgram
-        v-if="data.referral.status == '1'"
-        :data="data.referral"
-        :saveData="saveData"
-        :cancelSave="cancelSave"
-      />
-      <CardFacebookShare
-        v-if="data.entries.facebook_share.status == '1'"
-        :data="data.entries"
-        :saveData="saveData"
-        :cancelSave="cancelSave"
-      />
-      <CardTwitterShare
-        v-if="data.entries.twitter_tweet.status == '1'"
-        :data="data.entries"
-        :saveData="saveData"
-        :cancelSave="cancelSave"
-      />
-      <CardBirthdayRewards
-        v-if="data.events.status == '1'"
-        :data="data.events"
-        :saveData="saveData"
-        :cancelSave="cancelSave"
-      />
-      <CardWooRewards
-        v-if="data.reviews.woo_reviews.review_status == '1'"
-        :data="data.reviews"
-        :saveData="saveData"
-        :cancelSave="cancelSave"
-      />
-      <CardNewsletter
-        v-if="data.entries.newsletter_subscription.status == '1'"
-        :data="data.entries"
-        :saveData="saveData"
-        :cancelSave="cancelSave"
-      />
+      <transition name="slide-fade">
+        <CardPointsProgram
+          v-if="data.points_setup.purchase_status == '1'"
+          :data="data.points_setup"
+          :saveData="saveData"
+          :cancelSave="cancelSave"
+        />
+      </transition>
+      <transition name="slide-fade">
+        <CardSignupBonus
+          v-if="data.points_setup.bonus_status == '1'"
+          :data="data.points_setup"
+          :saveData="saveData"
+          :cancelSave="cancelSave"
+        />
+      </transition>
+      <transition name="slide-fade">
+        <CardPaybyPoints
+          v-if="data.points_setup.redeem_purchase_status == '1' && data.shop.plugin_type == 'WP'"
+          :data="data.points_setup"
+          :saveData="saveData"
+          :cancelSave="cancelSave"
+        />
+      </transition>
+      <transition name="slide-fade">
+        <CardReferralProgram
+          v-if="data.referral.status == '1'"
+          :data="data.referral"
+          :saveData="saveData"
+          :cancelSave="cancelSave"
+        />
+      </transition>
+      <transition name="slide-fade">
+        <CardFacebookShare
+          v-if="data.entries.facebook_share.status == '1'"
+          :data="data.entries"
+          :saveData="saveData"
+          :cancelSave="cancelSave"
+        />
+      </transition>
+      <transition name="slide-fade">
+        <CardTwitterShare
+          v-if="data.entries.twitter_tweet.status == '1'"
+          :data="data.entries"
+          :saveData="saveData"
+          :cancelSave="cancelSave"
+        />
+      </transition>
+      <transition name="slide-fade">
+        <CardBirthdayRewards
+          v-if="data.events.status == '1'"
+          :data="data.events"
+          :saveData="saveData"
+          :cancelSave="cancelSave"
+        />
+      </transition>
+      <transition name="slide-fade">
+        <CardWooRewards
+          v-if="data.reviews.woo_reviews.review_status == '1'"
+          :data="data.reviews"
+          :saveData="saveData"
+          :cancelSave="cancelSave"
+        />
+      </transition>
+      <transition name="slide-fade">
+        <CardNewsletter
+          v-if="data.entries.newsletter_subscription.status == '1'"
+          :data="data.entries"
+          :saveData="saveData"
+          :cancelSave="cancelSave"
+        />
+      </transition>
     </div>
     <!-- <div v-if="this.$refs.pausedItem && this.$refs.pausedItem.querySelector('.setupItemList')"> -->
     <div>
@@ -64,60 +82,78 @@
       </h6>
     </div>
     <div class="setupItemContainer pausedItem" ref="pausedItem" v-if="this.data">
-      <CardPointsProgram
-        v-if="data.points_setup.purchase_status == '0'"
-        :data="data.points_setup"
-        :saveData="saveData"
-        :cancelSave="cancelSave"
-      />
-      <CardSignupBonus
-        v-if="data.points_setup.bonus_status == '0'"
-        :data="data.points_setup"
-        :saveData="saveData"
-        :cancelSave="cancelSave"
-      />
-      <CardPaybyPoints
-        v-if="data.points_setup.redeem_purchase_status == '0'"
-        :data="data.points_setup"
-        :saveData="saveData"
-        :cancelSave="cancelSave"
-      />
-      <CardReferralProgram
-        v-if="data.referral.status == '0'"
-        :data="data.referral"
-        :saveData="saveData"
-        :cancelSave="cancelSave"
-      />
-      <CardFacebookShare
-        v-if="data.entries.facebook_share.status == '0'"
-        :data="data.entries"
-        :saveData="saveData"
-        :cancelSave="cancelSave"
-      />
-      <CardTwitterShare
-        v-if="data.entries.twitter_tweet.status == '0'"
-        :data="data.entries"
-        :saveData="saveData"
-        :cancelSave="cancelSave"
-      />
-      <CardBirthdayRewards
-        v-if="data.events.status == '0'"
-        :data="data.events"
-        :saveData="saveData"
-        :cancelSave="cancelSave"
-      />
-      <CardWooRewards
-        v-if="data.reviews.woo_reviews.review_status == '0'"
-        :data="data.reviews"
-        :saveData="saveData"
-        :cancelSave="cancelSave"
-      />
-      <CardNewsletter
-        v-if="data.entries.newsletter_subscription.status == '0'"
-        :data="data.entries"
-        :saveData="saveData"
-        :cancelSave="cancelSave"
-      />
+      <transition name="slide-fade">
+        <CardPointsProgram
+          v-if="data.points_setup.purchase_status == '0'"
+          :data="data.points_setup"
+          :saveData="saveData"
+          :cancelSave="cancelSave"
+        />
+      </transition>
+      <transition name="slide-fade">
+        <CardSignupBonus
+          v-if="data.points_setup.bonus_status == '0'"
+          :data="data.points_setup"
+          :saveData="saveData"
+          :cancelSave="cancelSave"
+        />
+      </transition>
+      <transition name="slide-fade">
+        <CardPaybyPoints
+          v-if="data.points_setup.redeem_purchase_status == '0'"
+          :data="data.points_setup"
+          :saveData="saveData"
+          :cancelSave="cancelSave"
+        />
+      </transition>
+      <transition name="slide-fade">
+        <CardReferralProgram
+          v-if="data.referral.status == '0'"
+          :data="data.referral"
+          :saveData="saveData"
+          :cancelSave="cancelSave"
+        />
+      </transition>
+      <transition name="slide-fade">
+        <CardFacebookShare
+          v-if="data.entries.facebook_share.status == '0'"
+          :data="data.entries"
+          :saveData="saveData"
+          :cancelSave="cancelSave"
+        />
+      </transition>
+      <transition name="slide-fade">
+        <CardTwitterShare
+          v-if="data.entries.twitter_tweet.status == '0'"
+          :data="data.entries"
+          :saveData="saveData"
+          :cancelSave="cancelSave"
+        />
+      </transition>
+      <transition name="slide-fade">
+        <CardBirthdayRewards
+          v-if="data.events.status == '0'"
+          :data="data.events"
+          :saveData="saveData"
+          :cancelSave="cancelSave"
+        />
+      </transition>
+      <transition name="slide-fade">
+        <CardWooRewards
+          v-if="data.reviews.woo_reviews.review_status == '0'"
+          :data="data.reviews"
+          :saveData="saveData"
+          :cancelSave="cancelSave"
+        />
+      </transition>
+      <transition name="slide-fade">
+        <CardNewsletter
+          v-if="data.entries.newsletter_subscription.status == '0'"
+          :data="data.entries"
+          :saveData="saveData"
+          :cancelSave="cancelSave"
+        />
+      </transition>
     </div>
   </div>
 </template>
