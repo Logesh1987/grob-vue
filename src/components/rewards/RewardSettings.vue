@@ -213,12 +213,6 @@
 import { mapState, mapActions } from "vuex";
 import RadioGroup from "@/components/RadioGroup";
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
-import {
-  required,
-  minValue,
-  requiredIf,
-  maxLength
-} from "vuelidate/lib/validators";
 import "swiper/css/swiper.css";
 import { validationMixin } from "vuelidate";
 import {
