@@ -497,11 +497,9 @@ export default {
     },
     handleSaveWidget: function() {
       this.saveWidgetData(this.wData.data).then(res => {
-        console.log(this.wData, "ds");
         if (this.page === "setup") {
           this.$router.push("congrats");
         }
-        console.log(this.wData, "ds");
       });
     }
   },

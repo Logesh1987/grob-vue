@@ -156,11 +156,7 @@ export default {
   methods: {
     ...mapActions(["getSetupData", "savePartialSetup"]),
     saveData: function(key) {
-      this.savePartialSetup(this.data[key]).then(res => {
-        setTimeout(() => {
-          this.data[key] = res;
-        }, 1000);
-      });
+      this.savePartialSetup(this.data[key]);
     },
     cancelSave: function() {
       this.data = JSON.parse(JSON.stringify(this.setupData));
