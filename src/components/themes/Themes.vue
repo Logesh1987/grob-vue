@@ -272,10 +272,10 @@
                       <swiper-slide v-for="(icon, index) in widgetIcons" :key="index">
                         <div
                           class="icon"
-                          :class="{'active': wData.data.style_data.widget_logo_img === icon}"
-                          @click.prevent="wData.data.style_data.widget_logo_img = icon"
+                          :class="{'active': wData.data.style_data.widget_icon_name === icon.name}"
+                          @click.prevent="wData.data.style_data.widget_logo_img = icon.url"
                         >
-                          <img :src="icon" alt />
+                          <img :src="icon.url" alt />
                         </div>
                       </swiper-slide>
                     </swiper>
@@ -387,10 +387,10 @@
                       <swiper-slide v-for="(icon, index) in widgetIcons" :key="index">
                         <div
                           class="icon"
-                          :class="{'active': wData.data.style_data.widget_logo_img === icon}"
-                          @click.prevent="wData.data.style_data.widget_logo_img = icon"
+                          :class="{'active': wData.data.style_data.widget_icon_name === icon.name}"
+                          @click.prevent="wData.data.style_data.widget_logo_img = icon.url"
                         >
-                          <img :src="icon" alt />
+                          <img :src="icon.url" alt />
                         </div>
                       </swiper-slide>
                     </swiper>

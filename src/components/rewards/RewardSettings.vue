@@ -12,10 +12,10 @@
             <swiper-slide v-for="(img, index) in rewardImages" :key="index">
               <div
                 class="icon"
-                :class="{active: data.image_url === img}"
-                @click="data.image_url = img"
+                :class="{active: data.image_name === img.name}"
+                @click="data.image_url = img.url"
               >
-                <img :src="img" alt />
+                <img :src="img.url" alt />
               </div>
             </swiper-slide>
           </swiper>
@@ -94,7 +94,7 @@
               false-value="0"
             />
             <label for="raa" class="m-0">Reward as a</label>
-            <div v-if="couponType == 0" class="recommendFloater float-right mr-2">
+            <div v-if="data.realtime_coupon_on == 1" class="recommendFloater float-right mr-2">
               <i id="recommend" class="material-icons info">info</i>
               <b-tooltip
                 target="recommend"
@@ -108,15 +108,15 @@
             </div>
           </div>
           <div class="col-6 p-0">
-            <select class="form-control" v-model="couponType">
-              <option value="0">Automatic</option>
-              <option value="1">Manual</option>
+            <select class="form-control" v-model="data.realtime_coupon_on">
+              <option value="1">Automatic</option>
+              <option value="0">Manual</option>
             </select>
           </div>
           <div v-if="data.is_coupon == 1">
             <div
               class="row pt-3 pb-3 mt-4 mb-4 border-top border-light border-bottom border-light"
-              v-if="couponType == 0"
+              v-if="data.realtime_coupon_on == 1"
             >
               <div class="col-md-12 mt-2 mb-3">
                 <RadioGroup
@@ -158,7 +158,7 @@
                     name="rpMsv"
                     v-model="data.realtime_coupon.minimum_order"
                   />
-                  <em class="error" v-if="!$v.data.realtime_coupon.minimum_order.required">Please enter the Max. coupon value</em>
+                  <em class="error" v-if="!$v.data.realtime_coupon.minimum_order.required">Please enter the minimum spend value</em>
                   <em
                     class="error"
                     v-if="!$v.data.realtime_coupon.minimum_order.minValue"
@@ -173,7 +173,7 @@
 
             <div
               class="col-md-12 mt-4 mb-4 pt-5 pb-5 border-top border-light border-bottom border-light"
-              v-if="couponType == 1"
+              v-if="data.realtime_coupon_on == 0"
             >
               <div class="m-0 form-group fLabel">
                 <label for>Manual coupons</label>
@@ -325,8 +325,8 @@ export default {
     this.id
       ? (this.data = this.getDataById(this.id))
       : (this.data = this.newSettings);
-    this.couponType = this.data.manual_coupon.length ? "1" : "0";
-    this.is_limited = parseInt(this.data.quantity) ? "1" : "0";
+      this.couponType = this.data.realtime_coupon_on;
+      this.is_limited = parseInt(this.data.quantity) ? "1" : "0";
   },
   /*validations: {
     data: {
@@ -374,14 +374,14 @@ export default {
       realtime_coupon: {
         amount: {
           required: requiredIf(function() {
-            return (this.data.is_coupon == 1 && this.couponType == 0 && this.data.realtime_coupon.type != 3);
+            return (this.data.is_coupon == 1 && this.data.realtime_coupon_on == 1 && this.data.realtime_coupon.type != 3);
           }),
           minValue: minValue(1),
           maxLength: maxLength(6)
         },
         minimum_order: {
           required: requiredIf(function() {
-            return (this.data.is_coupon == 1 && this.couponType == 0);
+            return (this.data.is_coupon == 1 && this.data.realtime_coupon_on == 1);
           }),
           minValue: minValue(0),
           maxLength: maxLength(6)
@@ -389,7 +389,7 @@ export default {
       },
       manual_coupon: {
         required: requiredIf(function() {
-          return (this.data.is_coupon == 1 && this.couponType == 1);
+          return (this.data.is_coupon == 1 && this.data.realtime_coupon_on == 0);
         }),
       },
       quantity: {
